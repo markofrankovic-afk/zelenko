@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.7.7",
+  verzija: "0.7.8",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -460,6 +460,7 @@ function openUsluga(p) {
     <div class="row" style="flex-wrap:wrap"><button class="btn primary" id="tNav" style="flex:2 1 140px">${ic("nav")}${esc(t("vodi_me"))}</button>
       ${u.telefon ? `<a class="btn" style="flex:1 1 100px" href="tel:${esc(u.telefon.replace(/\s/g, ""))}">${ic("phone")}${esc(t("nazovi"))}</a>` : ""}
       ${u.web ? `<a class="btn" style="flex:1 1 90px" href="${esc(u.web)}" target="_blank" rel="noopener">${esc(t("web"))}</a>` : ""}
+      <button class="btn" id="tKarta" style="flex:1 1 100px">${ic("map")}${esc(t("na_karti"))}</button>
       <button class="btn" id="tFav" aria-pressed="${fav}" aria-label="${esc(fav ? t("spremljeno") : t("spremi"))}" style="flex:0 0 52px">${ic("star")}</button></div>
     ${x.opis ? `<p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>` : ""}
     ${u.radno_vrijeme ? `<details class="tip"><summary>${esc(t("radno_vrijeme"))}</summary><p style="white-space:pre-line">${esc(rvLjudski(u.radno_vrijeme))}</p></details>` : ""}
@@ -467,6 +468,7 @@ function openUsluga(p) {
     ${u.partner ? "" : `<div class="card stack" style="gap:8px"><b>${esc(t("vlasnik_naslov"))}</b><span class="small muted">${esc(t("vlasnik_tekst"))}</span><a class="btn" style="align-self:flex-start" href="${mail}">${ic("msg")}${esc(t("vlasnik_gumb"))}</a></div>`}
     <p class="small muted" style="margin:0">${esc(t(u.osm ? "usluga_izvor" : "usluga_izvor_vlasnik"))}</p></div>`);
   $("#tNav").onclick = () => openNav({ lat: p.lat, lon: p.lon }, x.naziv);
+  $("#tKarta").onclick = () => istakniNaKarti(p);
   $("#tFav").onclick = () => { S.favs = S.favs.includes(p.id) ? S.favs.filter(f => f !== p.id) : S.favs.concat(p.id); store.set("gk-fav", S.favs); renderChips(); openUsluga(p); };
   if (map) map.panTo([p.lat, p.lon]);
   gcEv("usluga");
@@ -604,13 +606,15 @@ function openTocka(id) {
   openSheet(katNaziv(p), `<div class="stack">
     ${slikaHtml(id, boja(p))}
     <div><span class="row small muted"><span class="dot" style="background:${boja(p)}"></span>${esc(katNaziv(p))}${d != null ? " · " + fmtDist(d) + " " + esc(t("od_tebe")) : ""}</span><h1>${esc(x.naziv)}</h1></div>
-    <div class="grid3"><button class="btn primary" id="tNav">${ic("nav")}${esc(t("vodi_me"))}</button>
+    <div class="grid4"><button class="btn primary" id="tNav">${ic("nav")}${esc(t("vodi_me"))}</button>
+      <button class="btn" id="tKarta">${ic("map")}${esc(t("na_karti"))}</button>
       <button class="btn" id="tFav" aria-pressed="${fav}" aria-label="${esc(fav ? t("spremljeno") : t("spremi"))}">${ic("star")}</button>
       <button class="btn" id="tShare" aria-label="${esc(t("podijeli"))}">${ic("share")}</button></div>
+    ${p.dolazak ? `<p class="small muted" style="margin:-6px 0 0">${esc(t("vodi_do_" + p.dolazak.naziv))}</p>` : ""}
     <p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>
     ${infoHtml(p)}
     ${pecatHtml(p)}
-    ${p.napomena ? `<div class="note warn small">${esc(t("prototip_napomena", { tekst: p.napomena }))}</div>` : ""}
+    ${p.napomena && PREGLED ? `<div class="note warn small">${esc(t("prototip_napomena", { tekst: p.napomena }))}</div>` : ""}
     ${uRuti.length ? `<section><h3>${esc(t("dio_rute"))}</h3>${uRuti.map(r => `<button class="list-row" data-open="${r.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(r).naziv)}</b><span>${esc(t("vrsta_" + r.vrsta))} · ${esc(r.tezina)} · ${kmR(r)} km</span></span><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></button>`).join("")}</section>` : ""}
     <section><h3>${esc(t("u_blizini"))}</h3>${blizu.map(({ q, d }) => `<button class="list-row" data-open="${q.id}"><span class="dot" style="background:${boja(q)}"></span><span class="t"><b>${esc(tx(q).naziv)}</b><span>${esc(katNaziv(q))}</span></span><span class="mono small">${fmtDist(d)}</span></button>`).join("")}</section>
     <div class="small muted" style="border-top:1px solid var(--line2);padding-top:12px;display:flex;flex-direction:column;gap:6px">
@@ -618,13 +622,30 @@ function openTocka(id) {
       <span>${esc(t("pouzdanost_" + p.pouzdanost))} · ${esc(t("izvor_koordinata"))}: ${izvor} · ${esc(t("izvor_opisa"))}: ${esc(t("opis_autor"))}</span>
       <a class="btn" style="align-self:flex-start" href="${mail}">${ic("msg")}${esc(t("javi_promjenu"))}</a>
     </div></div>`);
-  $("#tNav").onclick = () => openNav({ lat: p.lat, lon: p.lon }, x.naziv);
+  $("#tNav").onclick = () => openNav(p.dolazak ? { lat: p.dolazak.lat, lon: p.dolazak.lon } : { lat: p.lat, lon: p.lon }, x.naziv);
+  $("#tKarta").onclick = () => istakniNaKarti(p);
   $("#tFav").onclick = () => { S.favs = S.favs.includes(id) ? S.favs.filter(f => f !== id) : S.favs.concat(id); store.set("gk-fav", S.favs); renderChips(); openTocka(id); gcEv("spremi"); };
   $("#tShare").onclick = () => sharePlace(x.naziv, p);
   $("#sheet").dataset.tocka = id;
   $("#tCoord").onclick = () => copy(`${p.lat.toFixed(5)}, ${p.lon.toFixed(5)}`);
   if (map) map.panTo([p.lat, p.lon]);
   gcEv("tocka");
+}
+/* „Na karti”: otvori kartu na mjestu i nakratko ga istakni (makne filter ako ga skriva) */
+let istaknut = null;
+function istakniNaKarti(p) {
+  closeSheet(); go("karta");
+  if (S.trazi && !S.trazi.ids.has(p.id)) { S.trazi = null; $("#searchPill").hidden = true; }
+  if (S.grupa && S.grupa !== "spremljeno" && !(p.grupe || []).includes(S.grupa) || S.grupa === "spremljeno" && !S.favs.includes(p.id)) { S.grupa = ""; renderChips(); }
+  setTimeout(() => {
+    map.invalidateSize(); map.setView([p.lat, p.lon], Math.max(map.getZoom(), 16), { animate: false });
+    renderMarkers(); renderNear();
+    if (istaknut) map.removeLayer(istaknut);
+    istaknut = L.marker([p.lat, p.lon], { icon: L.divIcon({ className: "istakni", html: "<span></span>", iconSize: [56, 56], iconAnchor: [28, 28] }), interactive: false, keyboard: false })
+      .bindTooltip(esc(tx(p).naziv), { permanent: true, direction: "top", offset: [0, -24], className: "lbl istakni-lbl" }).addTo(map);
+    const m = istaknut; setTimeout(() => { if (istaknut === m) { map.removeLayer(m); istaknut = null; } }, 8000);
+  }, 80);
+  gcEv("na-karti");
 }
 function sharePlace(naziv, p) {
   const url = `https://www.openstreetmap.org/?mlat=${p.lat.toFixed(5)}&mlon=${p.lon.toFixed(5)}#map=15/${p.lat.toFixed(5)}/${p.lon.toFixed(5)}`;

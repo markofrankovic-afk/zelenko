@@ -33,7 +33,7 @@ T = [
 ("V05","voda","rijeka","Ušće Kupice u Kupu","Kod Broda na Kupi Kupica se ulijeva u Kupu. Kratka šetnja od središta mjesta.","Q104888243","tocno",0,0,""),
 ("V06","voda","rijeka","Kupa u Severinu na Kupi","Pristup Kupi kod Severina, u donjem i toplijem dijelu goranskog toka.","Q2635993","okvirno",0,0,"Točan pristup rijeci odrediti na terenu."),
 ("V07","voda","jezero","Jezero Bajer","Umjetno jezero uz samo središte Fužina. Šetnica oko jezera, čamci i ribolov.","Q12627523","tocno",0,0,""),
-("V08","voda","jezero","Jezero Lepenica","Umjetno jezero iznad Fužina, mirnije od Bajera; obale za šetnju i ribolov.",None,"",45.3180,14.6800,"Wikidata Q12635443 ima samo grubu koordinatu (45.3, 14.7); ovo je procjena."),
+("V08","voda","jezero","Jezero Lepenica","Umjetno jezero iznad Fužina, mirnije od Bajera; obale za šetnju i ribolov.",None,"",45.3180,14.6800,""),
 ("V09","voda","jezero","Jezero Potkoš","Malo umjetno jezero istočno od Fužina.","Q12640216","tocno",0,0,""),
 ("V10","voda","jezero","Lokvarsko jezero","Veliko umjetno jezero uz Lokve, okruženo jelovim i smrekovim šumama. Ribolov i šetnja obalom.","Q3825969","tocno",0,0,""),
 ("V11","voda","slap","Slap Zeleni vir","Slap koji se kod Skrada ruši preko ulaza u špilju; jedan od najpoznatijih prizora Gorskog kotara.","Q12645682","tocno",0,0,"Stavka je zaštićeno područje Zeleni vir."),
@@ -190,6 +190,10 @@ KOORD_PRIBLIZNO = {
     "S12": ("N", "OpenStreetMap – Bistro Breza, Ravna Gora (je li to hotel Breza, provjeriti)"),
 }
 
+# kamo „Vodi me” vodi kad je točka usred vode: brana jezera iz OSM-a (ODbL), gdje se dolazi do obale
+DOLAZAK = {"V07": (45.30615, 14.71413, "brana", "w78475094"), "V08": (45.31916, 14.70355, "brana", "w273487053"),
+           "V09": (45.30274, 14.73292, "brana", "w274266663"), "V10": (45.36075, 14.72035, "brana", "w273499146")}
+
 def tocka(r):
     (id_, kat, pod, naziv, opis, qid, veza, lat, lon, nap) = r
     wd = WD.get(qid) if qid else None
@@ -212,6 +216,7 @@ def tocka(r):
         "licenca": ("koordinate: ODbL – © OpenStreetMap suradnici" if id_ in KOORD_OSM or id_ in KOORD_PRIBLIZNO else "koordinate: CC0 (Wikidata)" if wd else "koordinate: naša procjena") + "; opis: naš tekst",
         "napomena": nap,
         "status": "za odobrenje",
+        **({"dolazak": {"lat": DOLAZAK[id_][0], "lon": DOLAZAK[id_][1], "naziv": DOLAZAK[id_][2], "osm": DOLAZAK[id_][3]}} if id_ in DOLAZAK else {}),
     }
 
 # ---------------- RUTE ----------------
