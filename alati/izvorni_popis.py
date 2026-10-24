@@ -76,18 +76,18 @@ T = [
 ("Z05","zasticeno","park-suma","Japlenški vrh","Brdo uz Delnice sa skijalištem i šumskim stazama.",None,"",45.3950,14.8200,"Nema u Wikidati; provjeriti položaj i status park-šume."),
 ("Z06","zasticeno","stablo","Kraljica šume","Istaknuto staro stablo u šumi Golubinjaka kod Lokava.","Q131929765","tocno",0,0,""),
 # ---------------- STAZE ----------------
-("S01","staza","poucna","Poučna staza Leska","Kružna poučna staza od oko 4 km kroz šumu NP Risnjak, za sve uzraste. Kreće s ulaza u park.","Q3003074","okvirno",0,0,"Koordinata sela Crni Lug."),
-("S02","staza","pjesacka","Staza do izvora Kupe","Šumska staza od zaseoka Razloge do izvora Kupe.","Q3421377","okvirno",0,0,"Provjeriti polazište i parking."),
-("S03","staza","setnica","Šetnica oko Bajera","Ravna šetnica oko jezera Bajer kroz Fužine, lagana za sve.","Q12627523","okvirno",0,0,""),
+("S01","staza","poucna","Poučna staza Leska","Kružna poučna staza od oko 4 km kroz šumu NP Risnjak, za sve uzraste. Kreće s ulaza u park.","Q3003074","okvirno",45.41624,14.66842,"Koordinata sela Crni Lug."),
+("S02","staza","pjesacka","Staza do izvora Kupe","Šumska staza od zaseoka Razloge do izvora Kupe.","Q3421377","okvirno",45.48314,14.70164,"Provjeriti polazište i parking."),
+("S03","staza","setnica","Šetnica oko Bajera","Ravna šetnica oko jezera Bajer kroz Fužine, lagana za sve.","Q12627523","okvirno",45.30935,14.71547,""),
 ("S04","staza","pjesacka","Delnice – Petehovac","Šumska staza iz Delnica do vidikovca Petehovac.","Q397508","okvirno",0,0,"Koordinata grada Delnica."),
-("S05","staza","planinarska","Gornje Jelenje – Tuhobić","Najkraći uspon na Tuhobić, od Gornjeg Jelenja (Lepenice): oko 3,7 km i 1 h 15 – 1 h 30 hoda.","Q5586712","okvirno",0,0,"Točno polazište i parking snimiti na terenu."),
+("S05","staza","planinarska","Gornje Jelenje – Tuhobić","Najkraći uspon na Tuhobić, od Gornjeg Jelenja (Lepenice): oko 3,7 km i 1 h 15 – 1 h 30 hoda.","Q5586712","okvirno",45.35912,14.63034,"Točno polazište i parking snimiti na terenu."),
 ("S06","staza","planinarska","Benkovac Fužinski – Tuhobić","Uspon na Tuhobić s fužinske strane: oko 5 km i 1 h 30 – 1 h 45 hoda. Iz Liča preko Benkovca oko 3 h 15.","Q2896315","okvirno",0,0,"Wikidata ima grubu koordinatu sela."),
 ("S07","staza","planinarska","Zlobin – Jelenčić – Tuhobić","Duži uspon iz Zlobina preko vrha Jelenčić: oko 7 km i 2 h 15 – 2 h 30 hoda.","Q3511348","okvirno",0,0,"Zlobin je administrativno Bakar; rubno polazište."),
 ("S08","staza","planinarska","Prilaz Bijelim stijenama s mrkopaljske strane","Iz Mrkopalja šumskom cestom prema Jasenku. S ceste vode markirani prilazi: do Ratkova skloništa oko 30 min, do Bijelih stijena najkraćim odvojkom oko 45 min. Od prosinca do travnja ili svibnja cesta je zbog snijega neprohodna.","Q4533015","okvirno",0,0,"Koordinata sela Tuk Mrkopaljski; odvojke sa šumske ceste snimiti na terenu."),
 ("S09","staza","planinarska","Jasenak – Bijele stijene","Klasičan uspon iz Jasenka do Bijelih stijena, oko 2 h 30 – 3 h hoda.","Q2156997","tocno",0,0,"Jasenak je administrativno Ogulin; rubno polazište."),
 # ---------------- BICIKL ----------------
 ("B01","bicikl","polaziste","Dolina Kupe – polazište Brod na Kupi","Polazište za vožnju uz Kupu po mirnim lokalnim cestama.","Q924149","okvirno",0,0,""),
-("B02","bicikl","polaziste","Fužinska jezera – polazište Bajer","Polazište za kružnu vožnju između fužinskih jezera.","Q915795","okvirno",0,0,""),
+("B02","bicikl","polaziste","Fužinska jezera – polazište Bajer","Polazište za kružnu vožnju između fužinskih jezera.","Q915795","okvirno",45.30707,14.71501,""),
 # ---------------- ŠPILJE ----------------
 ("C01","spilja","spilja","Špilja Vrelo","Uređena špilja kod Fužina, uz izvor Ličanke nedaleko od jezera Lepenica; obilazak s vodičem.",None,"",45.3060,14.7120,"Nema u Wikidati; procjena u Fužinama. Termine obilaska provjeriti."),
 ("C02","spilja","spilja","Špilja Lokvarka","Uređena špilja kod Lokava sa sigama; jedna od poznatijih špilja u ovom dijelu Hrvatske.","Q14699654","tocno",0,0,""),
@@ -149,7 +149,7 @@ def pouzdanost(wd, veza):
 RUCNO = {"V01": "S"}  # izvor Kupe: položaj se poklapa s izvorom, ali Wikidata navodi grubu preciznost
 
 # točke kod kojih Wikidata pokazuje nešto drugo (npr. selo umjesto polja): vrijedi naša koordinata
-KOORD_RUCNO = {"P14"}
+KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02"}
 
 def tocka(r):
     (id_, kat, pod, naziv, opis, qid, veza, lat, lon, nap) = r
