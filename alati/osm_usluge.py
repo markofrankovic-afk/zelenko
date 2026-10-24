@@ -107,7 +107,7 @@ for o in osmium.FileProcessor(SRC).with_locations().with_areas():
     # hotel s kuhinjom (cuisine) ima i restoran; mjesto za jelo s oznakom hotela ima i sobe
     if c[0] == "spavanje" and t.get("cuisine"): x["i_jelo"] = True
     if c[0] == "jelo" and t.get("tourism") in SPAVANJE: x["i_spavanje"] = True
-    if c[0] == "spavanje" and t.get("tourism") == "hotel" and "hotel" not in x["naziv"].lower(): x["naziv"] = "Hotel " + x["naziv"]
+    if c[0] == "spavanje" and t.get("tourism") == "hotel" and not re.search(r"hotel|dom\b", x["naziv"].lower()): x["naziv"] = "Hotel " + x["naziv"]
     x = {k2: v for k2, v in x.items() if v is not None}
     seen[k] = x
     out.append(x)
@@ -119,6 +119,13 @@ if os.path.exists(pp):
     for x in json.load(open(pp, encoding="utf-8"))["partneri"]:
         out = [u for u in out if not (u["naziv"].lower() == x["naziv"].lower() and abs(u["lat"] - x["lat"]) < 0.005)]
         out.append(x)
+# ručni ispravci (izvori/usluge_ispravci.json): npr. hotel s restoranom koji OSM ne zna
+pi = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "izvori", "usluge_ispravci.json")
+if os.path.exists(pi):
+    isp = json.load(open(pi, encoding="utf-8"))["ispravci"]
+    for x in out:
+        for k, v in isp.get(x["id"], {}).items():
+            if k != "napomena_izvor": x[k] = v
 out.sort(key=lambda x: (x["vrsta"], x["naziv"]))
 json.dump({"izvor": "OpenStreetMap (ODbL) – BBBike izvadak 23. 10. 2026.", "licenca": "ODbL – © OpenStreetMap suradnici",
            "usluge": out}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=0)

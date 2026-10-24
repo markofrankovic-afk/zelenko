@@ -1402,18 +1402,6 @@
 "partner": false
 },
 {
-"id": "Un11918508747",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Hotel Lovački dom Arnika",
-"lat": 45.30049,
-"lon": 14.715765,
-"adresa": "Klađe 22",
-"mjesto": "Fužine",
-"osm": "n11918508747",
-"partner": false
-},
-{
 "id": "Un1273000627",
 "vrsta": "spavanje",
 "podvrsta": "hotel",
@@ -1528,6 +1516,19 @@
 "adresa": "Topolovac 7",
 "osm": "n4045567919",
 "partner": false
+},
+{
+"id": "Un11918508747",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Lovački dom Arnika",
+"lat": 45.30049,
+"lon": 14.715765,
+"adresa": "Klađe 22",
+"mjesto": "Fužine",
+"osm": "n11918508747",
+"partner": false,
+"i_jelo": true
 },
 {
 "id": "Un5906354786",
