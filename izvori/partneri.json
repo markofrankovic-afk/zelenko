@@ -1,0 +1,9 @@
+{
+ "opis": "Ručno upisani partneri (vlasnik je dao podatke). Spajaju se s OSM uslugama u osm_usluge.py.",
+ "partneri": [
+  {"id": "P-opg-frankovic", "vrsta": "kupnja", "podvrsta": "opg", "naziv": "OPG Franković",
+   "opis": "Sok od aronije i domaća jaja.",
+   "lat": 45.30191, "lon": 14.71393, "lokacija_priblizna": true,
+   "adresa": "Kolibice II 10", "mjesto": "Fužine", "partner": true}
+ ]
+}

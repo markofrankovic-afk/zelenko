@@ -1,0 +1,704 @@
+{
+ "B01": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Brod_na_Kupi.JPG/500px-Brod_na_Kupi.JPG",
+  "datoteka": "slike/brod-na-kupi.webp",
+  "autor": "Modzzak",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Brod_na_Kupi.JPG",
+  "naslov": "Brod na Kupi.JPG"
+ },
+ "C02": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Lokvarka2.JPG/500px-Lokvarka2.JPG",
+  "datoteka": "slike/lokvarka.webp",
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Lokvarka2.JPG",
+  "naslov": "Lokvarka2.JPG"
+ },
+ "H03": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Dvorac_u_Severinu.jpg/500px-Dvorac_u_Severinu.jpg",
+  "datoteka": "slike/dvorac-u-severinu.webp",
+  "autor": "Stefo",
+  "licenca": "Public domain",
+  "licenca_url": null,
+  "izvor": "https://commons.wikimedia.org/wiki/File:Dvorac_u_Severinu.jpg",
+  "naslov": "Dvorac u Severinu.jpg"
+ },
+ "H04": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Manastir_Gomirje.jpg",
+  "datoteka": "slike/manastir-gomirje.webp",
+  "autor": "LalalaB at Croatian Wikipedia",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Manastir_Gomirje.jpg",
+  "naslov": "Manastir Gomirje.jpg"
+ },
+ "H05": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Lukovdol_u_proljece.jpg/500px-Lukovdol_u_proljece.jpg",
+  "datoteka": "slike/lukovdol-u-proljece.webp",
+  "autor": "Stefo",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Lukovdol_u_proljece.jpg",
+  "naslov": "Lukovdol u proljece.jpg"
+ },
+ "H06": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Gornje_Jelenje_-_Right_Crikvenica%2C_directly_Zagreb_-_panoramio.jpg/500px-Gornje_Jelenje_-_Right_Crikvenica%2C_directly_Zagreb_-_panoramio.jpg",
+  "datoteka": "slike/gornje-jelenje-right-crikvenica-directly-zagreb-panoramio.webp",
+  "autor": "Zoran Kurelić Rabko",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Gornje_Jelenje_-_Right_Crikvenica,_directly_Zagreb_-_panoramio.jpg",
+  "naslov": "Gornje Jelenje - Right Crikvenica, directly Zagreb - panoramio.jpg"
+ },
+ "H08": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Chorvatsko_Zeleni_vir_elektr%C3%A1rna_1.jpg/500px-Chorvatsko_Zeleni_vir_elektr%C3%A1rna_1.jpg",
+  "datoteka": "slike/chorvatsko-zeleni-vir-elektrarna.webp",
+  "autor": "VitVit",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Chorvatsko_Zeleni_vir_elektr%C3%A1rna_1.jpg",
+  "naslov": "Chorvatsko Zeleni vir elektrárna 1.jpg"
+ },
+ "H09": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Delnice.jpg/500px-Delnice.jpg",
+  "datoteka": "slike/delnice.webp",
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Delnice.jpg",
+  "naslov": "Delnice.jpg"
+ },
+ "H10": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Fu%C5%BEine_i_Crkva_sv._Antona_Padovanskog._26._kolovoza_1929..jpg/500px-Fu%C5%BEine_i_Crkva_sv._Antona_Padovanskog._26._kolovoza_1929..jpg",
+  "datoteka": "slike/fuzine-i-crkva-sv-antona-padovanskog-26-kolovoza-1929.webp",
+  "autor": "Unknown author Unknown author",
+  "licenca": "Public domain",
+  "licenca_url": null,
+  "izvor": "https://commons.wikimedia.org/wiki/File:Fu%C5%BEine_i_Crkva_sv._Antona_Padovanskog._26._kolovoza_1929..jpg",
+  "naslov": "Fužine i Crkva sv. Antona Padovanskog. 26. kolovoza 1929..jpg"
+ },
+ "H11": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/LokvarskoJezero1.jpg/500px-LokvarskoJezero1.jpg",
+  "datoteka": "slike/lokvarskojezero.webp",
+  "autor": "Sl-Ziga",
+  "licenca": "Public domain",
+  "licenca_url": null,
+  "izvor": "https://commons.wikimedia.org/wiki/File:LokvarskoJezero1.jpg",
+  "naslov": "LokvarskoJezero1.jpg"
+ },
+ "H12": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Mrkopalj_s_kose.jpg/500px-Mrkopalj_s_kose.jpg",
+  "datoteka": "slike/mrkopalj-s-kose.webp",
+  "autor": "Mr. Mrko.",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Mrkopalj_s_kose.jpg",
+  "naslov": "Mrkopalj s kose.jpg"
+ },
+ "H13": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Pogled_na_Ravnu_Goru_zima.jpg",
+  "datoteka": "slike/pogled-na-ravnu-goru-zima.webp",
+  "autor": "Martinarg",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Pogled_na_Ravnu_Goru_zima.jpg",
+  "naslov": "Pogled na Ravnu Goru zima.jpg"
+ },
+ "H14": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Crkva_Vrbovsko.jpg",
+  "datoteka": null,
+  "autor": "Original uploader was LalalaB at hr.wikipedia",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Crkva_Vrbovsko.jpg",
+  "naslov": "Crkva Vrbovsko.jpg"
+ },
+ "H15": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Mestecko_Skrad%2C_centrum_Gorskeho_kotaru.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Mestecko_Skrad,_centrum_Gorskeho_kotaru.jpg",
+  "naslov": "Mestecko Skrad, centrum Gorskeho kotaru.jpg"
+ },
+ "H16": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Kolodvorska_ulica%2C_Brod_Moravice.jpg/500px-Kolodvorska_ulica%2C_Brod_Moravice.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Kolodvorska_ulica,_Brod_Moravice.jpg",
+  "naslov": "Kolodvorska ulica, Brod Moravice.jpg"
+ },
+ "H17": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Cabar-1.JPG/500px-Cabar-1.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Cabar-1.JPG",
+  "naslov": "Cabar-1.JPG"
+ },
+ "H19": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Prezid.JPG/500px-Prezid.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Prezid.JPG",
+  "naslov": "Prezid.JPG"
+ },
+ "H21": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Z_Drgomalje_na_vychod_-_v_pozadi_hreben_Risnjaku_a_Crni_Lug.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Z_Drgomalje_na_vychod_-_v_pozadi_hreben_Risnjaku_a_Crni_Lug.jpg",
+  "naslov": "Z Drgomalje na vychod - v pozadi hreben Risnjaku a Crni Lug.jpg"
+ },
+ "H22": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Li%C4%8DZeljko.jpg/500px-Li%C4%8DZeljko.jpg",
+  "datoteka": null,
+  "autor": "Original uploader was Zeljko at hr.wikipedia",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Li%C4%8DZeljko.jpg",
+  "naslov": "LičZeljko.jpg"
+ },
+ "H25": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Moravice.jpg/500px-Moravice.jpg",
+  "datoteka": null,
+  "autor": "The original uploader was Goran051 at Croatian Wikipedia .",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Moravice.jpg",
+  "naslov": "Moravice.jpg"
+ },
+ "H26": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Crkva_svetog_Vida_u_Kupjaku.jpg",
+  "datoteka": null,
+  "autor": "Martinarg",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Crkva_svetog_Vida_u_Kupjaku.jpg",
+  "naslov": "Crkva svetog Vida u Kupjaku.jpg"
+ },
+ "H27": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Kolodvor_Zalesina.jpg/500px-Kolodvor_Zalesina.jpg",
+  "datoteka": null,
+  "autor": "Kiki273",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Kolodvor_Zalesina.jpg",
+  "naslov": "Kolodvor Zalesina.jpg"
+ },
+ "H28": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Razloge%2C_Risnjak.jpg/500px-Razloge%2C_Risnjak.jpg",
+  "datoteka": null,
+  "autor": "PepeJanja",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Razloge,_Risnjak.jpg",
+  "naslov": "Razloge, Risnjak.jpg"
+ },
+ "H29": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Cerkev%2C_Brod_na_Kolpi.jpg/500px-Cerkev%2C_Brod_na_Kolpi.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Cerkev,_Brod_na_Kolpi.jpg",
+  "naslov": "Cerkev, Brod na Kolpi.jpg"
+ },
+ "H30": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Cabar-1.JPG/500px-Cabar-1.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Cabar-1.JPG",
+  "naslov": "Cabar-1.JPG"
+ },
+ "H31": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Ple%C5%A1ce.jpg/500px-Ple%C5%A1ce.jpg",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Ple%C5%A1ce.jpg",
+  "naslov": "Plešce.jpg"
+ },
+ "H33": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Hrvatsko%2C_St._Florian_church_02.jpg/500px-Hrvatsko%2C_St._Florian_church_02.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Hrvatsko,_St._Florian_church_02.jpg",
+  "naslov": "Hrvatsko, St. Florian church 02.jpg"
+ },
+ "H34": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Pogled_na_Turke.jpg/500px-Pogled_na_Turke.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Pogled_na_Turke.jpg",
+  "naslov": "Pogled na Turke.jpg"
+ },
+ "H35": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Crkva%2C_Ku%C5%BEelj.jpg/500px-Crkva%2C_Ku%C5%BEelj.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Crkva,_Ku%C5%BEelj.jpg",
+  "naslov": "Crkva, Kuželj.jpg"
+ },
+ "H43": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Spomenik_26_smrznutih_partizana%2C_Mati%C4%87_poljana.jpg",
+  "datoteka": null,
+  "autor": "Flammard",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Spomenik_26_smrznutih_partizana,_Mati%C4%87_poljana.jpg",
+  "naslov": "Spomenik 26 smrznutih partizana, Matić poljana.jpg"
+ },
+ "On10839185877": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Panorama_Mali_Platak_-_View_to_Kvarner_-_panoramio.jpg/500px-Panorama_Mali_Platak_-_View_to_Kvarner_-_panoramio.jpg",
+  "datoteka": null,
+  "autor": "Zoran Kurelić Rabko",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Panorama_Mali_Platak_-_View_to_Kvarner_-_panoramio.jpg",
+  "naslov": "Panorama Mali Platak - View to Kvarner - panoramio.jpg"
+ },
+ "On11653905583": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Talijanski_bunker_na_Bukovcu.jpg/500px-Talijanski_bunker_na_Bukovcu.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Talijanski_bunker_na_Bukovcu.jpg",
+  "naslov": "Talijanski bunker na Bukovcu.jpg"
+ },
+ "On11691765979": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Sveta_Gora_%28Male_Gospe%29%2C_view_from_Zamost.jpg/500px-Sveta_Gora_%28Male_Gospe%29%2C_view_from_Zamost.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Sveta_Gora_(Male_Gospe),_view_from_Zamost.jpg",
+  "naslov": "Sveta Gora (Male Gospe), view from Zamost.jpg"
+ },
+ "On2187719502": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Platak_-_Top_Rade%C5%A1evo_1363m%2C_ski_lift_-_panoramio.jpg/500px-Platak_-_Top_Rade%C5%A1evo_1363m%2C_ski_lift_-_panoramio.jpg",
+  "datoteka": null,
+  "autor": "Guba Zoky Rabko",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Platak_-_Top_Rade%C5%A1evo_1363m,_ski_lift_-_panoramio.jpg",
+  "naslov": "Platak - Top Radeševo 1363m, ski lift - panoramio.jpg"
+ },
+ "On2193401514": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Dren_in_Colnarji_s_%C5%A0pi%C4%8Dastega_vrha.jpg/500px-Dren_in_Colnarji_s_%C5%A0pi%C4%8Dastega_vrha.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Dren_in_Colnarji_s_%C5%A0pi%C4%8Dastega_vrha.jpg",
+  "naslov": "Dren in Colnarji s Špičastega vrha.jpg"
+ },
+ "On2689049616": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Fu%C5%BEine_s_Preradovi%C4%87evog_vrha.jpg/500px-Fu%C5%BEine_s_Preradovi%C4%87evog_vrha.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Fu%C5%BEine_s_Preradovi%C4%87evog_vrha.jpg",
+  "naslov": "Fužine s Preradovićevog vrha.jpg"
+ },
+ "On3804053298": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Mavrc_s_Kavrance.jpg/500px-Mavrc_s_Kavrance.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Mavrc_s_Kavrance.jpg",
+  "naslov": "Mavrc s Kavrance.jpg"
+ },
+ "On5669867571": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Krempa_saddle.jpg/500px-Krempa_saddle.jpg",
+  "datoteka": null,
+  "autor": "Vid Pogacnik",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Krempa_saddle.jpg",
+  "naslov": "Krempa saddle.jpg"
+ },
+ "On5674782961": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/View_of_Ribjek_and_the_Upper_Kolpa_Valley_from_Loska_stena_04.jpg/500px-View_of_Ribjek_and_the_Upper_Kolpa_Valley_from_Loska_stena_04.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:View_of_Ribjek_and_the_Upper_Kolpa_Valley_from_Loska_stena_04.jpg",
+  "naslov": "View of Ribjek and the Upper Kolpa Valley from Loska stena 04.jpg"
+ },
+ "On8661391313": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Baba%2C_view_from_Firstov_rep_05.jpg/500px-Baba%2C_view_from_Firstov_rep_05.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Baba,_view_from_Firstov_rep_05.jpg",
+  "naslov": "Baba, view from Firstov rep 05.jpg"
+ },
+ "On8661422457": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Upper_Kolpa_Valley%2C_view_from_Borovska_gora%27s_cliff_07.jpg/500px-Upper_Kolpa_Valley%2C_view_from_Borovska_gora%27s_cliff_07.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Upper_Kolpa_Valley,_view_from_Borovska_gora%27s_cliff_07.jpg",
+  "naslov": "Upper Kolpa Valley, view from Borovska gora's cliff 07.jpg"
+ },
+ "On9558995191": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Orlovska_stena%2C_Loska_stena_and_Krokar%2C_view_from_a_meadow_east_of_Gasparci_02.jpg/500px-Orlovska_stena%2C_Loska_stena_and_Krokar%2C_view_from_a_meadow_east_of_Gasparci_02.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Orlovska_stena,_Loska_stena_and_Krokar,_view_from_a_meadow_east_of_Gasparci_02.jpg",
+  "naslov": "Orlovska stena, Loska stena and Krokar, view from a meadow east of Gasparci 02.jpg"
+ },
+ "Or14680208": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Nacionalni_park_Risnjak_%28Berghutte_unterhalb_des_Gipfels_des_Risnak%29.jpg/500px-Nacionalni_park_Risnjak_%28Berghutte_unterhalb_des_Gipfels_des_Risnak%29.jpg",
+  "datoteka": null,
+  "autor": "Perun",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Nacionalni_park_Risnjak_(Berghutte_unterhalb_des_Gipfels_des_Risnak).jpg",
+  "naslov": "Nacionalni park Risnjak (Berghutte unterhalb des Gipfels des Risnak).jpg"
+ },
+ "Or4684430": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Dvorac_u_Severinu.jpg/500px-Dvorac_u_Severinu.jpg",
+  "datoteka": "slike/dvorac-u-severinu.webp",
+  "autor": "Stefo",
+  "licenca": "Public domain",
+  "licenca_url": null,
+  "izvor": "https://commons.wikimedia.org/wiki/File:Dvorac_u_Severinu.jpg",
+  "naslov": "Dvorac u Severinu.jpg"
+ },
+ "Ow1286834179": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/SKRAD_Vra%C5%BEji_prolaz_%28The_Devil%27s_pass%29_-_Zeleni_vir_%28The_Green_Whirlpool%29_-_panoramio.jpg/500px-SKRAD_Vra%C5%BEji_prolaz_%28The_Devil%27s_pass%29_-_Zeleni_vir_%28The_Green_Whirlpool%29_-_panoramio.jpg",
+  "datoteka": null,
+  "autor": "Zoran Kurelić Rabko",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:SKRAD_Vra%C5%BEji_prolaz_(The_Devil%27s_pass)_-_Zeleni_vir_(The_Green_Whirlpool)_-_panoramio.jpg",
+  "naslov": "SKRAD Vražji prolaz (The Devil's pass) - Zeleni vir (The Green Whirlpool) - panoramio.jpg"
+ },
+ "Ow308958063": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Platak%2C_Croatia_%28Unsplash%29.jpg/500px-Platak%2C_Croatia_%28Unsplash%29.jpg",
+  "datoteka": null,
+  "autor": "Igor Cancarevic igorcancarevic",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Platak,_Croatia_(Unsplash).jpg",
+  "naslov": "Platak, Croatia (Unsplash).jpg"
+ },
+ "Ow313465237": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Park_suma_golubinjak1.JPG/500px-Park_suma_golubinjak1.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Park_suma_golubinjak1.JPG",
+  "naslov": "Park suma golubinjak1.JPG"
+ },
+ "Ow433248579": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Crkva_Svetog_Jurja.jpg/500px-Crkva_Svetog_Jurja.jpg",
+  "datoteka": null,
+  "autor": "Cborna",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Crkva_Svetog_Jurja.jpg",
+  "naslov": "Crkva Svetog Jurja.jpg"
+ },
+ "Ow433260933": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Crkva_sv._Nikole%2C_Brod_Moravice.jpg/500px-Crkva_sv._Nikole%2C_Brod_Moravice.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Crkva_sv._Nikole,_Brod_Moravice.jpg",
+  "naslov": "Crkva sv. Nikole, Brod Moravice.jpg"
+ },
+ "Ow455461360": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Cerkev_sv.Petra_in_Pavla_Osilnica1.jpg/500px-Cerkev_sv.Petra_in_Pavla_Osilnica1.jpg",
+  "datoteka": null,
+  "autor": "Pinky sl",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Cerkev_sv.Petra_in_Pavla_Osilnica1.jpg",
+  "naslov": "Cerkev sv.Petra in Pavla Osilnica1.jpg"
+ },
+ "P01": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Pogled_na_Risnjak_i_Schlosserov_dom.jpg/500px-Pogled_na_Risnjak_i_Schlosserov_dom.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Pogled_na_Risnjak_i_Schlosserov_dom.jpg",
+  "naslov": "Pogled na Risnjak i Schlosserov dom.jpg"
+ },
+ "P02": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Pogled_na_Risnjak_i_Schlosserov_dom.jpg/500px-Pogled_na_Risnjak_i_Schlosserov_dom.jpg",
+  "datoteka": null,
+  "autor": "Lan Glad",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Pogled_na_Risnjak_i_Schlosserov_dom.jpg",
+  "naslov": "Pogled na Risnjak i Schlosserov dom.jpg"
+ },
+ "P03": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Snjeznik_-_pohled_z_nejvyssiho_vrcholu_%281506_m%29.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Snjeznik_-_pohled_z_nejvyssiho_vrcholu_(1506_m).jpg",
+  "naslov": "Snjeznik - pohled z nejvyssiho vrcholu (1506 m).jpg"
+ },
+ "P04": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Chair_lift_on_Platak.jpg/500px-Chair_lift_on_Platak.jpg",
+  "datoteka": null,
+  "autor": "ottori1982",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Chair_lift_on_Platak.jpg",
+  "naslov": "Chair lift on Platak.jpg"
+ },
+ "P05": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Bjelolasica_-_pohled_z_nejvyssiho_vrchu_Kula_%281534_m%29_do_vni.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Bjelolasica_-_pohled_z_nejvyssiho_vrchu_Kula_(1534_m)_do_vni.jpg",
+  "naslov": "Bjelolasica - pohled z nejvyssiho vrchu Kula (1534 m) do vni.jpg"
+ },
+ "P07": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Bijele_i_samarske_stijene3.JPG/500px-Bijele_i_samarske_stijene3.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Bijele_i_samarske_stijene3.JPG",
+  "naslov": "Bijele i samarske stijene3.JPG"
+ },
+ "P10": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Hlavni_hreben_jadranskeho_rozvodi_%28Tuhobic%2C_Bitoraj%29_ze_Skra.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Hlavni_hreben_jadranskeho_rozvodi_(Tuhobic,_Bitoraj)_ze_Skra.jpg",
+  "naslov": "Hlavni hreben jadranskeho rozvodi (Tuhobic, Bitoraj) ze Skra.jpg"
+ },
+ "P11": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Hlavni_hreben_jadranskeho_rozvodi_%28Tuhobic%2C_Bitoraj%29_ze_Skra.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Hlavni_hreben_jadranskeho_rozvodi_(Tuhobic,_Bitoraj)_ze_Skra.jpg",
+  "naslov": "Hlavni hreben jadranskeho rozvodi (Tuhobic, Bitoraj) ze Skra.jpg"
+ },
+ "P13": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/HR-PG-Skrad16.jpg/500px-HR-PG-Skrad16.jpg",
+  "datoteka": null,
+  "autor": "Szeder László",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:HR-PG-Skrad16.jpg",
+  "naslov": "HR-PG-Skrad16.jpg"
+ },
+ "P14": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Li%C4%8DZeljko.jpg/500px-Li%C4%8DZeljko.jpg",
+  "datoteka": null,
+  "autor": "Original uploader was Zeljko at hr.wikipedia",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Li%C4%8DZeljko.jpg",
+  "naslov": "LičZeljko.jpg"
+ },
+ "P27": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Mati%C4%87_poljana.jpg/500px-Mati%C4%87_poljana.jpg",
+  "datoteka": null,
+  "autor": "Alessandro Sgambati",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Mati%C4%87_poljana.jpg",
+  "naslov": "Matić poljana.jpg"
+ },
+ "S03": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Jezero_BajerFu%C5%BEine.jpg",
+  "datoteka": null,
+  "autor": "The original uploader was Zeljko at Croatian Wikipedia .",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_BajerFu%C5%BEine.jpg",
+  "naslov": "Jezero BajerFužine.jpg"
+ },
+ "V01": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Izvor_Kupe_%285%29.jpg/500px-Izvor_Kupe_%285%29.jpg",
+  "datoteka": null,
+  "autor": "JasminkaMartina",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Izvor_Kupe_(5).jpg",
+  "naslov": "Izvor Kupe (5).jpg"
+ },
+ "V02": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Kupa_a.k.a._Kolpa%2C_view_from_the_bridge_between_Hrvatsko_and_Osilnica_02.jpg/500px-Kupa_a.k.a._Kolpa%2C_view_from_the_bridge_between_Hrvatsko_and_Osilnica_02.jpg",
+  "datoteka": null,
+  "autor": "Ajznponar",
+  "licenca": "CC0",
+  "licenca_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Kupa_a.k.a._Kolpa,_view_from_the_bridge_between_Hrvatsko_and_Osilnica_02.jpg",
+  "naslov": "Kupa a.k.a. Kolpa, view from the bridge between Hrvatsko and Osilnica 02.jpg"
+ },
+ "V03": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Ku%C5%BEelj_001.jpg/500px-Ku%C5%BEelj_001.jpg",
+  "datoteka": null,
+  "autor": "User:Xyxyx",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Ku%C5%BEelj_001.jpg",
+  "naslov": "Kuželj 001.jpg"
+ },
+ "V04": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Brod_na_Kupi.JPG/500px-Brod_na_Kupi.JPG",
+  "datoteka": "slike/brod-na-kupi.webp",
+  "autor": "Modzzak",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Brod_na_Kupi.JPG",
+  "naslov": "Brod na Kupi.JPG"
+ },
+ "V05": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Kupa_i_Kup%C4%8Dica.jpg",
+  "datoteka": null,
+  "autor": "Original uploader was Zeljko at hr.wikipedia",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Kupa_i_Kup%C4%8Dica.jpg",
+  "naslov": "Kupa i Kupčica.jpg"
+ },
+ "V07": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Jezero_BajerFu%C5%BEine.jpg",
+  "datoteka": null,
+  "autor": "The original uploader was Zeljko at Croatian Wikipedia .",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_BajerFu%C5%BEine.jpg",
+  "naslov": "Jezero BajerFužine.jpg"
+ },
+ "V08": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Jezero_Lepenica_-_panoramio.jpg/500px-Jezero_Lepenica_-_panoramio.jpg",
+  "datoteka": null,
+  "autor": "Reklam-net",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_Lepenica_-_panoramio.jpg",
+  "naslov": "Jezero Lepenica - panoramio.jpg"
+ },
+ "V09": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Jezero_Potko%C5%A1.jpg/500px-Jezero_Potko%C5%A1.jpg",
+  "datoteka": null,
+  "autor": "Cborna",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_Potko%C5%A1.jpg",
+  "naslov": "Jezero Potkoš.jpg"
+ },
+ "V10": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/LokvarskoJezero1.jpg/500px-LokvarskoJezero1.jpg",
+  "datoteka": "slike/lokvarskojezero.webp",
+  "autor": "Sl-Ziga",
+  "licenca": "Public domain",
+  "licenca_url": null,
+  "izvor": "https://commons.wikimedia.org/wiki/File:LokvarskoJezero1.jpg",
+  "naslov": "LokvarskoJezero1.jpg"
+ },
+ "V11": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/SL03_Zeleni_Vir.jpg/500px-SL03_Zeleni_Vir.jpg",
+  "datoteka": null,
+  "autor": "Deapmakeup",
+  "licenca": "CC BY-SA 4.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:SL03_Zeleni_Vir.jpg",
+  "naslov": "SL03 Zeleni Vir.jpg"
+ },
+ "V12": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Cabar-1.JPG/500px-Cabar-1.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Cabar-1.JPG",
+  "naslov": "Cabar-1.JPG"
+ },
+ "Z01": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Z_Drgomalje_na_vychod_-_v_pozadi_hreben_Risnjaku_a_Crni_Lug.jpg",
+  "datoteka": null,
+  "autor": "Martin Brož",
+  "licenca": "CC BY 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Z_Drgomalje_na_vychod_-_v_pozadi_hreben_Risnjaku_a_Crni_Lug.jpg",
+  "naslov": "Z Drgomalje na vychod - v pozadi hreben Risnjaku a Crni Lug.jpg"
+ },
+ "Z02": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Park_suma_golubinjak1.JPG/500px-Park_suma_golubinjak1.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Park_suma_golubinjak1.JPG",
+  "naslov": "Park suma golubinjak1.JPG"
+ },
+ "Z03": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/SKRAD_Vra%C5%BEji_prolaz_%28The_Devil%27s_pass%29_-_panoramio.jpg/500px-SKRAD_Vra%C5%BEji_prolaz_%28The_Devil%27s_pass%29_-_panoramio.jpg",
+  "datoteka": null,
+  "autor": "Zoran Kurelić Rabko",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:SKRAD_Vra%C5%BEji_prolaz_(The_Devil%27s_pass)_-_panoramio.jpg",
+  "naslov": "SKRAD Vražji prolaz (The Devil's pass) - panoramio.jpg"
+ },
+ "Z04": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Kamacnik08%2C_Croatia.JPG/500px-Kamacnik08%2C_Croatia.JPG",
+  "datoteka": null,
+  "autor": "Modzzak",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Kamacnik08,_Croatia.JPG",
+  "naslov": "Kamacnik08, Croatia.JPG"
+ },
+ "Z06": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Park_suma_golubinjak2.JPG/500px-Park_suma_golubinjak2.JPG",
+  "datoteka": null,
+  "autor": "Croq",
+  "licenca": "CC BY-SA 3.0",
+  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "izvor": "https://commons.wikimedia.org/wiki/File:Park_suma_golubinjak2.JPG",
+  "naslov": "Park suma golubinjak2.JPG"
+ }
+}

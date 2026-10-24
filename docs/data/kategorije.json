@@ -1,0 +1,223 @@
+{
+ "boje": {
+  "voda": "#2B7BBF",
+  "planina": "#8A6A3B",
+  "zasticeno": "#2F7D4F",
+  "staza": "#C2610F",
+  "bicikl": "#7E4FA0",
+  "bastina": "#A23B4B",
+  "spilja": "#5B6670",
+  "naselje": "#66746C",
+  "izlet": "#5F8A2E",
+  "prakticno": "#6B7A72",
+  "jelo": "#B45309",
+  "spavanje": "#5B4BB5",
+  "kupnja": "#0F766E"
+ },
+ "grupe": [
+  {
+   "id": "vrh",
+   "boja": "#7A6236",
+   "pravila": [
+    [
+     "planina",
+     "vrh"
+    ],
+    [
+     "planina",
+     "vidikovac"
+    ],
+    [
+     "planina",
+     "stijene"
+    ],
+    [
+     "planina",
+     "prijevoj"
+    ]
+   ]
+  },
+  {
+   "id": "voda",
+   "boja": "#1F6FA8",
+   "pravila": [
+    [
+     "voda",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "jelo",
+   "boja": "#B45309",
+   "pravila": [
+    [
+     "jelo",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "spavanje",
+   "boja": "#5B4BB5",
+   "pravila": [
+    [
+     "spavanje",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "opg",
+   "boja": "#4D7C0F",
+   "pravila": [
+    [
+     "kupnja",
+     "opg"
+    ]
+   ]
+  },
+  {
+   "id": "kupnja",
+   "boja": "#0F766E",
+   "pravila": [
+    [
+     "kupnja",
+     "!opg"
+    ]
+   ]
+  },
+  {
+   "id": "slap",
+   "boja": "#1B5E8F",
+   "pravila": [
+    [
+     "voda",
+     "slap"
+    ]
+   ]
+  },
+  {
+   "id": "izvor",
+   "boja": "#2C7FB8",
+   "pravila": [
+    [
+     "voda",
+     "izvor"
+    ],
+    [
+     "prakticno",
+     "pitka_voda"
+    ]
+   ]
+  },
+  {
+   "id": "izlet",
+   "boja": "#5E7D1E",
+   "pravila": [
+    [
+     "planina",
+     "izletiste"
+    ],
+    [
+     "zasticeno",
+     "park-suma"
+    ],
+    [
+     "staza",
+     "setnica"
+    ],
+    [
+     "voda",
+     "jezero"
+    ],
+    [
+     "voda",
+     "kupaliste"
+    ],
+    [
+     "izlet",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "park",
+   "boja": "#2E7D4B",
+   "pravila": [
+    [
+     "zasticeno",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "staza",
+   "boja": "#B4531A",
+   "pravila": [
+    [
+     "staza",
+     "*"
+    ],
+    [
+     "bicikl",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "bastina",
+   "boja": "#9B2F3E",
+   "pravila": [
+    [
+     "bastina",
+     "!naselje"
+    ]
+   ]
+  },
+  {
+   "id": "spilja",
+   "boja": "#4B5563",
+   "pravila": [
+    [
+     "spilja",
+     "*"
+    ]
+   ]
+  },
+  {
+   "id": "dom",
+   "boja": "#8A5A00",
+   "pravila": [
+    [
+     "planina",
+     "dom"
+    ],
+    [
+     "planina",
+     "skloniste"
+    ]
+   ]
+  },
+  {
+   "id": "mjesto",
+   "boja": "#3E4C59",
+   "pravila": [
+    [
+     "bastina",
+     "naselje"
+    ]
+   ]
+  },
+  {
+   "id": "prakt",
+   "boja": "#56606B",
+   "pravila": [
+    [
+     "prakticno",
+     "*"
+    ]
+   ]
+  }
+ ]
+}
