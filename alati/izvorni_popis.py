@@ -38,7 +38,7 @@ T = [
 ("V10","voda","jezero","Lokvarsko jezero","Veliko umjetno jezero uz Lokve, okruženo jelovim i smrekovim šumama. Ribolov i šetnja obalom.","Q3825969","tocno",0,0,""),
 ("V11","voda","slap","Slap Zeleni vir","Slap koji se kod Skrada ruši preko ulaza u špilju; jedan od najpoznatijih prizora Gorskog kotara.","Q12645682","tocno",0,0,"Stavka je zaštićeno područje Zeleni vir."),
 ("V12","voda","rijeka","Čabranka u Čabru","Rijeka koja teče kroz Čabar, a nizvodno čini granicu sa Slovenijom do utoka u Kupu.","Q337394","okvirno",0,0,"Stavka za rijeku: Q337411 (Čabranka)."),
-("V13","voda","izvor","Izvor Čabranke","Krško vrelo Čabranke u blizini Čabra.",None,"",45.6010,14.6500,"Nema u Wikidati; provjeriti položaj i pristup."),
+("V13","voda","izvor","Izvor Čabranke","Krško vrelo Čabranke kod sela Tropeti, sjeverozapadno od Čabra. Odavde kreće poučna staza Tropetarska stijena.",None,"",45.60411,14.64138,"Koordinata izvora iz OSM-a (n8548606710)."),
 # ---------------- PLANINE I VIDIKOVCI ----------------
 ("P01","planina","vrh","Veliki Risnjak (1528 m)","Vrh po kojem je park dobio ime. Po vedrom danu pogled seže od Kvarnera do Alpa.","Q134373316","tocno",0,0,""),
 ("P02","planina","dom","Schlosserov dom","Planinarski dom ispod vrha Risnjaka, na glavnom pristupu iz Crnog Luga.",None,"",45.4270,14.6190,"Nema u Wikidati; procjena prema vrhu. Dane otvorenosti provjeriti svake sezone."),
@@ -150,6 +150,15 @@ T = [
 ("E02","izlet","zanimljivost","Zabavni i paintball park Vrata","Zabavni park s paintballom kod Vrata.",None,"",45.31256,14.73238,""),
 ("E03","izlet","zanimljivost","Izletište Šumska bajka, Lič","Obiteljsko izletište u šumi kod Liča, prikladno za djecu.",None,"",45.29323,14.70443,""),
 ("E04","izlet","zanimljivost","Kuća prirode Kotač na Lujzijani","Edukativni centar o prirodi uz Lujzinsku cestu, s kafićem.",None,"",45.35685,14.74572,""),
+("H54","bastina","muzej","Hiša Rački, Delnice","Stara goranska kuća u Supilovoj ulici, procjenjuje se da ima oko 300 godina. Čuva delničku narodnu nošnju; svakog lipnja ovdje se održavaju Ivanjske kresnice.",None,"",45.39765,14.80229,"Supilova 94: kućni broj nije u OSM-u, položaj procijenjen po susjednim brojevima (82–88)."),
+("H55","bastina","tehnicka","Popovićev mlin, Delnice","Mlin iz 1924. s očuvanim strojevima: kameni i valjčani mlin, sita, elevatori i kožno remenje. Prvi je u Delnicama radio na struju iz hidroelektrane Zeleni vir. Posjet uz najavu.",None,"",45.39681,14.80153,"Adresa Supilova 76 (OSM)."),
+("H56","bastina","muzej","Kuća Delač, Delači","Najstarija kuća zaštićenog zaseoka Delači kod Brod Moravica, iz 1644. Obnovljena je i uređena starim predmetima iz kraja.",None,"",45.47163,14.95862,"Položaj: zaselak Delači (OSM); kuću provjeriti."),
+("H57","bastina","muzej","Hrvatska čitaonica sela Kuti","Seoska čitaonica u Gornjim Kutima kod Brod Moravica. Od 1936. vode je mještani volonteri; ima više od 9000 knjiga.",None,"",45.4718,14.97591,"Položaj: selo Gornji Kuti (OSM); zgradu provjeriti."),
+("E05","izlet","zanimljivost","Adrenalinski park Kupjak","Gorski park na oko 800 m: vidikovac, šumska staza za šetnju i bicikl, adrenalinski sadržaji i roštilj.",None,"",45.39311,14.88399,"Adresa Kupjak 72 nije u OSM-u; točka je u selu Kupjak, provjeriti."),
+("E06","izlet","zanimljivost","Adrenalinski park Gorski Lazi, Tršće","Adrenalinski park u zaseoku Lazi kod Tršća.",None,"",45.56906,14.63647,"Park je oko 300 m od kuće Lazi 15 (OSM); točan položaj provjeriti."),
+("E07","izlet","zanimljivost","Quad Gorski kotar","Vožnja quadom po goranskim šumskim cestama i selima, ture od 1 i 2 sata.",None,"",45.41244,14.91388,"Adresa Šubetov Most 2, Skrad; točka je zaselak Šubetov Most (OSM), provjeriti polazište."),
+("S11","staza","poucna","Poučna staza Tropetarska stijena","Kružna planinska poučna staza od izvora Čabranke do vrha Tropetarske stijene, oko 4,5 km na dvije razine. Više od 70 vrsta drveća, bukove i jelove šume i rijedak bor. Namijenjena je ponajprije najavljenim grupama.",None,"",45.60411,14.64138,"Polazište: izvor Čabranke (OSM)."),
+("S12","staza","poucna","Poučna staza Plodovi gorja, Ravna Gora","Staza od 1,5 km na Suhom vrhu kod Ravne Gore, s pločama o drveću, grmlju, gljivama, ljekovitom bilju i šumskim plodovima.",None,"",45.37076,14.94078,"Polazište kod hotela Breza (OSM), oko 700 m od središta Ravne Gore; provjeriti."),
 ("S10","staza","poucna","Staza predatora, Tršće","Kružna poučna staza od oko 1,7 km (oko 1 h hoda) s modelima vuka, risa, medvjeda, jelena, srne, lisice, divlje svinje i tetrijeba u prirodnoj veličini, uz ploče o svakoj životinji.",None,"",45.5664,14.62981,"Položaj: selo Tršće (OSM); polazište staze provjeriti."),
 ]
 
@@ -168,9 +177,18 @@ KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04", "H05"}  # P04: G
 
 # koordinate iz OSM-a (ODbL): objekt je u OSM-u, ali ga OSM izvadak ne donosi kao točku ili mu treba naš naziv i opis
 KOORD_OSM = {"H05": "w333577471", "H45": "w379649181", "H46": "w685050686", "H47": "w433260934", "H48": "r6304141",
-             "H49": "w433249369", "E01": "w1534944649", "E02": "w436526341", "E03": "n13022902160", "E04": "n12085008012"}
-# koordinata je središte naselja iz OSM-a (objekt je u tom mjestu, točna zgrada nepoznata)
-KOORD_SELO = {"H50": "Mrkopalj", "H51": "Brod Moravice", "H52": "Plešce", "H53": "Lič", "S10": "Tršće"}
+             "H49": "w433249369", "E01": "w1534944649", "E02": "w436526341", "E03": "n13022902160", "E04": "n12085008012",
+             "H55": "n12196525173", "V13": "n8548606710"}
+# približne koordinate: (pouzdanost, odakle je točka) – objekt je u tom mjestu ili na toj adresi, točan položaj provjeriti
+KOORD_PRIBLIZNO = {
+    "H50": ("S", "OpenStreetMap – središte mjesta Mrkopalj"), "H51": ("S", "OpenStreetMap – središte mjesta Brod Moravice"),
+    "H52": ("S", "OpenStreetMap – središte mjesta Plešce"), "H53": ("S", "OpenStreetMap – središte mjesta Lič"),
+    "S10": ("N", "OpenStreetMap – selo Tršće"), "H54": ("S", "procjena po kućnim brojevima u OSM-u (Supilova 94)"),
+    "H56": ("S", "OpenStreetMap – zaselak Delači"), "H57": ("S", "OpenStreetMap – selo Gornji Kuti"),
+    "E05": ("N", "OpenStreetMap – selo Kupjak"), "E06": ("N", "OpenStreetMap – kuća Lazi 15, park je oko 300 m dalje"),
+    "E07": ("N", "OpenStreetMap – zaselak Šubetov Most"), "S11": ("S", "OpenStreetMap – izvor Čabranke"),
+    "S12": ("N", "OpenStreetMap – Bistro Breza, Ravna Gora (je li to hotel Breza, provjeriti)"),
+}
 
 def tocka(r):
     (id_, kat, pod, naziv, opis, qid, veza, lat, lon, nap) = r
@@ -181,9 +199,9 @@ def tocka(r):
         "id": id_, "kategorija": kat, "podvrsta": pod,
         "tekst": {"hr": {"naziv": naziv, "opis": opis}},
         "lat": lat if id_ in KOORD_RUCNO else wd["lat"] if wd else lat, "lon": lon if id_ in KOORD_RUCNO else wd["lon"] if wd else lon,
-        "pouzdanost": "V" if id_ in KOORD_OSM else ("S" if id_ in KOORD_SELO and pod != "poucna" else "N") if id_ in KOORD_SELO else RUCNO.get(id_) or pouzdanost(wd, veza),
+        "pouzdanost": "V" if id_ in KOORD_OSM else KOORD_PRIBLIZNO[id_][0] if id_ in KOORD_PRIBLIZNO else RUCNO.get(id_) or pouzdanost(wd, veza),
         "izvor": {
-            "koordinate": "OpenStreetMap" if id_ in KOORD_OSM else f"OpenStreetMap – središte mjesta {KOORD_SELO[id_]}" if id_ in KOORD_SELO else "Wikidata" if wd and id_ not in KOORD_RUCNO else "Wikidata" if wd else "procjena – provjeriti",
+            "koordinate": "OpenStreetMap" if id_ in KOORD_OSM else KOORD_PRIBLIZNO[id_][1] if id_ in KOORD_PRIBLIZNO else "Wikidata" if wd and id_ not in KOORD_RUCNO else "Wikidata" if wd else "procjena – provjeriti",
             "osm": KOORD_OSM.get(id_),
             "wikidata": qid, "veza": veza or None,
             "wikidata_naziv": (wd.get("hr") or wd.get("en")) if wd else None,
@@ -191,7 +209,7 @@ def tocka(r):
             "slika_commons": wd.get("slika") if wd else None,
             "opis": "vlastiti tekst",
         },
-        "licenca": ("koordinate: ODbL – © OpenStreetMap suradnici" if id_ in KOORD_OSM or id_ in KOORD_SELO else "koordinate: CC0 (Wikidata)" if wd else "koordinate: naša procjena") + "; opis: naš tekst",
+        "licenca": ("koordinate: ODbL – © OpenStreetMap suradnici" if id_ in KOORD_OSM or id_ in KOORD_PRIBLIZNO else "koordinate: CC0 (Wikidata)" if wd else "koordinate: naša procjena") + "; opis: naš tekst",
         "napomena": nap,
         "status": "za odobrenje",
     }

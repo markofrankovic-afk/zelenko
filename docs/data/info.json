@@ -239,6 +239,57 @@
   "web": "https://www.paintball-vrata.com/",
   "izvor": "OpenStreetMap"
  },
+ "H55": {
+  "napomena": "Posjet uz prethodnu najavu.",
+  "telefon": "+385 51 814 374",
+  "email": "popovicev_mlin@hotmail.com",
+  "web": "https://www.popovicev-mlin.hr/",
+  "izvor": "Popovićev mlin",
+  "izvor_url": "https://www.popovicev-mlin.hr/",
+  "provjereno": "2026-10-24"
+ },
+ "H57": {
+  "napomena": "Radno vrijeme nije objavljeno; za posjet se raspitaj u Općini Brod Moravice.",
+  "telefon": "+385 51 817 180",
+  "email": "opcina@brodmoravice.hr",
+  "web": "https://www.brodmoravice.hr/citaonica-kuti/",
+  "izvor": "Općina Brod Moravice",
+  "izvor_url": "https://www.brodmoravice.hr/citaonica-kuti/",
+  "provjereno": "2026-10-24"
+ },
+ "E05": {
+  "napomena": "Sezonu i cijene provjeri telefonom.",
+  "telefon": "+385 91 569 2979",
+  "izvor": "Aktivni turizam – Adrenalin park Kupjak",
+  "izvor_url": "https://aktivniturizam.hr/ponuda/ravna-gora/adrenalin-park-kupjak",
+  "provjereno": "2026-10-24"
+ },
+ "E06": {
+  "napomena": "Sezonu i cijene provjeri telefonom.",
+  "telefon": "+385 95 577 4455",
+  "web": "https://gorskilazi.com/adrenalin-park",
+  "izvor": "Gorski Lazi",
+  "izvor_url": "https://gorskilazi.com/korisne-indormacije",
+  "provjereno": "2026-10-24"
+ },
+ "E07": {
+  "napomena": "Ture od 1 h (oko 15 km) i 2 h (oko 30 km). Cijene i termine provjeri na stranici.",
+  "web": "https://quadgorskikotar.com/",
+  "izvor": "Quad Gorski kotar",
+  "izvor_url": "https://quadgorskikotar.com/en/",
+  "provjereno": "2026-10-24"
+ },
+ "S11": {
+  "napomena": "Otvoren je dio od oko 1,45 km (88 m uspona). Staza je ponajprije za najavljene grupe (škole, udruge).",
+  "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+  "izvor_url": "https://gorskikotarbike.com/en/attractions/poucna-staza-tropetarska-stijena/",
+  "provjereno": "2026-10-24"
+ },
+ "S12": {
+  "izvor": "Plodovi gorja",
+  "izvor_url": "https://www.plodovigorja-gk.hr/poucna-staza-plodovi-gorja/",
+  "provjereno": "2026-10-24"
+ },
  "On2367579804": {
   "rv": "Mo-Su 06:00-22:00",
   "upravitelj": "Petrol d.o.o.",

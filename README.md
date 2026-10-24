@@ -1,7 +1,7 @@
-# Zelenko – offline vodič za Gorski kotar (prototip 0.7.5)
+# Zelenko – offline vodič za Gorski kotar (prototip 0.7.6)
 
 PWA (radi i bez signala). Izbornik: Karta · Danas · Gastro (specijaliteti, jelo, smještaj, OPG) · Rute · Moje.
-Karta s 1055 točaka, 30 ruta (10 naših, 3 besplatne; 20 biciklističkih i MTB iz OSM-a), gdje jesti, spavati i kupiti,
+Karta s 1064 točke, 30 ruta (10 naših, 3 besplatne; 20 biciklističkih i MTB iz OSM-a), gdje jesti, spavati i kupiti,
 Zelenkova putovnica (pečati po GPS-u), Danas (vrijeme i medin savjet), Sigurnost (SOS, povratak do auta,
 „javi nekome”), Moja mjesta, sigurnosna kopija. Svijetli i tamni način. Za sada samo hrvatski.
 
@@ -23,6 +23,9 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - `docs/data/kategorije.json` – filteri na karti i boje
 - `docs/data/podloga.json` – vlastita offline karta (ceste, staze, vode, naselja)
 - `docs/app.js` – logika; `CONFIG` na vrhu (GoatCounter, kontakt)
+
+## Ispravak lokacija
+`docs/pribadace.html` – karta na kojoj se približne točke povuku na pravo mjesto (samo prema poznavanju terena). Rezultat (JSON) se kopira i ugrađuje u `alati/izvorni_popis.py`.
 
 ## Alati (`alati/`, Python)
 - `osm_izvuci.py`, `spoji_osm.py`, `osm_podloga.py`, `osm_rute.py` – točke, karta i rute iz OSM izvatka (BBBike PBF)

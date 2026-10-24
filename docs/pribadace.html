@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Zelenko – ispravi lokacije</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="icons/favicon-64.png">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<style>
+:root{--bg:#FFFFFF;--surface:#FFFFFF;--muted-bg:#F1F6F2;--ink:#14201A;--ink2:#34433A;--muted:#5A6A60;--line:#E2ECE4;
+  --accent:#15803D;--on-accent:#FFFFFF;--accent-soft:#E7F5EB;--amber:#C2700A;--amber-soft:#FBEFD9;--grey:#7A8580;--sos:#C62828;
+  --f:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1613;--surface:#18221D;--muted-bg:#1E2A24;--ink:#E6EDE8;--ink2:#C2CEC6;
+  --muted:#97A79D;--line:#26332C;--accent:#7CC895;--on-accent:#0F1613;--accent-soft:#1F3428;--amber:#D9A04A;--amber-soft:#33281A;--grey:#8A968F;}}
+:root[data-theme="dark"]{--bg:#0F1613;--surface:#18221D;--muted-bg:#1E2A24;--ink:#E6EDE8;--ink2:#C2CEC6;--muted:#97A79D;--line:#26332C;
+  --accent:#7CC895;--on-accent:#0F1613;--accent-soft:#1F3428;--amber:#D9A04A;--amber-soft:#33281A;--grey:#8A968F;}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:16px/1.45 var(--f)}
+#app{display:grid;grid-template-rows:minmax(300px,52vh) 1fr;height:100%}
+@media (min-width:900px){#app{grid-template-rows:1fr;grid-template-columns:1fr 420px}}
+#map{background:var(--muted-bg)}
+#panel{overflow:auto;padding:14px 16px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+@media (min-width:900px){#panel{border-top:0;border-left:1px solid var(--line)}}
+h1{font-size:1.25rem;margin:0 0 4px} h2{font-size:1rem;margin:18px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+p{margin:0 0 8px} .small{font-size:.88rem;color:var(--muted)}
+.card{background:var(--accent-soft);border-radius:14px;padding:12px 14px;margin:10px 0}
+.card b{display:block;font-size:1.05rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{font:inherit;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+.item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:8px 0;min-height:52px}
+.item[aria-current="true"]{background:var(--accent-soft)}
+.dot{flex:none;width:14px;height:14px;border-radius:50%;background:var(--grey)}
+.dot.pomaknuto{background:var(--amber)} .dot.tocno{background:var(--accent)} .dot.nema{background:transparent;border:2px dashed var(--grey)}
+.item .t{flex:1;min-width:0} .item .t span{display:block;font-size:.85rem;color:var(--muted)}
+textarea{width:100%;min-height:90px;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--surface);color:var(--ink)}
+.pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);background:var(--grey)}
+.pin.pomaknuto{background:var(--amber)} .pin.tocno{background:var(--accent)} .pin.sel{outline:3px solid var(--ink);outline-offset:1px}
+.note{background:var(--amber-soft);border-radius:12px;padding:10px 12px;font-size:.9rem}
+</style>
+</head>
+<body>
+<div id="app"><div id="map" role="application" aria-label="Karta"></div><div id="panel"></div></div>
+<script src="vendor/leaflet.js"></script>
+<script>
+/* Pomoćna stranica: Marko postavlja točan položaj mjesta koja znamo samo približno.
+   Postavlja se samo ono što znaš s terena (ne prepisivati s Google Mapsa). Rezultat se kopira i šalje Claudeu. */
+const TXT = {
+  naslov: "Ispravi lokacije",
+  uvod: "Odaberi mjesto, pa dodirni kartu gdje je stvarno (ili povuci pribadaču). Postavi samo ono što znaš s terena, ne s Google Mapsa.",
+  odaberi: "Odaberi mjesto s popisa.",
+  tocno: "Ovdje je točno", vrati: "Vrati", neznam: "Ne znam",
+  nove: "Nove – nemamo lokaciju", danas: "Dodano danas – približno", ostale: "Ostale približne",
+  rezultat: "Rezultat", kopiraj: "Kopiraj", kopirano: "Kopirano – zalijepi u razgovor s Claudeom", podijeli: "Podijeli",
+  nista: "Još ništa nije ispravljeno.",
+  st_nema: "nema lokacije", st_pribl: "približno", st_pomaknuto: "pomaknuto", st_tocno: "potvrđeno",
+};
+const NOVE = [
+  { id: "X01", naziv: "Vicićev most, Lič", opis: "Obnovljeni povijesni most na Ličanki i izletište (otvoreno 2023.).", kod: "H22" },
+  { id: "X02", naziv: "Planinski vrt Osjetila Karoline", opis: "Edukativni goranski vrt, posjet uz najavu (Obrt Borovnica).", kod: "H10" },
+  { id: "X03", naziv: "OPG i izletište Zeleni san, Lič", opis: "Domaće i egzotične životinje, vikendom 11–18 h.", kod: "H22" },
+];
+const DANAS = new Set(["H50","H51","H52","H53","H54","H56","H57","E05","E06","E07","S10","S11","S12"]);
+const KLJUC = "zelenko-pribadace";
+let S = {}; try { S = JSON.parse(localStorage.getItem(KLJUC) || "{}"); } catch (e) {}
+const spremi = () => { try { localStorage.setItem(KLJUC, JSON.stringify(S)); } catch (e) {} };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const $ = s => document.querySelector(s);
+
+const map = L.map("map", { zoomControl: true }).setView([45.38, 14.8], 10);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap suradnici" }).addTo(map);
+let MJESTA = [], sel = null; const M = {};
+
+function stanje(m) { return S[m.id] ? S[m.id][2] : m.nova ? "nema" : "pribl"; }
+function ikona(m) { const st = stanje(m); return L.divIcon({ className: "", iconSize: [26, 26], iconAnchor: [13, 26], html: `<div class="pin ${st === "pomaknuto" ? "pomaknuto" : st === "tocno" ? "tocno" : ""} ${sel === m.id ? "sel" : ""}"></div>` }); }
+function poz(m) { return S[m.id] ? [S[m.id][0], S[m.id][1]] : [m.lat, m.lon]; }
+function postavi(m, ll, st) { S[m.id] = [Math.round(ll.lat * 1e6) / 1e6, Math.round(ll.lng * 1e6) / 1e6, st]; spremi(); M[m.id].setLatLng(poz(m)); osvjezi(); }
+
+function osvjezi() {
+  for (const m of MJESTA) M[m.id].setIcon(ikona(m));
+  const m = MJESTA.find(x => x.id === sel);
+  const grupa = (naslov, lista) => lista.length ? `<h2>${esc(naslov)}</h2>` + lista.map(x => `<button class="item" data-id="${x.id}" aria-current="${x.id === sel}">
+      <span class="dot ${stanje(x)}"></span><span class="t"><b>${esc(x.naziv)}</b><span>${esc(TXT["st_" + stanje(x)])}${x.izvor ? " · " + esc(x.izvor) : ""}</span></span></button>`).join("") : "";
+  const rez = Object.fromEntries(Object.entries(S));
+  $("#panel").innerHTML = `<h1>${esc(TXT.naslov)}</h1><p class="small">${esc(TXT.uvod)}</p>
+    ${m ? `<div class="card"><b>${esc(m.naziv)}</b><p class="small" style="margin:4px 0 0">${esc(m.opis || "")}</p>${m.napomena ? `<p class="small" style="margin:4px 0 0">${esc(m.napomena)}</p>` : ""}
+      <div class="row"><button class="primary" id="bTocno">${esc(TXT.tocno)}</button>${S[m.id] ? `<button id="bVrati">${esc(TXT.vrati)}</button>` : ""}</div></div>`
+      : `<div class="note">${esc(TXT.odaberi)}</div>`}
+    ${grupa(TXT.nove, MJESTA.filter(x => x.nova))}${grupa(TXT.danas, MJESTA.filter(x => DANAS.has(x.id)))}${grupa(TXT.ostale, MJESTA.filter(x => !x.nova && !DANAS.has(x.id)))}
+    <h2>${esc(TXT.rezultat)}</h2>${Object.keys(rez).length ? `<textarea id="out" readonly>${esc(JSON.stringify(rez))}</textarea>
+      <div class="row"><button class="primary" id="bKopiraj">${esc(TXT.kopiraj)}</button>${navigator.share ? `<button id="bPodijeli">${esc(TXT.podijeli)}</button>` : ""}</div>` : `<p class="small">${esc(TXT.nista)}</p>`}`;
+}
+function odaberi(id, centriraj) { sel = id; const m = MJESTA.find(x => x.id === id); osvjezi(); if (centriraj && m) map.setView(poz(m), Math.max(map.getZoom(), 16)); }
+
+$("#panel").addEventListener("click", e => {
+  const it = e.target.closest("[data-id]"); if (it) { odaberi(it.dataset.id, true); $("#panel").scrollTop = 0; return; }
+  const m = MJESTA.find(x => x.id === sel);
+  if (e.target.id === "bTocno" && m) postavi(m, M[m.id].getLatLng(), S[m.id] && S[m.id][2] === "pomaknuto" ? "pomaknuto" : "tocno");
+  if (e.target.id === "bVrati" && m) { delete S[m.id]; spremi(); M[m.id].setLatLng(poz(m)); osvjezi(); }
+  if (e.target.id === "bKopiraj") { const t = $("#out"); t.select(); (navigator.clipboard ? navigator.clipboard.writeText(t.value) : Promise.resolve(document.execCommand("copy"))).then(() => { e.target.textContent = TXT.kopirano; }); }
+  if (e.target.id === "bPodijeli") navigator.share({ title: "Zelenko – lokacije", text: $("#out").value }).catch(() => {});
+});
+map.on("click", e => { const m = MJESTA.find(x => x.id === sel); if (m) postavi(m, e.latlng, "pomaknuto"); });
+
+fetch("data/tocke.json").then(r => r.json()).then(d => {
+  const T = d.tocke, BY = Object.fromEntries(T.map(p => [p.id, p]));
+  MJESTA = NOVE.map(n => ({ ...n, nova: true, lat: BY[n.kod].lat, lon: BY[n.kod].lon }))
+    .concat(T.filter(p => (p.vaznost || 1) === 1 && p.pouzdanost !== "V" && p.podvrsta !== "naselje")
+      .map(p => ({ id: p.id, naziv: p.tekst.hr.naziv, opis: p.tekst.hr.opis, napomena: p.napomena, izvor: p.izvor && p.izvor.koordinate, lat: p.lat, lon: p.lon })));
+  for (const m of MJESTA) {
+    M[m.id] = L.marker(poz(m), { icon: ikona(m), draggable: true, title: m.naziv }).addTo(map)
+      .on("click", () => odaberi(m.id, false)).on("dragend", e => { sel = m.id; postavi(m, e.target.getLatLng(), "pomaknuto"); });
+  }
+  osvjezi();
+});
+</script>
+</body>
+</html>
