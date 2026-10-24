@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.7.0",
+  verzija: "0.7.1",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -62,7 +62,7 @@ function copy(text) { (navigator.clipboard ? navigator.clipboard.writeText(text)
 function ref() { if (S.pos) return S.pos; const c = map ? map.getCenter() : { lat: CONFIG.centar[0], lng: CONFIG.centar[1] }; return { lat: c.lat, lon: c.lng }; }
 function nearestPlace(p) { let best = null; for (const x of TOCKE) if (x.podvrsta === "naselje") { const d = hav(p, x); if (!best || d < best.d) best = { d, x }; } return best ? tx(best.x).naziv : ""; }
 function boja(p) { return p.moje ? cv("--accent") : (KAT.boje[p.podvrsta === "naselje" ? "naselje" : p.kategorija] || "#56606B"); }
-function katNaziv(p) { if (p.moje) return t("kat_moje"); if (p.podvrsta === "naselje") return t("kat_naselje"); const k = "pod_" + p.podvrsta; return T[k] || t("kat_" + p.kategorija); }
+function katNaziv(p) { if (p.moje) return t("kat_moje"); if (p.usluga && p.usluga.i_jelo) return t("pod_" + p.podvrsta) + " · " + t("pod_restoran").toLowerCase(); if (p.usluga && p.usluga.i_spavanje) return t("pod_" + p.podvrsta) + " · " + t("sobe"); if (p.podvrsta === "naselje") return t("kat_naselje"); const k = "pod_" + p.podvrsta; return T[k] || t("kat_" + p.kategorija); }
 function grupeOd(p) {
   return KAT.grupe.filter(g => g.pravila.some(([k, pod]) => k === p.kategorija && (pod === "*" || pod === p.podvrsta || (pod[0] === "!" && pod.slice(1) !== p.podvrsta)))).map(g => g.id);
 }
@@ -739,7 +739,7 @@ $("#moje").addEventListener("change", e => {
 });
 
 /* ---------- gastro kutak: specijaliteti, jelo, smještaj, OPG ---------- */
-const G_FILTRI = [["jelo", p => p.kategorija === "jelo"], ["spavanje", p => p.kategorija === "spavanje"],
+const G_FILTRI = [["jelo", p => p.kategorija === "jelo" || !!(p.usluga && p.usluga.i_jelo)], ["spavanje", p => p.kategorija === "spavanje" || !!(p.usluga && p.usluga.i_spavanje)],
   ["opg", p => p.kategorija === "kupnja" && (p.podvrsta === "opg" || p.podvrsta === "mljekomat")], ["trgovine", p => p.kategorija === "kupnja" && p.podvrsta !== "opg" && p.podvrsta !== "mljekomat"]];
 S.gastro = { f: "jelo", otvoreno: false };
 function specKartica(x) {
@@ -752,6 +752,7 @@ function openSpec(id) {
     <div class="hero" style="background:${x.boja};height:96px"></div>
     <h1>${esc(x.naziv)}</h1><p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>
     <dl class="info"><div class="info-row"><dt>${esc(t("spec_kad"))}</dt><dd>${esc(x.kad)}</dd></div><div class="info-row"><dt>${esc(t("spec_probaj"))}</dt><dd>${esc(x.probaj)}</dd></div></dl>
+    ${(x.ref || []).filter(i => BY[i]).map(i => `<button class="list-row" data-open="${i}"><span class="dot" style="background:${boja(BY[i])}"></span><span class="t"><b>${esc(tx(BY[i]).naziv)}</b><span>${esc(katNaziv(BY[i]))}${S.pos ? " · " + fmtDist(hav(S.pos, BY[i])) : ""}</span></span>${ic("chevron")}</button>`).join("")}
     ${x.veza === "gljive" && DANAS.gljive_url ? `<a class="btn" href="${esc(DANAS.gljive_url)}" target="_blank" rel="noopener">${esc(t("gljive_otvori"))}</a>` : ""}
     <button class="btn primary" data-gfiltar="${x.vrsta === "pice" ? "opg" : "jelo"}">${esc(t(x.vrsta === "pice" ? "spec_kupi" : "spec_gdje"))}</button>
     <p class="small muted" style="margin:0">${esc(t("info_izvor_kratko"))}: ${SPEC.izvori.map(i => `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.naziv)}</a>`).join(", ")}</p></div>`);
@@ -907,7 +908,11 @@ async function boot() {
   TOCKE = tocke.tocke; RUTE = rute.rute;
   /* usluge (jelo, smještaj, kupnja) idu na kartu kao točke; partneri su istaknuti */
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });
-  for (const p of TOCKE) { p.grupe = grupeOd(p); BY[p.id] = p; }
+  for (const p of TOCKE) {
+    p.grupe = grupeOd(p); BY[p.id] = p;
+    if (p.usluga && p.usluga.i_jelo && !p.grupe.includes("jelo")) p.grupe.push("jelo");          /* hotel s restoranom */
+    if (p.usluga && p.usluga.i_spavanje && !p.grupe.includes("spavanje")) p.grupe.push("spavanje"); /* konoba sa sobama */
+  }
   for (const r of RUTE) RBY[r.id] = r;
   applyI18n(); netStatus(); renderChips(); initMap(); renderNear();
   const h = location.hash.slice(1); go(["karta", "danas", "gastro", "rute", "moje", "sigurnost"].includes(h) ? h : "karta");

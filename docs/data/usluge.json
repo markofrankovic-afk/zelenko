@@ -54,6 +54,18 @@
 "partner": false
 },
 {
+"id": "Un3079057622",
+"vrsta": "jelo",
+"podvrsta": "restoran",
+"naziv": "Bistro Breza",
+"lat": 45.370756,
+"lon": 14.940781,
+"web": "http://www.breza-rg.hr/english/index.html",
+"osm": "n3079057622",
+"partner": false,
+"i_spavanje": true
+},
+{
 "id": "Uw445999066",
 "vrsta": "jelo",
 "podvrsta": "restoran",
@@ -403,6 +415,18 @@
 "partner": false
 },
 {
+"id": "Un1305138346",
+"vrsta": "jelo",
+"podvrsta": "konoba",
+"naziv": "Konoba Volta",
+"lat": 45.304664,
+"lon": 14.714078,
+"kuhinja": "regional",
+"osm": "n1305138346",
+"partner": false,
+"i_spavanje": true
+},
+{
 "id": "Un12196463564",
 "vrsta": "jelo",
 "podvrsta": "brza_hrana",
@@ -567,7 +591,8 @@
 "adresa": "1A",
 "mjesto": "Delnice",
 "osm": "n1376858376",
-"partner": false
+"partner": false,
+"i_spavanje": true
 },
 {
 "id": "Un10901109959",
@@ -772,7 +797,8 @@
 "lat": 45.315418,
 "lon": 14.851724,
 "osm": "n6911787917",
-"partner": false
+"partner": false,
+"i_spavanje": true
 },
 {
 "id": "Un3972168480",
@@ -1262,39 +1288,6 @@
 "partner": false
 },
 {
-"id": "Un467090970",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Bijela Ruža",
-"lat": 45.37597,
-"lon": 14.956331,
-"web": "https://www.bijela-ruza.hr/",
-"osm": "n467090970",
-"partner": false
-},
-{
-"id": "Un3079057622",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Bistro Breza",
-"lat": 45.370756,
-"lon": 14.940781,
-"web": "http://www.breza-rg.hr/english/index.html",
-"osm": "n3079057622",
-"partner": false
-},
-{
-"id": "Un1305138335",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Bitoraj",
-"lat": 45.304394,
-"lon": 14.713211,
-"kuhinja": "regional",
-"osm": "n1305138335",
-"partner": false
-},
-{
 "id": "Uw687313678",
 "vrsta": "spavanje",
 "podvrsta": "apartman",
@@ -1372,6 +1365,29 @@
 "partner": false
 },
 {
+"id": "Un467090970",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel Bijela Ruža",
+"lat": 45.37597,
+"lon": 14.956331,
+"web": "https://www.bijela-ruza.hr/",
+"osm": "n467090970",
+"partner": false
+},
+{
+"id": "Un1305138335",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel Bitoraj",
+"lat": 45.304394,
+"lon": 14.713211,
+"kuhinja": "regional",
+"osm": "n1305138335",
+"partner": false,
+"i_jelo": true
+},
+{
 "id": "Uw416543740",
 "vrsta": "spavanje",
 "podvrsta": "hotel",
@@ -1383,6 +1399,67 @@
 "adresa": "Sela 5",
 "mjesto": "Osilnica",
 "osm": "w416543740",
+"partner": false
+},
+{
+"id": "Un11918508747",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel Lovački dom Arnika",
+"lat": 45.30049,
+"lon": 14.715765,
+"adresa": "Klađe 22",
+"mjesto": "Fužine",
+"osm": "n11918508747",
+"partner": false
+},
+{
+"id": "Un1273000627",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel Mance",
+"lat": 45.462967,
+"lon": 14.853127,
+"kuhinja": "regional",
+"adresa": "Brod na Kupi",
+"osm": "n1273000627",
+"partner": false,
+"i_jelo": true
+},
+{
+"id": "Un10839677819",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel Pansion Risnjak",
+"lat": 45.418527,
+"lon": 14.685702,
+"telefon": "+385 51 212544",
+"web": "https://pansion-risnjak-restaurant.eatbu.com",
+"adresa": "Bela Vodica 48",
+"osm": "n10839677819",
+"partner": false
+},
+{
+"id": "Uw431847824",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel Risnjak",
+"lat": 45.393105,
+"lon": 14.796935,
+"web": "http://www.hotel-risnjak.hr",
+"osm": "w431847824",
+"partner": false
+},
+{
+"id": "Uw455482341",
+"vrsta": "spavanje",
+"podvrsta": "hotel",
+"naziv": "Hotel River Kupa lodge",
+"lat": 45.515223,
+"lon": 14.751657,
+"web": "https://riverkupalodge.com/",
+"mjesto": "Osilnica",
+"osm": "w455482341",
 "partner": false
 },
 {
@@ -1413,17 +1490,6 @@
 "lat": 45.442443,
 "lon": 14.943265,
 "osm": "n10229070376",
-"partner": false
-},
-{
-"id": "Un1305138346",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Konoba Volta",
-"lat": 45.304664,
-"lon": 14.714078,
-"kuhinja": "regional",
-"osm": "n1305138346",
 "partner": false
 },
 {
@@ -1464,18 +1530,6 @@
 "partner": false
 },
 {
-"id": "Un11918508747",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Lovački dom Arnika",
-"lat": 45.30049,
-"lon": 14.715765,
-"adresa": "Klađe 22",
-"mjesto": "Fužine",
-"osm": "n11918508747",
-"partner": false
-},
-{
 "id": "Un5906354786",
 "vrsta": "spavanje",
 "podvrsta": "hostel",
@@ -1497,18 +1551,6 @@
 "adresa": "Matanovci 39",
 "mjesto": "Ravna Gora",
 "osm": "n2841491019",
-"partner": false
-},
-{
-"id": "Un1273000627",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Mance",
-"lat": 45.462967,
-"lon": 14.853127,
-"kuhinja": "regional",
-"adresa": "Brod na Kupi",
-"osm": "n1273000627",
 "partner": false
 },
 {
@@ -1534,19 +1576,6 @@
 "partner": false
 },
 {
-"id": "Un10839677819",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Pansion Risnjak",
-"lat": 45.418527,
-"lon": 14.685702,
-"telefon": "+385 51 212544",
-"web": "https://pansion-risnjak-restaurant.eatbu.com",
-"adresa": "Bela Vodica 48",
-"osm": "n10839677819",
-"partner": false
-},
-{
 "id": "Un3010210517",
 "vrsta": "spavanje",
 "podvrsta": "pansion",
@@ -1555,30 +1584,8 @@
 "lon": 14.900999,
 "web": "http://www.planinski-raj.net/",
 "osm": "n3010210517",
-"partner": false
-},
-{
-"id": "Uw431847824",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "Risnjak",
-"lat": 45.393105,
-"lon": 14.796935,
-"web": "http://www.hotel-risnjak.hr",
-"osm": "w431847824",
-"partner": false
-},
-{
-"id": "Uw455482341",
-"vrsta": "spavanje",
-"podvrsta": "hotel",
-"naziv": "River Kupa lodge",
-"lat": 45.515223,
-"lon": 14.751657,
-"web": "https://riverkupalodge.com/",
-"mjesto": "Osilnica",
-"osm": "w455482341",
-"partner": false
+"partner": false,
+"i_jelo": true
 },
 {
 "id": "Uw431515751",

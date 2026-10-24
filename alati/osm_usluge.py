@@ -6,7 +6,7 @@ Granica je ista kao u osm_izvuci.py. Uz svaku uslugu ide radno vrijeme (opening_
 telefon i web kad postoje u OSM-u. Polje "partner" (false) je za poduzetnike koji se
 uključe u vodič: oni dobivaju opis, fotografiju i istaknuti prikaz.
 """
-import json, sys, math
+import json, sys, math, re
 import osmium, osmium.geom, shapely.wkb as wkb
 from shapely.geometry import Point, box
 from shapely.ops import unary_union
@@ -51,6 +51,10 @@ def kl(t):
     if a == "vending_machine" and t.get("vending") in ("milk", "eggs", "food", "cheese"):
         return ("kupnja", "mljekomat")
     if a in JELO: return ("jelo", JELO[a])
+    # konoba, restoran, gostionica... su mjesta za jelo i kad su u OSM-u označeni kao hotel
+    ime = t.get("name", "").lower()
+    if tu in SPAVANJE and re.match(r"(konoba|restoran|gostionica|pizzeria|bistro|krčma|kod )", ime):
+        return ("jelo", "konoba" if ime.startswith("konoba") else "restoran")
     if tu in SPAVANJE: return ("spavanje", SPAVANJE[tu])
     if sh in KUPNJA: return ("kupnja", KUPNJA[sh])
     return None
@@ -62,7 +66,7 @@ def prvi(t, *k):
     return None
 
 
-out, seen = [], set()
+out, seen = [], {}
 for o in osmium.FileProcessor(SRC).with_locations().with_areas():
     t = dict(o.tags)
     if not t: continue
@@ -86,8 +90,11 @@ for o in osmium.FileProcessor(SRC).with_locations().with_areas():
         continue
     if not P.contains(Point(lon, lat)): continue
     k = (t["name"].lower(), round(lat, 3), round(lon, 3))
-    if k in seen: continue
-    seen.add(k)
+    if k in seen:
+        prvo = seen[k]
+        if prvo["vrsta"] != c[0] and {prvo["vrsta"], c[0]} == {"jelo", "spavanje"}:
+            prvo["i_jelo" if c[0] == "jelo" else "i_spavanje"] = True
+        continue
     typ = "n" if o.is_node() else ("w" if (o.is_way() or (o.is_area() and o.from_way())) else "r")
     oid = o.orig_id() if o.is_area() else o.id
     web = prvi(t, "website", "contact:website", "url")
@@ -97,7 +104,13 @@ for o in osmium.FileProcessor(SRC).with_locations().with_areas():
          "web": web, "kuhinja": t.get("cuisine"), "zvjezdice": t.get("stars"),
          "adresa": " ".join(v for v in [t.get("addr:street"), t.get("addr:housenumber")] if v) or None,
          "mjesto": t.get("addr:city") or t.get("addr:place"), "osm": f"{typ}{oid}", "partner": False}
-    out.append({k2: v for k2, v in x.items() if v is not None})
+    # hotel s kuhinjom (cuisine) ima i restoran; mjesto za jelo s oznakom hotela ima i sobe
+    if c[0] == "spavanje" and t.get("cuisine"): x["i_jelo"] = True
+    if c[0] == "jelo" and t.get("tourism") in SPAVANJE: x["i_spavanje"] = True
+    if c[0] == "spavanje" and t.get("tourism") == "hotel" and "hotel" not in x["naziv"].lower(): x["naziv"] = "Hotel " + x["naziv"]
+    x = {k2: v for k2, v in x.items() if v is not None}
+    seen[k] = x
+    out.append(x)
 
 # ručno upisani partneri (izvori/partneri.json): zamjenjuju isti objekt iz OSM-a ako je na istom mjestu
 import os

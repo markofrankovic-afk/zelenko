@@ -2,62 +2,121 @@
  "opis": "Specijaliteti Gorskog kotara: činjenice iz turističkih izvora, napisano našim riječima.",
  "provjereno": "2026-10-24",
  "specijaliteti": [
-  {"id": "gulas", "vrsta": "jelo", "boja": "#7A3E1D",
+  {
+   "id": "gulas",
+   "vrsta": "jelo",
+   "boja": "#7A3E1D",
    "naziv": "Gulaš od divljači",
    "opis": "Najpoznatije goransko jelo: srnetina, jelen, divlja svinja ili medvjed, dugo kuhani s lukom i crnim vinom. Uz njega idu palenta, njoki od krumpira ili domaći kruh.",
    "kad": "cijele godine",
-   "probaj": "U restoranima i planinarskim domovima s domaćom kuhinjom."},
-  {"id": "suho", "vrsta": "jelo", "boja": "#8E2F2F",
+   "probaj": "U Fužinama su za gulaš poznati Hotel Bitoraj i Konoba Volta; jede se i u drugim restoranima i planinarskim domovima s domaćom kuhinjom.",
+   "ref": [
+    "Un1305138335",
+    "Un1305138346"
+   ]
+  },
+  {
+   "id": "suho",
+   "vrsta": "jelo",
+   "boja": "#8E2F2F",
    "naziv": "Pršut od divljači i škripavac",
    "opis": "Hladno predjelo: suho meso od medvjeda, vepra ili jelena, uz sir škripavac i domaći kruh.",
    "kad": "cijele godine",
-   "probaj": "Kao predjelo u restoranima; suhomesnato i kod malih domaćih proizvođača."},
-  {"id": "pastrva", "vrsta": "jelo", "boja": "#2C6E91",
+   "probaj": "Kao predjelo u restoranima; suhomesnato i kod malih domaćih proizvođača."
+  },
+  {
+   "id": "pastrva",
+   "vrsta": "jelo",
+   "boja": "#2C6E91",
    "naziv": "Potočna pastrva",
-   "opis": "Najcjenjenija riba goranskih rijeka i jezera. Peče se, griju na žaru ili kuha u gustoj riblju juhu.",
+   "opis": "Najcjenjenija riba goranskih rijeka i jezera. Peče se, radi na žaru ili kuha u gustoj ribljoj juhi.",
    "kad": "cijele godine",
-   "probaj": "Restorani uz Kupu, Kupicu i jezera."},
-  {"id": "zabe", "vrsta": "jelo", "boja": "#4D7C0F",
+   "probaj": "Restorani uz Kupu, Kupicu i jezera."
+  },
+  {
+   "id": "zabe",
+   "vrsta": "jelo",
+   "boja": "#4D7C0F",
    "naziv": "Žablji kraci",
    "opis": "Stari goranski specijalitet: pohani ili dinstani u umaku s puževima i gljivama.",
    "kad": "cijele godine",
-   "probaj": "Restorani s tradicionalnim jelovnikom."},
-  {"id": "puh", "vrsta": "jelo", "boja": "#6B5B4B",
+   "probaj": "Restorani s tradicionalnim jelovnikom."
+  },
+  {
+   "id": "puh",
+   "vrsta": "jelo",
+   "boja": "#6B5B4B",
    "naziv": "Puh",
    "opis": "Jelo starih Gorana: puh pečen ili kao gulaš. Cijenili su ga zbog mesa i masti, a lov na puhove i danas je goranska tradicija.",
    "kad": "kasno ljeto i jesen",
-   "probaj": "Rijetko na jelovniku; najčešće na goranskim puharskim večerima."},
-  {"id": "nadjev", "vrsta": "jelo", "boja": "#9A6A2F",
+   "probaj": "Rijetko na jelovniku; najčešće na goranskim puharskim večerima."
+  },
+  {
+   "id": "nadjev",
+   "vrsta": "jelo",
+   "boja": "#9A6A2F",
    "naziv": "Goranski nadjev (budel, nadelo)",
    "opis": "Uskrsno jelo: svinjski želudac punjen kockicama kruha, šunkom, slaninom, mladim lukom i jajima, pa kuhan ili kratko dimljen.",
    "kad": "oko Uskrsa",
-   "probaj": "Kod domaćina i na uskrsnim stolovima."},
-  {"id": "zelje", "vrsta": "jelo", "boja": "#7C8B3A",
+   "probaj": "Kod domaćina i na uskrsnim stolovima."
+  },
+  {
+   "id": "zelje",
+   "vrsta": "jelo",
+   "boja": "#7C8B3A",
    "naziv": "Kiselo zelje s kobasicom",
    "opis": "Nekad glavno zimsko jelo, danas prilog: kiselo zelje s češnjakom, kobasicom ili krvavicom.",
    "kad": "zima",
-   "probaj": "Restorani s domaćom kuhinjom."},
-  {"id": "gljive", "vrsta": "jelo", "boja": "#8A5A2B",
+   "probaj": "Restorani s domaćom kuhinjom."
+  },
+  {
+   "id": "gljive",
+   "vrsta": "jelo",
+   "boja": "#8A5A2B",
    "naziv": "Šumske gljive",
    "opis": "Vrganji, lisičarke, smrčci i sunčanice: kao glavno jelo, u umaku ili uz meso. Zimi se jedu sušene ili ukiseljene.",
    "kad": "proljeće do kasne jeseni",
    "probaj": "Restorani u sezoni. Prije branja provjeri vrste u aplikaciji Gljive Hrvatske.",
-   "veza": "gljive"},
-  {"id": "strudla", "vrsta": "slastica", "boja": "#3B3F8F",
+   "veza": "gljive"
+  },
+  {
+   "id": "strudla",
+   "vrsta": "slastica",
+   "boja": "#3B3F8F",
    "naziv": "Štrudla s borovnicama",
    "opis": "Goranska slastica: tanko tijesto s divljim borovnicama, šećerom i cimetom, poslužena topla i posuta šećerom u prahu. Rade se i štrudle od jabuka i sira.",
    "kad": "cijele godine, najbolja ljeti kad zriju borovnice",
-   "probaj": "Hotel Bitoraj u Fužinama poznat je po njoj; i u drugim restoranima."},
-  {"id": "rakije", "vrsta": "pice", "boja": "#2F6B4F",
+   "probaj": "Hotel Bitoraj u Fužinama poznat je po njoj; i u drugim restoranima.",
+   "ref": [
+    "Un1305138335"
+   ]
+  },
+  {
+   "id": "rakije",
+   "vrsta": "pice",
+   "boja": "#2F6B4F",
    "naziv": "Rakije, likeri i sokovi",
    "opis": "Domaće rakije od šljive, jabuke i kruške te brinjevec od borovice. Likeri i sokovi od borovnica, jagoda, malina i kupina, a u novije vrijeme i goranski gin.",
    "kad": "cijele godine",
-   "probaj": "Kod OPG-ova i u restoranima; pogledaj filter OPG i domaće."}
+   "probaj": "Kod OPG-ova i u restoranima; pogledaj filter OPG i domaće."
+  }
  ],
  "izvori": [
-  {"naziv": "TZ Gorskog kotara – gastro", "url": "https://gorskikotar.hr/en/gastro/"},
-  {"naziv": "Gault&Millau – tradicionalna jela Gorskog kotara i Like", "url": "https://hr.gaultmillau.com/en/news/tradicionalna-hrvatska-jela-dio-četvrti--gorski-kotar-i-lika"},
-  {"naziv": "Turističke priče – štrudla s borovnicama", "url": "https://www.turistickeprice.hr/en/Gorski-Kotar-is-known-for-its-venison-dishes%2C-but-no-one-leaves-the-mountains-without-this-dessert/"},
-  {"naziv": "Novi list – Šuma okusa (2026.)", "url": "https://www.novilist.hr/?p=1725599"}
+  {
+   "naziv": "TZ Gorskog kotara – gastro",
+   "url": "https://gorskikotar.hr/en/gastro/"
+  },
+  {
+   "naziv": "Gault&Millau – tradicionalna jela Gorskog kotara i Like",
+   "url": "https://hr.gaultmillau.com/en/news/tradicionalna-hrvatska-jela-dio-četvrti--gorski-kotar-i-lika"
+  },
+  {
+   "naziv": "Turističke priče – štrudla s borovnicama",
+   "url": "https://www.turistickeprice.hr/en/Gorski-Kotar-is-known-for-its-venison-dishes%2C-but-no-one-leaves-the-mountains-without-this-dessert/"
+  },
+  {
+   "naziv": "Novi list – Šuma okusa (2026.)",
+   "url": "https://www.novilist.hr/?p=1725599"
+  }
  ]
 }
