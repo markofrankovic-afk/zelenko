@@ -1,5 +1,5 @@
 {
- "opis": "Praktični podaci za glavna mjesta, sa službenih stranica (činjenice, našim riječima). rv = radno vrijeme u OSM obliku za 'otvoreno sada'; rv_tekst = točni termini za ljude. Dopunjeno 24. 10. 2026: Kamačnik, kašteli Zrinskih, Centar Velike zvijeri, NP Risnjak i za Izvor Kupe.",
+ "opis": "Praktični podaci za glavna mjesta, sa službenih stranica (činjenice, našim riječima). rv = radno vrijeme u OSM obliku za 'otvoreno sada'; rv_tekst = točni termini za ljude. Dopunjeno 24. 10. 2026: Kamačnik, kašteli Zrinskih, Centar Velike zvijeri, NP Risnjak i za Izvor Kupe. 24. 10. 2026: muzeji i interpretacijski centri prema popisu TZ Gorskog kotara.",
  "info": {
   "C01": {
    "rv": "Jan-May: Sa,Su 11:00-16:00; Jun: Fr 14:00-16:00; Jun: Sa,Su 11:00-16:00; Jul-Aug: Mo-We 10:00-13:00; Jul-Aug: Th,Fr 10:00-15:00; Jul-Aug: Sa,Su 10:00-18:00; Sep: Fr 10:00-16:00; Sep: Sa,Su 11:00-16:00; Oct: Fr 14:00-16:00; Oct: Sa,Su 11:00-16:00; Nov-Dec: Sa,Su 11:00-16:00",
@@ -56,7 +56,7 @@
   "Z01": {
    "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
    "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
-   "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+   "savjet": "U Crnom Lugu je i interpretacijski centar „Skriveno blago Risnjaka”: posjet uz najavu na 091 620 8672 ili info@visitdelnice.hr.",
    "telefon": "+385 51 836 133",
    "email": "np-risnjak@ri.t-com.hr",
    "web": "https://www.np-risnjak.hr/",
@@ -90,7 +90,7 @@
   "V01": {
    "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
    "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
-   "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+   "savjet": "Nadomak izvora su centri NP Risnjak „Rodna kuća rijeke Kupe” (Kupari) i „Goranska kuća znanja” (stara škola u Razlogama), otvoreni svaki dan 9–17 h.",
    "telefon": "+385 51 836 133",
    "email": "np-risnjak@ri.t-com.hr",
    "web": "https://www.np-risnjak.hr/",
@@ -117,25 +117,125 @@
   },
   "H02": {
    "savjet": "Unutra su interpretacijski centar „Putovima Frankopana” i stalna izložba Prirodoslovnog muzeja Rijeka „Divljina s pogledom na more”.",
-   "napomena": "Radno vrijeme i ulaznicu provjeri telefonom.",
+   "napomena": "Ista ulaznica vrijedi za izložbu i interpretacijski centar.",
    "telefon": "+385 51 629 301",
    "web": "https://ruta.frankopani.eu/en/loc/kastel-zrinskih-brod-na-kupi",
-   "izvor": "Putovima Frankopana (PGŽ)",
-   "provjereno": "2026-10-24"
+   "izvor": "TZ Gorskog kotara; Putovima Frankopana (PGŽ)",
+   "provjereno": "2026-10-24",
+   "rv": "Tu-Fr 09:00-19:00; Sa,Su 10:00-18:00",
+   "rv_tekst": [
+    "uto–pet 9–19 h, sub i ned 10–18 h",
+    "Zatvoreno ponedjeljkom i blagdanima."
+   ],
+   "ulaznica": [
+    [
+     "Odrasli",
+     "3,00 €"
+    ],
+    [
+     "Djeca, učenici, studenti, umirovljenici",
+     "1,50 €"
+    ],
+    [
+     "Obitelj",
+     "5,00 €"
+    ],
+    [
+     "Godišnja",
+     "15,00 €"
+    ]
+   ],
+   "email": "kastel@prirodoslovni.com",
+   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/"
   },
   "H01": {
-   "savjet": "U dvorcu je zavičajna zbirka.",
-   "napomena": "Radno vrijeme i ulaznicu provjeri telefonom.",
-   "telefon": "+385 98 461 406",
+   "savjet": "U dvorcu je interpretacijski centar „Putovima Frankopana” i zavičajna zbirka.",
+   "telefon": "+385 51 829 490",
    "web": "https://ruta.frankopani.eu/en/loc/dvorac-zrinskih-u-cabru",
-   "izvor": "Putovima Frankopana (PGŽ)",
-   "provjereno": "2026-10-24"
+   "izvor": "TZ Gorskog kotara; Putovima Frankopana (PGŽ)",
+   "provjereno": "2026-10-24",
+   "rv": "Mo 07:00-17:00; Tu-Th 07:00-15:00; Fr 07:00-13:00",
+   "rv_tekst": [
+    "pon 7–17 h, uto–čet 7–15 h, pet 7–13 h",
+    "Vikendom i blagdanima uz najavu telefonom ili e-poštom."
+   ],
+   "ulaznica": [
+    [
+     "Odrasli",
+     "3,30 €"
+    ],
+    [
+     "Učenici, studenti, umirovljenici",
+     "2,70 €"
+    ],
+    [
+     "Djeca 6–14 god.",
+     "1,30 €"
+    ],
+    [
+     "Djeca do 6 god.",
+     "besplatno"
+    ],
+    [
+     "Grupe (20+)",
+     "2,00 € po osobi"
+    ]
+   ],
+   "email": "maja.turk@cabar.hr",
+   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/"
   },
   "On11117413766": {
    "savjet": "Izložba o medvjedu, vuku i risu: staništa kroz godišnja doba, zvukovi, tragovi, film i dječji kutak.",
    "telefon": "+385 51 352 400",
    "email": "info@ju-priroda.hr",
    "izvor": "JU Priroda",
+   "provjereno": "2026-10-24"
+  },
+  "H05": {
+   "rv": "Tu-Sa 10:00-17:00; Su 10:00-15:00",
+   "rv_tekst": [
+    "uto–sub 10–17 h, ned 10–15 h",
+    "Zatvoreno ponedjeljkom i blagdanima."
+   ],
+   "napomena": "Cijenu ulaznice provjeri pri posjetu (djeca do 7 god. besplatno).",
+   "telefon": "+385 51 871 295",
+   "email": "hismus@hismus.hr",
+   "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
+   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+   "provjereno": "2026-10-24"
+  },
+  "H45": {
+   "rv": "Mo-Su 09:00-17:00",
+   "rv_tekst": [
+    "svaki dan 9–17 h"
+   ],
+   "napomena": "Ulaznice prema cjeniku NP Risnjak.",
+   "web_ulaznice": "https://www.np-risnjak.hr/cjenik-ulaza",
+   "telefon": "+385 51 836 133",
+   "email": "marketing@np-risnjak.hr",
+   "web": "https://www.np-risnjak.hr/",
+   "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
+   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+   "provjereno": "2026-10-24"
+  },
+  "H46": {
+   "rv": "Mo-Su 09:00-17:00",
+   "rv_tekst": [
+    "svaki dan 9–17 h"
+   ],
+   "napomena": "Ulaznice prema cjeniku NP Risnjak.",
+   "web_ulaznice": "https://www.np-risnjak.hr/cjenik-ulaza",
+   "telefon": "+385 51 836 133",
+   "email": "marketing@np-risnjak.hr",
+   "web": "https://www.np-risnjak.hr/",
+   "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
+   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+   "provjereno": "2026-10-24"
+  },
+  "H50": {
+   "napomena": "Obilazak s vodičem; termin dogovori unaprijed.",
+   "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+   "izvor_url": "https://gorskikotarbike.com/en/attractions/zavicajna-zbirka-mrkopalj/",
    "provjereno": "2026-10-24"
   }
  }

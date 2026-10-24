@@ -416,5 +416,13 @@
  "vlasnik_predmet_opce": "Zelenko – upis u Gastro kutak",
  "javi_s_rute": "Javi nekome da ideš ovom rutom",
  "pod_konoba": "Konoba",
- "sobe": "sobe"
+ "sobe": "sobe",
+ "posalji_email": "E-pošta",
+ "vrsta_mtb": "MTB",
+ "rf_sve": "Sve",
+ "rf_pjesice": "Pješice",
+ "rf_bicikl": "Biciklom",
+ "rf_mtb": "MTB",
+ "procjena_rute_osm": "Trasa i duljina su iz OpenStreetMapa. Trajanje je procjena, a uspon još ne znamo.",
+ "ruta_osm_izvor": "Ruta je ucrtana u OpenStreetMap (ODbL)."
 }

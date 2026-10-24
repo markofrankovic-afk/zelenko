@@ -27,6 +27,11 @@ UKLONI = {
     "On7651739302": "isto što i P22 Maj vrh", "On7651739303": "isto što i P22 Maj vrh",
     "On8867484417": "vidikovac na samom vrhu Treska",
     "On11841887243": "vrh nazvan samo 'Vidikovac', 50 m od vidikovca kod Bele Vodice",
+    # 24. 10. 2026: OSM objekti koji su sad ručne točke s našim nazivom i opisom
+    "Ow333577471": "isto što i H05 Memorijalni muzej I. G. Kovačića",
+    "Ow436526341": "isto što i E02 Zabavni i paintball park Vrata",
+    "Ow433249369": "isto što i H49 Svetište Majke Božje Snježne",
+    "Ow1534944649": "isto što i E01 Kaubojsko selo Roswell",
 }
 
 tp = f"{docs}/data/tocke.json"

@@ -3,7 +3,7 @@
   "web": "https://www.np-risnjak.hr/",
   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
   "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
-  "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+  "savjet": "Nadomak izvora su centri NP Risnjak „Rodna kuća rijeke Kupe” (Kupari) i „Goranska kuća znanja” (stara škola u Razlogama), otvoreni svaki dan 9–17 h.",
   "telefon": "+385 51 836 133",
   "email": "np-risnjak@ri.t-com.hr",
   "izvor": "NP Risnjak",
@@ -24,7 +24,7 @@
  "Z01": {
   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
   "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
-  "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+  "savjet": "U Crnom Lugu je i interpretacijski centar „Skriveno blago Risnjaka”: posjet uz najavu na 091 620 8672 ili info@visitdelnice.hr.",
   "telefon": "+385 51 836 133",
   "email": "np-risnjak@ri.t-com.hr",
   "web": "https://www.np-risnjak.hr/",
@@ -115,20 +115,129 @@
   "provjereno": "2026-10-24"
  },
  "H01": {
-  "savjet": "U dvorcu je zavičajna zbirka.",
-  "napomena": "Radno vrijeme i ulaznicu provjeri telefonom.",
-  "telefon": "+385 98 461 406",
+  "savjet": "U dvorcu je interpretacijski centar „Putovima Frankopana” i zavičajna zbirka.",
+  "telefon": "+385 51 829 490",
   "web": "https://ruta.frankopani.eu/en/loc/dvorac-zrinskih-u-cabru",
-  "izvor": "Putovima Frankopana (PGŽ)",
-  "provjereno": "2026-10-24"
+  "izvor": "TZ Gorskog kotara; Putovima Frankopana (PGŽ)",
+  "provjereno": "2026-10-24",
+  "rv": "Mo 07:00-17:00; Tu-Th 07:00-15:00; Fr 07:00-13:00",
+  "rv_tekst": [
+   "pon 7–17 h, uto–čet 7–15 h, pet 7–13 h",
+   "Vikendom i blagdanima uz najavu telefonom ili e-poštom."
+  ],
+  "ulaznica": [
+   [
+    "Odrasli",
+    "3,30 €"
+   ],
+   [
+    "Učenici, studenti, umirovljenici",
+    "2,70 €"
+   ],
+   [
+    "Djeca 6–14 god.",
+    "1,30 €"
+   ],
+   [
+    "Djeca do 6 god.",
+    "besplatno"
+   ],
+   [
+    "Grupe (20+)",
+    "2,00 € po osobi"
+   ]
+  ],
+  "email": "maja.turk@cabar.hr",
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/"
  },
  "H02": {
   "savjet": "Unutra su interpretacijski centar „Putovima Frankopana” i stalna izložba Prirodoslovnog muzeja Rijeka „Divljina s pogledom na more”.",
-  "napomena": "Radno vrijeme i ulaznicu provjeri telefonom.",
+  "napomena": "Ista ulaznica vrijedi za izložbu i interpretacijski centar.",
   "telefon": "+385 51 629 301",
   "web": "https://ruta.frankopani.eu/en/loc/kastel-zrinskih-brod-na-kupi",
-  "izvor": "Putovima Frankopana (PGŽ)",
+  "izvor": "TZ Gorskog kotara; Putovima Frankopana (PGŽ)",
+  "provjereno": "2026-10-24",
+  "rv": "Tu-Fr 09:00-19:00; Sa,Su 10:00-18:00",
+  "rv_tekst": [
+   "uto–pet 9–19 h, sub i ned 10–18 h",
+   "Zatvoreno ponedjeljkom i blagdanima."
+  ],
+  "ulaznica": [
+   [
+    "Odrasli",
+    "3,00 €"
+   ],
+   [
+    "Djeca, učenici, studenti, umirovljenici",
+    "1,50 €"
+   ],
+   [
+    "Obitelj",
+    "5,00 €"
+   ],
+   [
+    "Godišnja",
+    "15,00 €"
+   ]
+  ],
+  "email": "kastel@prirodoslovni.com",
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/"
+ },
+ "H05": {
+  "web": "http://hvm.mdc.hr/hrvatski-povijesni-muzej---memorijalni-muzej-ivan-goran-kovacic,762%3ALKD/hr/info/",
+  "rv": "Tu-Sa 10:00-17:00; Su 10:00-15:00",
+  "rv_tekst": [
+   "uto–sub 10–17 h, ned 10–15 h",
+   "Zatvoreno ponedjeljkom i blagdanima."
+  ],
+  "napomena": "Cijenu ulaznice provjeri pri posjetu (djeca do 7 god. besplatno).",
+  "telefon": "+385 51 871 295",
+  "email": "hismus@hismus.hr",
+  "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
   "provjereno": "2026-10-24"
+ },
+ "H45": {
+  "rv": "Mo-Su 09:00-17:00",
+  "rv_tekst": [
+   "svaki dan 9–17 h"
+  ],
+  "napomena": "Ulaznice prema cjeniku NP Risnjak.",
+  "web_ulaznice": "https://www.np-risnjak.hr/cjenik-ulaza",
+  "telefon": "+385 51 836 133",
+  "email": "marketing@np-risnjak.hr",
+  "web": "https://www.np-risnjak.hr/",
+  "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+  "provjereno": "2026-10-24"
+ },
+ "H46": {
+  "rv": "Mo-Su 09:00-17:00",
+  "rv_tekst": [
+   "svaki dan 9–17 h"
+  ],
+  "napomena": "Ulaznice prema cjeniku NP Risnjak.",
+  "web_ulaznice": "https://www.np-risnjak.hr/cjenik-ulaza",
+  "telefon": "+385 51 836 133",
+  "email": "marketing@np-risnjak.hr",
+  "web": "https://www.np-risnjak.hr/",
+  "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+  "provjereno": "2026-10-24"
+ },
+ "H50": {
+  "napomena": "Obilazak s vodičem; termin dogovori unaprijed.",
+  "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+  "izvor_url": "https://gorskikotarbike.com/en/attractions/zavicajna-zbirka-mrkopalj/",
+  "provjereno": "2026-10-24"
+ },
+ "E01": {
+  "web": "https://www.tz-fuzine.hr/hr/kaubojsko_selo__city_of_roswell/348/14",
+  "izvor": "OpenStreetMap"
+ },
+ "E02": {
+  "web": "https://www.paintball-vrata.com/",
+  "izvor": "OpenStreetMap"
  },
  "On2367579804": {
   "rv": "Mo-Su 06:00-22:00",
@@ -338,10 +447,6 @@
   "upravitelj": "INA",
   "izvor": "OpenStreetMap"
  },
- "Ow333577471": {
-  "web": "http://hvm.mdc.hr/hrvatski-povijesni-muzej---memorijalni-muzej-ivan-goran-kovacic,762%3ALKD/hr/info/",
-  "izvor": "OpenStreetMap"
- },
  "Ow340514310": {
   "rv": "Mo-Sa 07:00-19:00; Su 07:00-13:00",
   "upravitelj": "INA",
@@ -363,10 +468,6 @@
  },
  "Ow402147622": {
   "web": "http://tz-lokve.hr/muzej-zaba/?menu=9",
-  "izvor": "OpenStreetMap"
- },
- "Ow436526341": {
-  "web": "https://www.paintball-vrata.com/",
   "izvor": "OpenStreetMap"
  },
  "Ow513204670": {
@@ -415,10 +516,6 @@
  },
  "Ow1336488184": {
   "ulaz": "besplatno",
-  "izvor": "OpenStreetMap"
- },
- "Ow1534944649": {
-  "web": "https://www.tz-fuzine.hr/hr/kaubojsko_selo__city_of_roswell/348/14",
   "izvor": "OpenStreetMap"
  },
  "Ow1565256572": {

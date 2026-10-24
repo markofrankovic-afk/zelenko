@@ -1,8 +1,19 @@
 {
  "opis": "Ručni ispravci OSM usluga (lokalno znanje). Ključ je ID usluge; polja se dodaju ili zamjenjuju.",
  "ispravci": {
-  "Un11918508747": {"i_jelo": true, "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"},
-  "Un1305138346": {"napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"},
-  "Un1305138335": {"napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"}
+  "Un11918508747": {
+   "i_jelo": true,
+   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"
+  },
+  "Un1305138346": {
+   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"
+  },
+  "Un1305138335": {
+   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"
+  },
+  "Un12085008012": {
+   "ukloni": true,
+   "napomena_izvor": "Kuća prirode Kotač je točka E04 na karti (24. 10. 2026.)"
+  }
  }
 }

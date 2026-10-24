@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.7.4",
+  verzija: "0.7.5",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -159,15 +159,16 @@ function initMap() {
   let zPrev = map.getZoom(); map.on("zoomend", () => { const z = map.getZoom(); if (prag(z) !== prag(zPrev)) renderMarkers(); zPrev = z; });
   renderMarkers(); renderCarMarker();
 }
+const trasaLL = r => r.trasa_dijelovi ? r.trasa_dijelovi.map(d => d.map(([x, y]) => [y, x])) : r.trasa ? [r.trasa.map(([x, y]) => [y, x])] : null;
 function pokaziRutu(id) {
-  const r = RBY[id]; if (!r || !r.trasa) return;
+  const r = RBY[id]; if (!r || !trasaLL(r)) return;
   if (rutaLayer) map.removeLayer(rutaLayer);
-  const ll = r.trasa.map(([x, y]) => [y, x]);
+  const ll = trasaLL(r);
   rutaLayer = L.layerGroup([L.polyline(ll, { color: cv("--ink"), weight: 8, opacity: .55, interactive: false }), L.polyline(ll, { color: cv("--amber"), weight: 5, interactive: false })]).addTo(map);
   S.ruta = id; const pill = $("#routePill"); pill.hidden = false;
   pill.innerHTML = `${ic("route")}<span>${esc(tx(r).naziv)}</span><span style="display:flex;padding:8px" aria-hidden="true">${ic("x")}</span>`;
   pill.setAttribute("aria-label", t("makni_rutu") + ": " + tx(r).naziv);
-  map.fitBounds(L.latLngBounds(ll).pad(0.2));
+  map.fitBounds(L.latLngBounds(ll.flat()).pad(0.2));
 }
 function skloniRutu() { if (rutaLayer) map.removeLayer(rutaLayer); rutaLayer = null; S.ruta = null; $("#routePill").hidden = true; }
 $("#routePill").addEventListener("click", skloniRutu);
@@ -400,11 +401,12 @@ function infoHtml(p) {
   const gumbi = [
     i.telefon ? `<a class="btn" href="tel:${esc(i.telefon.replace(/\s/g, ""))}">${ic("phone")}${esc(t("nazovi"))}</a>` : "",
     i.web_ulaznice ? `<a class="btn" href="${esc(i.web_ulaznice)}" target="_blank" rel="noopener">${esc(t("kupi_ulaznicu"))}</a>` : "",
-    i.web ? `<a class="btn" href="${esc(i.web)}" target="_blank" rel="noopener">${esc(t("sluzbena_stranica"))}</a>` : ""].filter(Boolean);
+    i.web ? `<a class="btn" href="${esc(i.web)}" target="_blank" rel="noopener">${esc(t("sluzbena_stranica"))}</a>` : "",
+    i.email ? `<a class="btn" href="mailto:${esc(i.email)}">${esc(t("posalji_email"))}</a>` : ""].filter(Boolean);
   if (gumbi.length) dijelovi.push(`<div class="row" style="flex-wrap:wrap">${gumbi.join("")}</div>`);
   const izv = i.provjereno ? t("info_izvor", { izvor: i.izvor, datum: new Date(i.provjereno).toLocaleDateString("hr-HR") }) : t("info_izvor_osm");
   return `<section class="card stack" style="gap:10px"><h3>${esc(t("informacije"))}</h3>${dijelovi.join("")}
-    <span class="small muted">${esc(izv)}${i.rv_izvor ? " " + esc(t("info_rv_osm")) : ""}</span></section>`;
+    <span class="small muted">${i.izvor_url ? `<a href="${esc(i.izvor_url)}" target="_blank" rel="noopener">${esc(izv)}</a>` : esc(izv)}${i.rv_izvor ? " " + esc(t("info_rv_osm")) : ""}</span></section>`;
 }
 
 /* ---------- Zelenkova putovnica ---------- */
@@ -553,11 +555,13 @@ function openPopis() {
 
 /* ---------- rute ---------- */
 const kmR = r => r.km_gpx != null ? String(r.km_gpx).replace(".", ",") : "~" + r.km;
+const vrstaR = r => r.bicikl === "mtb" ? t("vrsta_mtb") : t("vrsta_" + r.vrsta);
+const R_FILTRI = [["sve", () => true], ["pjesice", r => r.vrsta !== "biciklisticka"], ["bicikl", r => r.vrsta === "biciklisticka" && r.bicikl !== "mtb"], ["mtb", r => r.bicikl === "mtb"]];
 function rutaGrupa(r) { const h = satiMax(r.sati); return h <= 2.5 ? "kratko" : h <= 4 ? "pola" : "dan"; }
 function rutaKartica(r, feat) {
   return `<button class="card list-row${feat ? " feat" : ""}" data-open="${r.id}" style="flex-direction:column;align-items:stretch;gap:6px;padding:14px">
     <span class="between" style="align-items:flex-start"><b style="font-size:1.1em;line-height:1.25">${esc(tx(r).naziv)}</b><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></span>
-    <span class="row small meta" style="gap:14px;color:var(--ink2)"><span>${esc(t("vrsta_" + r.vrsta))}</span><span>${esc(r.tezina)}</span><span class="mono">${kmR(r)} km</span><span class="mono">${esc(r.sati)} h</span></span>${feat ? `<span class="go">${esc(t("pogledaj_rutu"))}${ic("chevron")}</span>` : ""}</button>`;
+    <span class="row small meta" style="gap:14px;color:var(--ink2)"><span>${esc(vrstaR(r))}</span><span>${esc(r.tezina)}</span><span class="mono">${kmR(r)} km</span><span class="mono">${esc(r.sati)} h</span></span>${feat ? `<span class="go">${esc(t("pogledaj_rutu"))}${ic("chevron")}</span>` : ""}</button>`;
 }
 function renderRute() {
   const P = S.plan;
@@ -570,39 +574,42 @@ function renderRute() {
       ${grp("kako", "kako", [["pjesice", "kako_pjesice"], ["bicikl", "kako_bicikl"]])}</section>
     <div class="between"><h2>${esc(t("prijedlozi"))}</h2><span class="small muted">${esc(t("od_ruta", { n: fit.length, ukupno: RUTE.length }))}</span></div>
     ${fit.length ? fit.map(r => rutaKartica(r, true)).join("") : `<p class="muted" style="margin:0">${esc(t("nema_ruta"))}</p>`}
-    <h2 style="margin-top:8px">${esc(t("sve_rute"))}</h2>${RUTE.map(r => rutaKartica(r)).join("")}`;
+    <h2 style="margin-top:8px">${esc(t("sve_rute"))}</h2>
+    <div class="row g-filter" style="flex-wrap:wrap;gap:6px">${R_FILTRI.map(([k, f]) => `<button class="chip soft" data-rfiltar="${k}" aria-pressed="${(S.rFiltar || "sve") === k}">${esc(t("rf_" + k))} <span class="muted">${RUTE.filter(f).length}</span></button>`).join("")}</div>
+    ${RUTE.filter((R_FILTRI.find(([k]) => k === (S.rFiltar || "sve")) || R_FILTRI[0])[1]).map(r => rutaKartica(r)).join("")}`;
 }
-$("#rute").addEventListener("click", e => { const b = e.target.closest("[data-plan]"); if (!b) return; const [k, v] = b.dataset.plan.split(":"); S.plan[k] = v; renderRute(); gcEv("planer"); });
+$("#rute").addEventListener("click", e => { const f = e.target.closest("[data-rfiltar]"); if (f) { S.rFiltar = f.dataset.rfiltar; renderRute(); return; } const b = e.target.closest("[data-plan]"); if (!b) return; const [k, v] = b.dataset.plan.split(":"); S.plan[k] = v; renderRute(); gcEv("planer"); });
 
 function openRuta(id) {
   const r = RBY[id]; if (!r) return; const x = tx(r);
   const stops = r.tocke.map(i => BY[i]).filter(Boolean);
-  openSheet(t("vrsta_" + r.vrsta), `<div class="stack">
-    <div class="row"><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span><span class="small muted">${esc(t("vrsta_" + r.vrsta))}</span></div>
+  openSheet(vrstaR(r), `<div class="stack">
+    <div class="row"><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span><span class="small muted">${esc(vrstaR(r))}</span></div>
     <h1>${esc(x.naziv)}</h1>
-    <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(r.sati)}</b><span>${esc(t("sati"))}</span></div><div><b>~${r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b>${esc(r.tezina)}</b><span>${esc(t("tezina"))}</span></div></div>
+    <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(r.sati)}</b><span>${esc(t("sati"))}</span></div><div><b>${r.uspon_m == null ? "–" : "~" + r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b>${esc(r.tezina)}</b><span>${esc(t("tezina"))}</span></div></div>
     <p style="margin:0;font-size:1.04em">${esc(x.opis)}</p>
-    <p class="small muted" style="margin:0">${esc(t("procjena_rute"))}</p>
+    <p class="small muted" style="margin:0">${esc(t(r.osm ? "procjena_rute_osm" : "procjena_rute"))}</p>
     <div class="row small"><b>${esc(t("parking"))}:</b><span>${esc(x.parking)}</span></div>
     <button class="btn" id="rJavi" style="align-self:flex-start">${ic("msg")}${esc(t("javi_s_rute"))}</button>
     ${r.polazista && r.polazista.length ? `<section class="card"><h3>${esc(t("polazista"))}</h3>${r.polazista.map(p => `<div class="between small" style="border-top:1px solid var(--line);min-height:40px"><span>${esc(p.naziv)}</span><span class="mono">${esc(p.vrijeme)}</span></div>`).join("")}</section>` : ""}
     <div><div class="mini-map" id="rutaMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("linija_skica"))}</p></div>
-    <section><h3>${esc(t("stajalista"))}</h3>${stops.map((p, i) => `<button class="list-row" data-open="${p.id}"><span class="num">${i + 1}</span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")}</section>
+    ${r.osm ? `<p class="small muted" style="margin:0">${esc(t("ruta_osm_izvor"))} <a href="https://www.openstreetmap.org/relation/${esc(r.osm.slice(1))}" target="_blank" rel="noopener">OSM</a></p>` : ""}
+    ${stops.length ? `<section><h3>${esc(t("stajalista"))}</h3>${stops.map((p, i) => `<button class="list-row" data-open="${p.id}"><span class="num">${i + 1}</span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")}</section>` : ""}
     ${r.besplatno ? "" : `<div class="note warn">${esc(t("pro_zakljucano"))}<br>${esc(t("pro_cijena"))}</div>`}
     <div class="grid2"><button class="btn primary" id="rKreni" ${r.besplatno ? "" : "disabled"}>${ic(r.besplatno ? "nav" : "lock")}${esc(t("kreni_rutom"))}</button><button class="btn" id="rKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
   </div>`);
   const mm = L.map("rutaMap", { zoomControl: false, attributionControl: false, dragging: true, scrollWheelZoom: false, preferCanvas: true });
   if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 17, className: "osm-tiles" }).addTo(mm);
   const skini = addPodloga(mm, true);
-  const ll = r.trasa ? r.trasa.map(([x, y]) => [y, x]) : stops.map(p => [p.lat, p.lon]);
+  const ll = trasaLL(r) || [stops.map(p => [p.lat, p.lon])];
   L.polyline(ll, { color: cv("--ink"), weight: 7, opacity: .5 }).addTo(mm);
-  L.polyline(ll, { color: cv("--amber"), weight: 4, dashArray: r.trasa ? null : "8 8" }).addTo(mm);
+  L.polyline(ll, { color: cv("--amber"), weight: 4, dashArray: trasaLL(r) ? null : "8 8" }).addTo(mm);
   stops.forEach((p, i) => L.marker([p.lat, p.lon], { icon: L.divIcon({ className: "num-icon", html: String(i + 1), iconSize: [24, 24] }) }).addTo(mm));
-  mm.fitBounds(L.latLngBounds(ll).pad(0.25)); setTimeout(() => mm.invalidateSize(), 60);
+  mm.fitBounds(L.latLngBounds(ll.flat()).pad(0.25)); setTimeout(() => mm.invalidateSize(), 60);
   sheetCleanup.push(() => { skini(); mm.remove(); });
-  $("#rKreni").onclick = () => { if (r.besplatno && stops[0]) { openNav({ lat: stops[0].lat, lon: stops[0].lon }, tx(stops[0]).naziv); gcEv("ruta-kreni"); } };
+  $("#rKreni").onclick = () => { const st = stops[0] || (trasaLL(r) && { lat: trasaLL(r)[0][0][0], lon: trasaLL(r)[0][0][1] }); if (r.besplatno && st) { openNav({ lat: st.lat, lon: st.lon }, stops[0] ? tx(stops[0]).naziv : x.naziv); gcEv("ruta-kreni"); } };
   $("#rJavi").onclick = () => { S.javiRuta = x.naziv; closeSheet(); go("sigurnost"); setTimeout(() => { const el = $("#jRuta"); if (el) el.scrollIntoView({ block: "center" }); }, 80); };
-  $("#rKarta").onclick = () => { closeSheet(); go("karta"); setTimeout(() => r.trasa ? pokaziRutu(id) : map.fitBounds(L.latLngBounds(ll).pad(0.3)), 80); };
+  $("#rKarta").onclick = () => { closeSheet(); go("karta"); setTimeout(() => trasaLL(r) ? pokaziRutu(id) : map.fitBounds(L.latLngBounds(ll.flat()).pad(0.3)), 80); };
   gcEv("ruta");
 }
 
@@ -905,9 +912,9 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null)]);
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] }))]);
   T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec;
-  TOCKE = tocke.tocke; RUTE = rute.rute;
+  TOCKE = tocke.tocke; RUTE = rute.rute.concat((bike && bike.rute) || []);
   /* usluge (jelo, smještaj, kupnja) idu na kartu kao točke; partneri su istaknuti */
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });
   for (const p of TOCKE) {

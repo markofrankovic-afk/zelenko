@@ -96,7 +96,7 @@ T = [
 ("H02","bastina","dvorac","Kaštel Zrinskih, Brod na Kupi","Obnovljeni kaštel uz Kupu, danas s izložbenim prostorom.","Q121636817","tocno",0,0,"Sadržaj i radno vrijeme provjeriti."),
 ("H03","bastina","dvorac","Kaštel Severin na Kupi","Srednjovjekovni kaštel na stijeni iznad Kupe, više puta pregrađivan.","Q105953116","tocno",0,0,"Wikidata stavka (utvrda) nema naziv; provjeriti."),
 ("H04","bastina","sakralno","Manastir Gomirje","Pravoslavni manastir iz oko 1600., najzapadniji manastir Srpske pravoslavne crkve.","Q2226570","tocno",0,0,""),
-("H05","bastina","spomen","Lukovdol – rodno mjesto I. G. Kovačića","Selo iznad doline Kupe kod Severina, u kojem je 1913. rođen pjesnik Ivan Goran Kovačić.","Q3130235","tocno",0,0,""),
+("H05","bastina","muzej","Memorijalni muzej Ivana Gorana Kovačića, Lukovdol","Rodna kuća pjesnika Ivana Gorana Kovačića (1913.–1943.) u Lukovdolu, danas spomen-muzej Hrvatskoga povijesnog muzeja.","Q3130235","okvirno",45.42806,15.12584,"Koordinata zgrade muzeja iz OSM-a (w333577471); Wikidata stavka je selo Lukovdol."),
 ("H06","bastina","cesta","Lujzijana – Gornje Jelenje","Prijevoj na Lujzinskoj cesti (1803.–1811.) koja je povezala Karlovac i Rijeku; vrata Gorskog kotara s primorske strane.","Q5586712","okvirno",0,0,""),
 ("H07","bastina","cesta","Karolina – Vrata","Na trasi Karolinske ceste iz 18. st., prve ceste preko Gorskog kotara do mora.","Q116009101","okvirno",0,0,"Koordinata željezničkog stajališta Vrata. Potvrditi da trasa prolazi ovdje."),
 ("H08","bastina","tehnicka","Hidroelektrana Zeleni vir","Stara hidroelektrana kod Zelenog vira, primjer rane elektrifikacije Gorskog kotara.","Q8068728","tocno",0,0,"Wikidata ima grubu koordinatu."),
@@ -136,6 +136,21 @@ T = [
 ("H42","bastina","sakralno","Kapelica Majke Božje Lurdske, Čabar","Kapelica na rubu Čabra.","Q138496303","tocno",0,0,""),
 ("H43","bastina","spomen","Spomenik 26 smrznutih partizana","Spomenik na Matić poljani posvećen partizanima koji su se ondje smrznuli u Drugom svjetskom ratu.","Q15649591","tocno",0,0,""),
 ("H44","bastina","sport","Skijaške skakaonice Delnice","Skakaonice na rubu Delnica, dio goranske zimske tradicije.","Q1184550","tocno",0,0,"Provjeriti stanje i koriste li se."),
+("H45","bastina","muzej","Goranska kuća znanja, Razloge","Interpretacijski centar NP Risnjak u staroj seoskoj školi u Razlogama, na putu prema izvoru Kupe.",None,"",45.48325,14.70154,""),
+("H46","bastina","muzej","Rodna kuća rijeke Kupe","Centar za posjetitelje NP Risnjak u Kuparima, nadomak izvora Kupe: kako rijeka nastaje i život uz nju.",None,"",45.49621,14.69806,""),
+("H47","bastina","povijesno","Kula Turanj, Brod Moravice","Stara kamena kula u Brod Moravicama, jedno od obilježja mjesta.",None,"",45.4637,14.97171,""),
+("H48","bastina","povijesno","Fajeri – kameni stupovi","Niz kamenih stupova između Brestove Drage i Slavice, ostatak napuštenog mosta.",None,"",45.33397,14.77718,""),
+("H49","bastina","sakralno","Svetište Majke Božje Snježne, Lič","Kapela i svetište na Ličkom polju kod Liča.",None,"",45.27371,14.75182,""),
+("H50","bastina","muzej","Zavičajna zbirka Mrkopalj","Zbirka na prvom katu doma kulture u središtu Mrkopalja: stare fotografije, alati, nošnje, ručno rađene skije i krplje te dokumenti iz povijesti mjesta. Obilazak s vodičem.",None,"",45.31545,14.85571,"Položaj: središte Mrkopalja (OSM); točnu zgradu provjeriti."),
+("H51","bastina","muzej","Kolarnica, Brod Moravice","Nekadašnja kolarska radionica, danas izložba starih zanata: kolarstvo, stolarstvo, postolarstvo, krojenje i brijačnica. Na tavanu je digitalna arhiva baštine Brod Moravica.",None,"",45.46361,14.97114,"Položaj: središte Brod Moravica (OSM); točnu zgradu provjeriti."),
+("H52","bastina","muzej","Palčeva šiša, Plešce","Kuća obitelji Čop iz 1856., zaštićeni spomenik kulture: stara trgovina, gostionica, ured, salon i etnografska zbirka. Pokazuje život imućne kuće u dolini Čabranke.",None,"",45.5467,14.68664,"Položaj: središte Plešca (OSM); točnu zgradu provjeriti."),
+("H53","bastina","muzej","Etnografska zbirka Lič","Zbirka starih predmeta iz Liča i okolice, osnovana 1994. za 150. obljetnicu školstva u Liču. Zaštićeno kulturno dobro.",None,"",45.27903,14.71915,"Položaj: središte Liča (OSM); točnu zgradu provjeriti."),
+# ---------------- IZLETIŠTA I ZABAVA ----------------
+("E01","izlet","zanimljivost","Kaubojsko selo Roswell","Tematsko kaubojsko selo kod Fužina, zabava za obitelji s djecom.",None,"",45.34284,14.71134,""),
+("E02","izlet","zanimljivost","Zabavni i paintball park Vrata","Zabavni park s paintballom kod Vrata.",None,"",45.31256,14.73238,""),
+("E03","izlet","zanimljivost","Izletište Šumska bajka, Lič","Obiteljsko izletište u šumi kod Liča, prikladno za djecu.",None,"",45.29323,14.70443,""),
+("E04","izlet","zanimljivost","Kuća prirode Kotač na Lujzijani","Edukativni centar o prirodi uz Lujzinsku cestu, s kafićem.",None,"",45.35685,14.74572,""),
+("S10","staza","poucna","Staza predatora, Tršće","Kružna poučna staza od oko 1,7 km (oko 1 h hoda) s modelima vuka, risa, medvjeda, jelena, srne, lisice, divlje svinje i tetrijeba u prirodnoj veličini, uz ploče o svakoj životinji.",None,"",45.5664,14.62981,"Položaj: selo Tršće (OSM); polazište staze provjeriti."),
 ]
 
 def pouzdanost(wd, veza):
@@ -149,7 +164,13 @@ def pouzdanost(wd, veza):
 RUCNO = {"V01": "S"}  # izvor Kupe: položaj se poklapa s izvorom, ali Wikidata navodi grubu preciznost
 
 # točke kod kojih Wikidata pokazuje nešto drugo (npr. selo umjesto polja): vrijedi naša koordinata
-KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
+KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04", "H05"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
+
+# koordinate iz OSM-a (ODbL): objekt je u OSM-u, ali ga OSM izvadak ne donosi kao točku ili mu treba naš naziv i opis
+KOORD_OSM = {"H05": "w333577471", "H45": "w379649181", "H46": "w685050686", "H47": "w433260934", "H48": "r6304141",
+             "H49": "w433249369", "E01": "w1534944649", "E02": "w436526341", "E03": "n13022902160", "E04": "n12085008012"}
+# koordinata je središte naselja iz OSM-a (objekt je u tom mjestu, točna zgrada nepoznata)
+KOORD_SELO = {"H50": "Mrkopalj", "H51": "Brod Moravice", "H52": "Plešce", "H53": "Lič", "S10": "Tršće"}
 
 def tocka(r):
     (id_, kat, pod, naziv, opis, qid, veza, lat, lon, nap) = r
@@ -160,16 +181,17 @@ def tocka(r):
         "id": id_, "kategorija": kat, "podvrsta": pod,
         "tekst": {"hr": {"naziv": naziv, "opis": opis}},
         "lat": lat if id_ in KOORD_RUCNO else wd["lat"] if wd else lat, "lon": lon if id_ in KOORD_RUCNO else wd["lon"] if wd else lon,
-        "pouzdanost": RUCNO.get(id_) or pouzdanost(wd, veza),
+        "pouzdanost": "V" if id_ in KOORD_OSM else ("S" if id_ in KOORD_SELO and pod != "poucna" else "N") if id_ in KOORD_SELO else RUCNO.get(id_) or pouzdanost(wd, veza),
         "izvor": {
-            "koordinate": "Wikidata" if wd else "procjena – provjeriti",
+            "koordinate": "OpenStreetMap" if id_ in KOORD_OSM else f"OpenStreetMap – središte mjesta {KOORD_SELO[id_]}" if id_ in KOORD_SELO else "Wikidata" if wd and id_ not in KOORD_RUCNO else "Wikidata" if wd else "procjena – provjeriti",
+            "osm": KOORD_OSM.get(id_),
             "wikidata": qid, "veza": veza or None,
             "wikidata_naziv": (wd.get("hr") or wd.get("en")) if wd else None,
             "hr_wikipedija": wd.get("hrwiki") if wd else None,
             "slika_commons": wd.get("slika") if wd else None,
             "opis": "vlastiti tekst",
         },
-        "licenca": ("koordinate: CC0 (Wikidata)" if wd else "koordinate: naša procjena") + "; opis: naš tekst",
+        "licenca": ("koordinate: ODbL – © OpenStreetMap suradnici" if id_ in KOORD_OSM or id_ in KOORD_SELO else "koordinate: CC0 (Wikidata)" if wd else "koordinate: naša procjena") + "; opis: naš tekst",
         "napomena": nap,
         "status": "za odobrenje",
     }

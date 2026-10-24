@@ -123,6 +123,7 @@ if os.path.exists(pp):
 pi = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "izvori", "usluge_ispravci.json")
 if os.path.exists(pi):
     isp = json.load(open(pi, encoding="utf-8"))["ispravci"]
+    out = [x for x in out if not isp.get(x["id"], {}).get("ukloni")]  # npr. objekt koji je već točka na karti
     for x in out:
         for k, v in isp.get(x["id"], {}).items():
             if k != "napomena_izvor": x[k] = v
