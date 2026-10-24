@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.7.6",
+  verzija: "0.7.7",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -175,6 +175,7 @@ $("#routePill").addEventListener("click", skloniRutu);
 function vidljive() {
   const g = S.grupa;
   const all = TOCKE.concat(S.moja.map(m => ({ ...m, moje: true })));
+  if (S.trazi) return all.filter(p => !p.moje && S.trazi.ids.has(p.id));
   if (!g) return all;
   if (g === "spremljeno") return all.filter(p => p.moje || S.favs.includes(p.id));
   return all.filter(p => !p.moje && p.grupe.includes(g));
@@ -183,7 +184,7 @@ function vidljive() {
 function prag(z) { return z < 11 ? 1 : z < 13 ? 2 : 3; }
 function renderMarkers() {
   layer.clearLayers();
-  const max = S.grupa ? 3 : prag(map.getZoom()), stroke = cv("--marker-stroke");
+  const max = S.grupa || S.trazi ? 3 : prag(map.getZoom()), stroke = cv("--marker-stroke");
   for (const p of vidljive()) {
     if (!p.moje && (p.vaznost || 1) > max) continue;
     const nas = p.podvrsta === "naselje", v = p.vaznost || 1;
@@ -199,11 +200,11 @@ function renderChips() {
   if (S.favs.length || S.moja.length) defs.push({ id: "spremljeno", n: t("grupa_spremljeno"), c: "var(--accent)" });
   $("#chips").innerHTML = defs.map(d => `<button class="chip" data-g="${d.id}" aria-pressed="${S.grupa === d.id}">${d.c && S.grupa !== d.id ? `<span class="dot" style="background:${d.c}"></span>` : ""}${esc(d.n)}</button>`).join("");
 }
-$("#chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; S.grupa = b.dataset.g; renderChips(); renderMarkers(); renderNear(); gcEv("filtar-" + (S.grupa || "sve")); });
+$("#chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; if (S.trazi) { S.trazi = null; $("#searchPill").hidden = true; } S.grupa = b.dataset.g; renderChips(); renderMarkers(); renderNear(); gcEv("filtar-" + (S.grupa || "sve")); });
 
 function renderNear() {
   const r = ref();
-  const list = vidljive().filter(p => p.podvrsta !== "naselje" && (S.grupa || p.moje || (p.vaznost || 1) <= 2)).map(p => ({ p, d: hav(r, p) })).sort((a, b) => a.d - b.d).slice(0, 6);
+  const list = vidljive().filter(p => (S.trazi || p.podvrsta !== "naselje") && (S.grupa || S.trazi || p.moje || (p.vaznost || 1) <= 2)).map(p => ({ p, d: hav(r, p) })).sort((a, b) => a.d - b.d).slice(0, 6);
   $("#near").innerHTML = `<span class="grab"></span>
     <div class="between"><h2 style="font-size:1.3em">${S.pos ? t("blizu_tebe") : t("blizu_sredista")}</h2>
     ${S.pos ? `<span class="small muted">${esc(t("zracno"))}</span>` : `<button class="btn" id="nearLoc" style="min-height:38px">${esc(t("ukljuci_lokaciju"))}</button>`}</div>
@@ -247,18 +248,104 @@ function getPos(ok, fail) {
     () => { fail && fail(); toast(t("lokacija_odbijena")); }, { enableHighAccuracy: true, timeout: 30000, maximumAge: 10000 });
 }
 
-/* pretraga */
+/* pretraga: svaka riječ upita traži se u nazivu, vrsti, mjestu i opisu; rezultati po poklapanju, važnosti i udaljenosti */
+let IDX = null, MJESTA_K = new Set();
+const rijeci = s => norm(s).split(/[^a-z0-9]+/).filter(Boolean);
+/* lagano skidanje padežnih nastavaka: „Fužinama” i „Fužine” → „fuzin”, „crkve” i „crkva” → „crkv” */
+const NASTAVCI = ["ama", "ima", "ovi", "ova", "eve", "om", "em", "ih", "oj", "u", "a", "e", "i", "o"];
+const korijen = w => { for (const n of NASTAVCI) if (w.endsWith(n) && w.length - n.length >= 4) return w.slice(0, -n.length); return w; };
+function gradiIndeks() {
+  const MJ = TOCKE.filter(x => x.podvrsta === "naselje");
+  const sin = T.trazi_sinonimi || {};            /* {"jelo": "hrana jesti ...", ...} po grupi ili podvrsti */
+  const ul = (naziv, vrsta, mjesto, opis, vrsta2 = "") => {
+    const n = rijeci(naziv), k = rijeci(vrsta), k2 = rijeci(vrsta2), m = rijeci(mjesto);
+    return { n, nn: norm(naziv), k, k2, m, nk: n.map(korijen), kk: k.map(korijen), kk2: k2.map(korijen), mk: m.map(korijen), o: norm(opis || "") };
+  };
+  MJESTA_K = new Set(MJ.flatMap(x => rijeci(tx(x).naziv).map(korijen)));
+  IDX = TOCKE.map(p => {
+    let mj = ""; if (p.podvrsta !== "naselje") { let best = null; for (const x of MJ) { const d = hav(p, x); if (!best || d < best.d) best = { d, x }; } if (best && best.d < 6000) mj = tx(best.x).naziv; }
+    const mjd = mj; if (p.usluga && p.usluga.mjesto) mj += " " + p.usluga.mjesto;
+    const vr = katNaziv(p) + " " + (sin[p.podvrsta] || ""), vr2 = [t("kat_" + p.kategorija)].concat(p.grupe.map(g => t("grupa_" + g)), p.grupe.map(k => sin[k] || "")).join(" ");
+    return { tip: "t", id: p.id, p, ...ul(tx(p).naziv, vr, mj, tx(p).opis, vr2), mjd, nas: p.podvrsta === "naselje", v: p.vaznost || 1 };
+  }).concat(RUTE.map(r => ({ tip: "r", id: r.id, r, ...ul(tx(r).naziv, vrstaR(r) + " " + t("rute") + " " + (sin[r.bicikl === "mtb" ? "mtb" : r.vrsta] || ""), tx(r).parking || "", tx(r).opis), v: 1 })),
+    (SPEC.specijaliteti || []).map(x => ({ tip: "s", id: x.id, x, ...ul(x.naziv, t("spec_vrsta_" + x.vrsta) + " " + (sin.specijalitet || ""), "", x.opis), v: 1 })));
+}
+function lev(a, b, max) {                       /* udaljenost uređivanja s zamjenom susjednih slova, prekida iznad max */
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length];
+}
+const ZANEMARI = new Set(["u", "na", "i", "kod", "do", "od", "za", "s", "sa", "the", "a"]);
+function bodovi(e, tok, krivo, mjesto) {
+  const kt = korijen(tok), poc = (lista, x) => lista.some(w => w.startsWith(x));
+  /* riječ koja je ime mjesta („Fužine”, „Lokvama”): samo naselje dobiva puni pogodak, ostalo se mjeri kao „u tom mjestu” */
+  if (mjesto && !e.nas) return (poc(e.mk, kt) || poc(e.nk, kt)) ? 5 : 0;
+  if (e.n.includes(tok)) return 14;
+  if (poc(e.n, tok)) return 11;
+  if (poc(e.nk, kt)) return 9;
+  if (tok.length >= 3 && e.nn.includes(tok)) return 8;
+  if (poc(e.k, tok) || poc(e.kk, kt)) return 7;
+  if (poc(e.k2, tok) || poc(e.kk2, kt)) return 5;
+  if (poc(e.m, tok) || poc(e.mk, kt)) return 5;
+  if (tok.length >= 4 && e.o.includes(kt)) return 2;
+  if (krivo && tok.length >= 4) { const max = tok.length >= 8 ? 2 : 1; if (e.n.concat(e.k, e.m).some(w => lev(tok, w.slice(0, tok.length + 1), max) <= max || lev(tok, w, max) <= max)) return 4; }
+  return 0;
+}
+function trazi(q, krivo) {
+  if (!IDX) gradiIndeks();
+  const tok = rijeci(q).filter(w => !ZANEMARI.has(w)); if (!tok.length) return [];
+  const r = ref(), out = [];
+  for (const e of IDX) {
+    let b = 0; for (const w of tok) { const x = bodovi(e, w, krivo, MJESTA_K.has(korijen(w))); if (!x) { b = 0; break; } b += x; }
+    if (!b) continue;
+    const d = e.p ? hav(r, e.p) : 0;
+    out.push({ e, b: b + (e.v === 1 ? 5 : e.v === 2 ? 2 : 0) - (S.pos && e.p ? Math.min(3, d / 10000) : 0), d });
+  }
+  return out.sort((a, b) => b.b - a.b || a.d - b.d);
+}
 $("#q").addEventListener("input", () => {
-  const q = norm($("#q").value.trim()), box = $("#results");
-  if (q.length < 2) { box.hidden = true; return; }
-  const pts = TOCKE.filter(p => norm(tx(p).naziv).includes(q)).slice(0, 8);
-  const rts = RUTE.filter(r => norm(tx(r).naziv).includes(q)).slice(0, 3);
+  const q = $("#q").value.trim(), box = $("#results");
+  if (norm(q).length < 2) { box.hidden = true; return; }
+  let res = trazi(q, false), krivo = false;
+  if (!res.length) { res = trazi(q, true); krivo = res.length > 0; }
+  const moja = S.moja.filter(m => rijeci(q).every(w => norm(m.ime).includes(w)));
+  const pts = res.filter(x => x.e.tip === "t"), cap = { t: 8, r: 3, s: 2 }, prikaz = res.filter(x => cap[x.e.tip]-- > 0);
+  S.zadnjaPretraga = { q, ids: pts.map(x => x.e.id) };
   box.hidden = false;
-  box.innerHTML = (pts.length + rts.length) ? rts.map(r => `<button class="list-row" data-open="${r.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(r).naziv)}</b><span>${esc(t("vrsta_" + r.vrsta))}</span></span></button>`).join("") +
-    pts.map(p => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")
-    : `<div style="padding:10px 0">${medoOblak("", t("medo_trazi_nema", { q: $("#q").value }), null, 48)}</div>`;
+  box.innerHTML = (prikaz.length + moja.length) ?
+    (krivo ? `<p class="small muted" style="margin:10px 0 0">${esc(t("trazi_slicno"))}</p>` : "") +
+    moja.map(m => `<button class="list-row" data-open="m:${esc(m.id)}"><span class="dot" style="background:var(--accent)"></span><span class="t"><b>${esc(m.ime)}</b><span>${esc(t("kat_moje"))}</span></span></button>`).join("") +
+    prikaz.map(({ e, d }) => e.tip === "t" ? `<button class="list-row" data-open="${e.id}"><span class="dot" style="background:${boja(e.p)}"></span><span class="t"><b>${esc(tx(e.p).naziv)}</b><span>${esc(katNaziv(e.p))}${e.mjd && !norm(tx(e.p).naziv).includes(norm(e.mjd)) ? " · " + esc(e.mjd) : ""}</span></span>${S.pos ? `<span class="small muted mono">${fmtDist(d)}</span>` : ""}</button>`
+      : e.tip === "r" ? `<button class="list-row" data-open="${e.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(e.r).naziv)}</b><span>${esc(vrstaR(e.r))}</span></span></button>`
+      : `<button class="list-row" data-spec="${e.id}"><span class="dot" style="background:${e.x.boja}"></span><span class="t"><b>${esc(e.x.naziv)}</b><span>${esc(t("spec_vrsta_" + e.x.vrsta))}</span></span></button>`).join("") +
+    (pts.length > 1 ? `<button class="btn block" id="qSve" style="margin:10px 0">${ic("map")}${esc(t("trazi_sve", { n: pts.length }))}</button>` : "")
+    : `<div style="padding:10px 0">${medoOblak("", t("medo_trazi_nema", { q }), null, 48)}</div>`;
 });
-$("#results").addEventListener("click", () => { $("#results").hidden = true; $("#q").value = ""; });
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter" && S.zadnjaPretraga && S.zadnjaPretraga.ids.length) { e.preventDefault(); pokaziPretragu(); } });
+$("#results").addEventListener("click", e => {
+  if (e.target.closest("#qSve")) { pokaziPretragu(); return; }
+  const sp = e.target.closest("[data-spec]"); if (sp) openSpec(sp.dataset.spec);
+  $("#results").hidden = true; $("#q").value = "";
+});
+function pokaziPretragu() {
+  const z = S.zadnjaPretraga; if (!z) return;
+  S.trazi = { q: z.q, ids: new Set(z.ids) }; S.grupa = "";
+  $("#results").hidden = true; $("#q").value = ""; $("#q").blur();
+  const pill = $("#searchPill"); pill.hidden = false;
+  pill.innerHTML = `<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>${esc(t("trazi_pill", { q: z.q, n: z.ids.length }))}</span><span style="display:flex;padding:8px" aria-hidden="true">${ic("x")}</span>`;
+  pill.setAttribute("aria-label", t("trazi_makni"));
+  renderChips(); renderMarkers(); renderNear();
+  const ll = z.ids.map(i => BY[i]).filter(Boolean).map(p => [p.lat, p.lon]);
+  if (ll.length) map.fitBounds(L.latLngBounds(ll).pad(0.2), { maxZoom: 15 });
+  gcEv("pretraga-karta");
+}
+function makniPretragu() { S.trazi = null; $("#searchPill").hidden = true; renderMarkers(); renderNear(); }
+$("#searchPill").addEventListener("click", makniPretragu);
 
 function netStatus() {
   if (PREGLED) { $("#netStatus").textContent = t("pregled_status"); return; }
