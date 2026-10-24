@@ -1,6 +1,7 @@
-# Zelenko – offline vodič za Gorski kotar (prototip 0.6.0)
+# Zelenko – offline vodič za Gorski kotar (prototip 0.7.0)
 
-PWA (radi i bez signala): karta, 1080 točaka, 10 ruta (3 besplatne), gdje jesti, spavati i kupiti,
+PWA (radi i bez signala). Izbornik: Karta · Danas · Gastro (specijaliteti, jelo, smještaj, OPG) · Rute · Moje.
+Karta s 1080 točaka, 10 ruta (3 besplatne), gdje jesti, spavati i kupiti,
 Zelenkova putovnica (pečati po GPS-u), Danas (vrijeme i medin savjet), Sigurnost (SOS, povratak do auta,
 „javi nekome”), Moja mjesta, sigurnosna kopija. Svijetli i tamni način. Za sada samo hrvatski.
 
@@ -14,6 +15,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - `docs/data/tocke.json`, `rute.json` – točke i rute; `docs/gpx/` – GPX tragovi ruta
 - `docs/data/usluge.json` – jelo, smještaj, trgovine i OPG (OSM + `izvori/partneri.json`)
 - `docs/data/info.json` – radno vrijeme, ulaznice i kontakti (`izvori/info_rucno.json` sa službenih stranica + OSM), gradi `alati/info_tocke.py`
+- `docs/data/specijaliteti.json` – specijaliteti Gorskog kotara za Gastro kutak (s izvorima)
 - `docs/data/putovnica.json` – mjesta za pečate i polumjer u metrima; razine
 - `docs/data/slike.json` – fotografije s Wikimedia Commonsa, s autorom i licencom
 - `docs/data/danas.json` – „Stanje na terenu“ i sezonski prijedlozi (uređuje se ručno, s datumom provjere)

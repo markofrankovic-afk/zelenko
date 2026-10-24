@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.6.0",
+  verzija: "0.7.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -40,7 +40,7 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
-let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] }, INFO = {};
+let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] }, INFO = {}, SPEC = { specijaliteti: [], izvori: [] };
 function t(k, v) { let s = T[k] ?? k; if (v) for (const x in v) s = s.split("{" + x + "}").join(v[x]); return s; }
 const tx = o => (o && o.tekst && (o.tekst[CONFIG.jezik] || o.tekst.hr)) || {};
 
@@ -102,12 +102,14 @@ function gcEv(name) { try { if (window.goatcounter && window.goatcounter.count) 
 /* ---------- prikazi ---------- */
 function go(view) {
   S.view = view;
-  for (const v of ["karta", "danas", "rute", "sigurnost"]) $("#v-" + v).hidden = v !== view;
+  for (const v of ["karta", "danas", "gastro", "rute", "moje", "sigurnost"]) $("#v-" + v).hidden = v !== view;
   document.querySelectorAll(".tabs button").forEach(b => { if (b.dataset.go === view) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
   if (view === "karta" && map) setTimeout(() => map.invalidateSize(), 50);
   if (view === "danas") renderDanas();
   if (view === "rute") renderRute();
   if (view === "sigurnost") renderSigurnost();
+  if (view === "gastro") renderGastro();
+  if (view === "moje") renderMoje();
   try { history.replaceState(null, "", "#" + view); } catch (e) {}
   if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "/" + view });
 }
@@ -582,6 +584,7 @@ function openRuta(id) {
     <p style="margin:0;font-size:1.04em">${esc(x.opis)}</p>
     <p class="small muted" style="margin:0">${esc(t("procjena_rute"))}</p>
     <div class="row small"><b>${esc(t("parking"))}:</b><span>${esc(x.parking)}</span></div>
+    <button class="btn" id="rJavi" style="align-self:flex-start">${ic("msg")}${esc(t("javi_s_rute"))}</button>
     ${r.polazista && r.polazista.length ? `<section class="card"><h3>${esc(t("polazista"))}</h3>${r.polazista.map(p => `<div class="between small" style="border-top:1px solid var(--line);min-height:40px"><span>${esc(p.naziv)}</span><span class="mono">${esc(p.vrijeme)}</span></div>`).join("")}</section>` : ""}
     <div><div class="mini-map" id="rutaMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("linija_skica"))}</p></div>
     <section><h3>${esc(t("stajalista"))}</h3>${stops.map((p, i) => `<button class="list-row" data-open="${p.id}"><span class="num">${i + 1}</span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")}</section>
@@ -598,6 +601,7 @@ function openRuta(id) {
   mm.fitBounds(L.latLngBounds(ll).pad(0.25)); setTimeout(() => mm.invalidateSize(), 60);
   sheetCleanup.push(() => { skini(); mm.remove(); });
   $("#rKreni").onclick = () => { if (r.besplatno && stops[0]) { openNav({ lat: stops[0].lat, lon: stops[0].lon }, tx(stops[0]).naziv); gcEv("ruta-kreni"); } };
+  $("#rJavi").onclick = () => { S.javiRuta = x.naziv; closeSheet(); go("sigurnost"); setTimeout(() => { const el = $("#jRuta"); if (el) el.scrollIntoView({ block: "center" }); }, 80); };
   $("#rKarta").onclick = () => { closeSheet(); go("karta"); setTimeout(() => r.trasa ? pokaziRutu(id) : map.fitBounds(L.latLngBounds(ll).pad(0.3)), 80); };
   gcEv("ruta");
 }
@@ -703,6 +707,87 @@ async function renderDanas() {
   const w = await weather(r.lat, r.lon); const box = $("#wxBox"); if (box && w) { box.innerHTML = draw(w); const mb = $("#medoBox"); if (mb) mb.innerHTML = medoSavjet(w, st, now, sez); }
 }
 
+/* ---------- moje: putovnica, spremljena mjesta, auto, postavke ---------- */
+function renderMoje() {
+  const favs = S.favs.map(i => BY[i]).filter(Boolean), n = favs.length + S.moja.length;
+  $("#moje").innerHTML = `<div class="between"><h1>${esc(t("moje_naslov"))}</h1><button class="sos" data-go="sigurnost" aria-label="${esc(t("sos_aria"))}">${esc(t("sos"))}</button></div>
+    ${putovnicaKartica()}
+    <section class="stack" style="gap:6px"><div class="between"><h2>${esc(t("moja_mjesta"))}</h2><span class="small muted">${n}</span></div>
+      ${n ? favs.slice(0, 5).map(p => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")
+          + S.moja.slice(0, 5).map(m => `<button class="list-row" data-open="m:${esc(m.id)}"><span class="dot" style="background:var(--accent)"></span><span class="t"><b>${esc(m.ime)}</b><span>${esc(t("kat_moje"))}</span></span></button>`).join("")
+          + `<button class="btn" id="sMoja" style="align-self:flex-start">${esc(t("moja_sva"))}</button>`
+        : medoOblak("", t("medo_prazno"), null, 56)}</section>
+    <section class="card stack" style="gap:10px"><h2>${esc(t("auto_naslov"))}</h2><div class="stack carbox" style="gap:10px">${carHtml()}</div></section>
+    <section class="stack" style="gap:8px"><h2>${esc(t("postavke"))}</h2>
+      <div class="card stack" style="gap:8px"><b>${esc(t("sigurnosna_kopija"))}</b><span class="small muted">${esc(t("kopija_opis"))}</span>
+        <div class="grid2"><button class="btn" id="kIzvoz">${esc(t("kopija_izvoz"))}</button><label class="btn" for="kUvoz" style="cursor:pointer">${esc(t("kopija_uvoz"))}</label></div><input type="file" id="kUvoz" accept="application/json,.json" hidden></div>
+      <div class="card stack" style="gap:8px"><b>${esc(t("tema"))}</b><div class="seg" role="group" aria-label="${esc(t("tema"))}">${[["sustav", "tema_sustav"], ["light", "tema_svijetla"], ["dark", "tema_tamna"]].map(([v, k]) => `<button data-tema="${v}" aria-pressed="${store.get("gk-tema", "sustav") === v}">${esc(t(k))}</button>`).join("")}</div></div>
+      <label class="card row" for="bigTxt" style="justify-content:space-between;min-height:52px"><b>${esc(t("veliki_tekst"))}</b><input type="checkbox" id="bigTxt" ${document.documentElement.classList.contains("big") ? "checked" : ""} style="width:22px;height:22px;accent-color:var(--accent)"></label>
+      <details class="tip"><summary>${esc(t("izvori_licence"))}</summary><p>${esc(t("izvori_tekst"))}</p>${Object.keys(SLIKE).length ? `<button class="btn" id="sFoto" style="margin-top:10px">${esc(t("foto_zasluge"))}</button>` : ""}</details>
+      <details class="tip"><summary>${esc(t("o_aplikaciji"))}</summary><p>${esc(t("o_tekst"))} ${esc(t("verzija", { v: CONFIG.verzija }))}</p></details>
+    </section>`;
+}
+$("#moje").addEventListener("click", e => {
+  if (e.target.closest("#sMoja")) openMojaMjesta();
+  if (e.target.closest("#sFoto")) openFotoZasluge();
+  if (e.target.closest("#kIzvoz")) izvozKopije();
+  const tb = e.target.closest("[data-tema]"); if (tb) { primijeniTemu(tb.dataset.tema); renderMoje(); }
+});
+$("#moje").addEventListener("change", e => {
+  if (e.target.id === "bigTxt") { document.documentElement.classList.toggle("big", e.target.checked); store.set("gk-big", e.target.checked); }
+  if (e.target.id === "kUvoz" && e.target.files[0]) uvozKopije(e.target.files[0]);
+});
+
+/* ---------- gastro kutak: specijaliteti, jelo, smještaj, OPG ---------- */
+const G_FILTRI = [["jelo", p => p.kategorija === "jelo"], ["spavanje", p => p.kategorija === "spavanje"],
+  ["opg", p => p.kategorija === "kupnja" && (p.podvrsta === "opg" || p.podvrsta === "mljekomat")], ["trgovine", p => p.kategorija === "kupnja" && p.podvrsta !== "opg" && p.podvrsta !== "mljekomat"]];
+S.gastro = { f: "jelo", otvoreno: false };
+function specKartica(x) {
+  return `<button class="idea spec" data-spec="${x.id}"><span class="top" style="background:${x.boja}"><span>${esc(t("spec_vrsta_" + x.vrsta))}</span></span>
+    <span class="b"><b>${esc(x.naziv)}</b><span>${esc(x.kad)}</span></span></button>`;
+}
+function openSpec(id) {
+  const x = SPEC.specijaliteti.find(s => s.id === id); if (!x) return;
+  openSheet(t("spec_vrsta_" + x.vrsta), `<div class="stack">
+    <div class="hero" style="background:${x.boja};height:96px"></div>
+    <h1>${esc(x.naziv)}</h1><p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>
+    <dl class="info"><div class="info-row"><dt>${esc(t("spec_kad"))}</dt><dd>${esc(x.kad)}</dd></div><div class="info-row"><dt>${esc(t("spec_probaj"))}</dt><dd>${esc(x.probaj)}</dd></div></dl>
+    ${x.veza === "gljive" && DANAS.gljive_url ? `<a class="btn" href="${esc(DANAS.gljive_url)}" target="_blank" rel="noopener">${esc(t("gljive_otvori"))}</a>` : ""}
+    <button class="btn primary" data-gfiltar="${x.vrsta === "pice" ? "opg" : "jelo"}">${esc(t(x.vrsta === "pice" ? "spec_kupi" : "spec_gdje"))}</button>
+    <p class="small muted" style="margin:0">${esc(t("info_izvor_kratko"))}: ${SPEC.izvori.map(i => `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.naziv)}</a>`).join(", ")}</p></div>`);
+}
+function gastroLista() {
+  const r = ref(), [, f] = G_FILTRI.find(([k]) => k === S.gastro.f);
+  let list = TOCKE.filter(f).map(p => ({ p, d: hav(r, p), st: p.usluga ? rvStanje(p.usluga.radno_vrijeme) : null }));
+  if (S.gastro.otvoreno) list = list.filter(x => x.st && x.st.otvoreno);
+  list.sort((a, b) => (b.p.usluga && b.p.usluga.partner ? 1 : 0) - (a.p.usluga && a.p.usluga.partner ? 1 : 0) || a.d - b.d);
+  if (!list.length) return `<p class="muted" style="margin:0">${esc(t("gastro_nema"))}</p>`;
+  return list.slice(0, 25).map(({ p, d }) => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${boja(p)}"></span>
+    <span class="t"><b>${esc(tx(p).naziv)}${p.usluga && p.usluga.partner ? ` <span class="badge free">${esc(t("partner"))}</span>` : ""}</b><span>${esc(katNaziv(p))} · ${rvOznaka(p.usluga || {}, true)}</span></span>
+    <span class="mono small">${fmtDist(d)}</span></button>`).join("");
+}
+function renderGastro() {
+  const G = S.gastro;
+  $("#gastro").innerHTML = `<div class="between"><h1>${esc(t("gastro_naslov"))}</h1><button class="sos" data-go="sigurnost" aria-label="${esc(t("sos_aria"))}">${esc(t("sos"))}</button></div>
+    ${medoOblak(t("gastro_medo_n"), t("gastro_medo"), null, 64)}
+    <section class="stack" style="gap:8px"><h2>${esc(t("spec_naslov"))}</h2><div class="ideas">${SPEC.specijaliteti.map(specKartica).join("")}</div></section>
+    <section class="stack" style="gap:8px"><h2>${esc(t("gastro_gdje"))}</h2>
+      <div class="g-filter" role="group">${G_FILTRI.map(([k]) => `<button class="chip soft" data-gf="${k}" aria-pressed="${G.f === k}">${esc(t("g_" + k))}</button>`).join("")}</div>
+      <div class="row" style="justify-content:space-between"><button class="chip" id="gOtv" aria-pressed="${G.otvoreno}">${esc(t("samo_otvoreno"))}</button>
+        <button class="btn" id="gKarta" style="min-height:44px">${ic("map")}${esc(t("na_karti"))}</button></div>
+      <div>${gastroLista()}</div>
+      <p class="small muted" style="margin:0">${esc(t(S.pos ? "zracno" : "blizu_sredista"))}</p></section>
+    <div class="card stack" style="gap:8px"><b>${esc(t("vlasnik_naslov"))}</b><span class="small muted">${esc(t("vlasnik_tekst"))}</span>
+      <a class="btn" style="align-self:flex-start" href="mailto:${CONFIG.kontakt}?subject=${encodeURIComponent(t("vlasnik_predmet_opce"))}">${ic("msg")}${esc(t("vlasnik_gumb"))}</a></div>`;
+}
+$("#gastro").addEventListener("click", e => {
+  const sp = e.target.closest("[data-spec]"); if (sp) { openSpec(sp.dataset.spec); return; }
+  const gf = e.target.closest("[data-gf]"); if (gf) { S.gastro.f = gf.dataset.gf; renderGastro(); gcEv("gastro-" + S.gastro.f); return; }
+  if (e.target.closest("#gOtv")) { S.gastro.otvoreno = !S.gastro.otvoreno; renderGastro(); return; }
+  if (e.target.closest("#gKarta")) { S.grupa = { jelo: "jelo", spavanje: "spavanje", opg: "opg", trgovine: "kupnja" }[S.gastro.f]; renderChips(); renderMarkers(); renderNear(); go("karta"); }
+});
+document.addEventListener("click", e => { const b = e.target.closest("[data-gfiltar]"); if (b) { S.gastro.f = b.dataset.gfiltar; closeSheet(); go("gastro"); } });
+
 /* ---------- sigurnost ---------- */
 let gdje = null;
 function renderSigurnost() {
@@ -717,21 +802,12 @@ function renderSigurnost() {
     <section class="card stack" style="gap:10px"><h2>${esc(t("auto_naslov"))}</h2><div class="stack carbox" style="gap:10px">${carHtml()}</div></section>
     <section class="card stack" style="gap:10px"><h2>${esc(t("prije_polaska"))}</h2>
       <b>${esc(t("javi_kamo"))}</b><span class="small muted" style="margin-top:-8px">${esc(t("javi_kamo_opis"))}</span>
-      <div class="grid2"><div class="field"><label for="jRuta">${esc(t("javi_ruta"))}</label><select id="jRuta">${RUTE.map(x => `<option>${esc(tx(x).naziv)}</option>`).join("")}<option>${esc(t("drugo"))}</option></select></div>
+      <div class="grid2"><div class="field"><label for="jRuta">${esc(t("javi_ruta"))}</label><select id="jRuta">${RUTE.map(x => `<option${S.javiRuta === tx(x).naziv ? " selected" : ""}>${esc(tx(x).naziv)}</option>`).join("")}<option>${esc(t("drugo"))}</option></select></div>
         <div class="field"><label for="jVrijeme">${esc(t("javi_povratak"))}</label><input id="jVrijeme" type="time" value="${pv}"></div></div>
       <button class="btn dark" id="jPosalji">${esc(t("javi_posalji"))}</button>
       <div class="between" style="border-top:1px solid var(--line);padding-top:8px"><span>${esc(t("zalazak_danas"))}</span><span class="mono">${st ? fmtTime(st.set) : "–"}</span></div></section>
     <section class="stack" style="gap:8px"><h2>${esc(t("u_sumi"))}</h2>${medoOblak(t("medo_sigurnost_n"), t("medo_sigurnost"), null, 64)}${tips.map(k => `<details class="tip"><summary>${esc(t("savjet_" + k + "_n"))}</summary><p>${esc(t("savjet_" + k + "_d"))}</p></details>`).join("")}</section>
-    <section class="stack" style="gap:8px"><h2>${esc(t("vise"))}</h2>
-      <button class="card list-row" id="sPut" style="padding:12px 14px"><span class="t"><b>${esc(t("putovnica"))}</b><span>${esc(t("putovnica_stanje", { n: brojPecata(), ukupno: PUT.pecati.length }))}</span></span></button>
-      <button class="card list-row" id="sMoja" style="padding:12px 14px"><span class="t"><b>${esc(t("moja_mjesta"))}</b><span>${S.favs.length + S.moja.length}</span></span></button>
-      <div class="card stack" style="gap:8px"><b>${esc(t("sigurnosna_kopija"))}</b><span class="small muted">${esc(t("kopija_opis"))}</span>
-        <div class="grid2"><button class="btn" id="kIzvoz">${esc(t("kopija_izvoz"))}</button><label class="btn" for="kUvoz" style="cursor:pointer">${esc(t("kopija_uvoz"))}</label></div><input type="file" id="kUvoz" accept="application/json,.json" hidden></div>
-      <div class="card stack" style="gap:8px"><b>${esc(t("tema"))}</b><div class="seg" role="group" aria-label="${esc(t("tema"))}">${[["sustav", "tema_sustav"], ["light", "tema_svijetla"], ["dark", "tema_tamna"]].map(([v, k]) => `<button data-tema="${v}" aria-pressed="${store.get("gk-tema", "sustav") === v}">${esc(t(k))}</button>`).join("")}</div></div>
-      <label class="card row" for="bigTxt" style="justify-content:space-between;min-height:52px"><b>${esc(t("veliki_tekst"))}</b><input type="checkbox" id="bigTxt" ${document.documentElement.classList.contains("big") ? "checked" : ""} style="width:22px;height:22px;accent-color:var(--accent)"></label>
-      <details class="tip"><summary>${esc(t("izvori_licence"))}</summary><p>${esc(t("izvori_tekst"))}</p>${Object.keys(SLIKE).length ? `<button class="btn" id="sFoto" style="margin-top:10px">${esc(t("foto_zasluge"))}</button>` : ""}</details>
-      <details class="tip"><summary>${esc(t("o_aplikaciji"))}</summary><p>${esc(t("o_tekst"))} ${esc(t("verzija", { v: CONFIG.verzija }))}</p></details>
-    </section>`;
+`;
 }
 function openFotoZasluge() {
   const po = {};
@@ -826,15 +902,15 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({}))]);
-  T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {};
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null)]);
+  T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec;
   TOCKE = tocke.tocke; RUTE = rute.rute;
   /* usluge (jelo, smještaj, kupnja) idu na kartu kao točke; partneri su istaknuti */
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });
   for (const p of TOCKE) { p.grupe = grupeOd(p); BY[p.id] = p; }
   for (const r of RUTE) RBY[r.id] = r;
   applyI18n(); netStatus(); renderChips(); initMap(); renderNear();
-  const h = location.hash.slice(1); go(["karta", "danas", "rute", "sigurnost"].includes(h) ? h : "karta");
+  const h = location.hash.slice(1); go(["karta", "danas", "gastro", "rute", "moje", "sigurnost"].includes(h) ? h : "karta");
   gcInit();
   if (!store.get("gk-pozdrav", false)) setTimeout(openPozdrav, 500);
   if (!PREGLED && "serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
