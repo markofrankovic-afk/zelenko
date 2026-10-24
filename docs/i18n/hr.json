@@ -378,5 +378,13 @@
  "lokacija_priblizna": "oznaka na karti je približna",
  "rv_nepoznato_bez": "Radno vrijeme nije upisano",
  "usluga_izvor_vlasnik": "Podatke je dao vlasnik.",
- "pod_polje": "Krško polje"
+ "pod_polje": "Krško polje",
+ "informacije": "Informacije",
+ "kupi_ulaznicu": "Kupi ulaznicu",
+ "sluzbena_stranica": "Službena stranica",
+ "ulaz_placa": "Ulaz se plaća.",
+ "ulaz_besplatan": "Ulaz je besplatan.",
+ "info_izvor": "Izvor: {izvor} · provjereno {datum} Prije puta provjeri, podaci se mijenjaju.",
+ "info_izvor_osm": "Izvor: OpenStreetMap, nije ručno provjereno. Prije puta provjeri.",
+ "info_rv_osm": "Radno vrijeme prema OpenStreetMapu."
 }

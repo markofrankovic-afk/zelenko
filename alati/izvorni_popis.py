@@ -43,7 +43,7 @@ T = [
 ("P01","planina","vrh","Veliki Risnjak (1528 m)","Vrh po kojem je park dobio ime. Po vedrom danu pogled seže od Kvarnera do Alpa.","Q134373316","tocno",0,0,""),
 ("P02","planina","dom","Schlosserov dom","Planinarski dom ispod vrha Risnjaka, na glavnom pristupu iz Crnog Luga.",None,"",45.4270,14.6190,"Nema u Wikidati; procjena prema vrhu. Dane otvorenosti provjeriti svake sezone."),
 ("P03","planina","vrh","Snježnik (1506 m)","Kameniti vrh iznad Platka s pogledom na Kvarner i Risnjak.","Q16513599","tocno",0,0,""),
-("P04","planina","izletiste","Platak","Skijalište i polazište za Snježnik, na zapadnom rubu Gorskog kotara.","Q3391795","tocno",0,0,"Administrativno Čavle; ostaje kao rubna točka."),
+("P04","planina","izletiste","Platak","Skijalište i polazište za Snježnik, na zapadnom rubu Gorskog kotara.","Q3391795","tocno",45.425907,14.565669,"Administrativno Čavle; ostaje kao rubna točka."),
 ("P05","planina","vrh","Bjelolasica – Kula (1534 m)","Najviši vrh Gorskog kotara: travnati greben s pogledom na Veliku Kapelu i more.","Q89549880","tocno",0,0,"Masiv: Q879408 (Bjelolasica)."),
 ("P06","planina","vidikovac","Begovo Razdolje","Najviše naselje u Hrvatskoj, na oko 1060 m. Polazište za Bjelolasicu.","Q3511509","tocno",0,0,""),
 ("P07","planina","stijene","Bijele stijene","Vapnenački tornjevi i kameni labirinti u strogom rezervatu. Kretanje samo po markiranim stazama.","Q859868","okvirno",0,0,"Stavka je cijeli rezervat Bijele i Samarske stijene."),
@@ -149,7 +149,7 @@ def pouzdanost(wd, veza):
 RUCNO = {"V01": "S"}  # izvor Kupe: položaj se poklapa s izvorom, ali Wikidata navodi grubu preciznost
 
 # točke kod kojih Wikidata pokazuje nešto drugo (npr. selo umjesto polja): vrijedi naša koordinata
-KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02"}
+KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
 
 def tocka(r):
     (id_, kat, pod, naziv, opis, qid, veza, lat, lon, nap) = r

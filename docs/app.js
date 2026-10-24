@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.5.4",
+  verzija: "0.6.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -40,7 +40,7 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
-let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] };
+let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] }, INFO = {};
 function t(k, v) { let s = T[k] ?? k; if (v) for (const x in v) s = s.split("{" + x + "}").join(v[x]); return s; }
 const tx = o => (o && o.tekst && (o.tekst[CONFIG.jezik] || o.tekst.hr)) || {};
 
@@ -292,12 +292,25 @@ function heroSvg(c) {
 /* ---------- radno vrijeme (OSM opening_hours, najčešći oblici) ---------- */
 const DANI = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const hm = m => String(Math.floor(m / 60) % 24).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
-function rvParse(s) {
+const MJ = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MJ_RE = "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)";
+/* tjedan (7 dana, svaki s intervalima u minutama) koji vrijedi u zadanom mjesecu; null = oblik koji ne razumijemo */
+function rvParse(s, mjesec = new Date().getMonth()) {
   if (!s) return null; s = s.trim();
   if (s === "24/7") return "24/7";
   const week = Array.from({ length: 7 }, () => []);
-  for (let r of s.split(/;\s*|,\s+(?=(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)\b)/)) {
+  for (let r of s.split(/;\s*|,\s+(?=(?:Mo|Tu|We|Th|Fr|Sa|Su|PH|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b)/)) {
     r = r.trim(); if (!r) continue;
+    const mm = r.match(new RegExp("^(" + MJ_RE + "(?:-" + MJ_RE + ")?(?:," + MJ_RE + "(?:-" + MJ_RE + ")?)*):?\\s+(.*)$"));
+    if (mm) {
+      let u = false;
+      for (const part of mm[1].split(",")) {
+        const [a, b] = part.split("-"), ia = MJ.indexOf(a), ib = b ? MJ.indexOf(b) : ia;
+        for (let i = ia; ; i = (i + 1) % 12) { if (i === mjesec) u = true; if (i === ib) break; }
+      }
+      if (!u) continue;                                /* pravilo za druge mjesece */
+      r = mm[2].trim();
+    }
     const m = r.match(/^((?:(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?,?)+)\s+(.*)$/);
     let days, times;
     if (m) {
@@ -323,12 +336,13 @@ function rvParse(s) {
   return week;
 }
 function rvStanje(s, now = new Date()) {
-  const w = rvParse(s); if (!w) return null; if (w === "24/7") return { otvoreno: true, stalno: true };
+  const w = rvParse(s, now.getMonth()); if (!w) return null; if (w === "24/7") return { otvoreno: true, stalno: true };
   const day = now.getDay(), min = now.getHours() * 60 + now.getMinutes();
   for (const [a, b] of w[day]) if (min >= a && min < b) return b - a >= 1440 ? { otvoreno: true, stalno: true } : { otvoreno: true, do: hm(b) };
   for (const [a, b] of w[(day + 6) % 7]) if (b > 1440 && min < b - 1440) return { otvoreno: true, do: hm(b) };
   for (let k = 0; k < 8; k++) {
-    const d = (day + k) % 7, od = w[d].map(x => x[0]).filter(a => k > 0 || a > min).sort((x, y) => x - y);
+    const dt = new Date(now.getTime() + k * 864e5), wk = k ? rvParse(s, dt.getMonth()) : w, d = dt.getDay();
+    const od = wk[d].map(x => x[0]).filter(a => k > 0 || a > min).sort((x, y) => x - y);
     if (od.length) return { otvoreno: false, dan: k === 0 ? t("danas_rijec") : k === 1 ? t("sutra_rijec") : t("dani_kratko").split(",")[d], vrijeme: hm(od[0]) };
   }
   return { otvoreno: false };
@@ -340,8 +354,10 @@ function rvOznaka(u, kratko) {
   return `<span class="rv ne"><span class="dot"></span>${esc(st.dan ? t("zatvoreno_otvara", { dan: st.dan, vrijeme: st.vrijeme }) : t("zatvoreno"))}</span>`;
 }
 function rvLjudski(s) {
-  const hr = { Mo: "pon", Tu: "uto", We: "sri", Th: "čet", Fr: "pet", Sa: "sub", Su: "ned", PH: "praznici", off: "zatvoreno" };
-  return s.split(/;\s*/).map(r => r.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su|PH|off)\b/g, m => hr[m])).join("\n");
+  const hr = { Mo: "pon", Tu: "uto", We: "sri", Th: "čet", Fr: "pet", Sa: "sub", Su: "ned", PH: "praznici", off: "zatvoreno",
+    Jan: "sij", Feb: "velj", Mar: "ožu", Apr: "tra", May: "svi", Jun: "lip", Jul: "srp", Aug: "kol", Sep: "ruj", Oct: "lis", Nov: "stu", Dec: "pro" };
+  if (s.trim() === "24/7") return t("otvoreno_stalno");
+  return s.split(/;\s*/).map(r => r.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su|PH|off|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g, m => hr[m])).join("\n");
 }
 function openUsluga(p) {
   const u = p.usluga, x = tx(p), d = S.pos ? hav(S.pos, p) : null, fav = S.favs.includes(p.id);
@@ -364,6 +380,29 @@ function openUsluga(p) {
   $("#tFav").onclick = () => { S.favs = S.favs.includes(p.id) ? S.favs.filter(f => f !== p.id) : S.favs.concat(p.id); store.set("gk-fav", S.favs); renderChips(); openUsluga(p); };
   if (map) map.panTo([p.lat, p.lon]);
   gcEv("usluga");
+}
+
+/* ---------- Informacije o mjestu (radno vrijeme, ulaznice, kontakt) ---------- */
+function infoHtml(p) {
+  const i = INFO[p.id]; if (!i) return "";
+  const red = (k, v) => `<div class="info-red"><span>${esc(k)}</span><b>${esc(v)}</b></div>`;
+  const dijelovi = [];
+  if (i.rv) dijelovi.push(rvOznaka({ radno_vrijeme: i.rv, telefon: i.telefon }));
+  if (i.rv_tekst) dijelovi.push(`<ul class="info-rv">${i.rv_tekst.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`);
+  else if (i.rv && rvParse(i.rv)) dijelovi.push(`<p class="small" style="margin:0;white-space:pre-line;color:var(--ink2)">${esc(rvLjudski(i.rv))}</p>`);
+  if (i.ulaznica) dijelovi.push(`<div class="info-tab">${i.ulaznica.map(([k, v]) => red(k, v)).join("")}</div>`);
+  else if (i.ulaz) dijelovi.push(`<span class="small">${esc(t(i.ulaz === "placa" ? "ulaz_placa" : "ulaz_besplatan"))}</span>`);
+  if (i.trajanje) dijelovi.push(`<span class="small">${esc(i.trajanje)}</span>`);
+  if (i.savjet) dijelovi.push(`<span class="small">${esc(i.savjet)}</span>`);
+  if (i.napomena) dijelovi.push(`<div class="note warn small">${esc(i.napomena)}</div>`);
+  const gumbi = [
+    i.telefon ? `<a class="btn" href="tel:${esc(i.telefon.replace(/\s/g, ""))}">${ic("phone")}${esc(t("nazovi"))}</a>` : "",
+    i.web_ulaznice ? `<a class="btn" href="${esc(i.web_ulaznice)}" target="_blank" rel="noopener">${esc(t("kupi_ulaznicu"))}</a>` : "",
+    i.web ? `<a class="btn" href="${esc(i.web)}" target="_blank" rel="noopener">${esc(t("sluzbena_stranica"))}</a>` : ""].filter(Boolean);
+  if (gumbi.length) dijelovi.push(`<div class="row" style="flex-wrap:wrap">${gumbi.join("")}</div>`);
+  const izv = i.provjereno ? t("info_izvor", { izvor: i.izvor, datum: new Date(i.provjereno).toLocaleDateString("hr-HR") }) : t("info_izvor_osm");
+  return `<section class="card stack" style="gap:10px"><h3>${esc(t("informacije"))}</h3>${dijelovi.join("")}
+    <span class="small muted">${esc(izv)}${i.rv_izvor ? " " + esc(t("info_rv_osm")) : ""}</span></section>`;
 }
 
 /* ---------- Zelenkova putovnica ---------- */
@@ -478,6 +517,7 @@ function openTocka(id) {
       <button class="btn" id="tFav" aria-pressed="${fav}" aria-label="${esc(fav ? t("spremljeno") : t("spremi"))}">${ic("star")}</button>
       <button class="btn" id="tShare" aria-label="${esc(t("podijeli"))}">${ic("share")}</button></div>
     <p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>
+    ${infoHtml(p)}
     ${pecatHtml(p)}
     ${p.napomena ? `<div class="note warn small">${esc(t("prototip_napomena", { tekst: p.napomena }))}</div>` : ""}
     ${uRuti.length ? `<section><h3>${esc(t("dio_rute"))}</h3>${uRuti.map(r => `<button class="list-row" data-open="${r.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(r).naziv)}</b><span>${esc(t("vrsta_" + r.vrsta))} · ${esc(r.tezina)} · ${kmR(r)} km</span></span><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></button>`).join("")}</section>` : ""}
@@ -786,8 +826,8 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null)]);
-  T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put;
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({}))]);
+  T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {};
   TOCKE = tocke.tocke; RUTE = rute.rute;
   /* usluge (jelo, smještaj, kupnja) idu na kartu kao točke; partneri su istaknuti */
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });

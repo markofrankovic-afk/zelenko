@@ -1,0 +1,142 @@
+{
+ "opis": "Praktični podaci za glavna mjesta, sa službenih stranica (činjenice, našim riječima). rv = radno vrijeme u OSM obliku za 'otvoreno sada'; rv_tekst = točni termini za ljude. Dopunjeno 24. 10. 2026: Kamačnik, kašteli Zrinskih, Centar Velike zvijeri, NP Risnjak i za Izvor Kupe.",
+ "info": {
+  "C01": {
+   "rv": "Jan-May: Sa,Su 11:00-16:00; Jun: Fr 14:00-16:00; Jun: Sa,Su 11:00-16:00; Jul-Aug: Mo-We 10:00-13:00; Jul-Aug: Th,Fr 10:00-15:00; Jul-Aug: Sa,Su 10:00-18:00; Sep: Fr 10:00-16:00; Sep: Sa,Su 11:00-16:00; Oct: Fr 14:00-16:00; Oct: Sa,Su 11:00-16:00; Nov-Dec: Sa,Su 11:00-16:00",
+   "rv_tekst": [
+    "Samo s vodičem, ulazi u točno vrijeme.",
+    "siječanj–svibanj: sub i ned u 11, 12, 14 i 15 h",
+    "lipanj: pet u 14 i 15 h; sub i ned u 11, 12, 14 i 15 h (od 15. 6. i sri i čet)",
+    "srpanj–kolovoz: pon–sri u 10, 11 i 12 h; čet i pet od 10 do 14 h; vikendom od 10 do 17 h, svaki sat",
+    "rujan: pet u 10, 11, 14 i 15 h; sub i ned u 11, 12, 14 i 15 h",
+    "listopad: pet u 14 i 15 h; sub i ned u 11, 12, 14 i 15 h",
+    "studeni–prosinac: sub i ned u 11, 12, 14 i 15 h",
+    "Zatvoreno: Uskrs, 1. 11., 25. 12. i 1. 1. Grupe od 15 i više osoba mogu i izvan termina, uz najavu 3 dana ranije."
+   ],
+   "ulaznica": [
+    [
+     "Odrasli",
+     "6,50 € (srpanj–kolovoz 7,00 €)"
+    ],
+    [
+     "Djeca 4–18 god.",
+     "5,00 € (5,50 €)"
+    ],
+    [
+     "Djeca do 4 god.",
+     "besplatno"
+    ],
+    [
+     "Umirovljenici, studenti, planinari",
+     "6,00 € (6,50 €)"
+    ],
+    [
+     "Obitelj (2 + do 3 djece)",
+     "19,00 € (22,00 €)"
+    ]
+   ],
+   "trajanje": "Obilazak s vodičem traje 25–30 minuta.",
+   "savjet": "Unutra je oko 8 °C, ponesi jaknu. Špilja je bez stepenica i pristupačna u invalidskim kolicima.",
+   "telefon": "+385 51 620 950",
+   "email": "info@visitfuzine.hr",
+   "web": "https://tz-fuzine.hr/en/vrelo_cave/148/14",
+   "izvor": "TZ Fužine",
+   "provjereno": "2026-10-24"
+  },
+  "C02": {
+   "napomena": "Cijene i radno vrijeme za 2026. nisu objavljeni na službenim stranicama. Nazovi prije dolaska.",
+   "trajanje": "Obilazak samo s vodičem.",
+   "savjet": "Unutra je oko 8 °C i vlažno, ponesi jaknu i čvrstu obuću.",
+   "telefon": "+385 95 353 6179",
+   "email": "lokvarka@lokve.hr",
+   "web": "https://lokvarka.hr/spilja-lokvarka",
+   "izvor": "JU Priroda (koncesionar Lokvarka d.o.o.)",
+   "provjereno": "2026-10-24"
+  },
+  "Z01": {
+   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
+   "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
+   "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+   "telefon": "+385 51 836 133",
+   "email": "np-risnjak@ri.t-com.hr",
+   "web": "https://www.np-risnjak.hr/",
+   "izvor": "NP Risnjak",
+   "provjereno": "2026-10-24"
+  },
+  "S01": {
+   "trajanje": "Kružna staza od 4,2 km, gotovo ravna, s 23 poučne ploče. Dovoljne su sportske cipele.",
+   "napomena": "Staza je u Nacionalnom parku, ulaz se plaća.",
+   "telefon": "+385 51 836 133",
+   "web": "https://www.np-risnjak.hr/",
+   "izvor": "NP Risnjak",
+   "provjereno": "2026-10-24"
+  },
+  "V11": {
+   "napomena": "Prema JU Priroda cesta do Zelenog vira se obnavlja: prilaz iz Donjeg Lošca kod Broda na Kupi ili kružnom stazom od kolodvora Skrad. Provjeri prije polaska.",
+   "telefon": "+385 99 532 1291",
+   "email": "leopold@pins-skrad.hr",
+   "web": "https://ju-priroda.hr/en/protected-nature-areas/vrazji-prolaz-and-zeleni-vir/",
+   "izvor": "JU Priroda (koncesionar PINS Skrad)",
+   "provjereno": "2026-10-24"
+  },
+  "Z03": {
+   "napomena": "Prema JU Priroda cesta do Zelenog vira se obnavlja: prilaz iz Donjeg Lošca kod Broda na Kupi ili kružnom stazom od kolodvora Skrad. Provjeri prije polaska.",
+   "telefon": "+385 99 532 1291",
+   "email": "leopold@pins-skrad.hr",
+   "web": "https://ju-priroda.hr/en/protected-nature-areas/vrazji-prolaz-and-zeleni-vir/",
+   "izvor": "JU Priroda (koncesionar PINS Skrad)",
+   "provjereno": "2026-10-24"
+  },
+  "V01": {
+   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
+   "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
+   "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+   "telefon": "+385 51 836 133",
+   "email": "np-risnjak@ri.t-com.hr",
+   "web": "https://www.np-risnjak.hr/",
+   "izvor": "NP Risnjak",
+   "provjereno": "2026-10-24"
+  },
+  "Or14680208": {
+   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
+   "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
+   "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+   "telefon": "+385 51 836 133",
+   "email": "np-risnjak@ri.t-com.hr",
+   "web": "https://www.np-risnjak.hr/",
+   "izvor": "NP Risnjak",
+   "provjereno": "2026-10-24"
+  },
+  "Z04": {
+   "napomena": "Radno vrijeme, ulaznicu i parking za ovu sezonu provjeri kod upravitelja.",
+   "telefon": "+385 99 438 2826",
+   "email": "info@komunalac-vrbovsko.hr",
+   "web": "https://www.komunalac-vrbovsko.hr/izletiste-kamacnik-informacije",
+   "izvor": "JU Priroda (koncesionar Komunalac Vrbovsko)",
+   "provjereno": "2026-10-24"
+  },
+  "H02": {
+   "savjet": "Unutra su interpretacijski centar „Putovima Frankopana” i stalna izložba Prirodoslovnog muzeja Rijeka „Divljina s pogledom na more”.",
+   "napomena": "Radno vrijeme i ulaznicu provjeri telefonom.",
+   "telefon": "+385 51 629 301",
+   "web": "https://ruta.frankopani.eu/en/loc/kastel-zrinskih-brod-na-kupi",
+   "izvor": "Putovima Frankopana (PGŽ)",
+   "provjereno": "2026-10-24"
+  },
+  "H01": {
+   "savjet": "U dvorcu je zavičajna zbirka.",
+   "napomena": "Radno vrijeme i ulaznicu provjeri telefonom.",
+   "telefon": "+385 98 461 406",
+   "web": "https://ruta.frankopani.eu/en/loc/dvorac-zrinskih-u-cabru",
+   "izvor": "Putovima Frankopana (PGŽ)",
+   "provjereno": "2026-10-24"
+  },
+  "On11117413766": {
+   "savjet": "Izložba o medvjedu, vuku i risu: staništa kroz godišnja doba, zvukovi, tragovi, film i dječji kutak.",
+   "telefon": "+385 51 352 400",
+   "email": "info@ju-priroda.hr",
+   "izvor": "JU Priroda",
+   "provjereno": "2026-10-24"
+  }
+ }
+}

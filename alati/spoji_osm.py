@@ -18,6 +18,8 @@ def hav(a, b):
 def norm(s): return re.sub(r"[^a-z0-9 ]", " ", unicodedata.normalize("NFKD", (s or "").lower()).encode("ascii", "ignore").decode()).split()
 OPCE = {"jezero", "izvor", "slap", "spilja", "park", "suma", "staza", "dom", "planinarski", "crkva", "kapela", "sv", "svetog", "svete",
         "kastel", "dvorac", "vrh", "veliki", "mali", "kupa", "na", "u", "kod", "i", "polaziste", "np", "ulaz", "rijeka", "nacionalni"}
+DRUGO = {"mali", "mala", "malo", "veliki", "velika", "veliko", "gornji", "gornja", "gornje", "donji", "donja", "donje",
+         "stari", "stara", "novi", "nova", "zabavni", "climbing", "crag", "kamp", "camp", "parking", "restoran", "hotel"}
 def kljuc(s): return {w for w in norm(s) if len(w) > 3 and w not in OPCE}
 def najblize(p):
     m = min(MJ, key=lambda m: hav(p, m)); return m["ime"], hav(p, m)
@@ -50,7 +52,18 @@ for o in O["tocke"]:
     for t in tocke:
         d = hav(o, t)
         if d > 4000: continue
-        if k and k & kljuc(t["tekst"]["hr"]["naziv"]) and t["podvrsta"] != "naselje":
+        # samo isti objekt iste vrste: benzinska, ambulanta, kolodvor, kamp ili penjalište nisu rijeka, staza ni park
+        if o["kategorija"] == "prakticno" and t["kategorija"] != "prakticno": continue
+        if o["podvrsta"] in ("kamp", "stijene", "dom", "skloniste") and o["podvrsta"] != t["podvrsta"]: continue
+        kt = kljuc(t["tekst"]["hr"]["naziv"])
+        # isto ime: OSM-ovo je dio ručnog ("Bajer" ~ "Jezero Bajer") ili obrnuto, ali bez riječi koje znače drugo mjesto ("Mali Platak" nije "Platak")
+        srodno = o["kategorija"] == t["kategorija"] or {o["kategorija"], t["kategorija"]} in ({"izlet", "zasticeno"}, {"planina", "zasticeno"}, {"voda", "zasticeno"}, {"staza", "zasticeno"})
+        do, dt = set(norm(ime)) & DRUGO, set(norm(t["tekst"]["hr"]["naziv"])) & DRUGO
+        suprotno = do and dt and do != dt                     # "Mali Kozarac" i "Veliki Kozarac": dva vrha
+        isto = srodno and k and kt and not suprotno and (
+            ((k <= kt or kt <= k) and (do == dt or d < 500))   # isto ime, ili "Veliki Bitoraj" ~ "Bitoraj" na istom mjestu
+            or (k & kt and d < 500))                           # slično ime na istom mjestu ("Kanculova glava" ~ "glavica")
+        if isto and t["podvrsta"] != "naselje":
             if not best or d < best[0]: best = (d, t)
     if best and best[0] < {"N": 4000, "S": 1500}.get(best[1]["pouzdanost"], 600):
         t = best[1]
