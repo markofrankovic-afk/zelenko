@@ -179,10 +179,6 @@
   "upravitelj": "Zaba",
   "izvor": "OpenStreetMap"
  },
- "On4148542045": {
-  "upravitelj": "Erste",
-  "izvor": "OpenStreetMap"
- },
  "On4421617578": {
   "upravitelj": "GSC",
   "izvor": "OpenStreetMap"
@@ -258,10 +254,6 @@
  },
  "On11118473102": {
   "upravitelj": "Gorenjska Banka",
-  "izvor": "OpenStreetMap"
- },
- "On11463856706": {
-  "ulaz": "besplatno",
   "izvor": "OpenStreetMap"
  },
  "On11738442811": {
@@ -365,10 +357,6 @@
   "upravitelj": "INA",
   "izvor": "OpenStreetMap"
  },
- "Ow394206857": {
-  "ulaz": "besplatno",
-  "izvor": "OpenStreetMap"
- },
  "Ow402141963": {
   "ulaz": "besplatno",
   "izvor": "OpenStreetMap"
@@ -425,15 +413,7 @@
   "web": "https://zelenivir.com.hr/en/",
   "izvor": "OpenStreetMap"
  },
- "Ow1336488177": {
-  "ulaz": "besplatno",
-  "izvor": "OpenStreetMap"
- },
  "Ow1336488184": {
-  "ulaz": "besplatno",
-  "izvor": "OpenStreetMap"
- },
- "Ow1473230816": {
   "ulaz": "besplatno",
   "izvor": "OpenStreetMap"
  },
