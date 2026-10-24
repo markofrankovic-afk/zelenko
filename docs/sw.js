@@ -2,7 +2,7 @@
    - Ljuska, tekstovi i podaci (točke, rute): spremljeni unaprijed, uvijek dostupni.
    - Kartice karte (OpenStreetMap) i fontovi: spremaju se dok ih gledaš, s ograničenjem broja.
    - Vremenska prognoza: uvijek s mreže; aplikacija sama čuva zadnju. */
-const VERSION = "gk-v0.7.2";
+const VERSION = "gk-v0.7.3";
 const SHELL = ["./", "index.html", "app.js", "manifest.webmanifest",
   "i18n/hr.json", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/slike.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json",
   "vendor/leaflet.js", "vendor/leaflet.css", "vendor/images/layers.png", "vendor/images/marker-icon.png", "vendor/images/marker-shadow.png",
@@ -15,7 +15,8 @@ self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(async c => {
     await c.addAll(SHELL);
     try {
-      const sl = Object.values(await (await c.match("data/slike.json")).json());
+      const sl = Object.values(await (await c.match("data/slike.json")).json())
+        .concat(((await (await c.match("data/specijaliteti.json")).json()).specijaliteti || []).map(x => x.slika).filter(Boolean));
       const lok = [...new Set(sl.map(s => s.datoteka).filter(Boolean))];
       const vani = [...new Set(sl.filter(s => !s.datoteka).map(s => s.url))];
       const f = await caches.open("gk-foto");

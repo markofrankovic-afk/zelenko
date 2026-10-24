@@ -1,4 +1,4 @@
-# Zelenko – offline vodič za Gorski kotar (prototip 0.7.2)
+# Zelenko – offline vodič za Gorski kotar (prototip 0.7.3)
 
 PWA (radi i bez signala). Izbornik: Karta · Danas · Gastro (specijaliteti, jelo, smještaj, OPG) · Rute · Moje.
 Karta s 1080 točaka, 10 ruta (3 besplatne), gdje jesti, spavati i kupiti,

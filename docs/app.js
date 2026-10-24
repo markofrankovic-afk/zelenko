@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.7.2",
+  verzija: "0.7.3",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -743,13 +743,14 @@ const G_FILTRI = [["jelo", p => p.kategorija === "jelo" || !!(p.usluga && p.uslu
   ["opg", p => p.kategorija === "kupnja" && (p.podvrsta === "opg" || p.podvrsta === "mljekomat")], ["trgovine", p => p.kategorija === "kupnja" && p.podvrsta !== "opg" && p.podvrsta !== "mljekomat"]];
 S.gastro = { f: "jelo", otvoreno: false };
 function specKartica(x) {
-  return `<button class="idea spec" data-spec="${x.id}"><span class="top" style="background:${x.boja}"><span>${esc(t("spec_vrsta_" + x.vrsta))}</span></span>
+  return `<button class="idea spec" data-spec="${x.id}"><span class="top" style="background:${x.boja}${x.slika ? `;background-image:url('${esc(fotoSrc(x.slika))}')` : ""}"><span>${esc(t("spec_vrsta_" + x.vrsta))}</span></span>
     <span class="b"><b>${esc(x.naziv)}</b><span>${esc(x.kad)}</span></span></button>`;
 }
 function openSpec(id) {
   const x = SPEC.specijaliteti.find(s => s.id === id); if (!x) return;
   openSheet(t("spec_vrsta_" + x.vrsta), `<div class="stack">
-    <div class="hero" style="background:${x.boja};height:96px"></div>
+    ${x.slika ? `<figure class="hero foto" style="background:${x.boja}"><img src="${esc(fotoSrc(x.slika))}" alt="" decoding="async" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">
+      <figcaption><a href="${esc(x.slika.izvor)}" target="_blank" rel="noopener">${esc(t("foto_autor", { autor: x.slika.autor }))}</a> · <a href="${esc(x.slika.licenca_url || x.slika.izvor)}" target="_blank" rel="noopener">${esc(x.slika.licenca)}</a></figcaption></figure>` : `<div class="hero" style="background:${x.boja};height:96px"></div>`}
     <h1>${esc(x.naziv)}</h1><p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>
     <dl class="info"><div class="info-row"><dt>${esc(t("spec_kad"))}</dt><dd>${esc(x.kad)}</dd></div><div class="info-row"><dt>${esc(t("spec_probaj"))}</dt><dd>${esc(x.probaj)}</dd></div></dl>
     ${(x.ref || []).filter(i => BY[i]).map(i => `<button class="list-row" data-open="${i}"><span class="dot" style="background:${boja(BY[i])}"></span><span class="t"><b>${esc(tx(BY[i]).naziv)}</b><span>${esc(katNaziv(BY[i]))}${S.pos ? " · " + fmtDist(hav(S.pos, BY[i])) : ""}</span></span>${ic("chevron")}</button>`).join("")}
@@ -813,8 +814,9 @@ function renderSigurnost() {
 function openFotoZasluge() {
   const po = {};
   for (const [id, s] of Object.entries(SLIKE)) (po[s.naslov] = po[s.naslov] || { s, ids: [] }).ids.push(id);
+  for (const x of SPEC.specijaliteti) if (x.slika) (po[x.slika.naslov] = po[x.slika.naslov] || { s: x.slika, ids: [], nazivi: [] }).nazivi = [x.naziv];
   openSheet(t("foto_zasluge"), `<p class="small muted" style="margin:0 0 8px">${esc(t("foto_zasluge_uvod"))}</p>` +
-    Object.values(po).map(({ s, ids }) => `<div class="list-row" style="align-items:flex-start"><span class="t"><b>${esc(ids.map(i => BY[i] ? tx(BY[i]).naziv : i).join(", "))}</b>
+    Object.values(po).map(({ s, ids, nazivi }) => `<div class="list-row" style="align-items:flex-start"><span class="t"><b>${esc(ids.map(i => BY[i] ? tx(BY[i]).naziv : i).concat(nazivi || []).join(", "))}</b>
       <span>${esc(t("foto_autor", { autor: s.autor }))} · <a href="${esc(s.licenca_url || s.izvor)}" target="_blank" rel="noopener">${esc(s.licenca)}</a> · <a href="${esc(s.izvor)}" target="_blank" rel="noopener">Wikimedia Commons</a></span></span></div>`).join(""));
 }
 function gdjeHtml() {

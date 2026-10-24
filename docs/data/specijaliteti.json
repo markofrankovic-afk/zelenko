@@ -14,7 +14,16 @@
     "Un1305138335",
     "Un1305138346",
     "Un11918508747"
-   ]
+   ],
+   "slika": {
+    "datoteka": "slike/jela/gulas.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Hirschgulasch_mit_Semmlekn%C3%B6del.jpg/500px-Hirschgulasch_mit_Semmlekn%C3%B6del.jpg",
+    "autor": "Kritzolina",
+    "licenca": "CC BY-SA 4.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Hirschgulasch_mit_Semmlekn%C3%B6del.jpg",
+    "naslov": "Hirschgulasch mit Semmleknödel.jpg"
+   }
   },
   {
    "id": "suho",
@@ -23,7 +32,16 @@
    "naziv": "Pršut od divljači i škripavac",
    "opis": "Hladno predjelo: suho meso od medvjeda, vepra ili jelena, uz sir škripavac i domaći kruh.",
    "kad": "cijele godine",
-   "probaj": "Kao predjelo u restoranima; suhomesnato i kod malih domaćih proizvođača."
+   "probaj": "Kao predjelo u restoranima; suhomesnato i kod malih domaćih proizvođača.",
+   "slika": {
+    "datoteka": "slike/jela/suho.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Dalmatinski_pr%C5%A1ut.jpg/500px-Dalmatinski_pr%C5%A1ut.jpg",
+    "autor": "Haydn Blackey",
+    "licenca": "CC BY-SA 2.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Dalmatinski_pr%C5%A1ut.jpg",
+    "naslov": "Dalmatinski pršut.jpg"
+   }
   },
   {
    "id": "pastrva",
@@ -32,7 +50,16 @@
    "naziv": "Potočna pastrva",
    "opis": "Najcjenjenija riba goranskih rijeka i jezera. Peče se, radi na žaru ili kuha u gustoj ribljoj juhi.",
    "kad": "cijele godine",
-   "probaj": "Restorani uz Kupu, Kupicu i jezera."
+   "probaj": "Restorani uz Kupu, Kupicu i jezera.",
+   "slika": {
+    "datoteka": "slike/jela/pastrva.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Grilled_trout%2C_Restaurant_Trofta%2C_Istog%2C_2025.jpg/500px-Grilled_trout%2C_Restaurant_Trofta%2C_Istog%2C_2025.jpg",
+    "autor": "Bdx",
+    "licenca": "CC0",
+    "licenca_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Grilled_trout%2C_Restaurant_Trofta%2C_Istog%2C_2025.jpg",
+    "naslov": "Grilled trout, Restaurant Trofta, Istog, 2025.jpg"
+   }
   },
   {
    "id": "zabe",
@@ -41,7 +68,16 @@
    "naziv": "Žablji kraci",
    "opis": "Stari goranski specijalitet: pohani ili dinstani u umaku s puževima i gljivama.",
    "kad": "cijele godine",
-   "probaj": "Restorani s tradicionalnim jelovnikom."
+   "probaj": "Restorani s tradicionalnim jelovnikom.",
+   "slika": {
+    "datoteka": "slike/jela/zabe.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Frog%27s_legs_in_Shkod%C3%ABr.jpg/500px-Frog%27s_legs_in_Shkod%C3%ABr.jpg",
+    "autor": "Gertjan R.",
+    "licenca": "CC BY-SA 3.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Frog%27s_legs_in_Shkod%C3%ABr.jpg",
+    "naslov": "Frog's legs in Shkodër.jpg"
+   }
   },
   {
    "id": "puh",
@@ -50,7 +86,16 @@
    "naziv": "Puh",
    "opis": "Jelo starih Gorana: puh pečen ili kao gulaš. Cijenili su ga zbog mesa i masti, a lov na puhove i danas je goranska tradicija.",
    "kad": "kasno ljeto i jesen",
-   "probaj": "Rijetko na jelovniku; najčešće na goranskim puharskim večerima."
+   "probaj": "Rijetko na jelovniku; najčešće na goranskim puharskim večerima.",
+   "slika": {
+    "datoteka": null,
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Edible_dormouse_-_Relmuis_-_Glis_glis.jpg/500px-Edible_dormouse_-_Relmuis_-_Glis_glis.jpg",
+    "autor": "Bouke ten Cate",
+    "licenca": "CC BY-SA 4.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Edible_dormouse_-_Relmuis_-_Glis_glis.jpg",
+    "naslov": "Edible dormouse - Relmuis - Glis glis.jpg"
+   }
   },
   {
    "id": "nadjev",
@@ -68,7 +113,16 @@
    "naziv": "Kiselo zelje s kobasicom",
    "opis": "Nekad glavno zimsko jelo, danas prilog: kiselo zelje s češnjakom, kobasicom ili krvavicom.",
    "kad": "zima",
-   "probaj": "Restorani s domaćom kuhinjom."
+   "probaj": "Restorani s domaćom kuhinjom.",
+   "slika": {
+    "datoteka": "slike/jela/zelje.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Schlachteplatte-cropped-2.jpg/500px-Schlachteplatte-cropped-2.jpg",
+    "autor": "Codc; obrada: Jocian",
+    "licenca": "CC BY-SA 3.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Schlachteplatte-cropped-2.jpg",
+    "naslov": "Schlachteplatte-cropped-2.jpg"
+   }
   },
   {
    "id": "gljive",
@@ -78,7 +132,16 @@
    "opis": "Vrganji, lisičarke, smrčci i sunčanice: kao glavno jelo, u umaku ili uz meso. Zimi se jedu sušene ili ukiseljene.",
    "kad": "proljeće do kasne jeseni",
    "probaj": "Restorani u sezoni. Prije branja provjeri vrste u aplikaciji Gljive Hrvatske.",
-   "veza": "gljive"
+   "veza": "gljive",
+   "slika": {
+    "datoteka": "slike/jela/gljive.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Pfifferlinge_Rahmso%C3%9Fe_Wickelklo%C3%9F.jpg/500px-Pfifferlinge_Rahmso%C3%9Fe_Wickelklo%C3%9F.jpg",
+    "autor": "Benreis",
+    "licenca": "CC BY-SA 4.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Pfifferlinge_Rahmso%C3%9Fe_Wickelklo%C3%9F.jpg",
+    "naslov": "Pfifferlinge Rahmsoße Wickelkloß.jpg"
+   }
   },
   {
    "id": "strudla",
@@ -90,7 +153,16 @@
    "probaj": "Hotel Bitoraj u Fužinama poznat je po njoj; i u drugim restoranima.",
    "ref": [
     "Un1305138335"
-   ]
+   ],
+   "slika": {
+    "datoteka": "slike/jela/strudla.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Darmstaedter_Huette_im_Schwarzwald-10-Heidelbeerstrudel-2023-gje.jpg/500px-Darmstaedter_Huette_im_Schwarzwald-10-Heidelbeerstrudel-2023-gje.jpg",
+    "autor": "Gerd Eichmann",
+    "licenca": "CC BY 4.0",
+    "licenca_url": "https://creativecommons.org/licenses/by/4.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Darmstaedter_Huette_im_Schwarzwald-10-Heidelbeerstrudel-2023-gje.jpg",
+    "naslov": "Darmstaedter Huette im Schwarzwald-10-Heidelbeerstrudel-2023-gje.jpg"
+   }
   },
   {
    "id": "rakije",
@@ -99,7 +171,16 @@
    "naziv": "Rakije, likeri i sokovi",
    "opis": "Domaće rakije od šljive, jabuke i kruške te brinjevec od borovice. Likeri i sokovi od borovnica, jagoda, malina i kupina, a u novije vrijeme i goranski gin.",
    "kad": "cijele godine",
-   "probaj": "Kod OPG-ova i u restoranima; pogledaj filter OPG i domaće."
+   "probaj": "Kod OPG-ova i u restoranima; pogledaj filter OPG i domaće.",
+   "slika": {
+    "datoteka": "slike/jela/rakije.webp",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Serviranje.jpg/500px-Serviranje.jpg",
+    "autor": "Kristina1903",
+    "licenca": "CC BY-SA 4.0",
+    "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "izvor": "https://commons.wikimedia.org/wiki/File:Serviranje.jpg",
+    "naslov": "Serviranje.jpg"
+   }
   }
  ],
  "izvori": [
