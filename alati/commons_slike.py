@@ -19,9 +19,9 @@ API = "https://commons.wikimedia.org/w/api.php"
 SIRINA = 720
 CACHE = "/tmp/claude-0/-home-claude/59acbbd8-2078-53fe-a99d-cb1b163ccd71/scratchpad/commons_cache.json"
 # ručni popis: slika s Wikidate ne prikazuje baš tu točku
-PRESKOCI = {"V06", "S01", "S04", "S07", "B02"}
+PRESKOCI = {"V06", "S01", "S04", "S07", "B02", "P14"}
 # ručno pregledano: fotografija iz okolice prikazuje nešto drugo (tunel, susjedni vrh, dvorac umjesto rijeke)
-ODBACI = {"On11653879228", "On3693176057", "On3724313174", "On8207139324", "V06"}
+ODBACI = {"P14", "On11653879228", "On3693176057", "On3724313174", "On8207139324", "V06"}
 OPCE = set("""crkva crkvica kapela kapelica sv sveti svetog svete svetoga svetih sv. hram manastir zupna župna
 vrh vrhovi veliki velika veliko mali mala malo gornji donji gornja donja stari stara novi nova
 jezero slap izvor vrelo spilja špilja jama rijeka potok most park suma šuma dom kuca kuća planinarski

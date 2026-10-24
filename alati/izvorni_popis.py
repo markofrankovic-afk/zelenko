@@ -53,7 +53,7 @@ T = [
 ("P11","planina","vrh","Tuhobić (1109 m)","Pristupačan šumoviti vrh između Gornjeg Jelenja i Fužina s pogledom prema Rijeci i Kvarneru. Kontrolna točka Hrvatske planinarske obilaznice.","Q7851699","tocno",0,0,""),
 ("P12","planina","vidikovac","Petehovac","Vidikovac s tornjem i dom iznad Delnica; pogled na Risnjak i goranske šume.",None,"",45.4050,14.7870,"Nema u Wikidati; provjeriti."),
 ("P13","planina","vrh","Skradski vrh","Vrh iznad Skrada s pogledom na dolinu Kupe.","Q25301357","tocno",0,0,""),
-("P14","planina","vidikovac","Ličko polje","Krško polje kod Liča: ljeti livade, povremeno pod vodom.","Q3257410","okvirno",0,0,"Koordinata sela Lič; polje odrediti na karti."),
+("P14","planina","polje","Ličko polje","Krško polje kod Liča: ljeti livade, povremeno pod vodom.","","",45.2805,14.7420,"točka je približna (sredina livada istočno od Liča), provjeriti na terenu."),
 ("P16","planina","izletiste","Čelimbaša (Mrkopalj)","Skijalište i livade iznad Mrkopalja.",None,"",45.3150,14.8620,"Nema u Wikidati; provjeriti."),
 ("P17","planina","vrh","Sjeverni Mali Risnjak (1434 m)","Sjeverni vrh masiva Risnjaka, unutar nacionalnog parka.","Q25291486","tocno",0,0,""),
 ("P18","planina","vrh","Veliki Drgomalj (1154 m)","Šumoviti vrh sjeverno od Delnica, prema dolini Kupe.","Q25286984","tocno",0,0,""),
@@ -148,6 +148,9 @@ def pouzdanost(wd, veza):
 
 RUCNO = {"V01": "S"}  # izvor Kupe: položaj se poklapa s izvorom, ali Wikidata navodi grubu preciznost
 
+# točke kod kojih Wikidata pokazuje nešto drugo (npr. selo umjesto polja): vrijedi naša koordinata
+KOORD_RUCNO = {"P14"}
+
 def tocka(r):
     (id_, kat, pod, naziv, opis, qid, veza, lat, lon, nap) = r
     wd = WD.get(qid) if qid else None
@@ -156,7 +159,7 @@ def tocka(r):
     return {
         "id": id_, "kategorija": kat, "podvrsta": pod,
         "tekst": {"hr": {"naziv": naziv, "opis": opis}},
-        "lat": wd["lat"] if wd else lat, "lon": wd["lon"] if wd else lon,
+        "lat": lat if id_ in KOORD_RUCNO else wd["lat"] if wd else lat, "lon": lon if id_ in KOORD_RUCNO else wd["lon"] if wd else lon,
         "pouzdanost": RUCNO.get(id_) or pouzdanost(wd, veza),
         "izvor": {
             "koordinate": "Wikidata" if wd else "procjena – provjeriti",
