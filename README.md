@@ -1,4 +1,4 @@
-# Zelenko – offline vodič za Gorski kotar (prototip 0.7.9)
+# Zelenko – offline vodič za Gorski kotar (prototip 0.8.0)
 
 PWA (radi i bez signala). Izbornik: Karta · Danas · Gastro (specijaliteti, jelo, smještaj, OPG) · Rute · Moje.
 Karta s 1083 točke, 30 ruta (10 naših, 3 besplatne; 20 biciklističkih i MTB iz OSM-a), gdje jesti, spavati i kupiti,
@@ -13,6 +13,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 ## Gdje je što
 - `docs/i18n/hr.json` – svi tekstovi sučelja (za EN/DE dodaj `en.json`, `de.json`)
 - `docs/data/tocke.json`, `rute.json` – točke i rute; `docs/gpx/` – GPX tragovi ruta
+- `docs/data/mreza.json` – mreža putova za navigaciju po karti bez interneta (gradi `alati/osm_mreza.py`); izračun puta je u `docs/put.js`
 - `docs/data/rute_bicikl.json` – biciklističke i MTB rute iz OSM relacija (gradi `alati/osm_bike_rute.py`)
 - `docs/data/usluge.json` – jelo, smještaj, trgovine i OPG (OSM + `izvori/partneri.json`)
 - `docs/data/info.json` – radno vrijeme, ulaznice i kontakti (`izvori/info_rucno.json` sa službenih stranica + OSM), gradi `alati/info_tocke.py`
@@ -29,6 +30,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 
 ## Alati (`alati/`, Python)
 - `osm_izvuci.py`, `spoji_osm.py`, `osm_podloga.py`, `osm_rute.py` – točke, karta i rute iz OSM izvatka (BBBike PBF)
+- `osm_mreza.py` – mreža cesta, šumskih cesta i staza za navigaciju (pješice i biciklom)
 - `osm_bike_rute.py` – biciklističke i MTB rute iz OSM relacija: trasa, duljina, GPX, stajališta
 - `ocisti_duplikate.py` – nakon spoji_osm.py: uklanja dvostruke točke (popis ručno pregledanih + pravila)
 - `osm_usluge.py` – usluge iz OSM-a + ručni partneri iz `izvori/partneri.json`

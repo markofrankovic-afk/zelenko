@@ -6,9 +6,9 @@ style = re.search(r"<style>(.*?)</style>", html, re.S).group(1)
 body = re.search(r"<body>(.*?)<script src=\"vendor/leaflet.js\"></script>", html, re.S).group(1)
 lcss = open(f"{D}/vendor/leaflet.css", encoding="utf-8").read()
 lcss = re.sub(r"url\([^)]*images/[^)]*\)", "none", lcss)   # slike Leafleta se ne koriste
-app = open(f"{D}/app.js", encoding="utf-8").read()
+app = open(f"{D}/put.js", encoding="utf-8").read() + "\n" + open(f"{D}/app.js", encoding="utf-8").read()
 data = {u: json.load(open(f"{D}/{u}", encoding="utf-8")) for u in
-        ["i18n/hr.json", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json"]}
+        ["i18n/hr.json", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json", "data/mreza.json"]}
 # fotografije ugrađene kao data URI (pregled nema pristup mapi slike/)
 import base64, io
 from PIL import Image

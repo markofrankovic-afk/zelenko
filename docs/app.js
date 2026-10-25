@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.7.9",
+  verzija: "0.8.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -30,6 +30,7 @@ const ICON = {
   alert: '<path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3z"/><path d="M12 9v4M12 17h.01"/>',
   route: '<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
   map: '<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>', lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  loc: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
   pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
   wifi_off: '<path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 4.2-2.7M10.7 5.1A15 15 0 0 1 22 8.8M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-1.6-1.2M12 20h.01"/>',
   chevron: '<path d="m9 18 6-6-6-6"/>', car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>'
@@ -741,8 +742,12 @@ function navDraw() {
 }
 function openNav(target, label) {
   NAV.target = target; NAV.pos = S.pos; NAV.head = null;
-  openSheet(t("vodi_me") + " · " + label, `<div class="stack"><div id="navBox"></div><button class="btn" id="navCompass" hidden>${esc(t("nav_ukljuci_kompas"))}</button>
+  openSheet(t("vodi_me") + " · " + label, `<div class="stack">
+    <div class="seg dva" role="group" aria-label="${esc(t("nav_nacin"))}"><button aria-pressed="true">${esc(t("nav_kompas"))}</button><button id="navNaKarti">${ic("map")}${esc(t("nav_karta"))}</button></div>
+    <div id="navBox"></div><button class="btn" id="navCompass" hidden>${esc(t("nav_ukljuci_kompas"))}</button>
+    <a class="btn" href="${esc(vanjskaNav(target, label))}" target="_blank" rel="noopener">${ic("nav")}${esc(t("nav_vanjska"))}</a>
     <div class="grid2"><button class="btn" data-go="sigurnost">${esc(t("gdje_sam"))}</button><a class="btn danger" href="tel:112">112</a></div></div>`);
+  $("#navNaKarti").onclick = () => kartaNav(target, label);
   navDraw();
   if (!GEO) { $("#navBox").innerHTML = `<p class="note warn">${esc(t("lokacija_nema"))}</p>`; return; }
   NAV.watch = GEO.watchPosition(p => { NAV.pos = { lat: p.coords.latitude, lon: p.coords.longitude, acc: p.coords.accuracy, alt: p.coords.altitude }; navDraw(); },
@@ -755,6 +760,137 @@ function openNav(target, label) {
   sheetCleanup.push(() => { if (NAV.watch != null) GEO.clearWatch(NAV.watch); NAV.watch = null; removeEventListener("deviceorientationabsolute", onHead); removeEventListener("deviceorientation", onHead); });
   gcEv("navigacija");
 }
+
+/* ---------- navigacija po karti (put.js + data/mreza.json, bez interneta) ---------- */
+/* vanjska aplikacija: samo predajemo cilj (koordinate); na Androidu bira korisnik, na iPhoneu Apple Karte */
+function vanjskaNav(c, label) {
+  const ll = `${c.lat.toFixed(6)},${c.lon.toFixed(6)}`, ua = navigator.userAgent;
+  if (/Android/i.test(ua)) return `geo:${ll}?q=${ll}(${encodeURIComponent(label)})`;
+  if (/iPhone|iPad|iPod/i.test(ua)) return `https://maps.apple.com/?daddr=${ll}&q=${encodeURIComponent(label)}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${ll}`;
+}
+let MREZA = null;
+function mreza() {
+  if (MREZA) return MREZA;
+  const get = PREGLED ? Promise.resolve(window.GK_DATA["data/mreza.json"]) : fetch("data/mreza.json").then(r => { if (!r.ok) throw 0; return r.json(); });
+  return (MREZA = get.then(d => Put.ucitaj(d)).catch(e => { MREZA = null; throw e; }));
+}
+const KN = { aktivna: false };
+function kartaNav(cilj, naziv) {
+  closeSheet(); go("karta");
+  Object.assign(KN, { aktivna: true, cilj, naziv, profil: store.get("gk-profil", "pjesice"), put: null, pos: null, pratim: true, izvan: 0, zadnji: 0, head: null, stigao: false });
+  $("#v-karta").classList.add("nav-mode"); skloniRutu(); if (S.trazi) makniPretragu();
+  KN.sloj = L.layerGroup().addTo(map);
+  KN.cMarker = L.marker([cilj.lat, cilj.lon], { icon: L.divIcon({ className: "kn-cilj", html: ic("pin"), iconSize: [34, 34], iconAnchor: [17, 32] }), keyboard: false }).addTo(KN.sloj);
+  knPanel();
+  if (!GEO) { knPoruka(t("lokacija_nema")); return; }
+  KN.watch = GEO.watchPosition(p => knPozicija({ lat: p.coords.latitude, lon: p.coords.longitude, acc: p.coords.accuracy, smjer: p.coords.heading, brzina: p.coords.speed }),
+    () => knPoruka(t("lokacija_odbijena")), { enableHighAccuracy: true, maximumAge: 3000, timeout: 30000 });
+  KN.onHead = e => { let h = null; if (e.webkitCompassHeading != null) h = e.webkitCompassHeading; else if (e.absolute && e.alpha != null) h = 360 - e.alpha; if (h != null) { KN.head = h; knMarker(); } };
+  addEventListener("deviceorientationabsolute", KN.onHead); addEventListener("deviceorientation", KN.onHead);
+  KN.drag = () => { if (KN.pratim) { KN.pratim = false; knPanel(); } };
+  map.on("dragstart", KN.drag);
+  mreza().catch(() => knPoruka(t("kn_nema_mreze")));
+  gcEv("navigacija-karta");
+}
+function zavrsiKartaNav() {
+  if (!KN.aktivna) return;
+  if (KN.watch != null && GEO) GEO.clearWatch(KN.watch);
+  removeEventListener("deviceorientationabsolute", KN.onHead); removeEventListener("deviceorientation", KN.onHead);
+  map.off("dragstart", KN.drag); if (KN.sloj) map.removeLayer(KN.sloj);
+  Object.assign(KN, { aktivna: false, watch: null, sloj: null, put: null, uMarker: null });
+  $("#v-karta").classList.remove("nav-mode"); $("#navPanel").hidden = true;
+  renderNear();
+}
+function knPoruka(txt) { KN.poruka = txt; knPanel(); }
+async function knPozicija(pos) {
+  if (!KN.aktivna) return;
+  KN.pos = pos; KN.poruka = null; knMarker();
+  const sad = Date.now();
+  if (!KN.put && !KN.racunam) await knIzracunaj();
+  else if (KN.put) {
+    const np = Put.naPutu(KN.put, pos.lon, pos.lat);
+    KN.np = np;
+    if (np.d > Math.max(40, (pos.acc || 0) * 1.5)) KN.izvan++; else KN.izvan = 0;
+    if (KN.izvan >= 2 && sad - KN.zadnji > 8000) { toast(t("kn_novi_put")); await knIzracunaj(); }
+  }
+  if (KN.pratim) map.setView([pos.lat, pos.lon], Math.max(map.getZoom(), 16), { animate: true });
+  knPanel();
+}
+async function knIzracunaj() {
+  if (!KN.pos) return;
+  KN.racunam = true; knPanel();
+  try {
+    const m = await mreza();
+    const put = Put.nadi(m, KN.pos, KN.cilj, KN.profil);
+    KN.zadnji = Date.now(); KN.izvan = 0;
+    if (!put) { KN.put = null; KN.poruka = t("kn_nema_puta"); }
+    else { KN.put = put; KN.np = Put.naPutu(put, KN.pos.lon, KN.pos.lat); knCrtaj(); }
+  } catch (e) { KN.poruka = t("kn_nema_mreze"); }
+  KN.racunam = false; knPanel();
+}
+function knCrtaj() {
+  KN.sloj.clearLayers(); KN.sloj.addLayer(KN.cMarker); KN.uMarker = null;
+  const p = KN.put, ll = p.tocke.map(([x, y]) => [y, x]);
+  L.polyline(ll, { color: cv("--ink"), weight: 9, opacity: .45, interactive: false }).addTo(KN.sloj);
+  L.polyline(ll, { color: cv("--accent"), weight: 6, interactive: false }).addTo(KN.sloj);
+  /* dio bez puta (do prve staze i od zadnje do cilja): isprekidano */
+  const crt = { color: cv("--accent"), weight: 4, dashArray: "6 8", interactive: false };
+  if (p.odPuta > 25) L.polyline([[KN.pos.lat, KN.pos.lon], [p.pristup[1], p.pristup[0]]], crt).addTo(KN.sloj);
+  if (p.doPuta > 25) L.polyline([[p.dolazak[1], p.dolazak[0]], [KN.cilj.lat, KN.cilj.lon]], crt).addTo(KN.sloj);
+  knMarker();
+  if (!KN.prviPrikaz) { KN.prviPrikaz = true; if (KN.pratim) map.fitBounds(L.latLngBounds(ll).pad(0.15)); setTimeout(() => { if (KN.pratim && KN.pos) map.setView([KN.pos.lat, KN.pos.lon], 17); }, 2500); }
+}
+function knMarker() {
+  if (!KN.pos || !KN.sloj) return;
+  const sm = KN.head != null ? KN.head : (KN.pos.brzina > 0.7 && KN.pos.smjer != null ? KN.pos.smjer : null);
+  const html = `<span class="kn-ja">${sm != null ? `<span class="kn-strelica" style="transform:rotate(${Math.round(sm)}deg)"></span>` : ""}</span>`;
+  if (!KN.uMarker) KN.uMarker = L.marker([KN.pos.lat, KN.pos.lon], { icon: L.divIcon({ className: "", html, iconSize: [40, 40], iconAnchor: [20, 20] }), interactive: false, keyboard: false, zIndexOffset: 1000 }).addTo(KN.sloj);
+  else { KN.uMarker.setLatLng([KN.pos.lat, KN.pos.lon]); const el = KN.uMarker.getElement(); if (el) el.innerHTML = html; }
+}
+function knSkretanje(u) {
+  if (u.cilj) return { ikona: "cilj", tekst: t("kn_cilj") };
+  const k = u.kut, a = Math.abs(k), str = k > 0 ? "desno" : "lijevo";
+  const kako = a < 45 ? "blago_" + str : a < 120 ? str : "ostro_" + str;
+  const v = u.vrsta, kamo = ["path", "footway", "bridleway"].includes(v) ? t("kn_na_stazu") : v === "track" ? t("kn_na_sumsku") : v === "steps" ? t("kn_na_stube")
+    : v === "cycleway" ? t("kn_na_biciklisticku") : u.ime ? t("kn_u", { ime: u.ime }) : ["tertiary", "secondary", "primary"].some(x => v.startsWith(x)) ? t("kn_na_cestu") : t("kn_na_put");
+  return { ikona: kako, tekst: t("kn_" + kako) + " " + kamo + (u.markirano ? " · " + t("kn_markacija") : "") };
+}
+const KN_STRELICE = { lijevo: -90, desno: 90, blago_lijevo: -40, blago_desno: 40, ostro_lijevo: -140, ostro_desno: 140 };
+function knPanel() {
+  const el = $("#navPanel"); if (!KN.aktivna) { el.hidden = true; return; }
+  el.hidden = false;
+  const p = KN.put, s = KN.np ? KN.np.s : 0;
+  let glavno;
+  if (KN.poruka) glavno = `<p class="kn-poruka">${esc(KN.poruka)}</p>`;
+  else if (!KN.pos) glavno = `<p class="kn-poruka">${esc(t("lokacija_trazim"))}</p>`;
+  else if (!p) glavno = `<p class="kn-poruka">${esc(t("kn_racunam"))}</p>`;
+  else {
+    const ostalo = Math.max(0, p.m - s) + (p.doPuta > 25 ? p.doPuta : 0), doCilja = hav(KN.pos, KN.cilj);
+    if (!KN.stigao && (doCilja < 25 || ostalo < 20)) { KN.stigao = true; toast(t("kn_stigao")); gcEv("navigacija-cilj"); }
+    const u = p.upute.find(x => x.na > s + 5) || p.upute[p.upute.length - 1], sk = knSkretanje(u), dU = Math.max(0, u.na - s);
+    const strelica = sk.ikona === "cilj" ? ic("pin") : `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(${KN_STRELICE[sk.ikona]}deg)"><path d="M12 20V5M6 11l6-6 6 6"/></svg>`;
+    glavno = KN.stigao ? `<div class="kn-upu"><span class="kn-ik">${ic("pin")}</span><div><b>${esc(t("kn_stigao"))}</b><span>${esc(KN.naziv)}</span></div></div>`
+      : `<div class="kn-upu"><span class="kn-ik">${strelica}</span><div><b>${esc(sk.ikona === "cilj" ? fmtDist(dU) : t("kn_za", { d: fmtDist(dU) }))}</b><span>${esc(sk.tekst)}</span></div></div>
+        ${p.odPuta > 25 && s < 5 ? `<p class="small" style="margin:0">${esc(t("kn_do_puta", { d: fmtDist(p.odPuta) }))}</p>` : ""}
+        <div class="kn-stat"><b>${fmtDist(ostalo)}</b><span>${esc(t("kn_ostalo"))}</span><b>${fmtMin(ostalo / 1000 / Put.BRZINA[KN.profil] * 60)}</b><span>${esc(t("kn_hoda_" + KN.profil))}</span></div>`;
+  }
+  el.innerHTML = `<div class="kn-glava"><span class="small muted">${esc(t("vodi_me"))} · ${esc(KN.naziv)}</span></div>${glavno}
+    <div class="row kn-gumbi">
+      <div class="seg dva mali" role="group" aria-label="${esc(t("kn_profil"))}"><button data-kn="pjesice" aria-pressed="${KN.profil === "pjesice"}">${esc(t("kako_pjesice"))}</button><button data-kn="bicikl" aria-pressed="${KN.profil === "bicikl"}">${esc(t("kako_bicikl"))}</button></div>
+      ${KN.pratim ? "" : `<button class="btn" data-kn="centar">${ic("loc")}${esc(t("kn_centriraj"))}</button>`}
+      <button class="btn" data-kn="kompas" aria-label="${esc(t("nav_kompas"))}">${ic("nav")}</button>
+      <button class="btn" data-kn="kraj">${esc(t("kn_zavrsi"))}</button></div>
+    <span class="small muted">${esc(t("kn_izvor"))}</span>`;
+}
+function fmtMin(min) { min = Math.max(1, Math.round(min)); return min < 60 ? min + " min" : Math.floor(min / 60) + " h " + String(min % 60).padStart(2, "0") + " min"; }
+$("#navPanel").addEventListener("click", e => {
+  const b = e.target.closest("[data-kn]"); if (!b) return; const a = b.dataset.kn;
+  if (a === "pjesice" || a === "bicikl") { if (KN.profil !== a) { KN.profil = a; store.set("gk-profil", a); KN.put = null; KN.prviPrikaz = false; knIzracunaj(); } }
+  if (a === "centar") { KN.pratim = true; if (KN.pos) map.setView([KN.pos.lat, KN.pos.lon], Math.max(map.getZoom(), 16)); knPanel(); }
+  if (a === "kompas") { const c = KN.cilj, n = KN.naziv; zavrsiKartaNav(); openNav(c, n); }
+  if (a === "kraj") zavrsiKartaNav();
+});
 
 /* ---------- auto ---------- */
 function renderCarMarker() {
