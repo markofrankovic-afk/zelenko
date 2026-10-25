@@ -68,6 +68,8 @@ def kl(t):
     if g("amenity") == "place_of_worship" and n: return ("bastina", "sakralno")
     if g("tourism") == "picnic_site" or (g("amenity") == "shelter" and g("shelter_type") in ("picnic_shelter", "lean_to")): return ("izlet", "piknik")
     if g("tourism") == "camp_site": return ("izlet", "kamp")
+    if g("leisure") in ("park", "garden") and n and g("access") not in ("private", "no"): return ("izlet", "park")
+    if g("leisure") == "playground" and g("access") not in ("private", "no"): return ("izlet", "igraliste")
     if g("tourism") == "attraction" and n: return ("izlet", "zanimljivost")
     if g("tourism") == "information" and g("information") == "office": return ("prakticno", "info")
     if g("railway") in ("station", "halt"): return ("prakticno", "kolodvor")

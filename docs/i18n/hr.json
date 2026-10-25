@@ -458,7 +458,11 @@
   "planinarska": "planinarenje pješice uspon",
   "specijalitet": "jelo hrana specijalitet gastro",
   "kolodvor": "vlak željeznica stanica",
-  "spilja": "špilja pećina jama"
+  "spilja": "špilja pećina jama",
+  "park": "park perivoj šetnja",
+  "igraliste": "igralište djeca ljuljačka tobogan"
  },
- "vodi_do_brana": "„Vodi me” vodi do brane, odakle se dolazi do obale."
+ "vodi_do_brana": "„Vodi me” vodi do brane, odakle se dolazi do obale.",
+ "pod_park": "Park",
+ "pod_igraliste": "Dječje igralište"
 }

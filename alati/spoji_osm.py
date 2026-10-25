@@ -28,7 +28,8 @@ def km(d): return (f"{d/1000:.1f}".replace(".", ",") + " km") if d >= 1000 else 
 GEN = {"vidikovac": "Vidikovac", "izvor": "Izvor", "piknik": "Izletište", "parking": "Parkiralište", "wc": "Javni WC",
        "pitka_voda": "Pitka voda", "bankomat": "Bankomat", "ljekarna": "Ljekarna", "ambulanta": "Ambulanta", "spilja": "Špilja",
        "rusevine": "Ruševine", "dom": "Planinarski dom", "skloniste": "Sklonište", "benzinska": "Benzinska postaja",
-       "info": "Turistički ured", "kamp": "Kamp", "muzej": "Muzej"}
+       "info": "Turistički ured", "kamp": "Kamp", "muzej": "Muzej",
+       "park": "Park", "igraliste": "Dječje igralište"}
 OPIS = {
  "vrh": "Vrh{ele}.", "prijevoj": "Planinski prijevoj{ele}.", "vidikovac": "Vidikovac{ele}.", "stijene": "Stijene.",
  "dom": "Planinarski dom{ele}. Prije polaska provjeri je li otvoren.", "skloniste": "Planinarsko sklonište{ele}.",
@@ -37,7 +38,7 @@ OPIS = {
  "muzej": "Muzej ili zbirka. Prije posjeta provjeri radno vrijeme.", "sakralno": "Crkva ili kapela.",
  "dvorac": "Dvorac ili utvrda.", "rusevine": "Ruševine.", "spomen": "Spomenik ili spomen-obilježje.",
  "tehnicka": "Tehnička baština.", "povijesno": "Povijesno mjesto.", "kamp": "Kamp.", "piknik": "Mjesto za odmor i piknik.",
- "zanimljivost": "Zanimljivost.", "info": "Turistički ured.", "kolodvor": "Željeznički kolodvor ili stajalište.",
+ "zanimljivost": "Zanimljivost.", "park": "Park za šetnju i odmor.", "igraliste": "Dječje igralište.", "info": "Turistički ured.", "kolodvor": "Željeznički kolodvor ili stajalište.",
  "pitka_voda": "Pitka voda.", "parking": "Parkiralište.", "wc": "Javni WC.", "ljekarna": "Ljekarna.",
  "ambulanta": "Ambulanta ili liječnička ordinacija.", "benzinska": "Benzinska postaja.", "bankomat": "Bankomat."}
 
@@ -92,7 +93,7 @@ for o in O["tocke"]:
     vazno = 2
     if o["podvrsta"] in ("parking", "wc", "bankomat", "benzinska", "pitka_voda", "ljekarna", "ambulanta", "piknik", "info"): vazno = 3
     if o["podvrsta"] == "vrh" and elev < 1000 and not tg.get("wikidata"): vazno = 3
-    if o["podvrsta"] in ("vidikovac", "izvor", "spilja") and not ime: vazno = 3
+    if o["podvrsta"] in ("vidikovac", "izvor", "spilja", "igraliste") and not ime: vazno = 3
     nove.append({
         "id": "O" + o["osm"], "kategorija": o["kategorija"], "podvrsta": o["podvrsta"],
         "tekst": {"hr": {"naziv": naziv, "opis": opis}},
