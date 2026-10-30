@@ -1,0 +1,27 @@
+{
+ "opis": "Lynx, ris iz Risnjaka: kratke zanimljivosti uz mjesta na karti. Činjenice iz navedenih izvora, napisane našim riječima.",
+ "provjereno": "2026-10-30",
+ "cinjenice": [
+  {"id": "ime", "ref": ["Z01", "P01", "P17", "S01"],
+   "tekst": "Planina Risnjak vjerojatno je ime dobila po meni – risu. Nacionalni park postoji od 1949. godine.",
+   "izvor": "Wikipedia – NP Risnjak", "url": "https://en.wikipedia.org/wiki/Risnjak_National_Park"},
+  {"id": "povratak", "ref": ["Z01", "P01", "On11117413766"],
+   "tekst": "Risovi su iz ovih šuma nestali početkom 20. stoljeća. Godine 1973. u slovenski dio Dinarida doneseno je šest risova iz Slovačke – današnji risovi ovdje njihovi su potomci.",
+   "izvor": "LIFE Lynx", "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/"},
+  {"id": "geni", "ref": ["On11117413766", "P07"],
+   "tekst": "Svi dinarski risovi potječu od samo šest životinja, pa smo si previše srodni. Zato se u projektu LIFE Lynx u Dinaride dovode risovi iz Karpata.",
+   "izvor": "LIFE Lynx", "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/"},
+  {"id": "zastita", "ref": ["P07", "P05", "Z03"],
+   "tekst": "U Hrvatskoj sam strogo zaštićena vrsta. Lov na risa zabranjen je od 1998. godine.",
+   "izvor": "LIFE Lynx", "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/"},
+  {"id": "teritorij", "ref": ["S10", "P07", "P05", "Z02"],
+   "tekst": "Ja sam samotnjak. Teritorij mužjaka ima od 120 do 1800 km² – i najmanji je veći od cijelog NP Risnjak.",
+   "izvor": "LCIE – Eurasian lynx", "url": "https://www.lcie.org/Large-carnivores/Eurasian-lynx"},
+  {"id": "plijen", "ref": ["S10", "Z02", "On11117413766"],
+   "tekst": "Najčešće lovim srne. Odrasli mužjak teži 18 do 25 kg, ženka 12 do 16 kg.",
+   "izvor": "LCIE – Eurasian lynx", "url": "https://www.lcie.org/Large-carnivores/Eurasian-lynx"},
+  {"id": "zvijeri", "ref": ["On11117413766", "S10"],
+   "tekst": "U Gorskom kotaru žive sve tri velike zvijeri: medvjed, vuk i ja. Medo Zelenko i ja smo susjedi!",
+   "izvor": "Wikipedia – NP Risnjak", "url": "https://en.wikipedia.org/wiki/Risnjak_National_Park"}
+ ]
+}

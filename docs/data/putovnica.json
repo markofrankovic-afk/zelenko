@@ -1,5 +1,5 @@
 {
- "opis": "Zelenkova putovnica: pečat se dobije kad je GPS unutar polumjera r (m) od točke.",
+ "opis": "Zelenkova putovnica: pečat se dobije kad je GPS unutar polumjera r (m) od točke. Pečati sa \"skriven\": true su Lynxovi skriveni tragovi: na popisu se vide tek kad ih skupiš.",
  "pecati": [
   {
    "id": "V01",
@@ -51,7 +51,8 @@
   },
   {
    "id": "P01",
-   "r": 250
+   "r": 250,
+   "skriven": true
   },
   {
    "id": "P02",
@@ -67,11 +68,13 @@
   },
   {
    "id": "P05",
-   "r": 250
+   "r": 250,
+   "skriven": true
   },
   {
    "id": "P07",
-   "r": 800
+   "r": 800,
+   "skriven": true
   },
   {
    "id": "P10",

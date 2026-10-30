@@ -497,5 +497,19 @@
  "kn_profil": "Pješice ili biciklom",
  "kn_centriraj": "Prati me",
  "kn_zavrsi": "Završi",
- "kn_izvor": "Put po mreži iz OpenStreetMapa, bez interneta. Na terenu vjeruj oznakama i procjeni sam."
+ "kn_izvor": "Put po mreži iz OpenStreetMapa, bez interneta. Na terenu vjeruj oznakama i procjeni sam.",
+ "lynx_ime": "Lynx",
+ "lynx_jesi_znao": "Lynx: jesi li znao?",
+ "lynx_mrak": "Ja volim mrak, ali ti u šumi sada ne bi trebao biti. Sutra se vidimo na stazi!",
+ "lynx_mrak_blizu": "Ja vidim i u mraku, ti ne. Do mraka je još oko {min} min – vrijeme je za povratak.",
+ "pecat_lynx": "Lynxov skriveni trag",
+ "lynx_trag_nasao_naslov": "Našao si moj trag!",
+ "lynx_trag_nasao": "Rijetko se pokazujem, a ti si me našao. Skriveni tragovi: {n} od {ukupno}.",
+ "lynx_tragovi": "Lynxovi skriveni tragovi",
+ "lynx_trag_skriven": "Skriveni trag",
+ "lynx_trag_hint": "Skrivam se na najvišim vrhovima i u stijenama. Dođi pa me nađi – trag se pokaže tek kad ga uzmeš.",
+ "lynx_oko": "Lynxovo oko",
+ "lynx_oko_tekst": "Našao si sve moje tragove. Sada vidiš šumu kao ris!",
+ "pozdrav_lynx": "Ponekad se javi i Lynx, ris iz Risnjaka. Rijetko se pokazuje – kao i u šumi.",
+ "izvor": "Izvor"
 }

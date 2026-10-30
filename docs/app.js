@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.8.1",
+  verzija: "0.9.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -41,7 +41,7 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
-let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] }, INFO = {}, SPEC = { specijaliteti: [], izvori: [] };
+let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] }, INFO = {}, SPEC = { specijaliteti: [], izvori: [] }, LYNX = { cinjenice: [] };
 function t(k, v) { let s = T[k] ?? k; if (v) for (const x in v) s = s.split("{" + x + "}").join(v[x]); return s; }
 const tx = o => (o && o.tekst && (o.tekst[CONFIG.jezik] || o.tekst.hr)) || {};
 
@@ -506,11 +506,13 @@ function razinaZa(n) {
   const r = PUT.razine.filter(x => x.od <= n).pop() || { k: "turist", od: 0 }, sl = PUT.razine.find(x => x.od > n);
   return { r, sl };
 }
+const lynxTragovi = () => PUT.pecati.filter(x => x.skriven);
 function pecatHtml(p) {
   const pc = pecatZa(p.id); if (!pc) return "";
-  if (S.pecati[p.id]) return `<div class="pecat-box ok">${medo(48, true)}<span class="t"><b>${esc(t("pecat_naslov"))}</b><span class="small">${esc(t("pecat_imas", { datum: new Date(S.pecati[p.id]).toLocaleDateString("hr-HR") }))}</span></span></div>`;
+  const lik = pc.skriven ? lynx(48, true) : medo(48, true), naslov = t(pc.skriven ? "pecat_lynx" : "pecat_naslov");
+  if (S.pecati[p.id]) return `<div class="pecat-box ok">${lik}<span class="t"><b>${esc(naslov)}</b><span class="small">${esc(t("pecat_imas", { datum: new Date(S.pecati[p.id]).toLocaleDateString("hr-HR") }))}</span></span></div>`;
   const d = S.pos ? hav(S.pos, p) : null, blizu = d != null && d <= pc.r;
-  return `<div class="pecat-box">${medo(48, true)}<span class="t"><b>${esc(t("pecat_naslov"))}</b>
+  return `<div class="pecat-box${pc.skriven ? " lynx" : ""}">${lik}<span class="t"><b>${esc(naslov)}</b>
     <span class="small muted">${esc(blizu ? "" : t("pecat_dodi", { r: fmtDist(pc.r) }) + " " + (d != null ? t("pecat_daleko", { d: fmtDist(d - pc.r) }) : t("pecat_gps")))}</span></span>
     ${blizu ? `<button class="btn primary" id="tPecat">${esc(t("pecat_uzmi"))}</button>` : ""}</div>`;
 }
@@ -522,6 +524,14 @@ function uzmiPecat(id) {
   S.pecati[id] = new Date().toISOString(); store.set("gk-pecati", S.pecati);
   const n = brojPecata(), sad = razinaZa(n).r;
   gcEv("pecat");
+  if (pc.skriven) {
+    const L = lynxTragovi(), nL = L.filter(x => S.pecati[x.id]).length, sve = nL === L.length;
+    openSheet(t("putovnica"), `<div class="stack" style="align-items:center;text-align:center">${lynx(140)}<h1>${esc(t(sve ? "lynx_oko" : "lynx_trag_nasao_naslov"))}</h1>
+      <p style="margin:0">${esc(sve ? t("lynx_oko_tekst") : t("lynx_trag_nasao", { n: nL, ukupno: L.length }))}</p>${sad.k !== prije ? `<p class="small muted" style="margin:0">${esc(t("razina_nova", { razina: t("razina_" + sad.k) }))}</p>` : ""}
+      <button class="btn primary block" id="pPut">${esc(t("putovnica"))}</button></div>`);
+    $("#pPut").onclick = openPutovnica; gcEv("lynx-trag");
+    return;
+  }
   if (sad.k !== prije) {
     openSheet(t("putovnica"), `<div class="stack" style="align-items:center;text-align:center">${medo(140)}<h1>${esc(t("razina_nova", { razina: t("razina_" + sad.k) }))}</h1>
       <p style="margin:0">${esc(t("medo_razina", { razina: t("razina_" + sad.k) }))}</p><button class="btn primary block" id="pPut">${esc(t("putovnica"))}</button></div>`);
@@ -532,7 +542,7 @@ function putovnicaKartica() {
   if (!PUT.pecati.length) return "";
   const n = brojPecata(), N = PUT.pecati.length;
   return `<button class="card row" id="dPut" style="gap:12px;text-align:left;width:100%">${medo(52, true)}<span class="t" style="flex:1;display:flex;flex-direction:column;gap:6px">
-    <b>${esc(t("putovnica"))}</b><span class="small muted">${esc(t("putovnica_stanje", { n, ukupno: N }))} · ${esc(t("razina_" + razinaZa(n).r.k))}</span>
+    <b>${esc(t("putovnica"))}</b><span class="small muted">${esc(t("putovnica_stanje", { n, ukupno: N }))} · ${esc(t("razina_" + razinaZa(n).r.k))}${lynxTragovi().length && lynxTragovi().every(x => S.pecati[x.id]) ? " · " + esc(t("lynx_oko")) : ""}</span>
     <span class="prog"><i style="width:${Math.round(100 * n / N)}%"></i></span></span>${ic("chevron")}</button>`;
 }
 function openPutovnica() {
@@ -542,8 +552,13 @@ function openPutovnica() {
     ${medoOblak(t("razina_" + r.k), poruka, null, 64)}
     <div class="stack" style="gap:6px"><span class="small muted">${esc(t("putovnica_stanje", { n, ukupno: N }))}</span><span class="prog"><i style="width:${Math.round(100 * n / N)}%"></i></span></div>
     <p class="small muted" style="margin:0">${esc(t("putovnica_uvod"))}</p>
-    <div class="pecati">${PUT.pecati.filter(x => BY[x.id]).map(x => { const p = BY[x.id], ok = S.pecati[x.id];
-      return `<button class="pecat${ok ? " ok" : ""}" data-open="${x.id}"><span class="krug">${medo(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}${ok ? `<small>${new Date(ok).toLocaleDateString("hr-HR")}</small>` : ""}</button>`; }).join("")}</div></div>`);
+    <div class="pecati">${PUT.pecati.filter(x => BY[x.id] && !x.skriven).map(x => { const p = BY[x.id], ok = S.pecati[x.id];
+      return `<button class="pecat${ok ? " ok" : ""}" data-open="${x.id}"><span class="krug">${medo(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}${ok ? `<small>${new Date(ok).toLocaleDateString("hr-HR")}</small>` : ""}</button>`; }).join("")}</div>
+    ${lynxTragovi().length ? `<section class="stack" style="gap:8px"><h3>${esc(t("lynx_tragovi"))}</h3>
+      ${lynxTragovi().every(x => S.pecati[x.id]) ? medoOblak(t("lynx_oko"), t("lynx_oko_tekst"), null, 56, "lynx") : medoOblak(t("lynx_ime"), t("lynx_trag_hint"), null, 56, "lynx")}
+      <div class="pecati">${lynxTragovi().filter(x => BY[x.id]).map(x => { const p = BY[x.id], ok = S.pecati[x.id];
+        return ok ? `<button class="pecat ok lynx" data-open="${x.id}"><span class="krug">${lynx(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}<small>${new Date(ok).toLocaleDateString("hr-HR")}</small></button>`
+          : `<span class="pecat skriven"><span class="krug" aria-hidden="true">?</span>${esc(t("lynx_trag_skriven"))}</span>`; }).join("")}</div></section>` : ""}</div>`);
 }
 document.addEventListener("click", e => {
   if (e.target.closest("#tPecat")) { const id = $("#sheet").dataset.tocka; if (id) uzmiPecat(id); }
@@ -558,9 +573,17 @@ function medo(px, samoGlava) {
     ? `<svg aria-hidden="true" width="${px}" height="${px}" viewBox="36 20 168 168">${MEDO_GLAVA}</svg>`
     : `<svg aria-hidden="true" width="${px}" height="${Math.round(px * 1.1)}" viewBox="36 20 168 220">${MEDO_TIJELO}${MEDO_GLAVA}</svg>`;
 }
-/* oblačić s medom: naslov, tekst i po želji gumb koji otvara točku */
-function medoOblak(naslov, tekst, ref, px = 76) {
-  return `<div class="medo">${medo(px)}<div class="bubble">${naslov ? `<b>${esc(naslov)}</b>` : ""}<span>${esc(tekst)}</span>${ref && BY[ref] ? `<button class="medo-go" data-open="${ref}">${esc(t("medo_pokazi"))} ${esc(tx(BY[ref]).naziv)}${ic("chevron")}</button>` : ""}</div></div>`;
+/* Lynx, ris iz Risnjaka: drugi lik, javlja se rijetko (zanimljivosti, skriveni pečati, mrak) */
+const LYNX_TIJELO = '<path d="M44 240 C44 184 78 160 120 160 C162 160 196 184 196 240 Z" fill="#B5895E"/><path d="M88 240 C88 206 102 190 120 190 C138 190 152 206 152 240 Z" fill="#F6EAD8"/><circle cx="72" cy="206" r="4" fill="#8C6440"/><circle cx="168" cy="210" r="4" fill="#8C6440"/><circle cx="64" cy="226" r="3.5" fill="#8C6440"/><circle cx="176" cy="228" r="3.5" fill="#8C6440"/><path d="M70 158 Q120 182 170 158 L173 173 Q120 200 67 173 Z" fill="#15803D"/><path d="M138 178 L160 214 L142 214 Z" fill="#116B33"/><circle cx="120" cy="188" r="11" fill="#fff" stroke="#C62828" stroke-width="5"/>';
+const LYNX_GLAVA = '<path d="M70 86 L60 22 L106 60 Z" fill="#B5895E"/><path d="M74 76 L67 38 L96 62 Z" fill="#EDC3A2"/><path d="M170 86 L180 22 L134 60 Z" fill="#B5895E"/><path d="M166 76 L173 38 L144 62 Z" fill="#EDC3A2"/><path d="M60 22 L54 2 L64 18 Z" fill="#2A1D14"/><path d="M180 22 L186 2 L176 18 Z" fill="#2A1D14"/><path d="M60 22 L63 30" stroke="#2A1D14" stroke-width="5" stroke-linecap="round"/><path d="M180 22 L177 30" stroke="#2A1D14" stroke-width="5" stroke-linecap="round"/><path d="M68 104 L36 142 L60 140 L48 162 L78 150 L84 122 Z" fill="#F6EAD8"/><path d="M172 104 L204 142 L180 140 L192 162 L162 150 L156 122 Z" fill="#F6EAD8"/><ellipse cx="120" cy="110" rx="58" ry="54" fill="#C9A27A"/><path d="M44 140 L62 134 M52 154 L70 144 M196 140 L178 134 M188 154 L170 144" stroke="#2A1D14" stroke-width="3.5" stroke-linecap="round"/><path d="M110 68 L110 82 M120 64 L120 80 M130 68 L130 82" stroke="#8C6440" stroke-width="4" stroke-linecap="round"/><circle cx="78" cy="112" r="3.5" fill="#8C6440"/><circle cx="84" cy="98" r="3" fill="#8C6440"/><circle cx="162" cy="112" r="3.5" fill="#8C6440"/><circle cx="156" cy="98" r="3" fill="#8C6440"/><ellipse cx="120" cy="136" rx="28" ry="19" fill="#F6EAD8"/><path d="M111 126 L129 126 L120 135 Z" fill="#8A4B3A"/><path d="M120 135 Q120 143 111 145 M120 135 Q120 143 129 145" stroke="#2A1D14" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M86 106 Q97 96 108 106 Q97 114 86 106 Z" fill="#E0A93A"/><ellipse cx="97" cy="106" rx="3" ry="5.5" fill="#2A1D14"/><circle cx="99" cy="103" r="1.8" fill="#fff"/><path d="M132 106 Q143 96 154 106 Q143 114 132 106 Z" fill="#E0A93A"/><ellipse cx="143" cy="106" rx="3" ry="5.5" fill="#2A1D14"/><circle cx="145" cy="103" r="1.8" fill="#fff"/><circle cx="82" cy="128" r="7" fill="#E07A5F" opacity=".35"/><circle cx="158" cy="128" r="7" fill="#E07A5F" opacity=".35"/>';
+function lynx(px, samoGlava) {
+  return samoGlava
+    ? `<svg aria-hidden="true" width="${px}" height="${px}" viewBox="30 0 180 180">${LYNX_GLAVA}</svg>`
+    : `<svg aria-hidden="true" width="${px}" height="${Math.round(px * 1.2)}" viewBox="36 0 168 240">${LYNX_TIJELO}${LYNX_GLAVA}</svg>`;
+}
+/* oblačić s medom (ili Lynxom): naslov, tekst i po želji gumb koji otvara točku */
+function medoOblak(naslov, tekst, ref, px = 76, lik = "medo") {
+  return `<div class="medo${lik === "lynx" ? " lynx" : ""}">${lik === "lynx" ? lynx(px) : medo(px)}<div class="bubble">${naslov ? `<b>${esc(naslov)}</b>` : ""}<span>${esc(tekst)}</span>${ref && BY[ref] ? `<button class="medo-go" data-open="${ref}">${esc(t("medo_pokazi"))} ${esc(tx(BY[ref]).naziv)}${ic("chevron")}</button>` : ""}</div></div>`;
 }
 /* savjet dana: mrak > nevrijeme > vrućina > godišnje doba */
 function medoSavjet(w, st, now, sez) {
@@ -576,12 +599,19 @@ function medoSavjet(w, st, now, sez) {
   else if (kod === 45 || kod === 48) k = "magla";
   else if (temp != null && temp >= 26) { k = "vruce"; ref = "V04"; }
   else { k = sez; ref = { jesen: "V08", zima: "P04", proljece: "V11", ljeto: "V02" }[sez]; }
+  if (k === "mrak" || k === "mrak_blizu") return medoOblak(t("lynx_ime") + ": " + pozdrav.toLowerCase(), t("lynx_" + k, { min }), null, 76, "lynx");
   return medoOblak(pozdrav, t("medo_" + k, { min }), ref);
+}
+/* „Jesi li znao?” – Lynxova zanimljivost uz mjesto (prva koja se veže uz točku, mijenja se po danu) */
+function lynxZnao(id) {
+  const sve = (LYNX.cinjenice || []).filter(c => c.ref.includes(id)); if (!sve.length) return "";
+  const c = sve[Math.floor(Date.now() / 864e5) % sve.length];
+  return `${medoOblak(t("lynx_jesi_znao"), c.tekst, null, 60, "lynx")}<span class="small muted" style="margin-top:-8px">${esc(t("izvor"))}: <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.izvor)}</a></span>`;
 }
 function openPozdrav() {
   openSheet(t("app_ime"), `<div class="stack" style="align-items:center;text-align:center">
     ${medo(150)}<h1>${esc(t("pozdrav_naslov"))}</h1><p style="margin:0;font-size:1.06em">${esc(t("pozdrav_tekst"))}</p>
-    <div class="stack" style="gap:10px;text-align:left;width:100%">${["pozdrav_1", "pozdrav_2", "pozdrav_3"].map(k => `<div class="row" style="align-items:flex-start;gap:10px"><span style="color:var(--accent);margin-top:2px">${ic("check")}</span><span>${esc(t(k))}</span></div>`).join("")}</div>
+    <div class="stack" style="gap:10px;text-align:left;width:100%">${["pozdrav_1", "pozdrav_2", "pozdrav_3", "pozdrav_lynx"].map(k => `<div class="row" style="align-items:flex-start;gap:10px"><span style="color:var(--accent);margin-top:2px">${ic("check")}</span><span>${esc(t(k))}</span></div>`).join("")}</div>
     <button class="btn primary block" id="pKreni">${esc(t("pozdrav_kreni"))}</button></div>`);
   store.set("gk-pozdrav", true);
   $("#pKreni").onclick = () => closeSheet();
@@ -614,6 +644,7 @@ function openTocka(id) {
     ${p.dolazak ? `<p class="small muted" style="margin:-6px 0 0">${esc(t("vodi_do_" + p.dolazak.naziv))}</p>` : ""}
     <p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>
     ${infoHtml(p)}
+    ${lynxZnao(id)}
     ${pecatHtml(p)}
     ${p.napomena && PREGLED ? `<div class="note warn small">${esc(t("prototip_napomena", { tekst: p.napomena }))}</div>` : ""}
     ${uRuti.length ? `<section><h3>${esc(t("dio_rute"))}</h3>${uRuti.map(r => `<button class="list-row" data-open="${r.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(r).naziv)}</b><span>${esc(t("vrsta_" + r.vrsta))} · ${esc(r.tezina)} · ${kmR(r)} km</span></span><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></button>`).join("")}</section>` : ""}
@@ -1156,8 +1187,8 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] }))]);
-  T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec;
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null)]);
+  T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec; if (lynxD) LYNX = lynxD;
   TOCKE = tocke.tocke; RUTE = rute.rute.concat((bike && bike.rute) || []);
   /* usluge (jelo, smještaj, kupnja) idu na kartu kao točke; partneri su istaknuti */
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });
