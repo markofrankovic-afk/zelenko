@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.10.1",
+  verzija: "0.10.2",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
