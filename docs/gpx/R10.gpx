@@ -2,16 +2,9 @@
 <gpx version="1.1" creator="Gorski kotar vodič" xmlns="http://www.topografix.com/GPX/1/1">
  <metadata><name>Jezera: Fužine – Lokve</name><copyright author="OpenStreetMap suradnici"><license>https://opendatacommons.org/licenses/odbl/</license></copyright></metadata>
  <trk><name>Jezera: Fužine – Lokve</name><trkseg>
-   <trkpt lat="45.305024" lon="14.713519"/>
-   <trkpt lat="45.305130" lon="14.713549"/>
-   <trkpt lat="45.305260" lon="14.713630"/>
-   <trkpt lat="45.305302" lon="14.713663"/>
-   <trkpt lat="45.305345" lon="14.713702"/>
-   <trkpt lat="45.305429" lon="14.713781"/>
-   <trkpt lat="45.305502" lon="14.713839"/>
-   <trkpt lat="45.305600" lon="14.713902"/>
-   <trkpt lat="45.305725" lon="14.713964"/>
-   <trkpt lat="45.305870" lon="14.714040"/>
+   <trkpt lat="45.306290" lon="14.712829"/>
+   <trkpt lat="45.306283" lon="14.712909"/>
+   <trkpt lat="45.306182" lon="14.714130"/>
    <trkpt lat="45.306177" lon="14.714188"/>
    <trkpt lat="45.306316" lon="14.714266"/>
    <trkpt lat="45.306444" lon="14.714376"/>
@@ -1433,15 +1426,8 @@
    <trkpt lat="45.306444" lon="14.714376"/>
    <trkpt lat="45.306316" lon="14.714266"/>
    <trkpt lat="45.306177" lon="14.714188"/>
-   <trkpt lat="45.305870" lon="14.714040"/>
-   <trkpt lat="45.305725" lon="14.713964"/>
-   <trkpt lat="45.305600" lon="14.713902"/>
-   <trkpt lat="45.305502" lon="14.713839"/>
-   <trkpt lat="45.305429" lon="14.713781"/>
-   <trkpt lat="45.305345" lon="14.713702"/>
-   <trkpt lat="45.305302" lon="14.713663"/>
-   <trkpt lat="45.305260" lon="14.713630"/>
-   <trkpt lat="45.305130" lon="14.713549"/>
-   <trkpt lat="45.305024" lon="14.713519"/>
+   <trkpt lat="45.306182" lon="14.714130"/>
+   <trkpt lat="45.306283" lon="14.712909"/>
+   <trkpt lat="45.306290" lon="14.712829"/>
  </trkseg></trk>
 </gpx>

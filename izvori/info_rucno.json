@@ -334,6 +334,29 @@
    "izvor": "OpenStreetMap; Total Croatia News",
    "izvor_url": "https://total-croatia-news.com/lifestyle/petehovac/",
    "provjereno": "2026-10-31"
+  },
+  "H58": {
+   "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+   "izvor_url": "https://gorskikotarbike.com/en/attractions/vicicev-most/",
+   "provjereno": "2026-10-31"
+  },
+  "E08": {
+   "napomena": "Posjet uz najavu; prikladno za grupe i radionice.",
+   "savjet": "Prilagođeno osobama s invaliditetom.",
+   "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+   "izvor_url": "https://gorskikotarbike.com/en/wp-json/wp/v2/attractions/4004",
+   "provjereno": "2026-10-31"
+  },
+  "E09": {
+   "rv_tekst": [
+    "subota i nedjelja 11–18 h"
+   ],
+   "napomena": "Grupe od 10 do 50 osoba samo uz najavu; posjet traje 1–2 sata.",
+   "telefon": "+385 91 931 5448",
+   "web": "https://opg-zeleni-san.weebly.com/",
+   "izvor": "TZ Fužine",
+   "izvor_url": "https://tz-fuzine.hr/en/opg_zeleni_san/509/14",
+   "provjereno": "2026-10-31"
   }
  }
 }

@@ -519,6 +519,39 @@
    "napomena": "Skiing runs only when there's enough snow – call the mountain lodge before you go."
   }
  },
+ "H58": {
+  "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+  "izvor_url": "https://gorskikotarbike.com/en/attractions/vicicev-most/",
+  "provjereno": "2026-10-31"
+ },
+ "E08": {
+  "napomena": "Posjet uz najavu; prikladno za grupe i radionice.",
+  "savjet": "Prilagođeno osobama s invaliditetom.",
+  "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
+  "izvor_url": "https://gorskikotarbike.com/en/wp-json/wp/v2/attractions/4004",
+  "provjereno": "2026-10-31",
+  "en": {
+   "napomena": "Visits by appointment, suitable for groups and workshops.",
+   "savjet": "Accessible for people with disabilities."
+  }
+ },
+ "E09": {
+  "rv_tekst": [
+   "subota i nedjelja 11–18 h"
+  ],
+  "napomena": "Grupe od 10 do 50 osoba samo uz najavu; posjet traje 1–2 sata.",
+  "telefon": "+385 91 931 5448",
+  "web": "https://opg-zeleni-san.weebly.com/",
+  "izvor": "TZ Fužine",
+  "izvor_url": "https://tz-fuzine.hr/en/opg_zeleni_san/509/14",
+  "provjereno": "2026-10-31",
+  "en": {
+   "rv_tekst": [
+    "Sat and Sun 11–18 h"
+   ],
+   "napomena": "Groups of 10–50 people only by appointment; a visit takes 1–2 hours."
+  }
+ },
  "On2367579804": {
   "rv": "Mo-Su 06:00-22:00",
   "upravitelj": "Petrol d.o.o.",

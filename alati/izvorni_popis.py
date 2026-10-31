@@ -165,6 +165,9 @@ T = [
 ("W05","zima","skijaliste","Rudnik, Tršće","Malo skijalište s vučnicama za djecu i sanjkalište s pokretnom trakom kod Tršća; sanjke se mogu iznajmiti.",None,"",45.56779,14.61549,""),
 ("W06","zima","skijaliste","Skijalište Petehovac, Delnice","Skijalište s vučnicom na Petehovcu iznad Delnica, uz planinski centar; radi kad ima dovoljno snijega. Uz njega je i sanjkalište.",None,"",45.38196,14.82105,""),
 ("S10","staza","poucna","Staza predatora, Tršće","Kružna poučna staza od oko 1,7 km (oko 1 h hoda) s modelima vuka, risa, medvjeda, jelena, srne, lisice, divlje svinje i tetrijeba u prirodnoj veličini, uz ploče o svakoj životinji.",None,"",45.5664,14.62981,"Položaj: selo Tršće (OSM); polazište staze provjeriti."),
+("H58","bastina","tehnicka","Vicićev most, Lič","Most s početka 20. stoljeća na Vicićevoj cesti preko potoka Ličanke, koja je vodila od Liča do Bukove Kose na Ličkom polju. Bio je drven, na kamenim gredama, čiji se ostaci i danas vide. Uz most je uređeno izletište.",None,"",45.278174,14.729034,""),
+("E08","izlet","zanimljivost","Planinski vrt osjetila, Belo Selo","Prvi tematski vrt u Gorskom kotaru, uređen kao stari goranski vrt uz Karolinsku cestu. Ploče govore o šumskim i vrtnim bobicama, planinskom cvijeću, ljekovitom bilju i starim sortama voća i povrća; uz obilazak se kušaju domaći likeri, džemovi i sokovi.",None,"",45.325762,14.739685,""),
+("E09","izlet","zanimljivost","OPG i izletište Zeleni san, Lič","Obiteljsko gospodarstvo kod Liča s domaćim i egzotičnim životinjama: mini koze i svinje, magarci, poniji, lame, alpake, nandui i ara papige. Uz to vrt s ribnjakom i rijetkim biljkama te domaći sokovi i džem od aronije.",None,"",45.281783,14.725333,""),
 ]
 
 def pouzdanost(wd, veza):
@@ -248,7 +251,7 @@ R = [
       opis="Kratka šetnja od Razloga do izvora Kupe i natrag.",
       trasa="staza NP Risnjak – službeni opis od parka; trasa iz OSM-a (ODbL)"),
  dict(id="R05", vrsta="planinarska", naziv="Risnjak iz Crnog Luga", tezina="zahtjevno", km=16, sati="6–7", uspon_m=850, besplatno=False,
-      tocke=["H21","Z01","S01","P02","P01"], parking="Crni Lug, ulaz u NP",
+      tocke=["H21","Z01","P02","P01"], parking="Crni Lug, ulaz u NP",
       opis="Klasičan uspon iz Crnog Luga preko Schlosserova doma na Veliki Risnjak i povratak istim putem.",
       trasa="markirana HPS staza – trasa iz OSM-a (ODbL); službeni opis i oznake uz pisanu dozvolu HPS-a"),
  dict(id="R06", vrsta="planinarska", naziv="Snježnik s Platka", tezina="srednje", km=6, sati="2,5–3", uspon_m=400, besplatno=False,

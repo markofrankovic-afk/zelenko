@@ -130,6 +130,16 @@ for t in tocke:
         t.update(lat=45.380177, lon=14.820399, pouzdanost="S"); t["izvor"].update(osm="n4582333878", koordinate="OpenStreetMap (lokalitet)")
         t["licenca"] = "koordinate: ODbL (© OpenStreetMap suradnici); opis: naš tekst"
         t["napomena"] = "Koordinata lokaliteta Petehovac; točan položaj tornja provjeriti."
+# položaji s terena (autor, izvori/lokacije_teren.json): imaju prednost pred svim ostalim izvorima
+TEREN = json.load(open("izvori/lokacije_teren.json", encoding="utf-8"))
+ZADRZI_NAPOMENU = {"P04", "S07"}  # napomene koje nisu o položaju
+for t in tocke:
+    if t["id"] in TEREN["tocke"]:
+        la, lo, _ = TEREN["tocke"][t["id"]]
+        t.update(lat=la, lon=lo, pouzdanost="V")
+        t["izvor"].update(koordinate="teren (autor), " + TEREN["datum"], teren=TEREN["datum"])
+        t["licenca"] = "koordinate: naše (provjera na terenu); opis: naš tekst"
+        if t["id"] not in ZADRZI_NAPOMENU: t["napomena"] = ""
 B["tocke"] = tocke + nove
 B["kategorije"].update({"izlet": "Izletišta", "prakticno": "Praktično"})
 B["izvor_osm"] = O["izvor"]

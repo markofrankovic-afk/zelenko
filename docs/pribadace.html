@@ -56,11 +56,7 @@ const TXT = {
   nista: "Još ništa nije ispravljeno.",
   st_nema: "nema lokacije", st_pribl: "približno", st_pomaknuto: "pomaknuto", st_tocno: "potvrđeno",
 };
-const NOVE = [
-  { id: "X01", naziv: "Vicićev most, Lič", opis: "Obnovljeni povijesni most na Ličanki i izletište (otvoreno 2023.).", kod: "H22" },
-  { id: "X02", naziv: "Planinski vrt Osjetila Karoline", opis: "Edukativni goranski vrt, posjet uz najavu (Obrt Borovnica).", kod: "H10" },
-  { id: "X03", naziv: "OPG i izletište Zeleni san, Lič", opis: "Domaće i egzotične životinje, vikendom 11–18 h.", kod: "H22" },
-];
+const NOVE = [];
 const DANAS = new Set(["H50","H51","H52","H53","H54","H56","H57","E05","E06","E07","S10","S11","S12"]);
 const KLJUC = "zelenko-pribadace";
 let S = {}; try { S = JSON.parse(localStorage.getItem(KLJUC) || "{}"); } catch (e) {}

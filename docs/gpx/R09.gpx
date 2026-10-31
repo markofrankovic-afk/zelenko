@@ -2,6 +2,14 @@
 <gpx version="1.1" creator="Gorski kotar vodič" xmlns="http://www.topografix.com/GPX/1/1">
  <metadata><name>Dolina Kupe: Brod na Kupi – Gašparci</name><copyright author="OpenStreetMap suradnici"><license>https://opendatacommons.org/licenses/odbl/</license></copyright></metadata>
  <trk><name>Dolina Kupe: Brod na Kupi – Gašparci</name><trkseg>
+   <trkpt lat="45.463616" lon="14.853156"/>
+   <trkpt lat="45.463515" lon="14.853204"/>
+   <trkpt lat="45.463463" lon="14.853234"/>
+   <trkpt lat="45.463377" lon="14.853268"/>
+   <trkpt lat="45.463296" lon="14.853288"/>
+   <trkpt lat="45.463209" lon="14.853304"/>
+   <trkpt lat="45.463097" lon="14.853340"/>
+   <trkpt lat="45.463128" lon="14.853466"/>
    <trkpt lat="45.463159" lon="14.853567"/>
    <trkpt lat="45.463216" lon="14.853748"/>
    <trkpt lat="45.463251" lon="14.853848"/>
@@ -284,30 +292,24 @@
    <trkpt lat="45.476855" lon="14.809150"/>
    <trkpt lat="45.476941" lon="14.809257"/>
    <trkpt lat="45.476963" lon="14.809295"/>
+   <trkpt lat="45.477096" lon="14.808911"/>
+   <trkpt lat="45.477144" lon="14.808819"/>
+   <trkpt lat="45.477196" lon="14.808749"/>
+   <trkpt lat="45.477259" lon="14.808688"/>
+   <trkpt lat="45.477196" lon="14.808749"/>
+   <trkpt lat="45.477144" lon="14.808819"/>
+   <trkpt lat="45.477096" lon="14.808911"/>
+   <trkpt lat="45.476963" lon="14.809295"/>
    <trkpt lat="45.477047" lon="14.809443"/>
    <trkpt lat="45.477101" lon="14.809542"/>
-   <trkpt lat="45.477135" lon="14.809621"/>
-   <trkpt lat="45.477222" lon="14.809734"/>
-   <trkpt lat="45.477280" lon="14.809821"/>
-   <trkpt lat="45.477376" lon="14.809968"/>
-   <trkpt lat="45.477467" lon="14.810094"/>
-   <trkpt lat="45.477527" lon="14.810155"/>
-   <trkpt lat="45.477574" lon="14.810167"/>
-   <trkpt lat="45.477633" lon="14.810108"/>
-   <trkpt lat="45.477782" lon="14.809935"/>
-   <trkpt lat="45.477958" lon="14.809687"/>
-   <trkpt lat="45.478086" lon="14.809572"/>
-   <trkpt lat="45.478145" lon="14.809508"/>
-   <trkpt lat="45.478184" lon="14.809441"/>
-   <trkpt lat="45.478242" lon="14.809332"/>
-   <trkpt lat="45.478275" lon="14.809238"/>
-   <trkpt lat="45.478310" lon="14.809099"/>
-   <trkpt lat="45.478332" lon="14.809024"/>
-   <trkpt lat="45.478362" lon="14.808980"/>
-   <trkpt lat="45.478406" lon="14.808931"/>
-   <trkpt lat="45.478454" lon="14.808868"/>
-   <trkpt lat="45.478485" lon="14.808803"/>
-   <trkpt lat="45.478598" lon="14.808530"/>
+   <trkpt lat="45.477154" lon="14.809456"/>
+   <trkpt lat="45.477312" lon="14.809268"/>
+   <trkpt lat="45.477555" lon="14.809007"/>
+   <trkpt lat="45.477904" lon="14.808696"/>
+   <trkpt lat="45.477993" lon="14.808661"/>
+   <trkpt lat="45.478075" lon="14.808637"/>
+   <trkpt lat="45.478402" lon="14.808553"/>
+   <trkpt lat="45.478541" lon="14.808500"/>
    <trkpt lat="45.478603" lon="14.808446"/>
    <trkpt lat="45.478893" lon="14.808078"/>
    <trkpt lat="45.479042" lon="14.807922"/>
@@ -869,30 +871,24 @@
    <trkpt lat="45.479042" lon="14.807922"/>
    <trkpt lat="45.478893" lon="14.808078"/>
    <trkpt lat="45.478603" lon="14.808446"/>
-   <trkpt lat="45.478598" lon="14.808530"/>
-   <trkpt lat="45.478485" lon="14.808803"/>
-   <trkpt lat="45.478454" lon="14.808868"/>
-   <trkpt lat="45.478406" lon="14.808931"/>
-   <trkpt lat="45.478362" lon="14.808980"/>
-   <trkpt lat="45.478332" lon="14.809024"/>
-   <trkpt lat="45.478310" lon="14.809099"/>
-   <trkpt lat="45.478275" lon="14.809238"/>
-   <trkpt lat="45.478242" lon="14.809332"/>
-   <trkpt lat="45.478184" lon="14.809441"/>
-   <trkpt lat="45.478145" lon="14.809508"/>
-   <trkpt lat="45.478086" lon="14.809572"/>
-   <trkpt lat="45.477958" lon="14.809687"/>
-   <trkpt lat="45.477782" lon="14.809935"/>
-   <trkpt lat="45.477633" lon="14.810108"/>
-   <trkpt lat="45.477574" lon="14.810167"/>
-   <trkpt lat="45.477527" lon="14.810155"/>
-   <trkpt lat="45.477467" lon="14.810094"/>
-   <trkpt lat="45.477376" lon="14.809968"/>
-   <trkpt lat="45.477280" lon="14.809821"/>
-   <trkpt lat="45.477222" lon="14.809734"/>
-   <trkpt lat="45.477135" lon="14.809621"/>
+   <trkpt lat="45.478541" lon="14.808500"/>
+   <trkpt lat="45.478402" lon="14.808553"/>
+   <trkpt lat="45.478075" lon="14.808637"/>
+   <trkpt lat="45.477993" lon="14.808661"/>
+   <trkpt lat="45.477904" lon="14.808696"/>
+   <trkpt lat="45.477555" lon="14.809007"/>
+   <trkpt lat="45.477312" lon="14.809268"/>
+   <trkpt lat="45.477154" lon="14.809456"/>
    <trkpt lat="45.477101" lon="14.809542"/>
    <trkpt lat="45.477047" lon="14.809443"/>
+   <trkpt lat="45.476963" lon="14.809295"/>
+   <trkpt lat="45.477096" lon="14.808911"/>
+   <trkpt lat="45.477144" lon="14.808819"/>
+   <trkpt lat="45.477196" lon="14.808749"/>
+   <trkpt lat="45.477259" lon="14.808688"/>
+   <trkpt lat="45.477196" lon="14.808749"/>
+   <trkpt lat="45.477144" lon="14.808819"/>
+   <trkpt lat="45.477096" lon="14.808911"/>
    <trkpt lat="45.476963" lon="14.809295"/>
    <trkpt lat="45.476941" lon="14.809257"/>
    <trkpt lat="45.476855" lon="14.809150"/>
@@ -1175,5 +1171,13 @@
    <trkpt lat="45.463251" lon="14.853848"/>
    <trkpt lat="45.463216" lon="14.853748"/>
    <trkpt lat="45.463159" lon="14.853567"/>
+   <trkpt lat="45.463128" lon="14.853466"/>
+   <trkpt lat="45.463097" lon="14.853340"/>
+   <trkpt lat="45.463209" lon="14.853304"/>
+   <trkpt lat="45.463296" lon="14.853288"/>
+   <trkpt lat="45.463377" lon="14.853268"/>
+   <trkpt lat="45.463463" lon="14.853234"/>
+   <trkpt lat="45.463515" lon="14.853204"/>
+   <trkpt lat="45.463616" lon="14.853156"/>
  </trkseg></trk>
 </gpx>

@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.10.0",
+  verzija: "0.10.1",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -644,7 +644,7 @@ function openTocka(id) {
   const uRuti = RUTE.filter(r => r.tocke.includes(id));
   const blizu = TOCKE.filter(q => q.id !== id && q.podvrsta !== "naselje" && (q.vaznost || 1) <= 2).map(q => ({ q, d: hav(p, q) })).sort((a, b) => a.d - b.d).slice(0, 3);
   const iz = p.izvor || {};
-  const izvor = iz.wikidata ? `${t("licenca_cc0")}${iz.veza === "okvirno" ? " · " + t("okvirno") : ""} · <a href="https://www.wikidata.org/wiki/${esc(iz.wikidata)}" target="_blank" rel="noopener">${esc(iz.wikidata)}</a>` : t("procjena");
+  const izvor = iz.teren ? esc(t("koord_teren")) : iz.wikidata ? `${t("licenca_cc0")}${iz.veza === "okvirno" ? " · " + t("okvirno") : ""} · <a href="https://www.wikidata.org/wiki/${esc(iz.wikidata)}" target="_blank" rel="noopener">${esc(iz.wikidata)}</a>` : t("procjena");
   const mail = `mailto:${CONFIG.kontakt}?subject=${encodeURIComponent(t("javi_predmet", { naziv: x.naziv, id }))}`;
   openSheet(katNaziv(p), `<div class="stack">
     ${slikaHtml(id, boja(p))}

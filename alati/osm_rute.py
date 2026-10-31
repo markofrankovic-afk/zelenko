@@ -64,6 +64,10 @@ for r in RJ["rute"]:
         for i in range(len(path) - 1):
             if G[k][path[i]][path[i + 1]]["hw"] in VOZNO: cut = i + 1
         path = path[cut:] if cut < len(path) - 1 else path
+        # polazište provjereno na terenu (izvori/lokacije_teren.json) ima prednost: ruta kreće od njega
+        if len(stops) > 1 and stops[1]["izvor"].get("teren"):
+            full = [nodes[0]] + [n for a, b in zip(nodes, nodes[1:]) if a != b for n in nx.shortest_path(G[k], a, b, weight="w")[1:]]
+            path = full[full.index(nodes[1]):]
     jedan = path[:]
     if oblik == "kruzna" and path[-1] != path[0]:
         path += nx.shortest_path(G[k], path[-1], path[0], weight="w")[1:]
