@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.11.1",
+  verzija: "0.11.2",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -167,7 +167,7 @@ function addPodloga(m, small) {
 let skiniPodlogu = () => {}, tileLayer = null, rutaLayer = null;
 function initMap() {
   map = L.map("map", { zoomControl: false, attributionControl: true, preferCanvas: true }).setView(CONFIG.centar, CONFIG.zoom);
-  if (!PREGLED) tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 17, className: "osm-tiles", attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici' }).addTo(map);
+  if (!PREGLED) tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles", attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici' }).addTo(map);
   else map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici');
   map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
   skiniPodlogu = addPodloga(map);
@@ -771,7 +771,7 @@ function openRuta(id) {
     ${slobodna(r) && r.gpx ? `<button class="btn" id="rGpx" style="align-self:flex-start">${ic("download")}${esc(t("gpx_preuzmi"))}</button>` : ""}
   </div>`);
   const mm = L.map("rutaMap", { zoomControl: false, attributionControl: false, dragging: true, scrollWheelZoom: false, preferCanvas: true });
-  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 17, className: "osm-tiles" }).addTo(mm);
+  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }).addTo(mm);
   const skini = addPodloga(mm, true);
   const ll = trasaLL(r) || [stops.map(p => [p.lat, p.lon])];
   L.polyline(ll, { color: cv("--ink"), weight: 7, opacity: .5 }).addTo(mm);
@@ -1158,7 +1158,7 @@ function openTrag(id) {
     <button class="btn" id="trBrisi" style="align-self:flex-start">${ic("trash")}<span>${esc(t("snim_obrisi"))}</span></button></div>`);
   const ll = x.p.map(p => [p[0], p[1]]);
   const mm = L.map("trMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, preferCanvas: true });
-  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 17, className: "osm-tiles" }).addTo(mm);
+  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }).addTo(mm);
   const skini = addPodloga(mm, true);
   L.polyline(ll, { color: cv("--sos"), weight: 4 }).addTo(mm);
   mm.fitBounds(L.latLngBounds(ll).pad(0.2)); setTimeout(() => mm.invalidateSize(), 60);
