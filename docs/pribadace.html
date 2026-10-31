@@ -57,6 +57,8 @@ const TXT = {
   st_nema: "nema lokacije", st_pribl: "približno", st_pomaknuto: "pomaknuto", st_tocno: "potvrđeno",
 };
 const NOVE = [];
+// mjesta koja treba ponovno postaviti (već su provjerena, ali krivo)
+const PONOVO = new Set(["S04"]);
 const DANAS = new Set(["H50","H51","H52","H53","H54","H56","H57","E05","E06","E07","S10","S11","S12"]);
 const KLJUC = "zelenko-pribadace";
 let S = {}; try { S = JSON.parse(localStorage.getItem(KLJUC) || "{}"); } catch (e) {}
@@ -102,7 +104,7 @@ map.on("click", e => { const m = MJESTA.find(x => x.id === sel); if (m) postavi(
 fetch("data/tocke.json").then(r => r.json()).then(d => {
   const T = d.tocke, BY = Object.fromEntries(T.map(p => [p.id, p]));
   MJESTA = NOVE.map(n => ({ ...n, nova: true, lat: BY[n.kod].lat, lon: BY[n.kod].lon }))
-    .concat(T.filter(p => (p.vaznost || 1) === 1 && p.pouzdanost !== "V" && p.podvrsta !== "naselje")
+    .concat(T.filter(p => PONOVO.has(p.id) || ((p.vaznost || 1) === 1 && p.pouzdanost !== "V" && p.podvrsta !== "naselje"))
       .map(p => ({ id: p.id, naziv: p.tekst.hr.naziv, opis: p.tekst.hr.opis, napomena: p.napomena, izvor: p.izvor && p.izvor.koordinate, lat: p.lat, lon: p.lon })));
   for (const m of MJESTA) {
     M[m.id] = L.marker(poz(m), { icon: ikona(m), draggable: true, title: m.naziv }).addTo(map)
