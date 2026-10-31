@@ -23,6 +23,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Hirschgulasch_mit_Semmlekn%C3%B6del.jpg",
     "naslov": "Hirschgulasch mit Semmleknödel.jpg"
+   },
+   "en": {
+    "naziv": "Game goulash",
+    "opis": "The best-known Gorski kotar dish: venison, red deer, wild boar or bear, slowly cooked with onion and red wine. Served with polenta, potato gnocchi or homemade bread.",
+    "kad": "all year",
+    "probaj": "In Fužine, Hotel Bitoraj, Konoba Volta and Lovački dom Arnika are known for goulash; it's also served in other restaurants and mountain huts with home cooking."
    }
   },
   {
@@ -41,6 +47,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/2.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Dalmatinski_pr%C5%A1ut.jpg",
     "naslov": "Dalmatinski pršut.jpg"
+   },
+   "en": {
+    "naziv": "Game prosciutto and škripavac cheese",
+    "opis": "A cold starter: cured bear, boar or deer meat with škripavac (squeaky cheese) and homemade bread.",
+    "kad": "all year",
+    "probaj": "As a starter in restaurants; cured meats also from small local producers."
    }
   },
   {
@@ -59,6 +71,12 @@
     "licenca_url": "https://creativecommons.org/publicdomain/zero/1.0/",
     "izvor": "https://commons.wikimedia.org/wiki/File:Grilled_trout%2C_Restaurant_Trofta%2C_Istog%2C_2025.jpg",
     "naslov": "Grilled trout, Restaurant Trofta, Istog, 2025.jpg"
+   },
+   "en": {
+    "naziv": "Brown trout",
+    "opis": "The most prized fish of the local rivers and lakes. Baked, grilled or cooked in a thick fish soup.",
+    "kad": "all year",
+    "probaj": "Restaurants by the Kupa, the Kupica and the lakes."
    }
   },
   {
@@ -77,6 +95,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Frog%27s_legs_in_Shkod%C3%ABr.jpg",
     "naslov": "Frog's legs in Shkodër.jpg"
+   },
+   "en": {
+    "naziv": "Frog legs",
+    "opis": "An old Gorski kotar speciality: breaded, or stewed in a sauce with snails and mushrooms.",
+    "kad": "all year",
+    "probaj": "Restaurants with a traditional menu."
    }
   },
   {
@@ -95,6 +119,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Edible_dormouse_-_Relmuis_-_Glis_glis.jpg",
     "naslov": "Edible dormouse - Relmuis - Glis glis.jpg"
+   },
+   "en": {
+    "naziv": "Edible dormouse",
+    "opis": "A dish of the old Gorani: dormouse roasted or as a goulash. It was valued for its meat and fat, and dormouse hunting is still a local tradition.",
+    "kad": "late summer and autumn",
+    "probaj": "Rarely on the menu; mostly at local dormouse evenings."
    }
   },
   {
@@ -104,7 +134,13 @@
    "naziv": "Goranski nadjev (budel, nadelo)",
    "opis": "Uskrsno jelo: svinjski želudac punjen kockicama kruha, šunkom, slaninom, mladim lukom i jajima, pa kuhan ili kratko dimljen.",
    "kad": "oko Uskrsa",
-   "probaj": "Kod domaćina i na uskrsnim stolovima."
+   "probaj": "Kod domaćina i na uskrsnim stolovima.",
+   "en": {
+    "naziv": "Gorski kotar stuffed stomach (budel, nadelo)",
+    "opis": "An Easter dish: pork stomach stuffed with cubes of bread, ham, bacon, spring onion and eggs, then boiled or lightly smoked.",
+    "kad": "around Easter",
+    "probaj": "In homes and on Easter tables."
+   }
   },
   {
    "id": "zelje",
@@ -122,6 +158,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Schlachteplatte-cropped-2.jpg",
     "naslov": "Schlachteplatte-cropped-2.jpg"
+   },
+   "en": {
+    "naziv": "Sauerkraut with sausage",
+    "opis": "Once the main winter dish, now a side: sauerkraut with garlic, sausage or blood sausage.",
+    "kad": "winter",
+    "probaj": "Restaurants with home cooking."
    }
   },
   {
@@ -141,6 +183,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Pfifferlinge_Rahmso%C3%9Fe_Wickelklo%C3%9F.jpg",
     "naslov": "Pfifferlinge Rahmsoße Wickelkloß.jpg"
+   },
+   "en": {
+    "naziv": "Wild mushrooms",
+    "opis": "Porcini, chanterelles, morels and parasols: as a main dish, in a sauce or with meat. In winter eaten dried or pickled.",
+    "kad": "spring to late autumn",
+    "probaj": "Restaurants in season. Before picking, check the species in the Gljive Hrvatske app."
    }
   },
   {
@@ -162,6 +210,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by/4.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Darmstaedter_Huette_im_Schwarzwald-10-Heidelbeerstrudel-2023-gje.jpg",
     "naslov": "Darmstaedter Huette im Schwarzwald-10-Heidelbeerstrudel-2023-gje.jpg"
+   },
+   "en": {
+    "naziv": "Blueberry strudel",
+    "opis": "A Gorski kotar dessert: thin pastry with wild blueberries, sugar and cinnamon, served warm and dusted with icing sugar. Apple and cheese strudels are made too.",
+    "kad": "all year, best in summer when blueberries ripen",
+    "probaj": "Hotel Bitoraj in Fužine is known for it; also in other restaurants."
    }
   },
   {
@@ -180,6 +234,12 @@
     "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "izvor": "https://commons.wikimedia.org/wiki/File:Serviranje.jpg",
     "naslov": "Serviranje.jpg"
+   },
+   "en": {
+    "naziv": "Brandies, liqueurs and juices",
+    "opis": "Homemade plum, apple and pear brandy and juniper brandy (brinjevec). Liqueurs and juices from blueberries, strawberries, raspberries and blackberries, and lately Gorski kotar gin.",
+    "kad": "all year",
+    "probaj": "At family farms and in restaurants; see the Farms & local filter."
    }
   }
  ],

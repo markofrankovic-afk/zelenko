@@ -2,9 +2,9 @@
    - Ljuska, tekstovi i podaci (točke, rute): spremljeni unaprijed, uvijek dostupni.
    - Kartice karte (OpenStreetMap) i fontovi: spremaju se dok ih gledaš, s ograničenjem broja.
    - Vremenska prognoza: uvijek s mreže; aplikacija sama čuva zadnju. */
-const VERSION = "gk-v0.9.1";
+const VERSION = "gk-v0.10.0";
 const SHELL = ["./", "index.html", "app.js", "put.js", "manifest.webmanifest",
-  "i18n/hr.json", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/slike.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json", "data/mreza.json", "data/lynx.json",
+  "i18n/hr.json", "i18n/en.json", "privatnost.html", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/slike.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json", "data/mreza.json", "data/lynx.json",
   "vendor/leaflet.js", "vendor/leaflet.css", "vendor/images/layers.png", "vendor/images/marker-icon.png", "vendor/images/marker-shadow.png",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "icons/favicon-64.png", "icons/maskable-512.png"];
 const LIMITS = { "gk-tiles": 3000, "gk-fonts": 40, "gk-foto": 600 };

@@ -1,25 +1,174 @@
 {
  "stanje": [
-  {"id": "cesta-jasenak", "razina": "upozorenje", "provjereno": "2026-10-23", "ref": "S08",
-   "tekst": {"hr": {"naslov": "Šumska cesta Mrkopalj – Jasenak", "opis": "Prilaz Bijelim stijenama. Sa snijegom se zatvara, obično od prosinca do travnja ili svibnja."}}},
-  {"id": "kuzelj", "razina": "upozorenje", "provjereno": "2026-10-23", "ref": "V03",
-   "tekst": {"hr": {"naslov": "Kuželj: gradi se obilaznica", "opis": "Na cesti uz Kupu moguća je regulacija prometa."}}},
-  {"id": "lov", "razina": "info", "provjereno": null, "ref": null,
-   "tekst": {"hr": {"naslov": "Sezona lova", "opis": "U šumi nosi nešto upadljive boje i drži se markiranih staza."}}}
+  {
+   "id": "cesta-jasenak",
+   "razina": "upozorenje",
+   "provjereno": "2026-10-23",
+   "ref": "S08",
+   "tekst": {
+    "hr": {
+     "naslov": "Šumska cesta Mrkopalj – Jasenak",
+     "opis": "Prilaz Bijelim stijenama. Sa snijegom se zatvara, obično od prosinca do travnja ili svibnja."
+    },
+    "en": {
+     "naslov": "Mrkopalj – Jasenak forest road",
+     "opis": "Access to Bijele stijene. Closed when there's snow, usually from December to April or May."
+    }
+   }
+  },
+  {
+   "id": "kuzelj",
+   "razina": "upozorenje",
+   "provjereno": "2026-10-23",
+   "ref": "V03",
+   "tekst": {
+    "hr": {
+     "naslov": "Kuželj: gradi se obilaznica",
+     "opis": "Na cesti uz Kupu moguća je regulacija prometa."
+    },
+    "en": {
+     "naslov": "Kuželj: bypass under construction",
+     "opis": "Traffic control is possible on the road along the Kupa."
+    }
+   }
+  },
+  {
+   "id": "lov",
+   "razina": "info",
+   "provjereno": null,
+   "ref": null,
+   "tekst": {
+    "hr": {
+     "naslov": "Sezona lova",
+     "opis": "U šumi nosi nešto upadljive boje i drži se markiranih staza."
+    },
+    "en": {
+     "naslov": "Hunting season",
+     "opis": "In the forest, wear something brightly coloured and stay on waymarked trails."
+    }
+   }
+  }
  ],
  "ideje": [
-  {"sezone": ["jesen"], "ref": "S06", "boja": "#9C5B1E",
-   "tekst": {"hr": {"oznaka": "Boje jeseni", "naslov": "Bukve na Tuhobiću", "opis": "Iz Benkovca Fužinskog, oko 1 h 30"}}},
-  {"sezone": ["jesen", "proljece", "ljeto", "zima"], "ref": "C02", "boja": "#4B5563",
-   "tekst": {"hr": {"oznaka": "Kad pada kiša", "naslov": "Kišni dan u špilji", "opis": "Lokvarka ili Vrelo, provjeri termine"}}},
-  {"sezone": ["jesen", "proljece"], "ref": "R03", "boja": "#1B5E8F",
-   "tekst": {"hr": {"oznaka": "Više vode", "naslov": "Zeleni vir nakon kiše", "opis": "Slap i kanjon Vražji prolaz"}}},
-  {"sezone": ["ljeto"], "ref": "R09", "boja": "#1F6FA8",
-   "tekst": {"hr": {"oznaka": "Osvježenje", "naslov": "Kupa na biciklu", "opis": "Od Broda na Kupi do Gašparaca, s pauzama za kupanje"}}},
-  {"sezone": ["ljeto", "proljece"], "ref": "R01", "boja": "#0E6F63",
-   "tekst": {"hr": {"oznaka": "S djecom", "naslov": "Fužine u pola dana", "opis": "Bajer, špilja Vrelo i Lepenica"}}},
-  {"sezone": ["zima"], "ref": "P04", "boja": "#3E4C59",
-   "tekst": {"hr": {"oznaka": "Snijeg", "naslov": "Platak", "opis": "Skijalište i polazište za Snježnik"}}}
+  {
+   "sezone": [
+    "jesen"
+   ],
+   "ref": "S06",
+   "boja": "#9C5B1E",
+   "tekst": {
+    "hr": {
+     "oznaka": "Boje jeseni",
+     "naslov": "Bukve na Tuhobiću",
+     "opis": "Iz Benkovca Fužinskog, oko 1 h 30"
+    },
+    "en": {
+     "oznaka": "Autumn colours",
+     "naslov": "Beeches on Tuhobić",
+     "opis": "From Benkovac Fužinski, about 1 h 30"
+    }
+   }
+  },
+  {
+   "sezone": [
+    "jesen",
+    "proljece",
+    "ljeto",
+    "zima"
+   ],
+   "ref": "C02",
+   "boja": "#4B5563",
+   "tekst": {
+    "hr": {
+     "oznaka": "Kad pada kiša",
+     "naslov": "Kišni dan u špilji",
+     "opis": "Lokvarka ili Vrelo, provjeri termine"
+    },
+    "en": {
+     "oznaka": "When it rains",
+     "naslov": "A rainy day in a cave",
+     "opis": "Lokvarka or Vrelo, check the tour times"
+    }
+   }
+  },
+  {
+   "sezone": [
+    "jesen",
+    "proljece"
+   ],
+   "ref": "R03",
+   "boja": "#1B5E8F",
+   "tekst": {
+    "hr": {
+     "oznaka": "Više vode",
+     "naslov": "Zeleni vir nakon kiše",
+     "opis": "Slap i kanjon Vražji prolaz"
+    },
+    "en": {
+     "oznaka": "More water",
+     "naslov": "Zeleni vir after rain",
+     "opis": "The waterfall and the Vražji prolaz canyon"
+    }
+   }
+  },
+  {
+   "sezone": [
+    "ljeto"
+   ],
+   "ref": "R09",
+   "boja": "#1F6FA8",
+   "tekst": {
+    "hr": {
+     "oznaka": "Osvježenje",
+     "naslov": "Kupa na biciklu",
+     "opis": "Od Broda na Kupi do Gašparaca, s pauzama za kupanje"
+    },
+    "en": {
+     "oznaka": "Cool off",
+     "naslov": "The Kupa by bike",
+     "opis": "From Brod na Kupi to Gašparci, with stops for a swim"
+    }
+   }
+  },
+  {
+   "sezone": [
+    "ljeto",
+    "proljece"
+   ],
+   "ref": "R01",
+   "boja": "#0E6F63",
+   "tekst": {
+    "hr": {
+     "oznaka": "S djecom",
+     "naslov": "Fužine u pola dana",
+     "opis": "Bajer, špilja Vrelo i Lepenica"
+    },
+    "en": {
+     "oznaka": "With kids",
+     "naslov": "Fužine in half a day",
+     "opis": "Bajer, Vrelo Cave and Lepenica"
+    }
+   }
+  },
+  {
+   "sezone": [
+    "zima"
+   ],
+   "ref": "P04",
+   "boja": "#3E4C59",
+   "tekst": {
+    "hr": {
+     "oznaka": "Snijeg",
+     "naslov": "Platak",
+     "opis": "Skijalište i polazište za Snježnik"
+    },
+    "en": {
+     "oznaka": "Snow",
+     "naslov": "Platak",
+     "opis": "Ski area and starting point for Snježnik"
+    }
+   }
+  }
  ],
  "gljive_url": "https://markofrankovic-afk.github.io/Gljive-Hrvatske/"
 }

@@ -42,6 +42,24 @@ OPIS = {
  "pitka_voda": "Pitka voda.", "parking": "Parkiralište.", "wc": "Javni WC.", "ljekarna": "Ljekarna.",
  "ambulanta": "Ambulanta ili liječnička ordinacija.", "benzinska": "Benzinska postaja.", "bankomat": "Bankomat."}
 
+# isto na engleskom (tekst.en) – tekstovi uz kod ovog alata, ne u aplikaciji
+GEN_EN = {"vidikovac": "Viewpoint", "izvor": "Spring", "piknik": "Picnic spot", "parking": "Parking", "wc": "Public toilet",
+          "pitka_voda": "Drinking water", "bankomat": "ATM", "ljekarna": "Pharmacy", "ambulanta": "Doctor", "spilja": "Cave",
+          "rusevine": "Ruins", "dom": "Mountain hut", "skloniste": "Shelter", "benzinska": "Petrol station",
+          "info": "Tourist office", "kamp": "Campsite", "muzej": "Museum", "park": "Park", "igraliste": "Playground"}
+OPIS_EN = {
+ "vrh": "Peak{ele}.", "prijevoj": "Mountain pass{ele}.", "vidikovac": "Viewpoint{ele}.", "stijene": "Rocks.",
+ "dom": "Mountain hut{ele}. Check it's open before you set off.", "skloniste": "Mountain shelter{ele}.",
+ "slap": "Waterfall.", "izvor": "Spring{pitka}.", "jezero": "Lake.", "kupaliste": "Swimming spot.",
+ "spilja": "Cave or pit entrance. Don't go in without equipment and an experienced guide.", "zasticeno": "Protected area.",
+ "muzej": "Museum or collection. Check opening hours before you visit.", "sakralno": "Church or chapel.",
+ "dvorac": "Castle or fort.", "rusevine": "Ruins.", "spomen": "Monument or memorial.",
+ "tehnicka": "Industrial heritage.", "povijesno": "Historic site.", "kamp": "Campsite.", "piknik": "Rest and picnic spot.",
+ "zanimljivost": "Attraction.", "park": "Park for walks and rest.", "igraliste": "Playground.", "info": "Tourist office.",
+ "kolodvor": "Railway station or halt.", "pitka_voda": "Drinking water.", "parking": "Parking.", "wc": "Public toilet.",
+ "ljekarna": "Pharmacy.", "ambulanta": "Doctor's surgery or clinic.", "benzinska": "Petrol station.", "bankomat": "ATM.",
+ "arheologija": "Archaeological site."}
+
 tocke = B["tocke"]
 for t in tocke: t["vaznost"] = 1
 spojeno, nove = 0, []
@@ -79,7 +97,8 @@ for o in O["tocke"]:
             continue
     mj, dmj = najblize(o)
     naziv = ime or (GEN.get(o["podvrsta"], "Točka") + " – " + mj)
-    if o["podvrsta"] == "bankomat" and not ime and tg.get("operator"): naziv = f"Bankomat {tg['operator']} – {mj}"
+    naziv_en = ime or (GEN_EN.get(o["podvrsta"], "Place") + " – " + mj)
+    if o["podvrsta"] == "bankomat" and not ime and tg.get("operator"): naziv, naziv_en = f"Bankomat {tg['operator']} – {mj}", f"ATM {tg['operator']} – {mj}"
     ele = tg.get("ele", "").replace(",", ".").split(";")[0]
     try: ele_s = f", {round(float(ele))} m" if ele else ""
     except ValueError: ele_s = ""
@@ -88,6 +107,10 @@ for o in O["tocke"]:
     opis = OPIS[o["podvrsta"]].format(ele=ele_s, pitka=pitka, zast=zast[0].upper() + zast[1:])
     opis += f" Najbliže mjesto: {mj} ({km(dmj)})."
     if tg.get("opening_hours"): opis += f" Radno vrijeme (OSM): {tg['opening_hours']}."
+    pitka_en = {"yes": ", drinking water (according to OSM)", "no": ", not drinking water"}.get(tg.get("drinking_water"), "")
+    opis_en = OPIS_EN.get(o["podvrsta"], "Place.").format(ele=ele_s, pitka=pitka_en)
+    opis_en += f" Nearest village: {mj} ({km(dmj).replace(',', '.')})."
+    if tg.get("opening_hours"): opis_en += f" Opening hours (OSM): {tg['opening_hours']}."
     try: elev = float(ele) if ele else 0
     except ValueError: elev = 0
     vazno = 2
@@ -96,7 +119,7 @@ for o in O["tocke"]:
     if o["podvrsta"] in ("vidikovac", "izvor", "spilja", "igraliste") and not ime: vazno = 3
     nove.append({
         "id": "O" + o["osm"], "kategorija": o["kategorija"], "podvrsta": o["podvrsta"],
-        "tekst": {"hr": {"naziv": naziv, "opis": opis}},
+        "tekst": {"hr": {"naziv": naziv, "opis": opis}, "en": {"naziv": naziv_en, "opis": opis_en}},
         "lat": o["lat"], "lon": o["lon"], "pouzdanost": "V", "vaznost": vazno,
         "izvor": {"koordinate": "OpenStreetMap", "osm": o["osm"], "wikidata": tg.get("wikidata"), "opis": "generiran iz OSM oznaka"},
         "licenca": "ODbL – © OpenStreetMap suradnici", "napomena": "", "status": "iz OSM-a, opis za doradu"})

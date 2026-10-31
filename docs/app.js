@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.9.1",
+  verzija: "0.10.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -43,6 +43,13 @@ const store = {
 };
 let T = {}, TOCKE = [], BY = {}, RUTE = [], RBY = {}, KAT = {}, DANAS = {}, PODLOGA = null, SLIKE = {}, PUT = { pecati: [], razine: [] }, INFO = {}, SPEC = { specijaliteti: [], izvori: [] }, LYNX = { cinjenice: [] };
 function t(k, v) { let s = T[k] ?? k; if (v) for (const x in v) s = s.split("{" + x + "}").join(v[x]); return s; }
+/* jezik: izbor u postavkama, inače po jeziku preglednika (hr, bs, sr, sh → hrvatski; ostalo → engleski) */
+const JEZICI = ["hr", "en"];
+CONFIG.jezik = (() => { const j = store.get("gk-jezik", null); if (JEZICI.includes(j)) return j;
+  return (navigator.languages || [navigator.language || "hr"]).some(l => /^(hr|bs|sr|sh)\b/i.test(l)) ? "hr" : "en"; })();
+const LOC = () => CONFIG.jezik === "hr" ? "hr-HR" : "en-GB";
+/* prijevod podataka bez „tekst” strukture (specijaliteti, Lynx, informacije, polazišta): polje "<jezik>" preko hrvatskog */
+const preko = o => { if (o && CONFIG.jezik !== "hr" && o[CONFIG.jezik]) Object.assign(o, o[CONFIG.jezik]); return o; };
 const tx = o => (o && o.tekst && (o.tekst[CONFIG.jezik] || o.tekst.hr)) || {};
 
 const S = {
@@ -54,9 +61,12 @@ const S = {
 /* ---------- pomoćne ---------- */
 function hav(a, b) { const R = 6371e3, r = Math.PI / 180, dLa = (b.lat - a.lat) * r, dLo = (b.lon - a.lon) * r; const x = Math.sin(dLa / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); }
 function brg(a, b) { const r = Math.PI / 180, y = Math.sin((b.lon - a.lon) * r) * Math.cos(b.lat * r), x = Math.cos(a.lat * r) * Math.sin(b.lat * r) - Math.sin(a.lat * r) * Math.cos(b.lat * r) * Math.cos((b.lon - a.lon) * r); return (Math.atan2(y, x) / r + 360) % 360; }
-function fmtDist(m) { return m < 1000 ? Math.round(m / 10) * 10 + " m" : (m / 1000).toFixed(m < 10000 ? 1 : 0).replace(".", ",") + " km"; }
-function fmtTime(d) { return d.toLocaleTimeString("hr-HR", { hour: "2-digit", minute: "2-digit" }); }
-function fmtCoord(x) { return x.toFixed(5).replace(".", ","); }
+/* decimalni zarez na hrvatskom, točka na engleskom */
+const dec = x => CONFIG.jezik === "hr" ? String(x).replace(/\./g, ",") : String(x).replace(/,/g, ".");
+const tez = r => t("tez_" + r.tezina) || r.tezina;
+function fmtDist(m) { return m < 1000 ? Math.round(m / 10) * 10 + " m" : dec((m / 1000).toFixed(m < 10000 ? 1 : 0)) + " km"; }
+function fmtTime(d) { return d.toLocaleTimeString(LOC(), { hour: "2-digit", minute: "2-digit" }); }
+function fmtCoord(x) { return dec(x.toFixed(5)); }
 function norm(s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d"); }
 function toast(msg) { const el = $("#toast"); el.textContent = msg; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2200); }
 function copy(text) { (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast(t("kopirano")), () => { window.prompt("", text); }); }
@@ -448,10 +458,9 @@ function rvOznaka(u, kratko) {
   return `<span class="rv ne"><span class="dot"></span>${esc(st.dan ? t("zatvoreno_otvara", { dan: st.dan, vrijeme: st.vrijeme }) : t("zatvoreno"))}</span>`;
 }
 function rvLjudski(s) {
-  const hr = { Mo: "pon", Tu: "uto", We: "sri", Th: "čet", Fr: "pet", Sa: "sub", Su: "ned", PH: "praznici", off: "zatvoreno",
-    Jan: "sij", Feb: "velj", Mar: "ožu", Apr: "tra", May: "svi", Jun: "lip", Jul: "srp", Aug: "kol", Sep: "ruj", Oct: "lis", Nov: "stu", Dec: "pro" };
+  const hr = T.rv_kratice || {};
   if (s.trim() === "24/7") return t("otvoreno_stalno");
-  return s.split(/;\s*/).map(r => r.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su|PH|off|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g, m => hr[m])).join("\n");
+  return s.split(/;\s*/).map(r => r.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su|PH|off|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g, m => hr[m] || m)).join("\n");
 }
 function openUsluga(p) {
   const u = p.usluga, x = tx(p), d = S.pos ? hav(S.pos, p) : null, fav = S.favs.includes(p.id);
@@ -497,7 +506,7 @@ function infoHtml(p) {
     i.web ? `<a class="btn" href="${esc(i.web)}" target="_blank" rel="noopener">${esc(t("sluzbena_stranica"))}</a>` : "",
     i.email ? `<a class="btn" href="mailto:${esc(i.email)}">${esc(t("posalji_email"))}</a>` : ""].filter(Boolean);
   if (gumbi.length) dijelovi.push(`<div class="row" style="flex-wrap:wrap">${gumbi.join("")}</div>`);
-  const izv = i.provjereno ? t("info_izvor", { izvor: i.izvor, datum: new Date(i.provjereno).toLocaleDateString("hr-HR") }) : t("info_izvor_osm");
+  const izv = i.provjereno ? t("info_izvor", { izvor: i.izvor, datum: new Date(i.provjereno).toLocaleDateString(LOC()) }) : t("info_izvor_osm");
   return `<section class="card stack" style="gap:10px"><h3>${esc(t("informacije"))}</h3>${dijelovi.join("")}
     <span class="small muted">${i.izvor_url ? `<a href="${esc(i.izvor_url)}" target="_blank" rel="noopener">${esc(izv)}</a>` : esc(izv)}${i.rv_izvor ? " " + esc(t("info_rv_osm")) : ""}</span></section>`;
 }
@@ -513,7 +522,7 @@ const lynxTragovi = () => PUT.pecati.filter(x => x.skriven);
 function pecatHtml(p) {
   const pc = pecatZa(p.id); if (!pc) return "";
   const lik = pc.skriven ? lynx(48, true) : medo(48, true), naslov = t(pc.skriven ? "pecat_lynx" : "pecat_naslov");
-  if (S.pecati[p.id]) return `<div class="pecat-box ok">${lik}<span class="t"><b>${esc(naslov)}</b><span class="small">${esc(t("pecat_imas", { datum: new Date(S.pecati[p.id]).toLocaleDateString("hr-HR") }))}</span></span></div>`;
+  if (S.pecati[p.id]) return `<div class="pecat-box ok">${lik}<span class="t"><b>${esc(naslov)}</b><span class="small">${esc(t("pecat_imas", { datum: new Date(S.pecati[p.id]).toLocaleDateString(LOC()) }))}</span></span></div>`;
   const d = S.pos ? hav(S.pos, p) : null, blizu = d != null && d <= pc.r;
   return `<div class="pecat-box${pc.skriven ? " lynx" : ""}">${lik}<span class="t"><b>${esc(naslov)}</b>
     <span class="small muted">${esc(blizu ? "" : t("pecat_dodi", { r: fmtDist(pc.r) }) + " " + (d != null ? t("pecat_daleko", { d: fmtDist(d - pc.r) }) : t("pecat_gps")))}</span></span>
@@ -556,11 +565,11 @@ function openPutovnica() {
     <div class="stack" style="gap:6px"><span class="small muted">${esc(t("putovnica_stanje", { n, ukupno: N }))}</span><span class="prog"><i style="width:${Math.round(100 * n / N)}%"></i></span></div>
     <p class="small muted" style="margin:0">${esc(t("putovnica_uvod"))}</p>
     <div class="pecati">${PUT.pecati.filter(x => BY[x.id] && !x.skriven).map(x => { const p = BY[x.id], ok = S.pecati[x.id];
-      return `<button class="pecat${ok ? " ok" : ""}" data-open="${x.id}"><span class="krug">${medo(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}${ok ? `<small>${new Date(ok).toLocaleDateString("hr-HR")}</small>` : ""}</button>`; }).join("")}</div>
+      return `<button class="pecat${ok ? " ok" : ""}" data-open="${x.id}"><span class="krug">${medo(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}${ok ? `<small>${new Date(ok).toLocaleDateString(LOC())}</small>` : ""}</button>`; }).join("")}</div>
     ${lynxTragovi().length ? `<section class="stack" style="gap:8px"><h3>${esc(t("lynx_tragovi"))}</h3>
       ${lynxTragovi().every(x => S.pecati[x.id]) ? medoOblak(t("lynx_oko"), t("lynx_oko_tekst"), null, 56, "lynx") : medoOblak(t("lynx_ime"), t("lynx_trag_hint"), null, 56, "lynx")}
       <div class="pecati">${lynxTragovi().filter(x => BY[x.id]).map(x => { const p = BY[x.id], ok = S.pecati[x.id];
-        return ok ? `<button class="pecat ok lynx" data-open="${x.id}"><span class="krug">${lynx(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}<small>${new Date(ok).toLocaleDateString("hr-HR")}</small></button>`
+        return ok ? `<button class="pecat ok lynx" data-open="${x.id}"><span class="krug">${lynx(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}<small>${new Date(ok).toLocaleDateString(LOC())}</small></button>`
           : `<span class="pecat skriven"><span class="krug" aria-hidden="true">?</span>${esc(t("lynx_trag_skriven"))}</span>`; }).join("")}</div></section>` : ""}</div>`);
 }
 document.addEventListener("click", e => {
@@ -650,7 +659,7 @@ function openTocka(id) {
     ${lynxZnao(id)}
     ${pecatHtml(p)}
     ${p.napomena && PREGLED ? `<div class="note warn small">${esc(t("prototip_napomena", { tekst: p.napomena }))}</div>` : ""}
-    ${uRuti.length ? `<section><h3>${esc(t("dio_rute"))}</h3>${uRuti.map(r => `<button class="list-row" data-open="${r.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(r).naziv)}</b><span>${esc(t("vrsta_" + r.vrsta))} · ${esc(r.tezina)} · ${kmR(r)} km</span></span><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></button>`).join("")}</section>` : ""}
+    ${uRuti.length ? `<section><h3>${esc(t("dio_rute"))}</h3>${uRuti.map(r => `<button class="list-row" data-open="${r.id}"><span class="num r">R</span><span class="t"><b>${esc(tx(r).naziv)}</b><span>${esc(t("vrsta_" + r.vrsta))} · ${esc(tez(r))} · ${kmR(r)} km</span></span><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></button>`).join("")}</section>` : ""}
     <section><h3>${esc(t("u_blizini"))}</h3>${blizu.map(({ q, d }) => `<button class="list-row" data-open="${q.id}"><span class="dot" style="background:${boja(q)}"></span><span class="t"><b>${esc(tx(q).naziv)}</b><span>${esc(katNaziv(q))}</span></span><span class="mono small">${fmtDist(d)}</span></button>`).join("")}</section>
     <div class="small muted" style="border-top:1px solid var(--line2);padding-top:12px;display:flex;flex-direction:column;gap:6px">
       <button class="mono" id="tCoord" style="all:unset;cursor:pointer;color:var(--ink2)">${fmtCoord(p.lat)} · ${fmtCoord(p.lon)}</button>
@@ -697,14 +706,14 @@ function openPopis() {
 }
 
 /* ---------- rute ---------- */
-const kmR = r => r.km_gpx != null ? String(r.km_gpx).replace(".", ",") : "~" + r.km;
+const kmR = r => r.km_gpx != null ? dec(r.km_gpx) : "~" + dec(r.km);
 const vrstaR = r => r.bicikl === "mtb" ? t("vrsta_mtb") : t("vrsta_" + r.vrsta);
 const R_FILTRI = [["sve", () => true], ["pjesice", r => r.vrsta !== "biciklisticka"], ["bicikl", r => r.vrsta === "biciklisticka" && r.bicikl !== "mtb"], ["mtb", r => r.bicikl === "mtb"]];
 function rutaGrupa(r) { const h = satiMax(r.sati); return h <= 2.5 ? "kratko" : h <= 4 ? "pola" : "dan"; }
 function rutaKartica(r, feat) {
   return `<button class="card list-row${feat ? " feat" : ""}" data-open="${r.id}" style="flex-direction:column;align-items:stretch;gap:6px;padding:14px">
     <span class="between" style="align-items:flex-start"><b style="font-size:1.1em;line-height:1.25">${esc(tx(r).naziv)}</b><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span></span>
-    <span class="row small meta" style="gap:14px;color:var(--ink2)"><span>${esc(vrstaR(r))}</span><span>${esc(r.tezina)}</span><span class="mono">${kmR(r)} km</span><span class="mono">${esc(r.sati)} h</span></span>${feat ? `<span class="go">${esc(t("pogledaj_rutu"))}${ic("chevron")}</span>` : ""}</button>`;
+    <span class="row small meta" style="gap:14px;color:var(--ink2)"><span>${esc(vrstaR(r))}</span><span>${esc(tez(r))}</span><span class="mono">${kmR(r)} km</span><span class="mono">${esc(dec(r.sati))} h</span></span>${feat ? `<span class="go">${esc(t("pogledaj_rutu"))}${ic("chevron")}</span>` : ""}</button>`;
 }
 function renderRute() {
   const P = S.plan;
@@ -742,7 +751,7 @@ function openRuta(id) {
   openSheet(vrstaR(r), `<div class="stack">
     <div class="row"><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span><span class="small muted">${esc(vrstaR(r))}</span></div>
     <h1>${esc(x.naziv)}</h1>
-    <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(r.sati)}</b><span>${esc(t("sati"))}</span></div><div><b>${r.uspon_m == null ? "–" : "~" + r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b>${esc(r.tezina)}</b><span>${esc(t("tezina"))}</span></div></div>
+    <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(dec(r.sati))}</b><span>${esc(t("sati"))}</span></div><div><b>${r.uspon_m == null ? "–" : "~" + r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b>${esc(tez(r))}</b><span>${esc(t("tezina"))}</span></div></div>
     <p style="margin:0;font-size:1.04em">${esc(x.opis)}</p>
     ${profilHtml(r)}
     <p class="small muted" style="margin:0">${esc(t(r.visina ? "procjena_rute_dem" : r.osm ? "procjena_rute_osm" : "procjena_rute"))}</p>
@@ -987,7 +996,7 @@ function zimaDanas(r) {
 }
 async function renderDanas() {
   const r = ref(), now = new Date(), st = sunTimes(now, r.lat, r.lon), sez = sezona(now);
-  const datum = now.toLocaleDateString("hr-HR", { weekday: "long", day: "numeric", month: "long" });
+  const datum = now.toLocaleDateString(LOC(), { weekday: "long", day: "numeric", month: "long" });
   const wxCell = (lbl, big, small) => `<div><span class="eyebrow">${esc(lbl)}</span><b>${esc(big)}</b><span class="s">${esc(small)}</span></div>`;
   const draw = w => {
     const d = w && w.d;
@@ -1008,7 +1017,7 @@ async function renderDanas() {
     <section class="stack" style="gap:8px"><h2>${esc(t("stanje_na_terenu"))}</h2>
       ${(DANAS.stanje || []).map(s => `<button class="card list-row" ${s.ref ? `data-open="${s.ref}"` : ""} style="align-items:flex-start;padding:12px 14px">
         <span class="dot" style="margin-top:6px;background:${s.razina === "upozorenje" ? "var(--warn)" : "var(--muted)"}"></span>
-        <span class="t"><b>${esc(tx(s).naslov)}</b><span style="color:var(--ink2)">${esc(tx(s).opis)}</span><span>${esc(s.provjereno ? t("provjereno", { datum: new Date(s.provjereno).toLocaleDateString("hr-HR") }) : t("opce_upozorenje"))}</span></span></button>`).join("")}</section>
+        <span class="t"><b>${esc(tx(s).naslov)}</b><span style="color:var(--ink2)">${esc(tx(s).opis)}</span><span>${esc(s.provjereno ? t("provjereno", { datum: new Date(s.provjereno).toLocaleDateString(LOC()) }) : t("opce_upozorenje"))}</span></span></button>`).join("")}</section>
     ${ideje.length ? `<section class="stack" style="gap:8px"><h2>${esc(t("ideje_" + sez))}</h2><div class="ideas">${ideje.map(i => `<button class="idea" data-open="${i.ref}"><span class="top${SLIKE[i.ref] ? " foto" : ""}" style="background:${i.boja}${SLIKE[i.ref] ? `;background-image:url('${esc(fotoSrc(SLIKE[i.ref]))}')` : ""}"><span>${esc(tx(i).oznaka)}</span></span><span class="b"><b>${esc(tx(i).naslov)}</b><span>${esc(tx(i).opis)}</span></span></button>`).join("")}</div></section>` : ""}
     ${gladan}
     <a class="card row" href="${esc(DANAS.gljive_url)}" target="_blank" rel="noopener" style="text-decoration:none;color:var(--ink);gap:12px">
@@ -1031,6 +1040,7 @@ function renderMoje() {
     <section class="stack" style="gap:8px"><h2>${esc(t("postavke"))}</h2>
       <div class="card stack" style="gap:8px"><b>${esc(t("sigurnosna_kopija"))}</b><span class="small muted">${esc(t("kopija_opis"))}</span>
         <div class="grid2"><button class="btn" id="kIzvoz">${esc(t("kopija_izvoz"))}</button><label class="btn" for="kUvoz" style="cursor:pointer">${esc(t("kopija_uvoz"))}</label></div><input type="file" id="kUvoz" accept="application/json,.json" hidden></div>
+      <div class="card stack" style="gap:8px"><b>${esc(t("jezik"))}</b><div class="seg dva" role="group" aria-label="${esc(t("jezik"))}">${JEZICI.map(j => `<button data-jezik="${j}" lang="${j}" aria-pressed="${CONFIG.jezik === j}">${esc(t("jezik_" + j))}</button>`).join("")}</div></div>
       <div class="card stack" style="gap:8px"><b>${esc(t("tema"))}</b><div class="seg" role="group" aria-label="${esc(t("tema"))}">${[["sustav", "tema_sustav"], ["light", "tema_svijetla"], ["dark", "tema_tamna"]].map(([v, k]) => `<button data-tema="${v}" aria-pressed="${store.get("gk-tema", "sustav") === v}">${esc(t(k))}</button>`).join("")}</div></div>
       <label class="card row" for="bigTxt" style="justify-content:space-between;min-height:52px"><b>${esc(t("veliki_tekst"))}</b><input type="checkbox" id="bigTxt" ${document.documentElement.classList.contains("big") ? "checked" : ""} style="width:22px;height:22px;accent-color:var(--accent)"></label>
       <button class="card list-row" id="sOApp" style="width:100%;text-align:left">${medo(40, true)}<span class="t"><b>${esc(t("oapp_gumb"))}</b><span>${esc(t("verzija", { v: CONFIG.verzija }))}</span></span>${ic("chevron")}</button>
@@ -1042,6 +1052,7 @@ $("#moje").addEventListener("click", e => {
   if (e.target.closest("#sOApp")) openOApp();
   if (e.target.closest("#kIzvoz")) izvozKopije();
   const tb = e.target.closest("[data-tema]"); if (tb) { primijeniTemu(tb.dataset.tema); renderMoje(); }
+  const jb = e.target.closest("[data-jezik]"); if (jb && jb.dataset.jezik !== CONFIG.jezik) { store.set("gk-jezik", jb.dataset.jezik); gcEv("jezik-" + jb.dataset.jezik); location.reload(); }
 });
 $("#moje").addEventListener("change", e => {
   if (e.target.id === "bigTxt") { document.documentElement.classList.toggle("big", e.target.checked); store.set("gk-big", e.target.checked); }
@@ -1181,7 +1192,7 @@ function openMojaMjesta() {
   openSheet(t("moja_mjesta"), `<div class="stack">
     ${favs.length + S.moja.length ? "" : medoOblak("", t("medo_prazno"), null, 64)}
     <div>${favs.map(p => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")}
-      ${S.moja.map(m => `<button class="list-row" data-open="m:${esc(m.id)}"><span class="dot" style="background:var(--accent)"></span><span class="t"><b>${esc(m.ime)}</b><span>${esc(t("kat_moje"))} · ${new Date(m.t).toLocaleDateString("hr-HR")}</span></span></button>`).join("")}</div>
+      ${S.moja.map(m => `<button class="list-row" data-open="m:${esc(m.id)}"><span class="dot" style="background:var(--accent)"></span><span class="t"><b>${esc(m.ime)}</b><span>${esc(t("kat_moje"))} · ${new Date(m.t).toLocaleDateString(LOC())}</span></span></button>`).join("")}</div>
     <div class="field"><label for="mIme">${esc(t("moje_mjesto_ime"))}</label><input id="mIme" maxlength="60" placeholder="${esc(t("moje_mjesto_zadano"))}"></div>
     <button class="btn primary" id="mDodaj">${esc(t("dodaj_moje_mjesto"))}</button></div>`);
   $("#mDodaj").onclick = () => {
@@ -1238,6 +1249,11 @@ async function boot() {
   const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null)]);
   T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec; if (lynxD) LYNX = lynxD;
   TOCKE = tocke.tocke; RUTE = rute.rute.concat((bike && bike.rute) || []);
+  if (CONFIG.jezik !== "hr") {
+    (SPEC.specijaliteti || []).forEach(preko); Object.values(INFO).forEach(preko);
+    (LYNX.cinjenice || []).forEach(c => { if (c[CONFIG.jezik]) c.tekst = c[CONFIG.jezik].tekst; });
+    RUTE.forEach(r => (r.polazista || []).forEach(preko));
+  }
   /* usluge (jelo, smještaj, kupnja) idu na kartu kao točke; partneri su istaknuti */
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });
   for (const p of TOCKE) {
@@ -1253,4 +1269,4 @@ async function boot() {
   if (!store.get("gk-pozdrav", false)) setTimeout(openPozdrav, 500);
   if (!PREGLED && "serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
 }
-boot().catch(e => { document.body.innerHTML = `<p style="padding:24px;font:16px system-ui">Podaci se nisu učitali. Osvježi stranicu dok imaš signal.</p>`; console.error(e); });
+boot().catch(e => { document.body.innerHTML = `<p style="padding:24px;font:16px system-ui">Podaci se nisu učitali. Osvježi stranicu dok imaš signal.<br><br>The data could not be loaded. Reload the page while you have signal.</p>`; console.error(e); });

@@ -2,26 +2,103 @@
  "opis": "Lynx, ris iz Risnjaka: kratke zanimljivosti uz mjesta na karti. Činjenice iz navedenih izvora, napisane našim riječima.",
  "provjereno": "2026-10-30",
  "cinjenice": [
-  {"id": "ime", "ref": ["Z01", "P01", "P17", "S01"],
+  {
+   "id": "ime",
+   "ref": [
+    "Z01",
+    "P01",
+    "P17",
+    "S01"
+   ],
    "tekst": "Planina Risnjak vjerojatno je ime dobila po meni – risu. Nacionalni park postoji od 1949. godine.",
-   "izvor": "Wikipedia – NP Risnjak", "url": "https://en.wikipedia.org/wiki/Risnjak_National_Park"},
-  {"id": "povratak", "ref": ["Z01", "P01", "On11117413766"],
+   "izvor": "Wikipedia – NP Risnjak",
+   "url": "https://en.wikipedia.org/wiki/Risnjak_National_Park",
+   "en": {
+    "tekst": "The Risnjak mountain probably got its name from me – the lynx (ris in Croatian). The national park has existed since 1949."
+   }
+  },
+  {
+   "id": "povratak",
+   "ref": [
+    "Z01",
+    "P01",
+    "On11117413766"
+   ],
    "tekst": "Risovi su iz ovih šuma nestali početkom 20. stoljeća. Godine 1973. u slovenski dio Dinarida doneseno je šest risova iz Slovačke – današnji risovi ovdje njihovi su potomci.",
-   "izvor": "LIFE Lynx", "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/"},
-  {"id": "geni", "ref": ["On11117413766", "P07"],
+   "izvor": "LIFE Lynx",
+   "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/",
+   "en": {
+    "tekst": "Lynx disappeared from these forests in the early 20th century. In 1973, six lynx from Slovakia were brought to the Slovenian part of the Dinaric mountains – today's lynx here are their descendants."
+   }
+  },
+  {
+   "id": "geni",
+   "ref": [
+    "On11117413766",
+    "P07"
+   ],
    "tekst": "Svi dinarski risovi potječu od samo šest životinja, pa smo si previše srodni. Zato se u projektu LIFE Lynx u Dinaride dovode risovi iz Karpata.",
-   "izvor": "LIFE Lynx", "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/"},
-  {"id": "zastita", "ref": ["P07", "P05", "Z03"],
+   "izvor": "LIFE Lynx",
+   "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/",
+   "en": {
+    "tekst": "All Dinaric lynx descend from only six animals, so we are too closely related. That's why the LIFE Lynx project is bringing lynx from the Carpathians to the Dinarides."
+   }
+  },
+  {
+   "id": "zastita",
+   "ref": [
+    "P07",
+    "P05",
+    "Z03"
+   ],
    "tekst": "U Hrvatskoj sam strogo zaštićena vrsta. Lov na risa zabranjen je od 1998. godine.",
-   "izvor": "LIFE Lynx", "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/"},
-  {"id": "teritorij", "ref": ["S10", "P07", "P05", "Z02"],
+   "izvor": "LIFE Lynx",
+   "url": "https://www.lifelynx.eu/large-carnivores-in-dinarides-and-lynx-history/",
+   "en": {
+    "tekst": "In Croatia I'm a strictly protected species. Hunting lynx has been banned since 1998."
+   }
+  },
+  {
+   "id": "teritorij",
+   "ref": [
+    "S10",
+    "P07",
+    "P05",
+    "Z02"
+   ],
    "tekst": "Ja sam samotnjak. Teritorij mužjaka ima od 120 do 1800 km² – i najmanji je veći od cijelog NP Risnjak.",
-   "izvor": "LCIE – Eurasian lynx", "url": "https://www.lcie.org/Large-carnivores/Eurasian-lynx"},
-  {"id": "plijen", "ref": ["S10", "Z02", "On11117413766"],
+   "izvor": "LCIE – Eurasian lynx",
+   "url": "https://www.lcie.org/Large-carnivores/Eurasian-lynx",
+   "en": {
+    "tekst": "I'm a loner. A male's territory covers 120 to 1800 km² – even the smallest is bigger than the whole of Risnjak National Park."
+   }
+  },
+  {
+   "id": "plijen",
+   "ref": [
+    "S10",
+    "Z02",
+    "On11117413766"
+   ],
    "tekst": "Najčešće lovim srne. Odrasli mužjak teži 18 do 25 kg, ženka 12 do 16 kg.",
-   "izvor": "LCIE – Eurasian lynx", "url": "https://www.lcie.org/Large-carnivores/Eurasian-lynx"},
-  {"id": "zvijeri", "ref": ["On11117413766", "S10"],
+   "izvor": "LCIE – Eurasian lynx",
+   "url": "https://www.lcie.org/Large-carnivores/Eurasian-lynx",
+   "en": {
+    "tekst": "I mostly hunt roe deer. An adult male weighs 18 to 25 kg, a female 12 to 16 kg."
+   }
+  },
+  {
+   "id": "zvijeri",
+   "ref": [
+    "On11117413766",
+    "S10"
+   ],
    "tekst": "U Gorskom kotaru žive sve tri velike zvijeri: medvjed, vuk i ja. Medo Zelenko i ja smo susjedi!",
-   "izvor": "Wikipedia – NP Risnjak", "url": "https://en.wikipedia.org/wiki/Risnjak_National_Park"}
+   "izvor": "Wikipedia – NP Risnjak",
+   "url": "https://en.wikipedia.org/wiki/Risnjak_National_Park",
+   "en": {
+    "tekst": "All three large carnivores live in Gorski kotar: the bear, the wolf and me. Zelenko the bear and I are neighbours!"
+   }
+  }
  ]
 }

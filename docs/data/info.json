@@ -7,7 +7,11 @@
   "telefon": "+385 51 836 133",
   "email": "np-risnjak@ri.t-com.hr",
   "izvor": "NP Risnjak",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "savjet": "Near the source are the Risnjak National Park centres “Birth House of the Kupa River” (Kupari) and “Gorski Kotar House of Knowledge” (the old school in Razloge), open daily 9–17 h.",
+   "napomena": "The national park charges admission. Tickets are sold at the entrance or online."
+  }
  },
  "V11": {
   "napomena": "Prema JU Priroda cesta do Zelenog vira se obnavlja: prilaz iz Donjeg Lošca kod Broda na Kupi ili kružnom stazom od kolodvora Skrad. Provjeri prije polaska.",
@@ -15,7 +19,10 @@
   "email": "leopold@pins-skrad.hr",
   "web": "https://ju-priroda.hr/en/protected-nature-areas/vrazji-prolaz-and-zeleni-vir/",
   "izvor": "JU Priroda (koncesionar PINS Skrad)",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "According to JU Priroda, the road to Zeleni vir is being repaired: access from Donji Lošac near Brod na Kupi or on the loop trail from Skrad station. Check before you go."
+  }
  },
  "P02": {
   "web": "https://www.np-risnjak.hr/smjestaj-i-prehrana/",
@@ -35,14 +42,28 @@
   "web": "https://platak.hr/",
   "izvor": "Platak – Goranski sportski centar",
   "izvor_url": "https://platak.hr/en/2026/01/06/pocinje-skijaska-sezona-na-platku/",
-  "provjereno": "2026-10-31"
+  "provjereno": "2026-10-31",
+  "en": {
+   "rv_tekst": [
+    "In winter, when there's snow: daily 9–16 h (slopes, chairlift, tows).",
+    "Night skiing on Tuesdays and Fridays 19–22 h, weather permitting.",
+    "The ticket office opens at 8 h (and at 18 h on night-skiing days).",
+    "The Tešnje tow is permanently closed."
+   ],
+   "savjet": "Day passes are sold at the ticket office, online and at Petrol filling stations.",
+   "napomena": "Slopes without snowmaking open only after enough natural snow has fallen."
+  }
  },
  "P16": {
   "savjet": "Na sanjkalištu je pokretna traka; ima poludnevnih i dnevnih karata, a sanjke se mogu iznajmiti.",
   "napomena": "Rad ovisi o snijegu i vremenu – prije dolaska provjeri na njihovoj Facebook stranici ili telefonom.",
   "izvor": "Turističke priče – sanjkališta u Gorskom kotaru (prosinac 2025.)",
   "izvor_url": "https://www.turistickeprice.hr/en/toboggan-run-in-Gorski-Kotar/",
-  "provjereno": "2026-10-31"
+  "provjereno": "2026-10-31",
+  "en": {
+   "savjet": "The sledding hill has a conveyor belt; there are half-day and full-day tickets, and sledges can be hired.",
+   "napomena": "Opening depends on snow and weather – check their Facebook page or call before you go."
+  }
  },
  "Z01": {
   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
@@ -52,7 +73,11 @@
   "email": "np-risnjak@ri.t-com.hr",
   "web": "https://www.np-risnjak.hr/",
   "izvor": "NP Risnjak",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "savjet": "Crni Lug also has the “Hidden Treasure of Risnjak” interpretation centre: visits by appointment on +385 91 620 8672 or info@visitdelnice.hr.",
+   "napomena": "The national park charges admission. Tickets are sold at the entrance or online."
+  }
  },
  "Z02": {
   "web": "http://www.golubinjak.com/",
@@ -66,7 +91,10 @@
   "web": "https://ju-priroda.hr/en/protected-nature-areas/vrazji-prolaz-and-zeleni-vir/",
   "izvor": "JU Priroda (koncesionar PINS Skrad)",
   "provjereno": "2026-10-24",
-  "rv_izvor": "OpenStreetMap"
+  "rv_izvor": "OpenStreetMap",
+  "en": {
+   "napomena": "According to JU Priroda, the road to Zeleni vir is being repaired: access from Donji Lošac near Brod na Kupi or on the loop trail from Skrad station. Check before you go."
+  }
  },
  "Z04": {
   "napomena": "Radno vrijeme, ulaznicu i parking za ovu sezonu provjeri kod upravitelja.",
@@ -74,7 +102,10 @@
   "email": "info@komunalac-vrbovsko.hr",
   "web": "https://www.komunalac-vrbovsko.hr/izletiste-kamacnik-informacije",
   "izvor": "JU Priroda (koncesionar Komunalac Vrbovsko)",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "Check this season's opening hours, ticket and parking with the operator."
+  }
  },
  "S01": {
   "trajanje": "Kružna staza od 4,2 km, gotovo ravna, s 23 poučne ploče. Dovoljne su sportske cipele.",
@@ -82,7 +113,11 @@
   "telefon": "+385 51 836 133",
   "web": "https://www.np-risnjak.hr/",
   "izvor": "NP Risnjak",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "The trail is inside the national park, admission is charged.",
+   "trajanje": "A 4.2 km loop, almost flat, with 23 information panels. Trainers are enough."
+  }
  },
  "C01": {
   "rv": "Jan-May: Sa,Su 11:00-16:00; Jun: Fr 14:00-16:00; Jun: Sa,Su 11:00-16:00; Jul-Aug: Mo-We 10:00-13:00; Jul-Aug: Th,Fr 10:00-15:00; Jul-Aug: Sa,Su 10:00-18:00; Sep: Fr 10:00-16:00; Sep: Sa,Su 11:00-16:00; Oct: Fr 14:00-16:00; Oct: Sa,Su 11:00-16:00; Nov-Dec: Sa,Su 11:00-16:00",
@@ -125,7 +160,43 @@
   "telefon": "+385 51 620 950",
   "email": "info@visitfuzine.hr",
   "izvor": "TZ Fužine",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "rv_tekst": [
+    "Guided tours only, starting at set times.",
+    "January–May: Sat and Sun at 11, 12, 14 and 15 h",
+    "June: Fri at 14 and 15 h; Sat and Sun at 11, 12, 14 and 15 h (from 15 June also Wed and Thu)",
+    "July–August: Mon–Wed at 10, 11 and 12 h; Thu and Fri 10–14 h; weekends 10–17 h, every hour",
+    "September: Fri at 10, 11, 14 and 15 h; Sat and Sun at 11, 12, 14 and 15 h",
+    "October: Fri at 14 and 15 h; Sat and Sun at 11, 12, 14 and 15 h",
+    "November–December: Sat and Sun at 11, 12, 14 and 15 h",
+    "Closed: Easter, 1 Nov, 25 Dec and 1 Jan. Groups of 15 or more can visit at other times if booked 3 days ahead."
+   ],
+   "savjet": "It's about 8 °C inside, bring a jacket. The cave has no steps and is wheelchair accessible.",
+   "trajanje": "The guided tour takes 25–30 minutes.",
+   "ulaznica": [
+    [
+     "Adults",
+     "€6.50 (July–August €7.00)"
+    ],
+    [
+     "Children 4–18",
+     "€5.00 (€5.50)"
+    ],
+    [
+     "Children under 4",
+     "free"
+    ],
+    [
+     "Pensioners, students, hikers",
+     "€6.00 (€6.50)"
+    ],
+    [
+     "Family (2 + up to 3 children)",
+     "€19.00 (€22.00)"
+    ]
+   ]
+  }
  },
  "C02": {
   "napomena": "Cijene i radno vrijeme za 2026. nisu objavljeni na službenim stranicama. Nazovi prije dolaska.",
@@ -135,7 +206,12 @@
   "email": "lokvarka@lokve.hr",
   "web": "https://lokvarka.hr/spilja-lokvarka",
   "izvor": "JU Priroda (koncesionar Lokvarka d.o.o.)",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "savjet": "It's about 8 °C and damp inside, bring a jacket and sturdy shoes.",
+   "napomena": "Prices and opening hours for 2026 have not been published on the official website. Call before you go.",
+   "trajanje": "Guided tours only."
+  }
  },
  "H01": {
   "savjet": "U dvorcu je interpretacijski centar „Putovima Frankopana” i zavičajna zbirka.",
@@ -171,7 +247,36 @@
    ]
   ],
   "email": "maja.turk@cabar.hr",
-  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/"
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+  "en": {
+   "rv_tekst": [
+    "Mon 7–17 h, Tue–Thu 7–15 h, Fri 7–13 h",
+    "Weekends and holidays by appointment by phone or email."
+   ],
+   "savjet": "The castle houses the “Frankopan Routes” interpretation centre and a local heritage collection.",
+   "ulaznica": [
+    [
+     "Adults",
+     "€3.30"
+    ],
+    [
+     "Pupils, students, pensioners",
+     "€2.70"
+    ],
+    [
+     "Children 6–14",
+     "€1.30"
+    ],
+    [
+     "Children under 6",
+     "free"
+    ],
+    [
+     "Groups (20+)",
+     "€2.00 per person"
+    ]
+   ]
+  }
  },
  "H02": {
   "savjet": "Unutra su interpretacijski centar „Putovima Frankopana” i stalna izložba Prirodoslovnog muzeja Rijeka „Divljina s pogledom na more”.",
@@ -204,7 +309,33 @@
    ]
   ],
   "email": "kastel@prirodoslovni.com",
-  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/"
+  "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
+  "en": {
+   "rv_tekst": [
+    "Tue–Fri 9–19 h, Sat and Sun 10–18 h",
+    "Closed on Mondays and public holidays."
+   ],
+   "savjet": "Inside are the “Frankopan Routes” interpretation centre and the Rijeka Natural History Museum's permanent exhibition “Wilderness with a Sea View”.",
+   "napomena": "One ticket covers the exhibition and the interpretation centre.",
+   "ulaznica": [
+    [
+     "Adults",
+     "€3.00"
+    ],
+    [
+     "Children, pupils, students, pensioners",
+     "€1.50"
+    ],
+    [
+     "Family",
+     "€5.00"
+    ],
+    [
+     "Annual",
+     "€15.00"
+    ]
+   ]
+  }
  },
  "H05": {
   "web": "http://hvm.mdc.hr/hrvatski-povijesni-muzej---memorijalni-muzej-ivan-goran-kovacic,762%3ALKD/hr/info/",
@@ -218,7 +349,14 @@
   "email": "hismus@hismus.hr",
   "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "rv_tekst": [
+    "Tue–Sat 10–17 h, Sun 10–15 h",
+    "Closed on Mondays and public holidays."
+   ],
+   "napomena": "Check the ticket price when you visit (children under 7 free)."
+  }
  },
  "H45": {
   "rv": "Mo-Su 09:00-17:00",
@@ -232,7 +370,13 @@
   "web": "https://www.np-risnjak.hr/",
   "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "rv_tekst": [
+    "daily 9–17 h"
+   ],
+   "napomena": "Tickets according to the Risnjak National Park price list."
+  }
  },
  "H46": {
   "rv": "Mo-Su 09:00-17:00",
@@ -246,13 +390,22 @@
   "web": "https://www.np-risnjak.hr/",
   "izvor": "TZ Gorskog kotara – muzeji i interpretacijski centri",
   "izvor_url": "https://gorskikotar.hr/en/muzeji-i-interpretacijski-centri/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "rv_tekst": [
+    "daily 9–17 h"
+   ],
+   "napomena": "Tickets according to the Risnjak National Park price list."
+  }
  },
  "H50": {
   "napomena": "Obilazak s vodičem; termin dogovori unaprijed.",
   "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
   "izvor_url": "https://gorskikotarbike.com/en/attractions/zavicajna-zbirka-mrkopalj/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "Guided visits; book a time in advance."
+  }
  },
  "E01": {
   "web": "https://www.tz-fuzine.hr/hr/kaubojsko_selo__city_of_roswell/348/14",
@@ -269,7 +422,10 @@
   "web": "https://www.popovicev-mlin.hr/",
   "izvor": "Popovićev mlin",
   "izvor_url": "https://www.popovicev-mlin.hr/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "Visits by appointment."
+  }
  },
  "H57": {
   "napomena": "Radno vrijeme nije objavljeno; za posjet se raspitaj u Općini Brod Moravice.",
@@ -278,7 +434,10 @@
   "web": "https://www.brodmoravice.hr/citaonica-kuti/",
   "izvor": "Općina Brod Moravice",
   "izvor_url": "https://www.brodmoravice.hr/citaonica-kuti/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "Opening hours are not published; ask the Brod Moravice municipality about a visit."
+  }
  },
  "E05": {
   "napomena": "Sezonu, radno vrijeme i cijene provjeri telefonom – zimi sve ovisi o snijegu.",
@@ -286,7 +445,11 @@
   "izvor": "Aktivni turizam – Adrenalin park Kupjak",
   "izvor_url": "https://aktivniturizam.hr/ponuda/ravna-gora/adrenalin-park-kupjak",
   "provjereno": "2026-10-24",
-  "savjet": "Zimi: sanjkalište s pokretnom trakom i noćnim sanjkanjem, sanjke se mogu iznajmiti."
+  "savjet": "Zimi: sanjkalište s pokretnom trakom i noćnim sanjkanjem, sanjke se mogu iznajmiti.",
+  "en": {
+   "savjet": "In winter: a sledding hill with a conveyor belt and night sledding; sledges for hire.",
+   "napomena": "Check the season, opening hours and prices by phone – in winter everything depends on snow."
+  }
  },
  "E06": {
   "napomena": "Sezonu i cijene provjeri telefonom.",
@@ -294,20 +457,29 @@
   "web": "https://gorskilazi.com/adrenalin-park",
   "izvor": "Gorski Lazi",
   "izvor_url": "https://gorskilazi.com/korisne-indormacije",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "Check the season and prices by phone."
+  }
  },
  "E07": {
   "napomena": "Ture od 1 h (oko 15 km) i 2 h (oko 30 km). Cijene i termine provjeri na stranici.",
   "web": "https://quadgorskikotar.com/",
   "izvor": "Quad Gorski kotar",
   "izvor_url": "https://quadgorskikotar.com/en/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "Tours of 1 h (about 15 km) and 2 h (about 30 km). Check prices and times on their website."
+  }
  },
  "S11": {
   "napomena": "Otvoren je dio od oko 1,45 km (88 m uspona). Staza je ponajprije za najavljene grupe (škole, udruge).",
   "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
   "izvor_url": "https://gorskikotarbike.com/en/attractions/poucna-staza-tropetarska-stijena/",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "napomena": "A section of about 1.45 km (88 m ascent) is open. The trail is mainly for pre-booked groups (schools, associations)."
+  }
  },
  "S12": {
   "izvor": "Plodovi gorja",
@@ -319,14 +491,22 @@
   "napomena": "Rad ovisi o snijegu i vremenu – prije dolaska provjeri na njihovoj Facebook stranici.",
   "izvor": "Turističke priče – sanjkališta u Gorskom kotaru (prosinac 2025.)",
   "izvor_url": "https://www.turistickeprice.hr/en/toboggan-run-in-Gorski-Kotar/",
-  "provjereno": "2026-10-31"
+  "provjereno": "2026-10-31",
+  "en": {
+   "savjet": "Sledges can be hired on site.",
+   "napomena": "Opening depends on snow and weather – check their Facebook page before you go."
+  }
  },
  "W05": {
   "savjet": "Sanjke se mogu iznajmiti po pristupačnoj cijeni.",
   "napomena": "Rad ovisi o snijegu i vremenu – prije dolaska provjeri na njihovoj Facebook stranici.",
   "izvor": "Turističke priče – sanjkališta u Gorskom kotaru (prosinac 2025.)",
   "izvor_url": "https://www.turistickeprice.hr/en/toboggan-run-in-Gorski-Kotar/",
-  "provjereno": "2026-10-31"
+  "provjereno": "2026-10-31",
+  "en": {
+   "savjet": "Sledges can be hired at an affordable price.",
+   "napomena": "Opening depends on snow and weather – check their Facebook page before you go."
+  }
  },
  "W06": {
   "napomena": "Skijanje radi samo kad ima dovoljno snijega – prije dolaska nazovi planinski centar.",
@@ -334,7 +514,10 @@
   "web": "https://petehovac.com.hr/",
   "izvor": "OpenStreetMap; Total Croatia News",
   "izvor_url": "https://total-croatia-news.com/lifestyle/petehovac/",
-  "provjereno": "2026-10-31"
+  "provjereno": "2026-10-31",
+  "en": {
+   "napomena": "Skiing runs only when there's enough snow – call the mountain lodge before you go."
+  }
  },
  "On2367579804": {
   "rv": "Mo-Su 06:00-22:00",
@@ -456,7 +639,10 @@
   "email": "info@ju-priroda.hr",
   "izvor": "JU Priroda",
   "provjereno": "2026-10-24",
-  "rv_izvor": "OpenStreetMap"
+  "rv_izvor": "OpenStreetMap",
+  "en": {
+   "savjet": "An exhibition about the bear, the wolf and the lynx: habitats through the seasons, sounds, tracks, a film and a children's corner."
+  }
  },
  "On11118473102": {
   "upravitelj": "Gorenjska Banka",
@@ -595,11 +781,15 @@
   "web": "https://www.np-risnjak.hr/",
   "napomena": "Ulaz u Nacionalni park se plaća. Ulaznice se kupuju na ulazu ili online.",
   "web_ulaznice": "https://www.parkovihrvatske.hr/en/web-shop-tickets?parkId=325",
-  "savjet": "U Crnom Lugu je centar za posjetitelje „Goranska kuća znanja” u staroj školi.",
+  "savjet": "U Crnom Lugu je i interpretacijski centar „Skriveno blago Risnjaka”: posjet uz najavu na 091 620 8672 ili info@visitdelnice.hr.",
   "telefon": "+385 51 836 133",
   "email": "np-risnjak@ri.t-com.hr",
   "izvor": "NP Risnjak",
-  "provjereno": "2026-10-24"
+  "provjereno": "2026-10-24",
+  "en": {
+   "savjet": "Crni Lug also has the “Hidden Treasure of Risnjak” interpretation centre: visits by appointment on +385 91 620 8672 or info@visitdelnice.hr.",
+   "napomena": "The national park charges admission. Tickets are sold at the entrance or online."
+  }
  },
  "Ow1165384924": {
   "ulaz": "placa",
