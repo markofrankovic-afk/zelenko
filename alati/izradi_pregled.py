@@ -26,7 +26,11 @@ for x in sp["specijaliteti"]:
     if x.get("slika") and x["slika"].get("datoteka"):
         x["slika"] = dict(x["slika"], datoteka=male.setdefault(x["slika"]["datoteka"], umanji(f"{D}/{x['slika']['datoteka']}", 330)))
 blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-out = f"""<title>Zelenko – Gorski kotar</title>
+out = f"""<!DOCTYPE html>
+<html lang="hr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zelenko – Gorski kotar</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 {lcss}
