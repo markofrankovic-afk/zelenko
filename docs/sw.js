@@ -2,12 +2,12 @@
    - Ljuska, tekstovi i podaci (točke, rute): spremljeni unaprijed, uvijek dostupni.
    - Kartice karte (OpenStreetMap) i fontovi: spremaju se dok ih gledaš, s ograničenjem broja.
    - Vremenska prognoza: uvijek s mreže; aplikacija sama čuva zadnju. */
-const VERSION = "gk-v0.11.0";
+const VERSION = "gk-v0.11.1";
 const SHELL = ["./", "index.html", "app.js", "put.js", "manifest.webmanifest",
   "i18n/hr.json", "i18n/en.json", "privatnost.html", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/slike.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json", "data/rute_planinarske.json", "data/mreza.json", "data/lynx.json",
   "vendor/leaflet.js", "vendor/leaflet.css", "vendor/images/layers.png", "vendor/images/marker-icon.png", "vendor/images/marker-shadow.png",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "icons/favicon-64.png", "icons/maskable-512.png"];
-const LIMITS = { "gk-tiles": 3000, "gk-fonts": 40, "gk-foto": 600 };
+const LIMITS = { "gk-tiles": 3000, "gk-tiles-t": 3000, "gk-fonts": 40, "gk-foto": 600 };
 
 self.addEventListener("install", e => {
   /* fotografije (data/slike.json) spremaju se odmah, da rade i bez signala:
@@ -44,6 +44,20 @@ async function cacheFirst(req, name) {
     return res;
   } catch (e) { return hit || Response.error(); }
 }
+/* kartice karte: odmah iz spremljenog, a starije od 7 dana osvježe se u pozadini kad ima signala
+   (pravila OSM poslužitelja traže barem 7 dana čuvanja; bez osvježavanja karta bi zauvijek ostala stara) */
+const TILE_DANA = 7;
+async function tileSWR(e, req) {
+  const c = await caches.open("gk-tiles"), meta = await caches.open("gk-tiles-t"), hit = await c.match(req);
+  const osvjezi = () => fetch(req).then(res => {
+    if (res.ok || res.type === "opaque") { c.put(req, res.clone()); meta.put(req.url, new Response(String(Date.now()))); trim("gk-tiles"); trim("gk-tiles-t"); }
+    return res;
+  });
+  if (!hit) { try { return await osvjezi(); } catch (err) { return Response.error(); } }
+  const tm = await meta.match(req.url), kad = tm ? +(await tm.text()) : 0;
+  if (Date.now() - kad > TILE_DANA * 864e5) e.waitUntil(osvjezi().catch(() => {}));
+  return hit;
+}
 /* podaci: s mreže kad ima signala (svježe izmjene), inače iz spremljenog */
 async function networkFirst(req) {
   const c = await caches.open(VERSION);
@@ -55,7 +69,7 @@ self.addEventListener("fetch", e => {
   const req = e.request, url = new URL(req.url);
   if (req.method !== "GET") return;
   if (url.hostname.endsWith("open-meteo.com") || url.hostname.endsWith("goatcounter.com") || url.hostname === "gc.zgo.at") return;
-  if (url.hostname === "tile.openstreetmap.org") { e.respondWith(cacheFirst(req, "gk-tiles")); return; }
+  if (url.hostname === "tile.openstreetmap.org") { e.respondWith(tileSWR(e, req)); return; }
   if (url.hostname === "upload.wikimedia.org") { e.respondWith(cacheFirst(req, "gk-foto")); return; }
   if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") { e.respondWith(cacheFirst(req, "gk-fonts")); return; }
   if (url.origin === location.origin && (url.pathname.includes("/data/") || url.pathname.includes("/i18n/"))) { e.respondWith(networkFirst(req)); return; }
