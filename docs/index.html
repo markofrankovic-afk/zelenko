@@ -227,6 +227,13 @@ details.tip p{margin:8px 0 0;color:var(--ink2)}
 .seg button{min-height:44px;border:0;border-radius:8px;background:none;font-weight:600;color:var(--ink2)}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);outline:1.5px solid var(--line2)}
 .seg.dva{grid-template-columns:1fr 1fr}
+.profil{display:flex;flex-direction:column;gap:4px}
+.profil-g{position:relative;height:110px;border-bottom:1px solid var(--line2)}
+.profil-g>svg{width:100%;height:100%;display:block}
+.profil-g .ph,.profil-g .pl{position:absolute;left:4px;font-size:.75rem;color:var(--muted);background:color-mix(in srgb,var(--surface) 70%,transparent);padding:0 3px;border-radius:4px}
+.profil-g .ph{top:0}.profil-g .pl{bottom:2px}
+.profil.zakljucano .profil-g>svg{filter:blur(5px);opacity:.6}
+.profil-g .plock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;color:var(--amber-ink)}
 .seg button .ic{width:18px;height:18px;vertical-align:-3px;margin-right:6px}
 /* navigacija po karti */
 #v-karta.nav-mode .map-top>:not(#navPanel),#v-karta.nav-mode .fab-col,#v-karta.nav-mode #near{display:none}

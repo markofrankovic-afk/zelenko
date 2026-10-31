@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.9.0",
+  verzija: "0.9.1",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -67,6 +67,7 @@ function katNaziv(p) { if (p.moje) return t("kat_moje"); if (p.usluga && p.uslug
 function grupeOd(p) {
   return KAT.grupe.filter(g => g.pravila.some(([k, pod]) => k === p.kategorija && (pod === "*" || pod === p.podvrsta || (pod[0] === "!" && pod.slice(1) !== p.podvrsta)))).map(g => g.id);
 }
+const zimskiMjesec = (d = new Date()) => [11, 12, 1, 2, 3].includes(d.getMonth() + 1);
 function sezona(d = new Date()) { const m = d.getMonth() + 1; return m <= 2 || m === 12 ? "zima" : m <= 5 ? "proljece" : m <= 8 ? "ljeto" : "jesen"; }
 function satiMax(s) { const n = String(s).replace(/,/g, ".").match(/[\d.]+/g) || ["0"]; return Math.max(...n.map(Number)); }
 
@@ -197,7 +198,9 @@ function renderMarkers() {
 }
 function renderChips() {
   const counts = {}; for (const p of TOCKE) for (const g of p.grupe) counts[g] = (counts[g] || 0) + 1;
-  const defs = [{ id: "", n: t("sve") }].concat(KAT.grupe.filter(g => counts[g.id]).map(g => ({ id: g.id, n: t("grupa_" + g.id), c: g.boja })));
+  let gr = KAT.grupe.filter(g => counts[g.id]);
+  if (zimskiMjesec()) gr = gr.filter(g => g.id === "zima").concat(gr.filter(g => g.id !== "zima"));   /* zimi je „Zima” prvi filter */
+  const defs = [{ id: "", n: t("sve") }].concat(gr.map(g => ({ id: g.id, n: t("grupa_" + g.id), c: g.boja })));
   if (S.favs.length || S.moja.length) defs.push({ id: "spremljeno", n: t("grupa_spremljeno"), c: "var(--accent)" });
   $("#chips").innerHTML = defs.map(d => `<button class="chip" data-g="${d.id}" aria-pressed="${S.grupa === d.id}">${d.c && S.grupa !== d.id ? `<span class="dot" style="background:${d.c}"></span>` : ""}${esc(d.n)}</button>`).join("");
 }
@@ -720,6 +723,19 @@ function renderRute() {
 }
 $("#rute").addEventListener("click", e => { const f = e.target.closest("[data-rfiltar]"); if (f) { S.rFiltar = f.dataset.rfiltar; renderRute(); return; } const b = e.target.closest("[data-plan]"); if (!b) return; const [k, v] = b.dataset.plan.split(":"); S.plan[k] = v; renderRute(); gcEv("planer"); });
 
+/* visinski profil rute (Copernicus DEM): jednostavan graf, za Pro rute zamućen */
+function profilHtml(r) {
+  const v = r.visina; if (!v || !v.profil || v.profil.length < 2) return "";
+  const P = v.profil, W = 320, H = 96, km = P[P.length - 1][0] || 1, lo = Math.floor(v.min / 50) * 50, hi = Math.max(lo + 100, Math.ceil(v.max / 50) * 50);
+  const x = d => (d / km * W).toFixed(1), y = e => (H - (e - lo) / (hi - lo) * H).toFixed(1);
+  const lin = P.map(([d, e], i) => (i ? "L" : "M") + x(d) + " " + y(e)).join(" ");
+  return `<section class="profil${r.besplatno ? "" : " zakljucano"}" aria-label="${esc(t("profil_aria", { uspon: r.uspon_m, spust: v.spust, min: v.min, max: v.max }))}">
+    <div class="between small"><b>${esc(t("profil_naslov"))}</b><span class="muted">↑ ${r.uspon_m} m · ↓ ${v.spust} m · ${v.min}–${v.max} m</span></div>
+    <div class="profil-g"><svg viewBox="0 -4 ${W} ${H + 8}" preserveAspectRatio="none" aria-hidden="true">
+      <path d="${lin} L${W} ${H} L0 ${H} Z" fill="var(--accent-soft)"/><path d="${lin}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+      <span class="ph">${hi} m</span><span class="pl">${lo} m</span>${r.besplatno ? "" : `<span class="plock">${ic("lock")}${esc(t("pro"))}</span>`}</div>
+    <div class="between small muted"><span>0 km</span><span>${kmR(r)} km</span></div></section>`;
+}
 function openRuta(id) {
   const r = RBY[id]; if (!r) return; const x = tx(r);
   const stops = r.tocke.map(i => BY[i]).filter(Boolean);
@@ -728,7 +744,8 @@ function openRuta(id) {
     <h1>${esc(x.naziv)}</h1>
     <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(r.sati)}</b><span>${esc(t("sati"))}</span></div><div><b>${r.uspon_m == null ? "–" : "~" + r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b>${esc(r.tezina)}</b><span>${esc(t("tezina"))}</span></div></div>
     <p style="margin:0;font-size:1.04em">${esc(x.opis)}</p>
-    <p class="small muted" style="margin:0">${esc(t(r.osm ? "procjena_rute_osm" : "procjena_rute"))}</p>
+    ${profilHtml(r)}
+    <p class="small muted" style="margin:0">${esc(t(r.visina ? "procjena_rute_dem" : r.osm ? "procjena_rute_osm" : "procjena_rute"))}</p>
     <div class="row small"><b>${esc(t("parking"))}:</b><span>${esc(x.parking)}</span></div>
     <button class="btn" id="rJavi" style="align-self:flex-start">${ic("msg")}${esc(t("javi_s_rute"))}</button>
     ${r.polazista && r.polazista.length ? `<section class="card"><h3>${esc(t("polazista"))}</h3>${r.polazista.map(p => `<div class="between small" style="border-top:1px solid var(--line);min-height:40px"><span>${esc(p.naziv)}</span><span class="mono">${esc(p.vrijeme)}</span></div>`).join("")}</section>` : ""}
@@ -958,6 +975,16 @@ async function weather(lat, lon) {
   } catch (e) { return c; }
 }
 function wmo(c) { return (T.wmo && T.wmo[String(c)]) || ""; }
+/* zimi (studeni–ožujak): skijališta i sanjkališta te savjeti za cestu */
+function zimaDanas(r) {
+  if (!zimskiMjesec()) return "";
+  const z = TOCKE.filter(p => p.zima).map(p => ({ p, d: hav(r, p) })).sort((a, b) => a.d - b.d);
+  return `<section class="stack" style="gap:8px"><h2>${esc(t("zima_naslov"))}</h2>
+    ${z.map(({ p, d }) => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${KAT.boje.zima}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(t("pod_" + p.zima))}</span></span><span class="mono small">${fmtDist(d)}</span></button>`).join("")}
+    <p class="small muted" style="margin:0">${esc(t("zima_provjeri"))}</p>
+    <div class="card stack" style="gap:6px"><b>${esc(t("zima_cesta_naslov"))}</b><span class="small" style="color:var(--ink2)">${esc(t("zima_cesta"))}</span>
+      <a class="btn" href="https://www.hak.hr/info/stanje-na-cestama/" target="_blank" rel="noopener" style="align-self:flex-start">${esc(t("zima_hak"))}</a></div></section>`;
+}
 async function renderDanas() {
   const r = ref(), now = new Date(), st = sunTimes(now, r.lat, r.lon), sez = sezona(now);
   const datum = now.toLocaleDateString("hr-HR", { weekday: "long", day: "numeric", month: "long" });
@@ -977,6 +1004,7 @@ async function renderDanas() {
     <div id="medoBox">${medoSavjet(store.get("gk-wx", null), st, now, sez)}</div>
     <div id="wxBox">${draw(store.get("gk-wx", null))}</div>
     ${putovnicaKartica()}
+    ${zimaDanas(r)}
     <section class="stack" style="gap:8px"><h2>${esc(t("stanje_na_terenu"))}</h2>
       ${(DANAS.stanje || []).map(s => `<button class="card list-row" ${s.ref ? `data-open="${s.ref}"` : ""} style="align-items:flex-start;padding:12px 14px">
         <span class="dot" style="margin-top:6px;background:${s.razina === "upozorenje" ? "var(--warn)" : "var(--muted)"}"></span>
@@ -1005,13 +1033,13 @@ function renderMoje() {
         <div class="grid2"><button class="btn" id="kIzvoz">${esc(t("kopija_izvoz"))}</button><label class="btn" for="kUvoz" style="cursor:pointer">${esc(t("kopija_uvoz"))}</label></div><input type="file" id="kUvoz" accept="application/json,.json" hidden></div>
       <div class="card stack" style="gap:8px"><b>${esc(t("tema"))}</b><div class="seg" role="group" aria-label="${esc(t("tema"))}">${[["sustav", "tema_sustav"], ["light", "tema_svijetla"], ["dark", "tema_tamna"]].map(([v, k]) => `<button data-tema="${v}" aria-pressed="${store.get("gk-tema", "sustav") === v}">${esc(t(k))}</button>`).join("")}</div></div>
       <label class="card row" for="bigTxt" style="justify-content:space-between;min-height:52px"><b>${esc(t("veliki_tekst"))}</b><input type="checkbox" id="bigTxt" ${document.documentElement.classList.contains("big") ? "checked" : ""} style="width:22px;height:22px;accent-color:var(--accent)"></label>
-      <details class="tip"><summary>${esc(t("izvori_licence"))}</summary><p>${esc(t("izvori_tekst"))}</p>${Object.keys(SLIKE).length ? `<button class="btn" id="sFoto" style="margin-top:10px">${esc(t("foto_zasluge"))}</button>` : ""}</details>
-      <details class="tip"><summary>${esc(t("o_aplikaciji"))}</summary><p>${esc(t("o_tekst"))} ${esc(t("verzija", { v: CONFIG.verzija }))}</p></details>
+      <button class="card list-row" id="sOApp" style="width:100%;text-align:left">${medo(40, true)}<span class="t"><b>${esc(t("oapp_gumb"))}</b><span>${esc(t("verzija", { v: CONFIG.verzija }))}</span></span>${ic("chevron")}</button>
     </section>`;
 }
 $("#moje").addEventListener("click", e => {
   if (e.target.closest("#sMoja")) openMojaMjesta();
   if (e.target.closest("#sFoto")) openFotoZasluge();
+  if (e.target.closest("#sOApp")) openOApp();
   if (e.target.closest("#kIzvoz")) izvozKopije();
   const tb = e.target.closest("[data-tema]"); if (tb) { primijeniTemu(tb.dataset.tema); renderMoje(); }
 });
@@ -1019,6 +1047,25 @@ $("#moje").addEventListener("change", e => {
   if (e.target.id === "bigTxt") { document.documentElement.classList.toggle("big", e.target.checked); store.set("gk-big", e.target.checked); }
   if (e.target.id === "kUvoz" && e.target.files[0]) uvozKopije(e.target.files[0]);
 });
+
+/* ---------- o aplikaciji: izvori, licence, privatnost, kontakt ---------- */
+function openOApp() {
+  const mail = `mailto:${CONFIG.kontakt}?subject=${encodeURIComponent("Zelenko " + CONFIG.verzija)}`;
+  openSheet(t("oapp_naslov"), `<div class="stack">
+    <div class="row" style="gap:14px;align-items:center">${medo(72, true)}${lynx(64, true)}</div>
+    <p style="margin:0;font-size:1.04em">${esc(t("oapp_uvod"))}</p><span class="small muted">${esc(t("verzija", { v: CONFIG.verzija }))}</span>
+    <section class="stack" style="gap:6px"><h2>${esc(t("oapp_izvori"))}</h2>
+      ${(T.oapp_izvori_popis || []).map(([n, o, u]) => `<div style="padding:8px 0;border-top:1px solid var(--line)"><b>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>` : esc(n)}</b><div class="small" style="color:var(--ink2)">${esc(o)}</div></div>`).join("")}
+      ${Object.keys(SLIKE).length ? `<button class="btn" id="oFoto" style="align-self:flex-start">${esc(t("foto_zasluge"))}</button>` : ""}</section>
+    <section class="stack" style="gap:6px"><h2>${esc(t("oapp_privatnost"))}</h2>
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px">${(T.oapp_privatnost_tekst || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      ${PREGLED ? "" : `<a class="btn" href="privatnost.html" target="_blank" rel="noopener" style="align-self:flex-start">${esc(t("oapp_privatnost_cijela"))}</a>`}</section>
+    <section class="stack" style="gap:6px"><h2>${esc(t("oapp_odgovornost"))}</h2><p style="margin:0">${esc(t("oapp_odgovornost_tekst"))}</p></section>
+    <section class="stack" style="gap:6px"><h2>${esc(t("oapp_kontakt"))}</h2><p style="margin:0">${esc(t("oapp_kontakt_tekst"))}</p>
+      <a class="btn primary" href="${mail}" style="align-self:flex-start">${ic("msg")}${esc(t("oapp_pisi"))}</a></section></div>`);
+  const f = $("#oFoto"); if (f) f.onclick = openFotoZasluge;
+  gcEv("o-aplikaciji");
+}
 
 /* ---------- gastro kutak: specijaliteti, jelo, smještaj, OPG ---------- */
 const G_FILTRI = [["jelo", p => p.kategorija === "jelo" || !!(p.usluga && p.usluga.i_jelo)], ["spavanje", p => p.kategorija === "spavanje" || !!(p.usluga && p.usluga.i_spavanje)],
@@ -1119,6 +1166,7 @@ $("#sigurnost").addEventListener("click", e => {
   if (e.target.closest("#jPosalji")) { const body = t("sms_plan", { ruta: $("#jRuta").value, vrijeme: $("#jVrijeme").value }); location.href = "sms:?&body=" + encodeURIComponent(body); gcEv("javi-kamo"); }
   if (e.target.closest("#sMoja")) openMojaMjesta();
   if (e.target.closest("#sFoto")) openFotoZasluge();
+  if (e.target.closest("#sOApp")) openOApp();
   if (e.target.closest("#kIzvoz")) izvozKopije();
   const tb = e.target.closest("[data-tema]"); if (tb) { primijeniTemu(tb.dataset.tema); renderSigurnost(); }
 });
@@ -1194,6 +1242,7 @@ async function boot() {
   for (const u of (usluge && usluge.usluge) || []) TOCKE.push({ id: u.id, kategorija: u.vrsta, podvrsta: u.podvrsta, tekst: { hr: { naziv: u.naziv, opis: u.opis || "" } }, lat: u.lat, lon: u.lon, vaznost: u.partner || u.podvrsta === "opg" ? 2 : 3, usluga: u });
   for (const p of TOCKE) {
     p.grupe = grupeOd(p); BY[p.id] = p;
+    if (p.zima && !p.grupe.includes("zima")) p.grupe.push("zima");                                /* skijališta i sanjkališta */
     if (p.usluga && p.usluga.i_jelo && !p.grupe.includes("jelo")) p.grupe.push("jelo");          /* hotel s restoranom */
     if (p.usluga && p.usluga.i_spavanje && !p.grupe.includes("spavanje")) p.grupe.push("spavanje"); /* konoba sa sobama */
   }

@@ -460,7 +460,10 @@
   "kolodvor": "vlak željeznica stanica",
   "spilja": "špilja pećina jama",
   "park": "park perivoj šetnja",
-  "igraliste": "igralište djeca ljuljačka tobogan"
+  "igraliste": "igralište djeca ljuljačka tobogan",
+  "skijaliste": "skijanje ski skijalište vučnica zima snijeg",
+  "sanjkaliste": "sanjkanje sanjke sanjkalište zima snijeg djeca",
+  "zima": "zima snijeg skijanje sanjkanje"
  },
  "vodi_do_brana": "„Vodi me” vodi do brane, odakle se dolazi do obale.",
  "pod_park": "Park",
@@ -511,5 +514,77 @@
  "lynx_oko": "Lynxovo oko",
  "lynx_oko_tekst": "Našao si sve moje tragove. Sada vidiš šumu kao ris!",
  "pozdrav_lynx": "Ponekad se javi i Lynx, ris iz Risnjaka. Rijetko se pokazuje – kao i u šumi.",
- "izvor": "Izvor"
+ "izvor": "Izvor",
+ "oapp_gumb": "O aplikaciji, izvori i privatnost",
+ "oapp_naslov": "O aplikaciji",
+ "oapp_uvod": "Zelenko – Gorski kotar Guide je offline vodič kroz Gorski kotar. Radi bez signala, bez prijave i bez reklama. Napravio ga je Marko Franković iz Fužina.",
+ "oapp_izvori": "Izvori podataka i licence",
+ "oapp_izvori_popis": [
+  [
+   "OpenStreetMap",
+   "Karta, mreža putova, većina točaka, usluge i biciklističke rute. © OpenStreetMap suradnici, licenca ODbL.",
+   "https://www.openstreetmap.org/copyright"
+  ],
+  [
+   "Wikidata",
+   "Koordinate dijela točaka. Licenca CC0.",
+   "https://www.wikidata.org/"
+  ],
+  [
+   "Wikimedia Commons",
+   "Fotografije mjesta i jela. Autor i licenca navedeni su uz svaku fotografiju.",
+   "https://commons.wikimedia.org/"
+  ],
+  [
+   "Službene stranice",
+   "Radno vrijeme, ulaznice i kontakti sa stranica turističkih zajednica, parkova i muzeja. Izvor i datum provjere navedeni su uz svako mjesto. Tekstovi su naši.",
+   null
+  ],
+  [
+   "Copernicus DEM GLO-30",
+   "Model terena za uspon i visinski profil ruta. © DLR e.V. 2010–2014 i © Airbus Defence and Space GmbH 2014–2018, dobavljeno u okviru programa COPERNICUS (Europska unija i ESA).",
+   "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM"
+  ],
+  [
+   "Open-Meteo",
+   "Vremenska prognoza.",
+   "https://open-meteo.com/"
+  ],
+  [
+   "LIFE Lynx, LCIE, Wikipedia",
+   "Činjenice za Lynxove zanimljivosti.",
+   null
+  ],
+  [
+   "Leaflet",
+   "Prikaz karte (licenca BSD-2).",
+   "https://leafletjs.com/"
+  ]
+ ],
+ "oapp_privatnost": "Privatnost",
+ "oapp_privatnost_tekst": [
+  "Nema računa ni prijave. Tvoja mjesta, pečati, spremljeni auto i postavke spremaju se samo na tvom mobitelu.",
+  "Lokacija se koristi samo na mobitelu (karta, navigacija, pečati) i ne šalje se nikamo.",
+  "Za prognozu se servisu Open-Meteo šalju približne koordinate (na oko 100 m), bez ikakvih podataka o tebi.",
+  "Ako je uključeno anonimno brojanje posjeta (GoatCounter), bilježi se samo koji su dijelovi aplikacije otvoreni – bez kolačića i bez osobnih podataka.",
+  "Poveznice na vanjske stranice i aplikacije (pozivi, e-pošta, navigacija) otvaraju se tek kad ih sam dodirneš."
+ ],
+ "oapp_odgovornost": "Sigurnost i odgovornost",
+ "oapp_odgovornost_tekst": "Podaci se redovito provjeravaju, ali staze, radno vrijeme i cijene mogu se promijeniti. Na terenu prati oznake i procijeni uvjete sam. Aplikacija ne jamči prohodnost staza. U nevolji zovi 112.",
+ "oapp_kontakt": "Kontakt",
+ "oapp_kontakt_tekst": "Pronašao si grešku, imaš prijedlog ili želiš da tvoje mjesto bude u aplikaciji? Javi se.",
+ "oapp_pisi": "Pošalji e-poštu",
+ "oapp_privatnost_cijela": "Pravila privatnosti (cijela stranica)",
+ "profil_naslov": "Visinski profil",
+ "profil_aria": "Visinski profil: uspon {uspon} m, spust {spust} m, od {min} do {max} m nadmorske visine",
+ "procjena_rute_dem": "Duljina je po putovima iz OpenStreetMapa, uspon i profil iz modela terena Copernicus. Trajanje je procjena.",
+ "grupa_zima": "Zima",
+ "kat_zima": "Zima",
+ "pod_skijaliste": "Skijalište",
+ "pod_sanjkaliste": "Sanjkalište",
+ "zima_naslov": "Zima u Gorskom kotaru",
+ "zima_provjeri": "Skijališta i sanjkališta rade samo kad ima snijega. Prije polaska provjeri radno vrijeme na njihovoj stranici ili telefonom.",
+ "zima_cesta_naslov": "Na cesti",
+ "zima_cesta": "Od 15. studenoga do 15. travnja na glavnim cestama obvezna je zimska oprema: zimske gume (M+S) ili ljetne s barem 4 mm šare, uz lance u autu. Na ostalim cestama vrijedi kad su pod snijegom ili ledom. Na planinu kreni ranije – zimi brzo pada mrak.",
+ "zima_hak": "Stanje na cestama (HAK)"
 }

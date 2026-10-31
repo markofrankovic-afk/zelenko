@@ -20,6 +20,7 @@ KAT = {
     "bicikl": "Biciklističke rute",
     "bastina": "Povijest i baština",
     "spilja": "Špilje",
+    "zima": "Zima",
 }
 
 # (id, kategorija, podvrsta, naziv, opis, qid, veza, lat, lon, napomena)
@@ -54,7 +55,7 @@ T = [
 ("P12","planina","vidikovac","Petehovac","Vidikovac s tornjem i dom iznad Delnica; pogled na Risnjak i goranske šume.",None,"",45.4050,14.7870,"Nema u Wikidati; provjeriti."),
 ("P13","planina","vrh","Skradski vrh","Vrh iznad Skrada s pogledom na dolinu Kupe.","Q25301357","tocno",0,0,""),
 ("P14","planina","polje","Ličko polje","Krško polje kod Liča: ljeti livade, povremeno pod vodom.","","",45.2805,14.7420,"točka je približna (sredina livada istočno od Liča), provjeriti na terenu."),
-("P16","planina","izletiste","Čelimbaša (Mrkopalj)","Skijalište i livade iznad Mrkopalja.",None,"",45.3150,14.8620,"Nema u Wikidati; provjeriti."),
+("P16","planina","izletiste","Čelimbaša (Mrkopalj)","Skijalište i sanjkalište iznad Mrkopalja: vučnica za skijaše i pokretna traka na sanjkalištu. Ljeti livade za šetnju.",None,"",45.30626,14.85957,"Koordinata vučnice iz OSM-a (w279916858)."),
 ("P17","planina","vrh","Sjeverni Mali Risnjak (1434 m)","Sjeverni vrh masiva Risnjaka, unutar nacionalnog parka.","Q25291486","tocno",0,0,""),
 ("P18","planina","vrh","Veliki Drgomalj (1154 m)","Šumoviti vrh sjeverno od Delnica, prema dolini Kupe.","Q25286984","tocno",0,0,""),
 ("P19","planina","vrh","Velika Javornica","Vrh Velike Kapele južno od Bijelih stijena.","Q25286967","tocno",0,0,""),
@@ -154,11 +155,15 @@ T = [
 ("H55","bastina","tehnicka","Popovićev mlin, Delnice","Mlin iz 1924. s očuvanim strojevima: kameni i valjčani mlin, sita, elevatori i kožno remenje. Prvi je u Delnicama radio na struju iz hidroelektrane Zeleni vir. Posjet uz najavu.",None,"",45.39681,14.80153,"Adresa Supilova 76 (OSM)."),
 ("H56","bastina","muzej","Kuća Delač, Delači","Najstarija kuća zaštićenog zaseoka Delači kod Brod Moravica, iz 1644. Obnovljena je i uređena starim predmetima iz kraja.",None,"",45.47163,14.95862,"Položaj: zaselak Delači (OSM); kuću provjeriti."),
 ("H57","bastina","muzej","Hrvatska čitaonica sela Kuti","Seoska čitaonica u Gornjim Kutima kod Brod Moravica. Od 1936. vode je mještani volonteri; ima više od 9000 knjiga.",None,"",45.4718,14.97591,"Položaj: selo Gornji Kuti (OSM); zgradu provjeriti."),
-("E05","izlet","zanimljivost","Adrenalinski park Kupjak","Gorski park na oko 800 m: vidikovac, šumska staza za šetnju i bicikl, adrenalinski sadržaji i roštilj.",None,"",45.39311,14.88399,"Adresa Kupjak 72 nije u OSM-u; točka je u selu Kupjak, provjeriti."),
+("E05","izlet","zanimljivost","Gorski park Kupjak","Gorski park na oko 800 m: ljeti vidikovac, šumska staza za šetnju i bicikl, adrenalinski sadržaji i roštilj; zimi sanjkalište s pokretnom trakom i noćnim sanjkanjem.",None,"",45.39594,14.88855,"Koordinata pokretne trake sanjkališta iz OSM-a (w321348201); adresa Kupjak 72."),
 ("E06","izlet","zanimljivost","Adrenalinski park Gorski Lazi, Tršće","Adrenalinski park u zaseoku Lazi kod Tršća.",None,"",45.56906,14.63647,"Park je oko 300 m od kuće Lazi 15 (OSM); točan položaj provjeriti."),
 ("E07","izlet","zanimljivost","Quad Gorski kotar","Vožnja quadom po goranskim šumskim cestama i selima, ture od 1 i 2 sata.",None,"",45.41244,14.91388,"Adresa Šubetov Most 2, Skrad; točka je zaselak Šubetov Most (OSM), provjeriti polazište."),
 ("S11","staza","poucna","Poučna staza Tropetarska stijena","Kružna planinska poučna staza od izvora Čabranke do vrha Tropetarske stijene, oko 4,5 km na dvije razine. Više od 70 vrsta drveća, bukove i jelove šume i rijedak bor. Namijenjena je ponajprije najavljenim grupama.",None,"",45.60411,14.64138,"Polazište: izvor Čabranke (OSM)."),
 ("S12","staza","poucna","Poučna staza Plodovi gorja, Ravna Gora","Staza od 1,5 km na Suhom vrhu kod Ravne Gore, s pločama o drveću, grmlju, gljivama, ljekovitom bilju i šumskim plodovima.",None,"",45.37076,14.94078,"Polazište kod hotela Breza (OSM), oko 700 m od središta Ravne Gore; provjeriti."),
+# ---------------- ZIMA ----------------
+("W03","zima","sanjkaliste","Sanjkalište Bajt, Ravna Gora","Sanjkalište uz izlaz s autoceste za Ravnu Goru, s vučnicom; sanjke se mogu iznajmiti.",None,"",45.3753,14.95814,""),
+("W05","zima","skijaliste","Rudnik, Tršće","Malo skijalište s vučnicama za djecu i sanjkalište s pokretnom trakom kod Tršća; sanjke se mogu iznajmiti.",None,"",45.56779,14.61549,""),
+("W06","zima","skijaliste","Skijalište Petehovac, Delnice","Skijalište s vučnicom na Petehovcu iznad Delnica, uz planinski centar; radi kad ima dovoljno snijega. Uz njega je i sanjkalište.",None,"",45.38196,14.82105,""),
 ("S10","staza","poucna","Staza predatora, Tršće","Kružna poučna staza od oko 1,7 km (oko 1 h hoda) s modelima vuka, risa, medvjeda, jelena, srne, lisice, divlje svinje i tetrijeba u prirodnoj veličini, uz ploče o svakoj životinji.",None,"",45.5664,14.62981,"Položaj: selo Tršće (OSM); polazište staze provjeriti."),
 ]
 
@@ -173,19 +178,22 @@ def pouzdanost(wd, veza):
 RUCNO = {"V01": "S"}  # izvor Kupe: položaj se poklapa s izvorom, ali Wikidata navodi grubu preciznost
 
 # točke kod kojih Wikidata pokazuje nešto drugo (npr. selo umjesto polja): vrijedi naša koordinata
-KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04", "H05"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
+KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04", "H05"}
+# mjesta koja se ističu zimi (filter „Zima” na karti i zimski dio u „Danas”)
+ZIMA = {"P04": "skijaliste", "P16": "skijaliste", "E05": "sanjkaliste", "W03": "sanjkaliste", "W05": "skijaliste", "W06": "skijaliste"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
 
 # koordinate iz OSM-a (ODbL): objekt je u OSM-u, ali ga OSM izvadak ne donosi kao točku ili mu treba naš naziv i opis
 KOORD_OSM = {"H05": "w333577471", "H45": "w379649181", "H46": "w685050686", "H47": "w433260934", "H48": "r6304141",
              "H49": "w433249369", "E01": "w1534944649", "E02": "w436526341", "E03": "n13022902160", "E04": "n12085008012",
-             "H55": "n12196525173", "V13": "n8548606710"}
+             "H55": "n12196525173", "V13": "n8548606710", "P16": "w279916858", "E05": "w321348201",
+             "W03": "w1384444362", "W05": "w664670006", "W06": "w228996245"}
 # približne koordinate: (pouzdanost, odakle je točka) – objekt je u tom mjestu ili na toj adresi, točan položaj provjeriti
 KOORD_PRIBLIZNO = {
     "H50": ("S", "OpenStreetMap – središte mjesta Mrkopalj"), "H51": ("S", "OpenStreetMap – središte mjesta Brod Moravice"),
     "H52": ("S", "OpenStreetMap – središte mjesta Plešce"), "H53": ("S", "OpenStreetMap – središte mjesta Lič"),
     "S10": ("N", "OpenStreetMap – selo Tršće"), "H54": ("S", "procjena po kućnim brojevima u OSM-u (Supilova 94)"),
     "H56": ("S", "OpenStreetMap – zaselak Delači"), "H57": ("S", "OpenStreetMap – selo Gornji Kuti"),
-    "E05": ("N", "OpenStreetMap – selo Kupjak"), "E06": ("N", "OpenStreetMap – kuća Lazi 15, park je oko 300 m dalje"),
+"E06": ("N", "OpenStreetMap – kuća Lazi 15, park je oko 300 m dalje"),
     "E07": ("N", "OpenStreetMap – zaselak Šubetov Most"), "S11": ("S", "OpenStreetMap – izvor Čabranke"),
     "S12": ("N", "OpenStreetMap – Bistro Breza, Ravna Gora (je li to hotel Breza, provjeriti)"),
 }
@@ -216,6 +224,7 @@ def tocka(r):
         "licenca": ("koordinate: ODbL – © OpenStreetMap suradnici" if id_ in KOORD_OSM or id_ in KOORD_PRIBLIZNO else "koordinate: CC0 (Wikidata)" if wd else "koordinate: naša procjena") + "; opis: naš tekst",
         "napomena": nap,
         "status": "za odobrenje",
+        **({"zima": ZIMA[id_]} if id_ in ZIMA else {}),
         **({"dolazak": {"lat": DOLAZAK[id_][0], "lon": DOLAZAK[id_][1], "naziv": DOLAZAK[id_][2], "osm": DOLAZAK[id_][3]}} if id_ in DOLAZAK else {}),
     }
 

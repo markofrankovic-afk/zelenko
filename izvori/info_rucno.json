@@ -257,11 +257,12 @@
    "provjereno": "2026-10-24"
   },
   "E05": {
-   "napomena": "Sezonu i cijene provjeri telefonom.",
+   "napomena": "Sezonu, radno vrijeme i cijene provjeri telefonom – zimi sve ovisi o snijegu.",
    "telefon": "+385 91 569 2979",
    "izvor": "Aktivni turizam – Adrenalin park Kupjak",
    "izvor_url": "https://aktivniturizam.hr/ponuda/ravna-gora/adrenalin-park-kupjak",
-   "provjereno": "2026-10-24"
+   "provjereno": "2026-10-24",
+   "savjet": "Zimi: sanjkalište s pokretnom trakom i noćnim sanjkanjem, sanjke se mogu iznajmiti."
   },
   "E06": {
    "napomena": "Sezonu i cijene provjeri telefonom.",
@@ -288,6 +289,51 @@
    "izvor": "Gorski kotar Bike (TZ Gorskog kotara)",
    "izvor_url": "https://gorskikotarbike.com/en/attractions/poucna-staza-tropetarska-stijena/",
    "provjereno": "2026-10-24"
+  },
+  "P04": {
+   "rv_tekst": [
+    "Zimi, kad ima snijega: svaki dan 9–16 h (staze, žičara, vučnice).",
+    "Noćno skijanje utorkom i petkom 19–22 h, ako vrijeme dopusti.",
+    "Blagajna se otvara u 8 h (na dane noćnog skijanja i u 18 h).",
+    "Vučnica Tešnje trajno je zatvorena."
+   ],
+   "savjet": "Dnevne karte mogu se kupiti na blagajni, online i na Petrolovim benzinskim postajama.",
+   "napomena": "Staze bez umjetnog snijega otvaraju se tek kad padne dovoljno prirodnog snijega.",
+   "telefon": "+385 91 181 1808",
+   "email": "platak@gsc-pgz.hr",
+   "web": "https://platak.hr/",
+   "izvor": "Platak – Goranski sportski centar",
+   "izvor_url": "https://platak.hr/en/2026/01/06/pocinje-skijaska-sezona-na-platku/",
+   "provjereno": "2026-10-31"
+  },
+  "P16": {
+   "savjet": "Na sanjkalištu je pokretna traka; ima poludnevnih i dnevnih karata, a sanjke se mogu iznajmiti.",
+   "napomena": "Rad ovisi o snijegu i vremenu – prije dolaska provjeri na njihovoj Facebook stranici ili telefonom.",
+   "izvor": "Turističke priče – sanjkališta u Gorskom kotaru (prosinac 2025.)",
+   "izvor_url": "https://www.turistickeprice.hr/en/toboggan-run-in-Gorski-Kotar/",
+   "provjereno": "2026-10-31"
+  },
+  "W03": {
+   "savjet": "Sanjke se mogu iznajmiti na licu mjesta.",
+   "napomena": "Rad ovisi o snijegu i vremenu – prije dolaska provjeri na njihovoj Facebook stranici.",
+   "izvor": "Turističke priče – sanjkališta u Gorskom kotaru (prosinac 2025.)",
+   "izvor_url": "https://www.turistickeprice.hr/en/toboggan-run-in-Gorski-Kotar/",
+   "provjereno": "2026-10-31"
+  },
+  "W05": {
+   "savjet": "Sanjke se mogu iznajmiti po pristupačnoj cijeni.",
+   "napomena": "Rad ovisi o snijegu i vremenu – prije dolaska provjeri na njihovoj Facebook stranici.",
+   "izvor": "Turističke priče – sanjkališta u Gorskom kotaru (prosinac 2025.)",
+   "izvor_url": "https://www.turistickeprice.hr/en/toboggan-run-in-Gorski-Kotar/",
+   "provjereno": "2026-10-31"
+  },
+  "W06": {
+   "napomena": "Skijanje radi samo kad ima dovoljno snijega – prije dolaska nazovi planinski centar.",
+   "telefon": "+385 51 814 901",
+   "web": "https://petehovac.com.hr/",
+   "izvor": "OpenStreetMap; Total Croatia News",
+   "izvor_url": "https://total-croatia-news.com/lifestyle/petehovac/",
+   "provjereno": "2026-10-31"
   }
  }
 }
