@@ -542,7 +542,7 @@
   ],
   [
    "Copernicus DEM GLO-30",
-   "Terrain model for route ascent and elevation profiles. © DLR e.V. 2010–2014 and © Airbus Defence and Space GmbH 2014–2018, provided under COPERNICUS by the European Union and ESA.",
+   "Terrain model for route ascent, elevation profiles, and the contour lines and hill shading on the map. © DLR e.V. 2010–2014 and © Airbus Defence and Space GmbH 2014–2018, provided under COPERNICUS by the European Union and ESA.",
    "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM"
   ],
   [
@@ -559,6 +559,11 @@
    "Leaflet",
    "Map display (BSD-2 licence).",
    "https://leafletjs.com/"
+  ],
+  [
+   "protomaps-leaflet",
+   "Draws our own map from vector tiles. BSD-3 licence.",
+   "https://github.com/protomaps/protomaps-leaflet"
   ]
  ],
  "oapp_privatnost": "Privacy",
@@ -629,5 +634,19 @@
  "snim_uspon_gps": "Ascent is calculated from GPS altitude, so it's approximate.",
  "snim_pro": "Recording your own routes and GPX export are part of Pro.",
  "snim_ruta": "Route {datum}",
- "snim_greska_gps": "Can't record without GPS. Allow location access."
+ "snim_greska_gps": "Can't record without GPS. Allow location access.",
+ "karta_dem_atr": "Terrain: Copernicus DEM (© DLR, © Airbus DS)",
+ "karta_vrsta": "Map",
+ "karta_zelenko": "Zelenko (topo)",
+ "karta_osm": "OpenStreetMap",
+ "karta_offline_opis": "Map areas you view are saved automatically. For a trip without signal, download all of Gorski kotar in advance.",
+ "karta_preuzmi": "Download the whole map",
+ "karta_ponovo": "Download again",
+ "karta_preuzimam": "Downloading map… {p}%",
+ "karta_preuzeta": "The whole map is on your phone ({mb} MB, {datum}).",
+ "karta_preuzeta_ok": "Map downloaded – it works without signal.",
+ "karta_greska": "Download failed. Try again when you have a better signal.",
+ "karta_offline_naslov": "Offline map",
+ "karta_pro": "Downloading the whole map of Gorski kotar for offline use is part of Pro.",
+ "offline_bez_mreze_puna": "No signal · the Gorski kotar map is on your phone"
 }

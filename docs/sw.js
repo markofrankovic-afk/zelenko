@@ -2,10 +2,10 @@
    - Ljuska, tekstovi i podaci (točke, rute): spremljeni unaprijed, uvijek dostupni.
    - Kartice karte (OpenStreetMap) i fontovi: spremaju se dok ih gledaš, s ograničenjem broja.
    - Vremenska prognoza: uvijek s mreže; aplikacija sama čuva zadnju. */
-const VERSION = "gk-v0.11.2";
+const VERSION = "gk-v0.12.0";
 const SHELL = ["./", "index.html", "app.js", "put.js", "manifest.webmanifest",
   "i18n/hr.json", "i18n/en.json", "privatnost.html", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/slike.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json", "data/rute_planinarske.json", "data/mreza.json", "data/lynx.json",
-  "vendor/leaflet.js", "vendor/leaflet.css", "vendor/images/layers.png", "vendor/images/marker-icon.png", "vendor/images/marker-shadow.png",
+  "vendor/leaflet.js", "vendor/leaflet.css", "vendor/protomaps-leaflet.js", "karta.js", "karta/popis.json", "vendor/images/layers.png", "vendor/images/marker-icon.png", "vendor/images/marker-shadow.png",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "icons/favicon-64.png", "icons/maskable-512.png"];
 const LIMITS = { "gk-tiles": 4000, "gk-tiles-t": 4000, "gk-fonts": 40, "gk-foto": 600 };
 
@@ -72,7 +72,9 @@ self.addEventListener("fetch", e => {
   if (url.hostname === "tile.openstreetmap.org") { e.respondWith(tileSWR(e, req)); return; }
   if (url.hostname === "upload.wikimedia.org") { e.respondWith(cacheFirst(req, "gk-foto")); return; }
   if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") { e.respondWith(cacheFirst(req, "gk-fonts")); return; }
-  if (url.origin === location.origin && (url.pathname.includes("/data/") || url.pathname.includes("/i18n/"))) { e.respondWith(networkFirst(req)); return; }
+  /* vlastita karta: pločice se čuvaju trajno (nova izrada ima novi ?v=), popis s mreže */
+  if (url.origin === location.origin && url.pathname.includes("/karta/") && !url.pathname.endsWith("popis.json")) { e.respondWith(cacheFirst(req, "gk-karta")); return; }
+  if (url.origin === location.origin && (url.pathname.includes("/data/") || url.pathname.endsWith("popis.json") || url.pathname.includes("/i18n/"))) { e.respondWith(networkFirst(req)); return; }
   if (url.origin === location.origin) {
     e.respondWith(caches.match(req, { ignoreSearch: true }).then(hit => hit || fetch(req).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); }

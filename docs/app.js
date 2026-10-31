@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.11.2",
+  verzija: "0.12.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -102,7 +102,7 @@ function sunTimes(date, lat, lon) {
 function primijeniTemu(v) {
   if (v === "light" || v === "dark") document.documentElement.setAttribute("data-theme", v); else document.documentElement.removeAttribute("data-theme");
   store.set("gk-tema", v || "sustav");
-  if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); renderMarkers(); renderCarMarker(); if (S.ruta) pokaziRutu(S.ruta);
+  if (map) { skiniPodlogu(); skiniPodlogu = osnova(map); renderMarkers(); renderCarMarker(); if (S.ruta) pokaziRutu(S.ruta);
     if (userMarker) { userMarker.setStyle({ color: cv("--marker-stroke"), fillColor: cv("--accent") }); userHalo.setStyle({ color: cv("--accent") }); } }
 }
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (store.get("gk-tema", "sustav") === "sustav") primijeniTemu("sustav"); });
@@ -164,13 +164,31 @@ function addPodloga(m, small) {
   m.on("zoomend", sync); sync();
   return () => { m.off("zoomend", sync); for (const k in grp) if (m.hasLayer(grp[k].lyr)) m.removeLayer(grp[k].lyr); };
 }
-let skiniPodlogu = () => {}, tileLayer = null, rutaLayer = null;
+let skiniPodlogu = () => {}, rutaLayer = null;
+/* osnova karte: „zelenko“ = vlastita topografska karta (karta/: OSM + Copernicus DEM, radi bez signala),
+   „osm“ = kartice OpenStreetMapa + offline podloga. Izvan okvira Gorskog kotara uvijek se vide OSM kartice. */
+const KARTA_OKVIR = L.latLngBounds([45.15, 14.42], [45.70, 15.33]);
+const KARTA_VERZIJA = 1;  /* povećaj kad se pločice ponovo izrade (alati/osm_karta.py) */
+const vrstaKarte = () => PREGLED || !window.ZelenkoKarta ? "osm" : store.get("gk-karta", "zelenko");
+const OsmVani = L.TileLayer.extend({ _isValidTile(c) { return L.TileLayer.prototype._isValidTile.call(this, c) && !KARTA_OKVIR.contains(this._tileCoordsToBounds(c)); } });
+function osnova(m, mala) {
+  const sl = [];
+  if (vrstaKarte() === "zelenko") {
+    sl.push(new OsmVani("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
+    const tamna = document.documentElement.getAttribute("data-theme") === "dark" || (!document.documentElement.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    const z = ZelenkoKarta.slojevi("karta/", { bounds: KARTA_OKVIR, v: KARTA_VERZIJA, tamna });
+    sl.push(z.vektor, z.sjencanje);
+    if (!mala) m.attributionControl.addAttribution(t("karta_dem_atr"));
+  } else if (!PREGLED) sl.push(L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
+  sl.forEach(x => x.addTo(m));
+  const skini = vrstaKarte() === "zelenko" ? () => {} : addPodloga(m, mala);
+  return () => { sl.forEach(x => m.removeLayer(x)); skini(); if (!mala) m.attributionControl.removeAttribution(t("karta_dem_atr")); };
+}
 function initMap() {
   map = L.map("map", { zoomControl: false, attributionControl: true, preferCanvas: true }).setView(CONFIG.centar, CONFIG.zoom);
-  if (!PREGLED) tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles", attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici' }).addTo(map);
-  else map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici');
+  map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici');
   map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
-  skiniPodlogu = addPodloga(map);
+  skiniPodlogu = osnova(map);
   layer = L.layerGroup().addTo(map);
   map.on("moveend", () => { if (!S.pos) renderNear(); });
   let zPrev = map.getZoom(); map.on("zoomend", () => { const z = map.getZoom(); if (prag(z) !== prag(zPrev)) renderMarkers(); zPrev = z; });
@@ -368,7 +386,7 @@ $("#searchPill").addEventListener("click", makniPretragu);
 
 function netStatus() {
   if (PREGLED) { $("#netStatus").textContent = t("pregled_status"); return; }
-  $("#netStatus").innerHTML = navigator.onLine ? `<span style="color:var(--ok);display:flex">${ic("check")}</span>${esc(t("offline_spremno"))}` : `<span style="color:var(--warn);display:flex">${ic("wifi_off")}</span>${esc(t("offline_bez_mreze"))}`;
+  $("#netStatus").innerHTML = navigator.onLine ? `<span style="color:var(--ok);display:flex">${ic("check")}</span>${esc(t("offline_spremno"))}` : `<span style="color:var(--warn);display:flex">${ic("wifi_off")}</span>${esc(t(vrstaKarte() === "zelenko" && store.get("gk-karta-offline", null) ? "offline_bez_mreze_puna" : "offline_bez_mreze"))}`;
 }
 
 addEventListener("online", netStatus); addEventListener("offline", netStatus);
@@ -771,8 +789,7 @@ function openRuta(id) {
     ${slobodna(r) && r.gpx ? `<button class="btn" id="rGpx" style="align-self:flex-start">${ic("download")}${esc(t("gpx_preuzmi"))}</button>` : ""}
   </div>`);
   const mm = L.map("rutaMap", { zoomControl: false, attributionControl: false, dragging: true, scrollWheelZoom: false, preferCanvas: true });
-  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }).addTo(mm);
-  const skini = addPodloga(mm, true);
+  const skini = osnova(mm, true);
   const ll = trasaLL(r) || [stops.map(p => [p.lat, p.lon])];
   L.polyline(ll, { color: cv("--ink"), weight: 7, opacity: .5 }).addTo(mm);
   L.polyline(ll, { color: cv("--amber"), weight: 4, dashArray: trasaLL(r) ? null : "8 8" }).addTo(mm);
@@ -1049,12 +1066,15 @@ function renderMoje() {
       <div class="card stack" style="gap:8px"><b>${esc(t("sigurnosna_kopija"))}</b><span class="small muted">${esc(t("kopija_opis"))}</span>
         <div class="grid2"><button class="btn" id="kIzvoz">${esc(t("kopija_izvoz"))}</button><label class="btn" for="kUvoz" style="cursor:pointer">${esc(t("kopija_uvoz"))}</label></div><input type="file" id="kUvoz" accept="application/json,.json" hidden></div>
       <div class="card stack" style="gap:8px"><b>${esc(t("jezik"))}</b><div class="seg dva" role="group" aria-label="${esc(t("jezik"))}">${JEZICI.map(j => `<button data-jezik="${j}" lang="${j}" aria-pressed="${CONFIG.jezik === j}">${esc(t("jezik_" + j))}</button>`).join("")}</div></div>
+      ${!PREGLED && window.ZelenkoKarta ? kartaPostavke() : ""}
       <div class="card stack" style="gap:8px"><b>${esc(t("tema"))}</b><div class="seg" role="group" aria-label="${esc(t("tema"))}">${[["sustav", "tema_sustav"], ["light", "tema_svijetla"], ["dark", "tema_tamna"]].map(([v, k]) => `<button data-tema="${v}" aria-pressed="${store.get("gk-tema", "sustav") === v}">${esc(t(k))}</button>`).join("")}</div></div>
       <label class="card row" for="bigTxt" style="justify-content:space-between;min-height:52px"><b>${esc(t("veliki_tekst"))}</b><input type="checkbox" id="bigTxt" ${document.documentElement.classList.contains("big") ? "checked" : ""} style="width:22px;height:22px;accent-color:var(--accent)"></label>
       <button class="card list-row" id="sOApp" style="width:100%;text-align:left">${medo(40, true)}<span class="t"><b>${esc(t("oapp_gumb"))}</b><span>${esc(t("verzija", { v: CONFIG.verzija }))}</span></span>${ic("chevron")}</button>
     </section>`;
 }
 $("#moje").addEventListener("click", e => {
+  const kb = e.target.closest("[data-karta]"); if (kb && kb.dataset.karta !== vrstaKarte()) { store.set("gk-karta", kb.dataset.karta); if (map) { skiniPodlogu(); skiniPodlogu = osnova(map); } renderMoje(); gcEv("karta-" + kb.dataset.karta); }
+  if (e.target.closest("#kPreuzmi")) preuzmiKartu();
   if (e.target.closest("#snKreni")) snimKreni();
   const tr = e.target.closest("[data-trag]"); if (tr) openTrag(tr.dataset.trag);
   if (e.target.closest("#sMoja")) openMojaMjesta();
@@ -1158,8 +1178,7 @@ function openTrag(id) {
     <button class="btn" id="trBrisi" style="align-self:flex-start">${ic("trash")}<span>${esc(t("snim_obrisi"))}</span></button></div>`);
   const ll = x.p.map(p => [p[0], p[1]]);
   const mm = L.map("trMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, preferCanvas: true });
-  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }).addTo(mm);
-  const skini = addPodloga(mm, true);
+  const skini = osnova(mm, true);
   L.polyline(ll, { color: cv("--sos"), weight: 4 }).addTo(mm);
   mm.fitBounds(L.latLngBounds(ll).pad(0.2)); setTimeout(() => mm.invalidateSize(), 60);
   sheetCleanup.push(() => { skini(); mm.remove(); });
@@ -1174,6 +1193,46 @@ function snimObnovi() {
   const st = SN.stanje; if (!st) return;
   if (st.od) { const z = st.p[st.p.length - 1], kraj = z ? st.start + z[3] * 1000 : st.od; st.trajanje = Math.round((st.trajanje || 0) + Math.max(0, kraj - st.od) / 1000); st.od = null; st.pauza = true; snimSpremi(); }
   snimCrtaj(); snimPanel();
+}
+
+
+/* ---------- karta bez signala: vrsta karte i preuzimanje cijele karte (Pro) ---------- */
+const KP = { radi: false };
+(() => { /* nova verzija pločica: stare spremljene više ne vrijede */
+  if (PREGLED || !("caches" in window)) return;
+  const v = store.get("gk-karta-v", null);
+  if (v !== KARTA_VERZIJA) { caches.delete("gk-karta").catch(() => {}); store.set("gk-karta-v", KARTA_VERZIJA); store.set("gk-karta-offline", null); }
+})();
+function kartaPostavke() {
+  const v = vrstaKarte(), pr = store.get("gk-karta-offline", null);
+  return `<div class="card stack" style="gap:8px"><b>${esc(t("karta_vrsta"))}</b>
+    <div class="seg dva" role="group" aria-label="${esc(t("karta_vrsta"))}">${["zelenko", "osm"].map(k => `<button data-karta="${k}" aria-pressed="${v === k}">${esc(t("karta_" + k))}</button>`).join("")}</div>
+    ${v === "zelenko" ? `<span class="small muted" id="kOffTxt">${esc(pr ? t("karta_preuzeta", { mb: pr.mb, datum: new Date(pr.t).toLocaleDateString(LOC()) }) : t("karta_offline_opis"))}</span>
+    <button class="btn" id="kPreuzmi" style="align-self:flex-start">${ic(jePro() ? "download" : "lock")}${esc(t(pr ? "karta_ponovo" : "karta_preuzmi"))}</button>` : ""}</div>`;
+}
+async function preuzmiKartu() {
+  if (!jePro()) { openSheet(t("karta_offline_naslov"), `<div class="stack"><p style="margin:0">${esc(t("karta_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p></div>`); return; }
+  if (KP.radi || !("caches" in window)) return;
+  KP.radi = true;
+  const poruka = x => { const el = $("#kOffTxt"); if (el) el.textContent = x; };
+  try {
+    poruka(t("karta_preuzimam", { p: 0 }));
+    const popis = await (await fetch("karta/popis.json", { cache: "no-store" })).json();
+    const c = await caches.open("gk-karta"), sve = popis.plocice;
+    let i = 0, gotovo = 0;
+    const radnik = async () => {
+      while (i < sve.length) {
+        const u = new URL("karta/" + sve[i++] + "?v=" + KARTA_VERZIJA, location.href).href;
+        if (!(await c.match(u))) { const r = await fetch(u); if (!r.ok) throw new Error(u); await c.put(u, r); }
+        if (++gotovo % 25 === 0) poruka(t("karta_preuzimam", { p: Math.round(gotovo / sve.length * 100) }));
+      }
+    };
+    await Promise.all(Array.from({ length: 6 }, radnik));
+    store.set("gk-karta-offline", { mb: Math.round(popis.bajtova / 1e6), t: Date.now() });
+    toast(t("karta_preuzeta_ok")); gcEv("karta-preuzeta");
+  } catch (e) { toast(t("karta_greska")); }
+  KP.radi = false;
+  if (S.view === "moje") renderMoje();
 }
 
 /* ---------- o aplikaciji: izvori, licence, privatnost, kontakt ---------- */
@@ -1366,7 +1425,7 @@ async function boot() {
   { const tm = store.get("gk-tema", "sustav"); if (tm === "light" || tm === "dark") document.documentElement.setAttribute("data-theme", tm); }
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
-  get("data/podloga.json").then(d => { PODLOGA = d; if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); } }).catch(() => {});
+  get("data/podloga.json").then(d => { PODLOGA = d; if (map && vrstaKarte() === "osm") { skiniPodlogu(); skiniPodlogu = osnova(map); } }).catch(() => {});
   const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD, hike] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null), get("data/rute_planinarske.json").catch(() => ({ rute: [] }))]);
   T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec; if (lynxD) LYNX = lynxD;
   TOCKE = tocke.tocke; RUTE = rute.rute.concat((hike && hike.rute) || [], (bike && bike.rute) || []);

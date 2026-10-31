@@ -17,6 +17,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - `docs/data/mreza.json` – mreža putova za navigaciju po karti bez interneta (gradi `alati/osm_mreza.py`); izračun puta je u `docs/put.js`
 - `docs/data/rute_bicikl.json` – biciklističke i MTB rute iz OSM relacija (gradi `alati/osm_bike_rute.py`)
 - `docs/data/rute_planinarske.json` – planinarske staze iz OSM relacija (gradi `alati/osm_pjesacke_rute.py`)
+- `docs/karta/` – vlastita topografska karta: vektorske pločice z8–14 i sjenčanje terena z8–13, `popis.json` za preuzimanje (gradi `alati/osm_karta.py`; nakon nove izrade povećaj `KARTA_VERZIJA` u app.js)
 - `docs/data/usluge.json` – jelo, smještaj, trgovine i OPG (OSM + `izvori/partneri.json`)
 - `docs/data/info.json` – radno vrijeme, ulaznice i kontakti (`izvori/info_rucno.json` sa službenih stranica + OSM), gradi `alati/info_tocke.py`
 - `docs/data/specijaliteti.json` – specijaliteti Gorskog kotara za Gastro kutak (s izvorima)
@@ -37,6 +38,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - `visine.py` – uspon, spust i visinski profil ruta iz Copernicus DEM GLO-30 (pokreće se nakon osm_rute.py, osm_bike_rute.py i osm_pjesacke_rute.py; DEM pločice N45E014 i N45E015 nisu u repozitoriju)
 - `osm_mreza.py` – mreža cesta, šumskih cesta i staza za navigaciju (pješice i biciklom)
 - `osm_bike_rute.py` – biciklističke i MTB rute iz OSM relacija: trasa, duljina, GPX, stajališta
+- `osm_karta.py` – vlastita topografska karta iz OSM izvatka i Copernicus DEM-a (šuma, livade, vode, ceste, staze, zgrade, markirane staze, slojnice 20/50/100 m, sjenčanje); crta je `docs/karta.js` (protomaps-leaflet, BSD-3)
 - `osm_pjesacke_rute.py` – planinarske staze iz OSM relacija: redoslijed iz relacije, popunjavanje rupa po stazama, smjer po imenu, GPX
 - `ocisti_duplikate.py` – nakon spoji_osm.py: uklanja dvostruke točke (popis ručno pregledanih + pravila)
 - `osm_usluge.py` – usluge iz OSM-a + ručni partneri iz `izvori/partneri.json`

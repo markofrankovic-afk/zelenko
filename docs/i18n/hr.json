@@ -542,7 +542,7 @@
   ],
   [
    "Copernicus DEM GLO-30",
-   "Model terena za uspon i visinski profil ruta. © DLR e.V. 2010–2014 i © Airbus Defence and Space GmbH 2014–2018, dobavljeno u okviru programa COPERNICUS (Europska unija i ESA).",
+   "Model terena za uspon, visinski profil ruta te slojnice i sjenčanje na karti. © DLR e.V. 2010–2014 i © Airbus Defence and Space GmbH 2014–2018, dobavljeno u okviru programa COPERNICUS (Europska unija i ESA).",
    "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM"
   ],
   [
@@ -559,6 +559,11 @@
    "Leaflet",
    "Prikaz karte (licenca BSD-2).",
    "https://leafletjs.com/"
+  ],
+  [
+   "protomaps-leaflet",
+   "Crtanje naše karte iz vektorskih pločica. Licenca BSD-3.",
+   "https://github.com/protomaps/protomaps-leaflet"
   ]
  ],
  "oapp_privatnost": "Privatnost",
@@ -641,5 +646,19 @@
  "snim_uspon_gps": "Uspon je izračunat iz GPS visine, pa je približan.",
  "snim_pro": "Snimanje vlastitih ruta i izvoz GPX-a dio su Pro verzije.",
  "snim_ruta": "Ruta {datum}",
- "snim_greska_gps": "Bez GPS-a ne mogu snimati. Dopusti pristup lokaciji."
+ "snim_greska_gps": "Bez GPS-a ne mogu snimati. Dopusti pristup lokaciji.",
+ "karta_dem_atr": "Teren: Copernicus DEM (© DLR, © Airbus DS)",
+ "karta_vrsta": "Karta",
+ "karta_zelenko": "Zelenko (topo)",
+ "karta_osm": "OpenStreetMap",
+ "karta_offline_opis": "Dijelovi karte koje pogledaš spremaju se sami. Za put bez signala preuzmi cijeli Gorski kotar unaprijed.",
+ "karta_preuzmi": "Preuzmi cijelu kartu",
+ "karta_ponovo": "Preuzmi ponovo",
+ "karta_preuzimam": "Preuzimam kartu… {p} %",
+ "karta_preuzeta": "Cijela karta je na mobitelu ({mb} MB, {datum}).",
+ "karta_preuzeta_ok": "Karta je preuzeta i radi bez signala.",
+ "karta_greska": "Preuzimanje nije uspjelo. Pokušaj ponovo kad imaš bolji signal.",
+ "karta_offline_naslov": "Karta bez signala",
+ "karta_pro": "Preuzimanje cijele karte Gorskog kotara za rad bez signala dio je Pro verzije.",
+ "offline_bez_mreze_puna": "Bez mreže · karta Gorskog kotara je na mobitelu"
 }

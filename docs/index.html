@@ -245,6 +245,7 @@ details.tip p{margin:8px 0 0;color:var(--ink2)}
 .kn-ik .ic{width:34px;height:34px;stroke-width:2.6;stroke:currentColor}
 .kn-stat{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:4px 8px;align-items:baseline}
 .kn-stat b{font:600 1.2rem var(--f-mono)} .kn-stat span{color:var(--muted);font-size:.9rem}
+.sjencanje{mix-blend-mode:multiply}:root[data-theme="dark"] .sjencanje{opacity:.45}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sjencanje{opacity:.45}}
 .rec-dot{width:12px;height:12px;border-radius:50%;background:var(--sos);animation:recp 1.4s infinite}.rec-dot.pauza{animation:none;background:var(--muted)}@keyframes recp{50%{opacity:.35}}@media (prefers-reduced-motion:reduce){.rec-dot{animation:none}}
 .kn-gumbi{flex-wrap:wrap;gap:8px} .kn-gumbi .seg{flex:1 1 180px} .kn-gumbi .btn{min-height:44px}
 .seg.mali button{min-height:38px;font-size:.92rem}
@@ -351,6 +352,8 @@ dl.info{margin:0}
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script src="vendor/leaflet.js"></script>
+<script src="vendor/protomaps-leaflet.js"></script>
+<script src="karta.js"></script>
 <script src="put.js"></script>
 <script src="app.js"></script>
 </body>
