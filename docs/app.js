@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.10.3",
+  verzija: "0.11.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -33,6 +33,7 @@ const ICON = {
   loc: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
   pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
   wifi_off: '<path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 4.2-2.7M10.7 5.1A15 15 0 0 1 22 8.8M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-1.6-1.2M12 20h.01"/>',
+  rec: '<circle cx="12" cy="12" r="7"/>', pause: '<path d="M9 5v14M15 5v14"/>', trash: '<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/>',
   chevron: '<path d="m9 18 6-6-6-6"/>', car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>'
 };
 const ic = (n, cls = "ic") => `<svg class="${cls}" aria-hidden="true" viewBox="0 0 24 24">${ICON[n] || ""}</svg>`;
@@ -47,6 +48,10 @@ function t(k, v) { let s = T[k] ?? k; if (v) for (const x in v) s = s.split("{" 
 const JEZICI = ["hr", "en"];
 CONFIG.jezik = (() => { const j = store.get("gk-jezik", null); if (JEZICI.includes(j)) return j;
   return (navigator.languages || [navigator.language || "hr"]).some(l => /^(hr|bs|sr|sh)\b/i.test(l)) ? "hr" : "en"; })();
+/* Pro: dok kupnja preko Google Playa ne postoji, za probu se otključava s ?pro=1 (gasi se s ?pro=0) */
+(() => { const q = new URLSearchParams(location.search).get("pro"); if (q === "1") store.set("gk-pro", true); if (q === "0") store.set("gk-pro", false); })();
+const jePro = () => !!store.get("gk-pro", false);
+const slobodna = r => !!(r.besplatno || jePro());
 const LOC = () => CONFIG.jezik === "hr" ? "hr-HR" : "en-GB";
 /* prijevod podataka bez „tekst” strukture (specijaliteti, Lynx, informacije, polazišta): polje "<jezik>" preko hrvatskog */
 const preko = o => { if (o && CONFIG.jezik !== "hr" && o[CONFIG.jezik]) Object.assign(o, o[CONFIG.jezik]); return o; };
@@ -169,7 +174,7 @@ function initMap() {
   layer = L.layerGroup().addTo(map);
   map.on("moveend", () => { if (!S.pos) renderNear(); });
   let zPrev = map.getZoom(); map.on("zoomend", () => { const z = map.getZoom(); if (prag(z) !== prag(zPrev)) renderMarkers(); zPrev = z; });
-  renderMarkers(); renderCarMarker();
+  renderMarkers(); renderCarMarker(); snimObnovi();
 }
 const trasaLL = r => r.trasa_dijelovi ? r.trasa_dijelovi.map(d => d.map(([x, y]) => [y, x])) : r.trasa ? [r.trasa.map(([x, y]) => [y, x])] : null;
 function pokaziRutu(id) {
@@ -738,11 +743,11 @@ function profilHtml(r) {
   const P = v.profil, W = 320, H = 96, km = P[P.length - 1][0] || 1, lo = Math.floor(v.min / 50) * 50, hi = Math.max(lo + 100, Math.ceil(v.max / 50) * 50);
   const x = d => (d / km * W).toFixed(1), y = e => (H - (e - lo) / (hi - lo) * H).toFixed(1);
   const lin = P.map(([d, e], i) => (i ? "L" : "M") + x(d) + " " + y(e)).join(" ");
-  return `<section class="profil${r.besplatno ? "" : " zakljucano"}" aria-label="${esc(t("profil_aria", { uspon: r.uspon_m, spust: v.spust, min: v.min, max: v.max }))}">
+  return `<section class="profil${slobodna(r) ? "" : " zakljucano"}" aria-label="${esc(t("profil_aria", { uspon: r.uspon_m, spust: v.spust, min: v.min, max: v.max }))}">
     <div class="between small"><b>${esc(t("profil_naslov"))}</b><span class="muted">↑ ${r.uspon_m} m · ↓ ${v.spust} m · ${v.min}–${v.max} m</span></div>
     <div class="profil-g"><svg viewBox="0 -4 ${W} ${H + 8}" preserveAspectRatio="none" aria-hidden="true">
       <path d="${lin} L${W} ${H} L0 ${H} Z" fill="var(--accent-soft)"/><path d="${lin}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-      <span class="ph">${hi} m</span><span class="pl">${lo} m</span>${r.besplatno ? "" : `<span class="plock">${ic("lock")}${esc(t("pro"))}</span>`}</div>
+      <span class="ph">${hi} m</span><span class="pl">${lo} m</span>${slobodna(r) ? "" : `<span class="plock">${ic("lock")}${esc(t("pro"))}</span>`}</div>
     <div class="between small muted"><span>0 km</span><span>${kmR(r)} km</span></div></section>`;
 }
 function openRuta(id) {
@@ -761,8 +766,9 @@ function openRuta(id) {
     <div><div class="mini-map" id="rutaMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("linija_skica"))}</p></div>
     ${r.osm ? `<p class="small muted" style="margin:0">${esc(t("ruta_osm_izvor"))} <a href="https://www.openstreetmap.org/relation/${esc(r.osm.slice(1))}" target="_blank" rel="noopener">OSM</a></p>` : ""}
     ${stops.length ? `<section><h3>${esc(t("stajalista"))}</h3>${stops.map((p, i) => `<button class="list-row" data-open="${p.id}"><span class="num">${i + 1}</span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")}</section>` : ""}
-    ${r.besplatno ? "" : `<div class="note warn">${esc(t("pro_zakljucano"))}<br>${esc(t("pro_cijena"))}</div>`}
-    <div class="grid2"><button class="btn primary" id="rKreni" ${r.besplatno ? "" : "disabled"}>${ic(r.besplatno ? "nav" : "lock")}${esc(t("kreni_rutom"))}</button><button class="btn" id="rKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
+    ${slobodna(r) ? "" : `<div class="note warn">${esc(t("pro_zakljucano"))}<br>${esc(t("pro_cijena"))}</div>`}
+    <div class="grid2"><button class="btn primary" id="rKreni" ${slobodna(r) ? "" : "disabled"}>${ic(slobodna(r) ? "nav" : "lock")}${esc(t("kreni_rutom"))}</button><button class="btn" id="rKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
+    ${slobodna(r) && r.gpx ? `<button class="btn" id="rGpx" style="align-self:flex-start">${ic("download")}${esc(t("gpx_preuzmi"))}</button>` : ""}
   </div>`);
   const mm = L.map("rutaMap", { zoomControl: false, attributionControl: false, dragging: true, scrollWheelZoom: false, preferCanvas: true });
   if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 17, className: "osm-tiles" }).addTo(mm);
@@ -773,7 +779,8 @@ function openRuta(id) {
   stops.forEach((p, i) => L.marker([p.lat, p.lon], { icon: L.divIcon({ className: "num-icon", html: String(i + 1), iconSize: [24, 24] }) }).addTo(mm));
   mm.fitBounds(L.latLngBounds(ll.flat()).pad(0.25)); setTimeout(() => mm.invalidateSize(), 60);
   sheetCleanup.push(() => { skini(); mm.remove(); });
-  $("#rKreni").onclick = () => { const st = stops[0] || (trasaLL(r) && { lat: trasaLL(r)[0][0][0], lon: trasaLL(r)[0][0][1] }); if (r.besplatno && st) { openNav({ lat: st.lat, lon: st.lon }, stops[0] ? tx(stops[0]).naziv : x.naziv); gcEv("ruta-kreni"); } };
+  $("#rKreni").onclick = () => { const st = stops[0] || (trasaLL(r) && { lat: trasaLL(r)[0][0][0], lon: trasaLL(r)[0][0][1] }); if (slobodna(r) && st) { openNav({ lat: st.lat, lon: st.lon }, stops[0] ? tx(stops[0]).naziv : x.naziv); gcEv("ruta-kreni"); } };
+  if ($("#rGpx")) $("#rGpx").onclick = () => fetch(r.gpx).then(x => x.ok ? x.text() : Promise.reject()).then(g => { spremiDatoteku(r.gpx.split("/").pop(), g, "application/gpx+xml"); gcEv("ruta-gpx"); }).catch(() => toast(t("gpx_nema")));
   $("#rJavi").onclick = () => { S.javiRuta = x.naziv; closeSheet(); go("sigurnost"); setTimeout(() => { const el = $("#jRuta"); if (el) el.scrollIntoView({ block: "center" }); }, 80); };
   $("#rKarta").onclick = () => { closeSheet(); go("karta"); setTimeout(() => trasaLL(r) ? pokaziRutu(id) : map.fitBounds(L.latLngBounds(ll.flat()).pad(0.3)), 80); };
   gcEv("ruta");
@@ -1036,6 +1043,7 @@ function renderMoje() {
           + S.moja.slice(0, 5).map(m => `<button class="list-row" data-open="m:${esc(m.id)}"><span class="dot" style="background:var(--accent)"></span><span class="t"><b>${esc(m.ime)}</b><span>${esc(t("kat_moje"))}</span></span></button>`).join("")
           + `<button class="btn" id="sMoja" style="align-self:flex-start">${esc(t("moja_sva"))}</button>`
         : medoOblak("", t("medo_prazno"), null, 56)}</section>
+    ${snimSekcija()}
     <section class="card stack" style="gap:10px"><h2>${esc(t("auto_naslov"))}</h2><div class="stack carbox" style="gap:10px">${carHtml()}</div></section>
     <section class="stack" style="gap:8px"><h2>${esc(t("postavke"))}</h2>
       <div class="card stack" style="gap:8px"><b>${esc(t("sigurnosna_kopija"))}</b><span class="small muted">${esc(t("kopija_opis"))}</span>
@@ -1047,6 +1055,8 @@ function renderMoje() {
     </section>`;
 }
 $("#moje").addEventListener("click", e => {
+  if (e.target.closest("#snKreni")) snimKreni();
+  const tr = e.target.closest("[data-trag]"); if (tr) openTrag(tr.dataset.trag);
   if (e.target.closest("#sMoja")) openMojaMjesta();
   if (e.target.closest("#sFoto")) openFotoZasluge();
   if (e.target.closest("#sOApp")) openOApp();
@@ -1058,6 +1068,113 @@ $("#moje").addEventListener("change", e => {
   if (e.target.id === "bigTxt") { document.documentElement.classList.toggle("big", e.target.checked); store.set("gk-big", e.target.checked); }
   if (e.target.id === "kUvoz" && e.target.files[0]) uvozKopije(e.target.files[0]);
 });
+
+
+/* ---------- snimanje vlastite rute (Pro): GPS trag, duljina, uspon, trajanje, izvoz GPX ---------- */
+const SN = { stanje: store.get("gk-snimanje", null), watch: null, linija: null, lock: null, tik: null, prikaz: null };
+function snimSpremi() { store.set("gk-snimanje", SN.stanje); }
+function snimTrajanje(st) { return Math.round((st.trajanje || 0) + (st.od ? (Date.now() - st.od) / 1000 : 0)); }
+function fmtTraj(s) { const m = Math.floor(s / 60); return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0"); }
+function snimSekcija() {
+  const tr = store.get("gk-tragovi", []);
+  return `<section class="card stack" style="gap:10px"><div class="between"><h2>${esc(t("snim_naslov"))}</h2>${jePro() ? "" : `<span class="badge pro">${esc(t("pro"))}</span>`}</div>
+    <span class="small muted">${esc(t("snim_opis"))}</span>
+    ${tr.map(x => `<button class="list-row" data-trag="${esc(x.id)}"><span class="num r">${ic("route")}</span><span class="t"><b>${esc(x.ime)}</b><span class="mono">${dec((x.m / 1000).toFixed(1))} km · ↑ ${x.uspon} m · ${fmtTraj(x.s)} h</span></span></button>`).join("") || `<span class="small muted">${esc(t("snim_prazno"))}</span>`}
+    <button class="btn ${SN.stanje ? "" : "primary"}" id="snKreni" style="align-self:flex-start">${ic(jePro() ? "rec" : "lock")}${esc(t(SN.stanje ? "snim_otvori" : "snim_kreni"))}</button></section>`;
+}
+function snimKreni() {
+  if (!jePro()) { openSheet(t("snim_naslov"), `<div class="stack"><p style="margin:0">${esc(t("snim_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p></div>`); return; }
+  if (!SN.stanje) { SN.stanje = { start: Date.now(), od: Date.now(), trajanje: 0, m: 0, uspon: 0, ref: null, p: [] }; snimSpremi(); gcEv("snim-kreni"); }
+  SN.prviPut = true; go("karta"); snimGPS(); snimCrtaj(); snimPanel(); toast(t("snim_ekran"));
+}
+function snimGPS() {
+  if (SN.watch != null || !SN.stanje || SN.stanje.pauza) return;
+  if (!GEO) { toast(t("snim_greska_gps")); return; }
+  if (!SN.stanje.od) SN.stanje.od = Date.now();
+  SN.watch = GEO.watchPosition(snimTocka, () => toast(t("snim_greska_gps")), { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 });
+  try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { SN.lock = l; }).catch(() => {}); } catch (e) {}
+  clearInterval(SN.tik); SN.tik = setInterval(snimPanel, 15000);
+}
+function snimStani() {
+  if (SN.watch != null) GEO.clearWatch(SN.watch);
+  SN.watch = null; clearInterval(SN.tik);
+  try { if (SN.lock) SN.lock.release(); } catch (e) {}
+  SN.lock = null;
+}
+function snimTocka(pos) {
+  const st = SN.stanje; if (!st || st.pauza) return;
+  const c = pos.coords; if ((c.accuracy || 0) > 35) return;
+  const p = [+c.latitude.toFixed(6), +c.longitude.toFixed(6), c.altitude == null ? null : Math.round(c.altitude), Math.round((Date.now() - st.start) / 1000)];
+  const z = st.p[st.p.length - 1];
+  if (z) { const d = hav({ lat: z[0], lon: z[1] }, { lat: p[0], lon: p[1] }); if (d < 8) return; st.m += d; }
+  /* uspon iz GPS visine: broji se tek promjena od 5 m, da šum ne napuše zbroj */
+  if (p[2] != null) { if (st.ref == null) st.ref = p[2]; else if (p[2] - st.ref >= 5) { st.uspon += p[2] - st.ref; st.ref = p[2]; } else if (st.ref - p[2] >= 5) st.ref = p[2]; }
+  st.p.push(p); snimSpremi(); snimCrtaj(); snimPanel();
+  if (map && S.view === "karta") { const ll = [p[0], p[1]]; if (st.p.length === 1 || SN.prviPut) { SN.prviPut = false; map.setView(ll, Math.max(map.getZoom(), 15)); } else if (!map.getBounds().pad(-0.15).contains(ll)) map.panTo(ll); }
+}
+function snimCrtaj() {
+  if (!map) return;
+  if (!SN.stanje) { if (SN.linija) { SN.linija.remove(); SN.linija = null; } return; }
+  const ll = SN.stanje.p.map(p => [p[0], p[1]]);
+  if (!SN.linija) SN.linija = L.polyline(ll, { color: cv("--sos"), weight: 4, opacity: .85 }).addTo(map); else SN.linija.setLatLngs(ll);
+}
+function snimPanel() {
+  const el = $("#snimPanel"), st = SN.stanje; if (!el) return;
+  if (!st) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `<div class="between"><b class="row" style="gap:8px"><span class="rec-dot${st.pauza ? " pauza" : ""}"></span>${esc(t(st.pauza ? "snim_pauzirano" : "snim_snimam"))}</b><span class="mono">${fmtTraj(snimTrajanje(st))} h</span></div>
+    <div class="kn-stat"><b>${dec((st.m / 1000).toFixed(2))}</b><span>km</span><b>↑ ${st.uspon}</b><span>m</span></div>
+    <div class="row kn-gumbi"><button class="btn" data-sn="${st.pauza ? "nastavi" : "pauza"}">${ic(st.pauza ? "rec" : "pause")}${esc(t(st.pauza ? "snim_nastavi" : "snim_pauza"))}</button><button class="btn primary" data-sn="kraj">${ic("check")}${esc(t("snim_zavrsi"))}</button></div>`;
+}
+$("#snimPanel").addEventListener("click", e => {
+  const b = e.target.closest("[data-sn]"); if (!b || !SN.stanje) return; const st = SN.stanje;
+  if (b.dataset.sn === "pauza") { st.trajanje = snimTrajanje(st); st.od = null; st.pauza = true; snimStani(); snimSpremi(); snimPanel(); }
+  if (b.dataset.sn === "nastavi") { st.pauza = false; st.ref = null; SN.prviPut = true; snimSpremi(); snimGPS(); snimPanel(); }
+  if (b.dataset.sn === "kraj") snimZavrsi();
+});
+function snimZavrsi() {
+  const st = SN.stanje; snimStani(); st.trajanje = snimTrajanje(st); st.od = null;
+  SN.stanje = null; store.set("gk-snimanje", null); snimCrtaj(); snimPanel();
+  if (S.view === "moje") renderMoje();
+  if (st.p.length < 2 || st.m < 50) { toast(t("snim_prekratko")); return; }
+  const d = new Date(st.start);
+  const trag = { id: "t" + st.start, ime: t("snim_ruta", { datum: d.toLocaleDateString(LOC()) + " " + fmtTime(d) }), start: st.start, m: Math.round(st.m), uspon: st.uspon, s: st.trajanje, p: st.p };
+  const sve = store.get("gk-tragovi", []); sve.unshift(trag); store.set("gk-tragovi", sve);
+  gcEv("snim-kraj"); toast(t("snim_spremljeno")); openTrag(trag.id);
+}
+function tragGpx(x) {
+  const e = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const pts = x.p.map(p => `   <trkpt lat="${p[0]}" lon="${p[1]}">${p[2] != null ? `<ele>${p[2]}</ele>` : ""}<time>${new Date(x.start + p[3] * 1000).toISOString()}</time></trkpt>`).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Zelenko" xmlns="http://www.topografix.com/GPX/1/1">\n <metadata><name>${e(x.ime)}</name><time>${new Date(x.start).toISOString()}</time></metadata>\n <trk><name>${e(x.ime)}</name><trkseg>\n${pts}\n </trkseg></trk>\n</gpx>\n`;
+}
+function openTrag(id) {
+  const sve = store.get("gk-tragovi", []), x = sve.find(y => y.id === id); if (!x) return;
+  openSheet(t("snim_naslov"), `<div class="stack">
+    <label class="stack" style="gap:4px"><span class="small muted">${esc(t("snim_ime"))}</span><input id="trIme" value="${esc(x.ime)}" maxlength="80" style="min-height:44px;padding:0 12px;border:1px solid var(--line2);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit"></label>
+    <div class="stats"><div><b>${dec((x.m / 1000).toFixed(1))}</b><span>${esc(t("km"))}</span></div><div><b>${fmtTraj(x.s)}</b><span>${esc(t("sati"))}</span></div><div><b>~${x.uspon}</b><span>${esc(t("m_uspona"))}</span></div></div>
+    <p class="small muted" style="margin:0">${esc(t("snim_uspon_gps"))}</p>
+    <div class="mini-map" id="trMap"></div>
+    <div class="grid2"><button class="btn primary" id="trGpx">${ic("download")}${esc(t("snim_gpx"))}</button><button class="btn" id="trKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
+    <button class="btn" id="trBrisi" style="align-self:flex-start">${ic("trash")}<span>${esc(t("snim_obrisi"))}</span></button></div>`);
+  const ll = x.p.map(p => [p[0], p[1]]);
+  const mm = L.map("trMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, preferCanvas: true });
+  if (!PREGLED) L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 17, className: "osm-tiles" }).addTo(mm);
+  const skini = addPodloga(mm, true);
+  L.polyline(ll, { color: cv("--sos"), weight: 4 }).addTo(mm);
+  mm.fitBounds(L.latLngBounds(ll).pad(0.2)); setTimeout(() => mm.invalidateSize(), 60);
+  sheetCleanup.push(() => { skini(); mm.remove(); });
+  $("#trIme").onchange = e => { const v = e.target.value.trim(); if (!v) return; x.ime = v; store.set("gk-tragovi", sve); if (S.view === "moje") renderMoje(); };
+  $("#trGpx").onclick = () => { spremiDatoteku((x.ime.replace(/[^\p{L}\p{N} _-]+/gu, "").trim().replace(/\s+/g, "-") || "ruta") + ".gpx", tragGpx(x), "application/gpx+xml"); gcEv("snim-gpx"); };
+  $("#trKarta").onclick = () => { closeSheet(); go("karta"); setTimeout(() => { if (SN.prikaz) SN.prikaz.remove(); SN.prikaz = L.polyline(ll, { color: cv("--sos"), weight: 4, dashArray: "6 6" }).addTo(map); map.fitBounds(SN.prikaz.getBounds().pad(0.2)); }, 80); };
+  $("#trBrisi").onclick = e => { const b = e.currentTarget; if (!b.dataset.sigurno) { b.dataset.sigurno = "1"; b.querySelector("span").textContent = t("snim_obrisi_potvrdi"); return; }
+    store.set("gk-tragovi", sve.filter(y => y.id !== id)); closeSheet(); if (S.view === "moje") renderMoje(); toast(t("snim_obrisano")); };
+}
+/* nastavak nakon ponovnog otvaranja: snimanje ostaje pauzirano dok ga korisnik ne nastavi */
+function snimObnovi() {
+  const st = SN.stanje; if (!st) return;
+  if (st.od) { const z = st.p[st.p.length - 1], kraj = z ? st.start + z[3] * 1000 : st.od; st.trajanje = Math.round((st.trajanje || 0) + Math.max(0, kraj - st.od) / 1000); st.od = null; st.pauza = true; snimSpremi(); }
+  snimCrtaj(); snimPanel();
+}
 
 /* ---------- o aplikaciji: izvori, licence, privatnost, kontakt ---------- */
 function openOApp() {
@@ -1212,22 +1329,26 @@ function openMoje(id) {
 }
 
 /* ---------- sigurnosna kopija ---------- */
-async function izvozKopije() {
-  const data = { app: "gk-vodic", v: 1, t: new Date().toISOString(), favs: S.favs, moja: S.moja, car: S.car, pecati: S.pecati, big: store.get("gk-big", false) };
+async function spremiDatoteku(ime, sadrzaj, tip) {
   if (PREGLED) {
     const dl = window.claude && window.claude.use ? await window.claude.use("downloads") : null;
     if (!dl) { toast(t("pregled_nema_spremanja")); return; }
-    try { await dl.save({ filename: "gorski-kotar-kopija-" + new Date().toISOString().slice(0, 10) + ".json", data: JSON.stringify(data, null, 1) }); } catch (e) {}
+    try { await dl.save({ filename: ime, data: sadrzaj }); } catch (e) {}
     return;
   }
-  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], { type: "application/json" }));
-  a.download = "gorski-kotar-kopija-" + new Date().toISOString().slice(0, 10) + ".json"; document.body.appendChild(a); a.click(); a.remove();
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([sadrzaj], { type: tip }));
+  a.download = ime; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+function izvozKopije() {
+  const data = { app: "gk-vodic", v: 1, t: new Date().toISOString(), favs: S.favs, moja: S.moja, car: S.car, pecati: S.pecati, tragovi: store.get("gk-tragovi", []), big: store.get("gk-big", false) };
+  spremiDatoteku("gorski-kotar-kopija-" + new Date().toISOString().slice(0, 10) + ".json", JSON.stringify(data, null, 1), "application/json");
 }
 function uvozKopije(file) {
   file.text().then(s => {
     const d = JSON.parse(s); if (d.app !== "gk-vodic") throw 0;
     S.favs = Array.isArray(d.favs) ? d.favs.filter(i => BY[i]) : []; S.moja = Array.isArray(d.moja) ? d.moja : []; S.car = d.car || null; S.pecati = d.pecati && typeof d.pecati === "object" ? d.pecati : {};
+    if (Array.isArray(d.tragovi)) store.set("gk-tragovi", d.tragovi);
     store.set("gk-pecati", S.pecati); store.set("gk-fav", S.favs); store.set("gk-moja", S.moja); store.set("gk-car", S.car); store.set("gk-big", !!d.big);
     document.documentElement.classList.toggle("big", !!d.big);
     renderChips(); renderMarkers(); renderCarMarker(); renderSigurnost(); toast(t("kopija_ok"));
@@ -1246,9 +1367,9 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map) { skiniPodlogu(); skiniPodlogu = addPodloga(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null)]);
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD, hike] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null), get("data/rute_planinarske.json").catch(() => ({ rute: [] }))]);
   T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec; if (lynxD) LYNX = lynxD;
-  TOCKE = tocke.tocke; RUTE = rute.rute.concat((bike && bike.rute) || []);
+  TOCKE = tocke.tocke; RUTE = rute.rute.concat((hike && hike.rute) || [], (bike && bike.rute) || []);
   if (CONFIG.jezik !== "hr") {
     (SPEC.specijaliteti || []).forEach(preko); Object.values(INFO).forEach(preko);
     (LYNX.cinjenice || []).forEach(c => { if (c[CONFIG.jezik]) c.tekst = c[CONFIG.jezik].tekst; });

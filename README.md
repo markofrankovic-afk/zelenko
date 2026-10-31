@@ -16,6 +16,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - `docs/data/tocke.json`, `rute.json` – točke i rute; `docs/gpx/` – GPX tragovi ruta
 - `docs/data/mreza.json` – mreža putova za navigaciju po karti bez interneta (gradi `alati/osm_mreza.py`); izračun puta je u `docs/put.js`
 - `docs/data/rute_bicikl.json` – biciklističke i MTB rute iz OSM relacija (gradi `alati/osm_bike_rute.py`)
+- `docs/data/rute_planinarske.json` – planinarske staze iz OSM relacija (gradi `alati/osm_pjesacke_rute.py`)
 - `docs/data/usluge.json` – jelo, smještaj, trgovine i OPG (OSM + `izvori/partneri.json`)
 - `docs/data/info.json` – radno vrijeme, ulaznice i kontakti (`izvori/info_rucno.json` sa službenih stranica + OSM), gradi `alati/info_tocke.py`
 - `docs/data/specijaliteti.json` – specijaliteti Gorskog kotara za Gastro kutak (s izvorima)
@@ -33,9 +34,10 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 ## Alati (`alati/`, Python)
 - `osm_izvuci.py`, `spoji_osm.py`, `osm_podloga.py`, `osm_rute.py` – točke, karta i rute iz OSM izvatka (BBBike PBF)
 - `prevedi.py` – upisuje prijevode u podatke; pokreće se zadnji
-- `visine.py` – uspon, spust i visinski profil ruta iz Copernicus DEM GLO-30 (pokreće se nakon osm_rute.py i osm_bike_rute.py; DEM pločice N45E014 i N45E015 nisu u repozitoriju)
+- `visine.py` – uspon, spust i visinski profil ruta iz Copernicus DEM GLO-30 (pokreće se nakon osm_rute.py, osm_bike_rute.py i osm_pjesacke_rute.py; DEM pločice N45E014 i N45E015 nisu u repozitoriju)
 - `osm_mreza.py` – mreža cesta, šumskih cesta i staza za navigaciju (pješice i biciklom)
 - `osm_bike_rute.py` – biciklističke i MTB rute iz OSM relacija: trasa, duljina, GPX, stajališta
+- `osm_pjesacke_rute.py` – planinarske staze iz OSM relacija: redoslijed iz relacije, popunjavanje rupa po stazama, smjer po imenu, GPX
 - `ocisti_duplikate.py` – nakon spoji_osm.py: uklanja dvostruke točke (popis ručno pregledanih + pravila)
 - `osm_usluge.py` – usluge iz OSM-a + ručni partneri iz `izvori/partneri.json`
 - `commons_slike.py`, `commons_preuzmi.py` – fotografije s Commonsa (samo PD, CC0, CC BY, CC BY-SA)
@@ -50,6 +52,10 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - Karta: Leaflet (BSD-2)
 
 ## Redoslijed alata
-`izvorni_popis.py` → `spoji_osm.py` → `ocisti_duplikate.py` → `info_tocke.py` → `osm_rute.py` / `osm_bike_rute.py` → `visine.py` → `prevedi.py`
+`izvorni_popis.py` → `spoji_osm.py` → `ocisti_duplikate.py` → `info_tocke.py` → `osm_rute.py` / `osm_bike_rute.py` / `osm_pjesacke_rute.py` → `visine.py` → `prevedi.py`
 
 `docs/privatnost.html` – pravila privatnosti (HR/EN), potrebna i za Google Play.
+
+## Pro za probu
+
+Dok kupnja preko Google Playa ne postoji, Pro se na uređaju otključava adresom s `?pro=1` (gasi se s `?pro=0`).

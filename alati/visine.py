@@ -11,7 +11,7 @@ iz duljine i uspona (pješice: DAV formula; bicikl: brzina + uspon).
 Copernicus DEM: © DLR e.V. 2010-2014 i © Airbus Defence and Space GmbH 2014-2018,
 dobavlja Europska komisija (program Copernicus); dopuštena je i komercijalna upotreba uz navođenje.
 """
-import json, math, sys
+import os, json, math, sys
 import numpy as np, rasterio
 
 DOCS, DEMS = sys.argv[1], sys.argv[2:]
@@ -92,7 +92,8 @@ def sati_raspon(h):
     return f(lo) if lo == hi else f"{f(lo)}–{f(hi)}"
 
 
-for ime in ("rute.json", "rute_bicikl.json"):
+for ime in ("rute.json", "rute_bicikl.json", "rute_planinarske.json"):
+    if not os.path.exists(f"{DOCS}/data/{ime}"): continue
     p = f"{DOCS}/data/{ime}"
     d = json.load(open(p, encoding="utf-8"))
     for r in d["rute"]:
@@ -111,7 +112,14 @@ for ime in ("rute.json", "rute_bicikl.json"):
             if mtb: r["tezina"] = "srednje" if v["uspon"] < 500 and km < 25 else "zahtjevno"
             else: r["tezina"] = "lagano" if v["uspon"] < 300 and km < 25 else "zahtjevno" if v["uspon"] > 900 or km > 60 else "srednje"
             r["napomena"] = "Duljina iz OSM trase, uspon iz modela terena (Copernicus DEM); trajanje je procjena."
+        elif r["id"].startswith("PL"):
+            # DAV: 4 km/h vodoravno, 300 m/h uspona, 500 m/h spusta; veće + pola manjeg
+            km = r.get("km_gpx") or r["km"]
+            a, b = km / 4, v["uspon"] / 300 + v["spust"] / 500
+            r["sati"] = sati_raspon(max(a, b) + min(a, b) / 2)
+            r["tezina"] = "lagano" if v["uspon"] < 300 and km < 8 else "zahtjevno" if v["uspon"] > 800 or km > 18 else "srednje"
+            r["napomena"] = "Trasa iz OSM-a, uspon iz modela terena (Copernicus DEM); trajanje po DAV formuli, u jednom smjeru."
         else:
             r["napomena"] = "Duljina iz OSM trase, uspon i profil iz modela terena (Copernicus DEM); trajanje je procjena."
         print(f"  {r['id']:10} {r.get('km_gpx') or r['km']:6} km  ↑{v['uspon']:5} ↓{v['spust']:5}  {v['min']}–{v['max']} m  {r['sati']:8} {r['tezina']:9} {r['tekst']['hr']['naziv'][:45]}")
-    json.dump(d, open(p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":") if ime == "rute_bicikl.json" else None, indent=None if ime == "rute_bicikl.json" else 1)
+    json.dump(d, open(p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":") if ime != "rute.json" else None, indent=None if ime != "rute.json" else 1)
