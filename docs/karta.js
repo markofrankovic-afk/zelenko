@@ -67,7 +67,7 @@ window.ZelenkoKarta = (() => {
     const { paint, label } = pravila();
     const vektor = P.leafletLayer({
       url: osnova + "v/{z}/{x}/{y}.mvt" + (opcije.v ? "?v=" + opcije.v : ""), maxDataZoom: 14, maxZoom: 19, paintRules: paint, labelRules: label,
-      backgroundColor: C_.pozadina, className: opcije.className || "", attribution: opcije.attribution || "", ...(opcije.bounds ? { bounds: opcije.bounds } : {})
+      backgroundColor: C_.pozadina, devicePixelRatio: Math.min(2, window.devicePixelRatio || 1), tileDelay: 3, className: opcije.className || "", attribution: opcije.attribution || "", ...(opcije.bounds ? { bounds: opcije.bounds } : {})
     });
     const sjencanje = L.tileLayer(osnova + "s/{z}/{x}/{y}.webp" + (opcije.v ? "?v=" + opcije.v : ""), { maxNativeZoom: 13, minZoom: 8, maxZoom: 19, className: (opcije.className || "") + " sjencanje", ...(opcije.bounds ? { bounds: opcije.bounds } : {}), errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" });
     return { vektor, sjencanje };
