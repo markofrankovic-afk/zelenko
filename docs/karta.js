@@ -1,4 +1,5 @@
-/* Zelenko karta: vlastita topografska podloga iz karta/ (OSM + Copernicus DEM), crta je protomaps-leaflet.
+/* Sjenčanje se ne prikazuje iznad z15: Leaflet bi pločicu z13 na z19 razvukao na 16384 px, što preglednik jedva podnosi.
+   Zelenko karta: vlastita topografska podloga iz karta/ (OSM + Copernicus DEM), crta je protomaps-leaflet.
    Vektorske pločice z8–14 (iznad se povećavaju), sjenčanje terena z8–13 kao prozirne slike. */
 "use strict";
 window.ZelenkoKarta = (() => {
@@ -67,9 +68,9 @@ window.ZelenkoKarta = (() => {
     const { paint, label } = pravila();
     const vektor = P.leafletLayer({
       url: osnova + "v/{z}/{x}/{y}.mvt" + (opcije.v ? "?v=" + opcije.v : ""), maxDataZoom: 14, maxZoom: 19, paintRules: paint, labelRules: opcije.bezNatpisa ? [] : opcije.natpisi ? label.filter(r => opcije.natpisi.includes(r.dataLayer)) : label,
-      backgroundColor: C_.pozadina, devicePixelRatio: Math.min(2, window.devicePixelRatio || 1), tileDelay: 3, className: opcije.className || "", attribution: opcije.attribution || "", ...(opcije.bounds ? { bounds: opcije.bounds } : {})
+      backgroundColor: C_.pozadina, devicePixelRatio: Math.min(2, window.devicePixelRatio || 1), tileDelay: 3, updateWhenZooming: false, keepBuffer: 1, className: opcije.className || "", attribution: opcije.attribution || "", ...(opcije.bounds ? { bounds: opcije.bounds } : {})
     });
-    const sjencanje = L.tileLayer(osnova + "s/{z}/{x}/{y}.webp" + (opcije.v ? "?v=" + opcije.v : ""), { maxNativeZoom: 13, minZoom: 8, maxZoom: 19, className: (opcije.className || "") + " sjencanje", ...(opcije.bounds ? { bounds: opcije.bounds } : {}), errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" });
+    const sjencanje = L.tileLayer(osnova + "s/{z}/{x}/{y}.webp" + (opcije.v ? "?v=" + opcije.v : ""), { maxNativeZoom: 13, minZoom: 8, maxZoom: 15, className: (opcije.className || "") + " sjencanje", ...(opcije.bounds ? { bounds: opcije.bounds } : {}), errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" });
     return { vektor, sjencanje };
   }
   return { slojevi, boje: C };
