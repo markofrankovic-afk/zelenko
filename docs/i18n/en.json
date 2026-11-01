@@ -566,9 +566,14 @@
    "https://leafletjs.com/"
   ],
   [
-   "protomaps-leaflet",
-   "Draws our own map from vector tiles. BSD-3 licence.",
-   "https://github.com/protomaps/protomaps-leaflet"
+   "MapLibre GL JS",
+   "Draws our own map (WebGL). BSD-3 licence.",
+   "https://maplibre.org/"
+  ],
+  [
+   "Noto Sans",
+   "Font for map labels. SIL OFL licence.",
+   "https://github.com/protomaps/basemaps-assets"
   ]
  ],
  "oapp_privatnost": "Privacy",

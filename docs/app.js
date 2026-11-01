@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.13.7",
+  verzija: "0.14.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -184,7 +184,7 @@ function osnova(m, mala) {
     const z = ZelenkoKarta.slojevi("karta/", { bounds: KARTA_OKVIR, v: KARTA_VERZIJA, tamna, bezNatpisa: /natpisa|oboje/.test(test),
       natpisi: test === "bez-crtnih" ? ["mjesta", "vrhovi"] : test === "samo-vrhovi" ? ["vrhovi"] : test === "samo-mjesta" ? ["mjesta"] : test === "samo-crtni" ? ["vodotoci", "ceste", "slojnice"] : null,
       bezSlojeva: test === "bez-slojnica" ? ["slojnice"] : test === "bez-zgrada" ? ["zgrade"] : test === "bez-pokrova" ? ["pokrov"] : test === "samo-ceste" ? ["slojnice", "zgrade", "pokrov", "markirane", "vodotoci", "voda", "zastita"] : [] });
-    sl.push(z.vektor); if (!/sjencanja|oboje/.test(test)) sl.push(z.sjencanje);
+    sl.push(z.vektor); if (z.sjencanje && !/sjencanja|oboje/.test(test)) sl.push(z.sjencanje);
     if (!mala) m.attributionControl.addAttribution(t("karta_dem_atr"));
   } else if (!PREGLED) sl.push(L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
   sl.forEach(x => x.addTo(m));
@@ -1230,7 +1230,7 @@ async function preuzmiKartu() {
     let i = 0, gotovo = 0;
     const radnik = async () => {
       while (i < sve.length) {
-        const u = new URL("karta/" + sve[i++] + "?v=" + KARTA_VERZIJA, location.href).href;
+        const f = sve[i++], u = new URL("karta/" + f + (f.startsWith("fonts/") ? "" : "?v=" + KARTA_VERZIJA), location.href).href;
         if (!(await c.match(u))) { const r = await fetch(u); if (!r.ok) throw new Error(u); await c.put(u, r); }
         if (++gotovo % 25 === 0) poruka(t("karta_preuzimam", { p: Math.round(gotovo / sve.length * 100) }));
       }

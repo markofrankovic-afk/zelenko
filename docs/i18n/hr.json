@@ -566,9 +566,14 @@
    "https://leafletjs.com/"
   ],
   [
-   "protomaps-leaflet",
-   "Crtanje naše karte iz vektorskih pločica. Licenca BSD-3.",
-   "https://github.com/protomaps/protomaps-leaflet"
+   "MapLibre GL JS",
+   "Crtanje naše karte (WebGL). Licenca BSD-3.",
+   "https://maplibre.org/"
+  ],
+  [
+   "Noto Sans",
+   "Font natpisa na karti. Licenca SIL OFL.",
+   "https://github.com/protomaps/basemaps-assets"
   ]
  ],
  "oapp_privatnost": "Privatnost",
