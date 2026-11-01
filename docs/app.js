@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.12.1",
+  verzija: "0.12.2",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -176,8 +176,10 @@ function osnova(m, mala) {
   if (vrstaKarte() === "zelenko") {
     sl.push(new OsmVani("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
     const tamna = document.documentElement.getAttribute("data-theme") === "dark" || (!document.documentElement.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
-    const z = ZelenkoKarta.slojevi("karta/", { bounds: KARTA_OKVIR, v: KARTA_VERZIJA, tamna });
-    sl.push(z.vektor, z.sjencanje);
+    /* probe za zastoje: ?test=bez-sjencanja, ?test=bez-natpisa, ?test=bez-oboje */
+    const test = new URLSearchParams(location.search).get("test") || "";
+    const z = ZelenkoKarta.slojevi("karta/", { bounds: KARTA_OKVIR, v: KARTA_VERZIJA, tamna, bezNatpisa: /natpisa|oboje/.test(test) });
+    sl.push(z.vektor); if (!/sjencanja|oboje/.test(test)) sl.push(z.sjencanje);
     if (!mala) m.attributionControl.addAttribution(t("karta_dem_atr"));
   } else if (!PREGLED) sl.push(L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
   sl.forEach(x => x.addTo(m));
