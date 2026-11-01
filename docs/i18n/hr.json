@@ -665,5 +665,6 @@
  "karta_greska": "Preuzimanje nije uspjelo. Pokušaj ponovo kad imaš bolji signal.",
  "karta_offline_naslov": "Karta bez signala",
  "karta_pro": "Preuzimanje cijele karte Gorskog kotara za rad bez signala dio je Pro verzije.",
- "offline_bez_mreze_puna": "Bez mreže · karta Gorskog kotara je na mobitelu"
+ "offline_bez_mreze_puna": "Bez mreže · karta Gorskog kotara je na mobitelu",
+ "nova_verzija": "Stigla je nova verzija – učitat će se kad ponovo otvoriš aplikaciju."
 }

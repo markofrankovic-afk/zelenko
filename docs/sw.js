@@ -2,7 +2,7 @@
    - Ljuska, tekstovi i podaci (točke, rute): spremljeni unaprijed, uvijek dostupni.
    - Kartice karte (OpenStreetMap) i fontovi: spremaju se dok ih gledaš, s ograničenjem broja.
    - Vremenska prognoza: uvijek s mreže; aplikacija sama čuva zadnju. */
-const VERSION = "gk-v0.13.1";
+const VERSION = "gk-v0.13.2";
 const SHELL = ["./", "index.html", "app.js", "put.js", "manifest.webmanifest",
   "i18n/hr.json", "i18n/en.json", "privatnost.html", "data/tocke.json", "data/rute.json", "data/kategorije.json", "data/danas.json", "data/podloga.json", "data/slike.json", "data/usluge.json", "data/putovnica.json", "data/info.json", "data/specijaliteti.json", "data/rute_bicikl.json", "data/rute_planinarske.json", "data/mreza.json", "data/lynx.json",
   "vendor/leaflet.js", "vendor/leaflet.css", "vendor/protomaps-leaflet.js", "karta.js", "karta/popis.json", "vendor/images/layers.png", "vendor/images/marker-icon.png", "vendor/images/marker-shadow.png",
@@ -10,20 +10,23 @@ const SHELL = ["./", "index.html", "app.js", "put.js", "manifest.webmanifest",
 const LIMITS = { "gk-tiles": 4000, "gk-tiles-t": 4000, "gk-fonts": 40, "gk-foto": 600 };
 
 self.addEventListener("install", e => {
-  /* fotografije (data/slike.json) spremaju se odmah, da rade i bez signala:
-     lokalne u ljusku, one s Wikimedia Commonsa u gk-foto */
-  e.waitUntil(caches.open(VERSION).then(async c => {
-    await c.addAll(SHELL);
-    try {
-      const sl = Object.values(await (await c.match("data/slike.json")).json())
-        .concat(((await (await c.match("data/specijaliteti.json")).json()).specijaliteti || []).map(x => x.slika).filter(Boolean));
-      const lok = [...new Set(sl.map(s => s.datoteka).filter(Boolean))];
-      const vani = [...new Set(sl.filter(s => !s.datoteka).map(s => s.url))];
-      const f = await caches.open("gk-foto");
-      await Promise.allSettled(lok.map(u => c.add(u)).concat(vani.map(u => f.match(u).then(h => h || f.add(new Request(u, { mode: "cors" }))))));
-    } catch (err) { /* bez fotografija aplikacija i dalje radi */ }
-  }).then(() => self.skipWaiting()));
+  /* u instalaciji samo ljuska: nova verzija mora se brzo instalirati i preuzeti stranicu */
+  e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
+/* fotografije (data/slike.json) spremaju se zasebno i trajno (gk-foto), da rade bez signala;
+   aplikacija to traži porukom „fotke“ pri svakom pokretanju, a već spremljene se preskaču */
+async function spremiFotke() {
+  try {
+    const c = await caches.open(VERSION), f = await caches.open("gk-foto");
+    const json = async u => (await (await c.match(u) || await fetch(u)).json());
+    const sl = Object.values(await json("data/slike.json")).concat(((await json("data/specijaliteti.json")).specijaliteti || []).map(x => x.slika).filter(Boolean));
+    const lok = [...new Set(sl.map(s => s.datoteka).filter(Boolean))].map(u => new URL(u, self.registration.scope).href);
+    const vani = [...new Set(sl.filter(s => !s.datoteka).map(s => s.url))];
+    await Promise.allSettled(lok.map(u => f.match(u).then(h => h || f.add(u)))
+      .concat(vani.map(u => f.match(u).then(h => h || f.add(new Request(u, { mode: "cors" }))))));
+  } catch (err) { /* bez fotografija aplikacija i dalje radi */ }
+}
+self.addEventListener("message", e => { if (e.data === "fotke") e.waitUntil(spremiFotke()); });
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(
     keys.filter(k => k.startsWith("gk-v") && k !== VERSION).map(k => caches.delete(k))

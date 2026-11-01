@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.13.1",
+  verzija: "0.13.2",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -1200,6 +1200,7 @@ function snimObnovi() {
 
 /* ---------- karta bez signala: vrsta karte i preuzimanje cijele karte (Pro) ---------- */
 const KP = { radi: false };
+let osvjezeno = false;
 (() => { /* nova verzija pločica: stare spremljene više ne vrijede */
   if (PREGLED || !("caches" in window)) return;
   const v = store.get("gk-karta-v", null);
@@ -1449,6 +1450,17 @@ async function boot() {
   const h = location.hash.slice(1); go(["karta", "danas", "gastro", "rute", "moje", "sigurnost"].includes(h) ? h : "karta");
   gcInit();
   if (!store.get("gk-pozdrav", false)) setTimeout(openPozdrav, 500);
-  if (!PREGLED && "serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js").catch(() => {});
+  if (!PREGLED && "serviceWorker" in navigator && location.protocol !== "file:") {
+    const imaoSW = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
+      reg.update().catch(() => {});
+      navigator.serviceWorker.ready.then(r => r.active && r.active.postMessage("fotke"));
+    }).catch(() => {});
+    /* nova verzija preuzela je stranicu: odmah nakon otvaranja učitaj je, inače javi */
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!imaoSW || osvjezeno) return; osvjezeno = true;
+      if (performance.now() < 20000) location.reload(); else toast(t("nova_verzija"));
+    });
+  }
 }
 boot().catch(e => { document.body.innerHTML = `<p style="padding:24px;font:16px system-ui">Podaci se nisu učitali. Osvježi stranicu dok imaš signal.<br><br>The data could not be loaded. Reload the page while you have signal.</p>`; console.error(e); });

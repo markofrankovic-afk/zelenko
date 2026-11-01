@@ -653,5 +653,6 @@
  "karta_greska": "Download failed. Try again when you have a better signal.",
  "karta_offline_naslov": "Offline map",
  "karta_pro": "Downloading the whole map of Gorski kotar for offline use is part of Pro.",
- "offline_bez_mreze_puna": "No signal · the Gorski kotar map is on your phone"
+ "offline_bez_mreze_puna": "No signal · the Gorski kotar map is on your phone",
+ "nova_verzija": "A new version has arrived – it will load next time you open the app."
 }
