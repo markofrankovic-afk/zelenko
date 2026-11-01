@@ -54,7 +54,7 @@ window.ZelenkoKarta = (() => {
     const label = [
       { dataLayer: "mjesta", symbolizer: new P.CenteredTextSymbolizer({ labelProps: ["n"], ...tx((z, f) => f.props.r === 1 ? (z < 11 ? 14 : 16) : f.props.r === 2 ? (z < 12 ? 12 : 14) : 12, (z, f) => f.props.r <= 2 ? 700 : 600) }),
         sort: (a, b) => a.r - b.r },
-      { dataLayer: "vrhovi", symbolizer: new P.OffsetTextSymbolizer({ labelProps: ["l", "n"], ...tx(11.5, 600, C_.vrh), offsetY: 2 }), sort: (a, b) => (b.e || 0) - (a.e || 0) },
+      { dataLayer: "vrhovi", symbolizer: new P.OffsetTextSymbolizer({ labelProps: ["l", "n"], ...tx(11.5, 600, C_.vrh), offsetX: 11, offsetY: 11, placements: [P.TextPlacements.E, P.TextPlacements.W, P.TextPlacements.Ne, P.TextPlacements.Sw] }), sort: (a, b) => (b.e || 0) - (a.e || 0) },
       { dataLayer: "vodotoci", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["n"], ...tx(11.5, 500, C_.vodaTekst) }), filter: k("rijeka"), minzoom: 12 },
       { dataLayer: "ceste", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["n"], ...tx(11, 500) }), minzoom: 15, filter: (z, f) => f.props.k !== "staza" && f.props.k !== "makadam" },
       { dataLayer: "slojnice", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["et"], ...tx(9.5, 500, C_.slojnica), repeatDistance: 400 }), minzoom: 14, filter: (z, f) => f.props.i === 1 }
