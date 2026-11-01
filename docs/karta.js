@@ -57,7 +57,7 @@ window.ZelenkoKarta = (() => {
       { dataLayer: "vrhovi", symbolizer: new P.OffsetTextSymbolizer({ labelProps: ["l", "n"], ...tx(11.5, 600, C_.vrh), offsetY: 2 }), sort: (a, b) => (b.e || 0) - (a.e || 0) },
       { dataLayer: "vodotoci", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["n"], ...tx(11.5, 500, C_.vodaTekst) }), filter: k("rijeka"), minzoom: 12 },
       { dataLayer: "ceste", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["n"], ...tx(11, 500) }), minzoom: 15, filter: (z, f) => f.props.k !== "staza" && f.props.k !== "makadam" },
-      { dataLayer: "slojnice", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["e"], ...tx(9.5, 500, C_.slojnica), repeatDistance: 400 }), minzoom: 14, filter: (z, f) => f.props.i === 1 }
+      { dataLayer: "slojnice", symbolizer: new P.LineLabelSymbolizer({ labelProps: ["et"], ...tx(9.5, 500, C_.slojnica), repeatDistance: 400 }), minzoom: 14, filter: (z, f) => f.props.i === 1 }
     ];
     return { paint, label };
   }

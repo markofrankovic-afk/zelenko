@@ -122,6 +122,21 @@ for o in osmium.FileProcessor(SRC).with_areas().with_locations():
                 L["vrhovi"].append((pt, p, 11 if p.get("e", 0) >= 1200 else 12))
     except Exception:
         continue
+# zgrade koje nedostaju u OSM-u: Microsoft Global ML Building Footprints (ODbL), izvori/ms_zgrade/*.csv.gz
+# (jedna GeoJSON značajka po retku; quadkeyi 120230320–120230323). Uzimaju se samo one koje ne dodiruju OSM zgradu.
+import glob, gzip
+MS = sorted(glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "izvori", "ms_zgrade", "*.csv.gz")))
+if MS:
+    osm_z = STRtree([g for g, _, _ in L["zgrade"]]); dodano = 0
+    for f in MS:
+        for red in gzip.open(f, "rt", encoding="utf-8"):
+            g = shapely.geometry.shape(json.loads(red)["geometry"])
+            c = g.centroid
+            if not (W <= c.x <= E and S <= c.y <= N): continue
+            gm = m(g)
+            if len(osm_z.query(gm, predicate="intersects")): continue
+            L["zgrade"].append((gm, {"ms": 1}, 14)); dodano += 1
+    print("Microsoft zgrade dodane:", dodano)
 print({k: len(v) for k, v in L.items()})
 
 # ---------------- teren: slojnice i sjenčanje ----------------
@@ -155,6 +170,7 @@ for korak, z in ((100, 11), (50, 12), (20, 13)):
             g = LineString(pix2ll(cnt)).simplify(0.00012)
             if g.length < 0.003: continue
             p = {"e": v, "i": 1 if v % 100 == 0 else 0}
+            if v % 100 == 0: p["et"] = f"{v} m"  # natpis mora biti tekst
             # 100 m od z11; 50 m od z12; ostale (20, 40, 60, 80) od z13
             L["slojnice"].append((m(g), p, 11 if v % 100 == 0 else 12 if v % 50 == 0 else 13))
 print("slojnice:", len(L["slojnice"]))
@@ -283,7 +299,7 @@ with Pool(os.cpu_count()) as pool:
 rezultat.sort()
 popis = [r[0] for r in rezultat]; ukupno = sum(r[1] for r in rezultat)
 
-json.dump({"verzija": 1, "okvir": [W, S, E, N], "z": [ZMIN, ZMAX], "sjencanje_z": ZSJ, "bajtova": ukupno, "plocice": popis,
-           "izvor": "© OpenStreetMap suradnici (ODbL); teren: Copernicus DEM GLO-30 (© DLR e.V., © Airbus DS; Copernicus/EK)"},
+json.dump({"verzija": 2, "okvir": [W, S, E, N], "z": [ZMIN, ZMAX], "sjencanje_z": ZSJ, "bajtova": ukupno, "plocice": popis,
+           "izvor": "© OpenStreetMap suradnici (ODbL); zgrade dijelom: Microsoft Global ML Building Footprints (ODbL); teren: Copernicus DEM GLO-30 (© DLR e.V., © Airbus DS; Copernicus/EK)"},
           open(os.path.join(OUT, "popis.json"), "w", encoding="utf-8"), separators=(",", ":"))
 print("gotovo:", len(popis), "pločica,", f"{ukupno / 1e6:.1f} MB")

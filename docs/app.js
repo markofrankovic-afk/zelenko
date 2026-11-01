@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.12.2",
+  verzija: "0.13.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -168,7 +168,7 @@ let skiniPodlogu = () => {}, rutaLayer = null;
 /* osnova karte: „zelenko“ = vlastita topografska karta (karta/: OSM + Copernicus DEM, radi bez signala),
    „osm“ = kartice OpenStreetMapa + offline podloga. Izvan okvira Gorskog kotara uvijek se vide OSM kartice. */
 const KARTA_OKVIR = L.latLngBounds([45.15, 14.42], [45.70, 15.33]);
-const KARTA_VERZIJA = 1;  /* povećaj kad se pločice ponovo izrade (alati/osm_karta.py) */
+const KARTA_VERZIJA = 2;  /* povećaj kad se pločice ponovo izrade (alati/osm_karta.py) */
 const vrstaKarte = () => PREGLED || !window.ZelenkoKarta ? "osm" : store.get("gk-karta", "zelenko");
 const OsmVani = L.TileLayer.extend({ _isValidTile(c) { return L.TileLayer.prototype._isValidTile.call(this, c) && !KARTA_OKVIR.contains(this._tileCoordsToBounds(c)); } });
 function osnova(m, mala) {

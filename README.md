@@ -17,7 +17,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - `docs/data/mreza.json` – mreža putova za navigaciju po karti bez interneta (gradi `alati/osm_mreza.py`); izračun puta je u `docs/put.js`
 - `docs/data/rute_bicikl.json` – biciklističke i MTB rute iz OSM relacija (gradi `alati/osm_bike_rute.py`)
 - `docs/data/rute_planinarske.json` – planinarske staze iz OSM relacija (gradi `alati/osm_pjesacke_rute.py`)
-- `docs/karta/` – vlastita topografska karta: vektorske pločice z8–14 i sjenčanje terena z8–13, `popis.json` za preuzimanje (gradi `alati/osm_karta.py`; nakon nove izrade povećaj `KARTA_VERZIJA` u app.js)
+- `docs/karta/` – vlastita topografska karta: vektorske pločice z8–14 i sjenčanje terena z8–13, `popis.json` za preuzimanje (gradi `alati/osm_karta.py`; nakon nove izrade povećaj `KARTA_VERZIJA` u app.js). Zgrade kojih nema u OSM-u dodaju se iz Microsoft Global ML Building Footprints (ODbL): četiri datoteke za Hrvatsku, quadkey 120230320–120230323 iz `dataset-links.csv`, idu u `izvori/ms_zgrade/` (nisu u repozitoriju)
 - `docs/data/usluge.json` – jelo, smještaj, trgovine i OPG (OSM + `izvori/partneri.json`)
 - `docs/data/info.json` – radno vrijeme, ulaznice i kontakti (`izvori/info_rucno.json` sa službenih stranica + OSM), gradi `alati/info_tocke.py`
 - `docs/data/specijaliteti.json` – specijaliteti Gorskog kotara za Gastro kutak (s izvorima)

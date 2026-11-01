@@ -526,6 +526,11 @@
    "https://www.openstreetmap.org/copyright"
   ],
   [
+   "Microsoft Global ML Building Footprints",
+   "Zgrade kojih još nema u OpenStreetMapu, prepoznate sa satelitskih snimaka. Licenca ODbL.",
+   "https://github.com/microsoft/GlobalMLBuildingFootprints"
+  ],
+  [
    "Wikidata",
    "Koordinate dijela točaka. Licenca CC0.",
    "https://www.wikidata.org/"
@@ -647,7 +652,7 @@
  "snim_pro": "Snimanje vlastitih ruta i izvoz GPX-a dio su Pro verzije.",
  "snim_ruta": "Ruta {datum}",
  "snim_greska_gps": "Bez GPS-a ne mogu snimati. Dopusti pristup lokaciji.",
- "karta_dem_atr": "Teren: Copernicus DEM (© DLR, © Airbus DS)",
+ "karta_dem_atr": "Teren: Copernicus DEM (© DLR, © Airbus DS) · dio zgrada: Microsoft (ODbL)",
  "karta_vrsta": "Karta",
  "karta_zelenko": "Zelenko (topo)",
  "karta_osm": "OpenStreetMap",

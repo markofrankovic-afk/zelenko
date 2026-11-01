@@ -526,6 +526,11 @@
    "https://www.openstreetmap.org/copyright"
   ],
   [
+   "Microsoft Global ML Building Footprints",
+   "Buildings not yet in OpenStreetMap, detected from satellite imagery. ODbL licence.",
+   "https://github.com/microsoft/GlobalMLBuildingFootprints"
+  ],
+  [
    "Wikidata",
    "Coordinates of some places. CC0 licence.",
    "https://www.wikidata.org/"
@@ -635,7 +640,7 @@
  "snim_pro": "Recording your own routes and GPX export are part of Pro.",
  "snim_ruta": "Route {datum}",
  "snim_greska_gps": "Can't record without GPS. Allow location access.",
- "karta_dem_atr": "Terrain: Copernicus DEM (© DLR, © Airbus DS)",
+ "karta_dem_atr": "Terrain: Copernicus DEM (© DLR, © Airbus DS) · some buildings: Microsoft (ODbL)",
  "karta_vrsta": "Map",
  "karta_zelenko": "Zelenko (topo)",
  "karta_osm": "OpenStreetMap",
