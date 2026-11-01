@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.13.3",
+  verzija: "0.13.4",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -496,10 +496,10 @@ function openUsluga(p) {
     <div><span class="row small muted"><span class="dot" style="background:${boja(p)}"></span>${esc(katNaziv(p))}${u.kuhinja ? " · " + esc(u.kuhinja.replace(/_/g, " ").replace(/;/g, ", ")) : ""}${d != null ? " · " + fmtDist(d) + " " + esc(t("od_tebe")) : ""}</span>
       <h1>${esc(x.naziv)}</h1>${u.partner ? `<span class="badge free">${esc(t("partner"))}</span>` : ""}</div>
     ${rvOznaka(u)}
-    <div class="row" style="flex-wrap:wrap"><button class="btn primary" id="tNav" style="flex:2 1 140px">${ic("nav")}${esc(t("vodi_me"))}</button>
+    <div class="row akc" style="flex-wrap:wrap"><button class="btn primary" id="tNav" style="flex:2 1 110px">${ic("nav")}${esc(t("vodi_me"))}</button>
       ${u.telefon ? `<a class="btn" style="flex:1 1 100px" href="tel:${esc(u.telefon.replace(/\s/g, ""))}">${ic("phone")}${esc(t("nazovi"))}</a>` : ""}
       ${u.web ? `<a class="btn" style="flex:1 1 90px" href="${esc(u.web)}" target="_blank" rel="noopener">${esc(t("web"))}</a>` : ""}
-      <button class="btn" id="tKarta" style="flex:1 1 100px">${ic("map")}${esc(t("na_karti"))}</button>
+      <button class="btn" id="tKarta" style="flex:1 1 auto">${ic("map")}${esc(t("na_karti"))}</button>
       <button class="btn" id="tFav" aria-pressed="${fav}" aria-label="${esc(fav ? t("spremljeno") : t("spremi"))}" style="flex:0 0 52px">${ic("star")}</button></div>
     ${x.opis ? `<p style="margin:0;font-size:1.06em">${esc(x.opis)}</p>` : ""}
     ${u.radno_vrijeme ? `<details class="tip"><summary>${esc(t("radno_vrijeme"))}</summary><p style="white-space:pre-line">${esc(rvLjudski(u.radno_vrijeme))}</p></details>` : ""}
