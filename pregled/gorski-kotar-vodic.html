@@ -1229,7 +1229,7 @@ dl.info{margin:0}
 "use strict";
 
 const CONFIG = {
-  verzija: "0.13.6",
+  verzija: "0.13.7",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -1395,7 +1395,10 @@ let skiniPodlogu = () => {}, rutaLayer = null;
    „osm“ = kartice OpenStreetMapa + offline podloga. Izvan okvira Gorskog kotara uvijek se vide OSM kartice. */
 const KARTA_OKVIR = L.latLngBounds([45.15, 14.42], [45.70, 15.33]);
 const KARTA_VERZIJA = 2;  /* povećaj kad se pločice ponovo izrade (alati/osm_karta.py) */
-const vrstaKarte = () => PREGLED || !window.ZelenkoKarta ? "osm" : store.get("gk-karta", "zelenko");
+/* računalo (miš, bez dodira): zadana OSM karta dok se ne riješi zastoj naše karte u Chromeu/Edgeu; ?test= uvijek uključuje našu */
+const RACUNALO = matchMedia("(hover: hover) and (pointer: fine)").matches;
+const TEST_KARTA = new URLSearchParams(location.search).get("test") || "";
+const vrstaKarte = () => PREGLED || !window.ZelenkoKarta ? "osm" : TEST_KARTA ? "zelenko" : store.get("gk-karta", RACUNALO ? "osm" : "zelenko");
 const OsmVani = L.TileLayer.extend({ _isValidTile(c) { return L.TileLayer.prototype._isValidTile.call(this, c) && !KARTA_OKVIR.contains(this._tileCoordsToBounds(c)); } });
 function osnova(m, mala) {
   const sl = [];
@@ -1405,7 +1408,8 @@ function osnova(m, mala) {
     /* probe za zastoje: ?test=bez-sjencanja, ?test=bez-natpisa, ?test=bez-oboje */
     const test = new URLSearchParams(location.search).get("test") || "";
     const z = ZelenkoKarta.slojevi("karta/", { bounds: KARTA_OKVIR, v: KARTA_VERZIJA, tamna, bezNatpisa: /natpisa|oboje/.test(test),
-      natpisi: test === "bez-crtnih" ? ["mjesta", "vrhovi"] : test === "samo-vrhovi" ? ["vrhovi"] : test === "samo-mjesta" ? ["mjesta"] : test === "samo-crtni" ? ["vodotoci", "ceste", "slojnice"] : null });
+      natpisi: test === "bez-crtnih" ? ["mjesta", "vrhovi"] : test === "samo-vrhovi" ? ["vrhovi"] : test === "samo-mjesta" ? ["mjesta"] : test === "samo-crtni" ? ["vodotoci", "ceste", "slojnice"] : null,
+      bezSlojeva: test === "bez-slojnica" ? ["slojnice"] : test === "bez-zgrada" ? ["zgrade"] : test === "bez-pokrova" ? ["pokrov"] : test === "samo-ceste" ? ["slojnice", "zgrade", "pokrov", "markirane", "vodotoci", "voda", "zastita"] : [] });
     sl.push(z.vektor); if (!/sjencanja|oboje/.test(test)) sl.push(z.sjencanje);
     if (!mala) m.attributionControl.addAttribution(t("karta_dem_atr"));
   } else if (!PREGLED) sl.push(L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
