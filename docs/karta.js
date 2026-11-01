@@ -67,10 +67,10 @@ window.ZelenkoKarta = (() => {
     C_ = opcije.tamna ? TAMNA : C;
     const { paint, label } = pravila();
     const vektor = P.leafletLayer({
-      url: osnova + "v/{z}/{x}/{y}.mvt" + (opcije.v ? "?v=" + opcije.v : ""), maxDataZoom: 14, maxZoom: 19, paintRules: paint, labelRules: opcije.bezNatpisa ? [] : opcije.natpisi ? label.filter(r => opcije.natpisi.includes(r.dataLayer)) : label,
+      url: osnova + "v/{z}/{x}/{y}.mvt" + (opcije.v ? "?v=" + opcije.v : ""), maxDataZoom: 14, minZoom: 9, maxZoom: 19, paintRules: paint, labelRules: opcije.bezNatpisa ? [] : opcije.natpisi ? label.filter(r => opcije.natpisi.includes(r.dataLayer)) : label,
       backgroundColor: C_.pozadina, devicePixelRatio: Math.min(2, window.devicePixelRatio || 1), tileDelay: 3, updateWhenZooming: false, keepBuffer: 1, className: opcije.className || "", attribution: opcije.attribution || "", ...(opcije.bounds ? { bounds: opcije.bounds } : {})
     });
-    const sjencanje = L.tileLayer(osnova + "s/{z}/{x}/{y}.webp" + (opcije.v ? "?v=" + opcije.v : ""), { maxNativeZoom: 13, minZoom: 8, maxZoom: 15, className: (opcije.className || "") + " sjencanje", ...(opcije.bounds ? { bounds: opcije.bounds } : {}), errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" });
+    const sjencanje = L.tileLayer(osnova + "s/{z}/{x}/{y}.webp" + (opcije.v ? "?v=" + opcije.v : ""), { maxNativeZoom: 13, minZoom: 9, maxZoom: 15, className: (opcije.className || "") + " sjencanje", ...(opcije.bounds ? { bounds: opcije.bounds } : {}), errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" });
     return { vektor, sjencanje };
   }
   return { slojevi, boje: C };

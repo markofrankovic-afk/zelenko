@@ -296,6 +296,12 @@ with Pool(os.cpu_count()) as pool:
     for r in pool.imap_unordered(stablo_z10, [(t.x, t.y) for t in mercantile.tiles(W, S, E, N, 10)]):
         rezultat += r; print("vektor", len(rezultat), flush=True)
     rezultat += pool.map(sjencanje_pl, [(t.z, t.x, t.y) for z in range(ZMIN, ZSJ + 1) for t in mercantile.tiles(W, S, E, N, z)])
+# prazne pločice unutar okvira: aplikacija ne smije dobiti 404 (HTML stranica nije MVT)
+for z in range(ZMIN, ZMAX + 1):
+    for t in mercantile.tiles(W, S, E, N, z):
+        f = os.path.join(OUT, "v", str(z), str(t.x), f"{t.y}.mvt")
+        if not os.path.exists(f):
+            os.makedirs(os.path.dirname(f), exist_ok=True); open(f, "wb").close(); rezultat.append((f"v/{z}/{t.x}/{t.y}.mvt", 0))
 rezultat.sort()
 popis = [r[0] for r in rezultat]; ukupno = sum(r[1] for r in rezultat)
 
