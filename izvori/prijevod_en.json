@@ -458,8 +458,8 @@
    "A themed cowboy village near Fužine, fun for families with kids."
   ],
   "E02": [
-   "Vrata Fun and Paintball Park",
-   "An amusement park with paintball near Vrata."
+   "Vrata Fun Park (Plasa)",
+   "An amusement park with paintball on Plasa near Vrata. In winter it is a sledding hill when there's snow."
   ],
   "E03": [
    "Šumska bajka (Forest Fairytale), Lič",
@@ -545,10 +545,6 @@
    "Plasa viewpoint, Vrata",
    "A viewpoint on Plasa above Vrata, looking over Vrata and the surrounding hills."
   ],
-  "W07": [
-   "Plasa sledding hill, Vrata",
-   "A sledding hill on the slope of Plasa near Vrata, for sledging when there's snow."
-  ],
   "E12": [
    "Fenced deer (Deer's Zoo), Delnice",
    "A fenced enclosure with fallow deer in the centre of Delnice, next to the ice rink."
@@ -556,6 +552,10 @@
   "E13": [
    "Delnice ice rink",
    "A covered ice rink in the centre of Delnice. Check whether and when it's open before you go."
+  ],
+  "E14": [
+   "Boat on Lake Lepenica",
+   "A small boat that takes visitors around Lake Lepenica. The landing is on the shore by the Lepenice Lake bar. Check that it's running before you go."
   ]
  },
  "rute": {

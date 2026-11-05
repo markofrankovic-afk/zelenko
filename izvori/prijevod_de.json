@@ -458,8 +458,8 @@
    "Ein thematisches Cowboydorf bei Fužine, Spaß für Familien mit Kindern."
   ],
   "E02": [
-   "Freizeit- und Paintballpark Vrata",
-   "Ein Freizeitpark mit Paintball bei Vrata."
+   "Freizeitpark Vrata (Plasa)",
+   "Ein Freizeitpark mit Paintball auf der Plasa bei Vrata. Im Winter ist hier ein Rodelhang, wenn Schnee liegt."
   ],
   "E03": [
    "Šumska bajka (Waldmärchen), Lič",
@@ -545,10 +545,6 @@
    "Aussichtspunkt Plasa, Vrata",
    "Ein Aussichtspunkt auf der Plasa oberhalb von Vrata, mit Blick auf Vrata und die umliegenden Hügel."
   ],
-  "W07": [
-   "Rodelhang Plasa, Vrata",
-   "Ein Rodelhang am Hang der Plasa bei Vrata, zum Rodeln, wenn Schnee liegt."
-  ],
   "E12": [
    "Damwild-Gehege (Deer's Zoo), Delnice",
    "Ein Gehege mit Damhirschen im Zentrum von Delnice, neben der Eisbahn."
@@ -556,6 +552,10 @@
   "E13": [
    "Eisbahn Delnice",
    "Eine überdachte Eisbahn im Zentrum von Delnice. Prüfe vor dem Besuch, ob und wann sie geöffnet ist."
+  ],
+  "E14": [
+   "Boot auf dem Lepenica-See",
+   "Ein kleines Boot, das Besucher über den Lepenica-See fährt. Die Anlegestelle ist am Ufer bei der Bar Lepenice Lake. Prüfe vor dem Besuch, ob es fährt."
   ]
  },
  "rute": {

@@ -683,12 +683,6 @@
   "vlastita": true,
   "naslov": "20260404_114204.jpg"
  },
- "W07": {
-  "datoteka": "slike/vlastita-20260503-182236.webp",
-  "autor": "Marko Franković",
-  "vlastita": true,
-  "naslov": "20260503_182236.jpg"
- },
  "P30": {
   "datoteka": "slike/vlastita-20260503-182343.webp",
   "autor": "Marko Franković",
@@ -718,5 +712,17 @@
   "autor": "Marko Franković",
   "vlastita": true,
   "naslov": "ZOE_0198.jpg"
+ },
+ "E02": {
+  "datoteka": "slike/vlastita-20260503-182236.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260503_182236.jpg"
+ },
+ "E14": {
+  "datoteka": "slike/vlastita-20240731-180607.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20240731_180607.jpg"
  }
 }

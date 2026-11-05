@@ -13,6 +13,7 @@ BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 V = json.load(open(f"{BASE}/izvori/vlastite_fotke.json", encoding="utf-8"))
 put = f"{docs}/data/slike.json"
 sl = json.load(open(put, encoding="utf-8"))
+sl = {k: v for k, v in sl.items() if not v.get("vlastita") or k in V["odabrane"]}   # makni fotke koje više nisu odabrane
 for tid, dat in V["odabrane"].items():
     ime = "vlastita-" + re.sub(r"[^a-z0-9]+", "-", os.path.splitext(dat)[0].lower()) + ".webp"
     cilj = f"{docs}/slike/{ime}"

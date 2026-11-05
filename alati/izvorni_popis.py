@@ -148,7 +148,7 @@ T = [
 ("H53","bastina","muzej","Etnografska zbirka Lič","Zbirka starih predmeta iz Liča i okolice, osnovana 1994. za 150. obljetnicu školstva u Liču. Zaštićeno kulturno dobro.",None,"",45.27903,14.71915,"Položaj: središte Liča (OSM); točnu zgradu provjeriti."),
 # ---------------- IZLETIŠTA I ZABAVA ----------------
 ("E01","izlet","zanimljivost","Kaubojsko selo Roswell","Tematsko kaubojsko selo kod Fužina, zabava za obitelji s djecom.",None,"",45.34284,14.71134,""),
-("E02","izlet","zanimljivost","Zabavni i paintball park Vrata","Zabavni park s paintballom kod Vrata.",None,"",45.31256,14.73238,""),
+("E02","izlet","zanimljivost","Zabavni park Vrata (Plasa)","Zabavni park s paintballom na Plasi kod Vrata. Zimi je ovdje sanjkalište, kad ima snijega.",None,"",45.312082,14.726372,"Položaj s autorove fotke; potvrdio da su park i sanjkalište isto mjesto."),
 ("E03","izlet","zanimljivost","Izletište Šumska bajka, Lič","Obiteljsko izletište u šumi kod Liča, prikladno za djecu.",None,"",45.29323,14.70443,""),
 ("E04","izlet","zanimljivost","Kuća prirode Kotač na Lujzijani","Edukativni centar o prirodi uz Lujzinsku cestu, s kafićem.",None,"",45.35685,14.74572,""),
 ("H54","bastina","muzej","Hiša Rački, Delnice","Stara goranska kuća u Supilovoj ulici, procjenjuje se da ima oko 300 godina. Čuva delničku narodnu nošnju; svakog lipnja ovdje se održavaju Ivanjske kresnice.",None,"",45.39765,14.80229,"Supilova 94: kućni broj nije u OSM-u, položaj procijenjen po susjednim brojevima (82–88)."),
@@ -172,7 +172,7 @@ T = [
 ("E10","izlet","igraliste","Dječje igralište uz Bajer","Dječje igralište na travnjaku uz jezero Bajer u Fužinama, uz šetnicu oko jezera.",None,"",45.312157,14.717052,""),
 ("E11","izlet","igraliste","Igralište Gmajna, Vrata","Dječje igralište na Gmajni kod Vrata, uz nogometno igralište.",None,"",45.322337,14.72586,""),
 ("P30","planina","vidikovac","Vidikovac Plasa, Vrata","Vidikovac na Plasi iznad Vrata, s pogledom na Vrata i okolna brda.",None,"",45.311962,14.726138,""),
-("W07","zima","sanjkaliste","Sanjkalište Plasa, Vrata","Sanjkalište na padini Plase kod Vrata, za sanjkanje kad ima snijega.",None,"",45.312082,14.726372,""),
+("E14","izlet","zanimljivost","Brodić na Lepenici","Brodić koji vozi izletnike po jezeru Lepenica. Pristanište je na obali kod bara Lepenice Lake. Prije dolaska provjeri vozi li.",None,"",45.322734,14.700226,""),
 ("E12","izlet","zanimljivost","Ograđeni jeleni (Deer's Zoo), Delnice","Ograđeni prostor s jelenima lopatarima u središtu Delnica, uz klizalište.",None,"",45.39442,14.79551,""),
 ("E13","izlet","sport","Klizalište Delnice","Natkriveno klizalište u središtu Delnica. Prije dolaska provjeri radi li i kada.",None,"",45.39494,14.79666,""),
 ]
@@ -190,11 +190,11 @@ RUCNO = {"V01": "S"}  # izvor Kupe: položaj se poklapa s izvorom, ali Wikidata 
 # točke kod kojih Wikidata pokazuje nešto drugo (npr. selo umjesto polja): vrijedi naša koordinata
 KOORD_RUCNO = {"P14", "S03", "S01", "S02", "S05", "B02", "P04", "H05"}
 # mjesta koja se ističu zimi (filter „Zima” na karti i zimski dio u „Danas”)
-ZIMA = {"W07": "sanjkaliste", "P04": "skijaliste", "P16": "skijaliste", "E05": "sanjkaliste", "W03": "sanjkaliste", "W05": "skijaliste", "W06": "skijaliste"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
+ZIMA = {"E02": "sanjkaliste", "P04": "skijaliste", "P16": "skijaliste", "E05": "sanjkaliste", "W03": "sanjkaliste", "W05": "skijaliste", "W06": "skijaliste"}  # P04: Goranski sportski centar (OSM), gdje turisti dolaze
 
 # koordinate iz OSM-a (ODbL): objekt je u OSM-u, ali ga OSM izvadak ne donosi kao točku ili mu treba naš naziv i opis
 KOORD_OSM = {"H05": "w333577471", "H45": "w379649181", "H46": "w685050686", "H47": "w433260934", "H48": "r6304141",
-             "H49": "w433249369", "E01": "w1534944649", "E02": "w436526341", "E03": "n13022902160", "E04": "n12085008012",
+             "H49": "w433249369", "E01": "w1534944649", "E03": "n13022902160", "E04": "n12085008012",
              "H55": "n12196525173", "V13": "n8548606710", "P16": "w279916858", "E05": "w321348201",
              "W03": "w1384444362", "W05": "w664670006", "W06": "w228996245",
              "E12": "n6521108748", "E13": "w228151222"}
