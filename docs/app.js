@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.14.1",
+  verzija: "0.15.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -253,7 +253,7 @@ function renderNear() {
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (!o) return;
   const id = o.dataset.open;
-  if (id.startsWith("m:")) openMoje(id.slice(2)); else if (RBY[id]) openRuta(id); else if (BY[id]) openTocka(id);
+  if (id.startsWith("m:")) openMoje(id.slice(2)); else if (RBY[id]) openRuta(id); else if (IBY[id]) openIzlet(id); else if (BY[id]) openTocka(id);
 });
 $("#near").addEventListener("click", e => { if (e.target.closest("#nearLoc")) locate(true); });
 function layoutNear() { const h = $("#near").offsetHeight; if (h) document.documentElement.style.setProperty("--near-h", h + "px"); }
@@ -743,6 +743,7 @@ function renderRute() {
   const grp = (key, label, opts) => `<div class="stack" style="gap:6px"><span class="eyebrow">${esc(t(label))}</span><div class="row" style="flex-wrap:wrap;gap:6px">${opts.map(([v, k]) => `<button class="chip soft" data-plan="${key}:${v}" aria-pressed="${P[key] === v}">${esc(t(k))}</button>`).join("")}</div></div>`;
   const fit = RUTE.filter(r => rutaGrupa(r) === P.vrijeme && (r.vrsta === "biciklisticka" ? "bicikl" : "pjesice") === P.kako && (P.s !== "djeca" || r.tezina === "lagano"));
   $("#rute").innerHTML = `<div class="between"><h1>${esc(t("rute"))}</h1><button class="sos" data-go="sigurnost" aria-label="${esc(t("sos_aria"))}">${esc(t("sos"))}</button></div>
+    ${izletiSekcija()}
     <section class="card stack" style="gap:12px"><h2>${esc(t("sto_danas"))}</h2>
       ${grp("vrijeme", "koliko_vremena", [["kratko", "vrijeme_kratko"], ["pola", "vrijeme_pola"], ["dan", "vrijeme_dan"]])}
       ${grp("s", "s_kim", [["drustvo", "s_drustvo"], ["djeca", "s_djeca"]])}
@@ -753,7 +754,7 @@ function renderRute() {
     <div class="row g-filter" style="flex-wrap:wrap;gap:6px">${R_FILTRI.map(([k, f]) => `<button class="chip soft" data-rfiltar="${k}" aria-pressed="${(S.rFiltar || "sve") === k}">${esc(t("rf_" + k))} <span class="muted">${RUTE.filter(f).length}</span></button>`).join("")}</div>
     ${RUTE.filter((R_FILTRI.find(([k]) => k === (S.rFiltar || "sve")) || R_FILTRI[0])[1]).map(r => rutaKartica(r)).join("")}`;
 }
-$("#rute").addEventListener("click", e => { const f = e.target.closest("[data-rfiltar]"); if (f) { S.rFiltar = f.dataset.rfiltar; renderRute(); return; } const b = e.target.closest("[data-plan]"); if (!b) return; const [k, v] = b.dataset.plan.split(":"); S.plan[k] = v; renderRute(); gcEv("planer"); });
+$("#rute").addEventListener("click", e => { if (e.target.closest("#izSvi")) { S.izSvi = !S.izSvi; renderRute(); return; } const f = e.target.closest("[data-rfiltar]"); if (f) { S.rFiltar = f.dataset.rfiltar; renderRute(); return; } const b = e.target.closest("[data-plan]"); if (!b) return; const [k, v] = b.dataset.plan.split(":"); S.plan[k] = v; renderRute(); gcEv("planer"); });
 
 /* visinski profil rute (Copernicus DEM): jednostavan graf, za Pro rute zamućen */
 function profilHtml(r) {
@@ -1236,6 +1237,91 @@ async function preuzmiKartu() {
   if (S.view === "moje") renderMoje();
 }
 
+
+/* ---------- izleti po danima (data/izleti.json): gotov plan dana od naših mjesta ---------- */
+let IZLETI = [], IBY = {};
+const IZ_MJESECI = { cijela_godina: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], proljece_jesen: [4, 5, 6, 7, 8, 9, 10], ljeto: [6, 7, 8], zima: [11, 12, 1, 2, 3], bez_snijega: [5, 6, 7, 8, 9, 10] };
+const izSezona = iz => (IZ_MJESECI[iz.sezona] || IZ_MJESECI.cijela_godina).includes(new Date().getMonth() + 1);
+const izTekst = iz => iz[CONFIG.jezik] || iz.hr;
+const izStop = s => s[CONFIG.jezik] || s.hr;
+/* put između stajališta: procjena iz zračne udaljenosti (×1,35 za vijugave ceste i staze) */
+function izPut(a, b, iz) {
+  const km = hav(a, b) / 1000 * 1.35;
+  if (km < 1.2 || iz.za === "planinari") return { km, min: Math.round(km / 3.5 * 60), nacin: "pjesice" };
+  if (iz.za === "biciklisti") return { km, min: Math.round(km / 15 * 60), nacin: "bicikl" };
+  return { km, min: Math.round(km / 45 * 60) + 5, nacin: "voznja" };
+}
+function izTrajanje(iz) {
+  const st = iz.tocke.map(s => BY[s.id]).filter(Boolean);
+  let min = iz.tocke.reduce((a, s) => a + (s.min || 0), 0);
+  for (let i = 1; i < st.length; i++) min += izPut(st[i - 1], st[i], iz).min;
+  return min;
+}
+const izSati = min => dec((Math.round(min / 30) / 2).toFixed(1).replace(/\.0$/, ""));
+/* planinarski izleti imaju ručno upisano trajanje (staze se ne mogu procijeniti zračnom crtom) */
+const izUkupno = iz => iz.sati ? dec(iz.sati) : izSati(izTrajanje(iz));
+function izletKartica(iz) {
+  const x = izTekst(iz), sad = izSezona(iz);
+  return `<button class="card list-row" data-open="${iz.id}" style="flex-direction:column;align-items:stretch;gap:6px;padding:14px">
+    <span class="between" style="align-items:flex-start"><b style="font-size:1.1em;line-height:1.25">${esc(x.naziv)}</b><span class="badge ${iz.besplatno ? "free" : "pro"}">${esc(iz.besplatno ? t("besplatno") : t("pro"))}</span></span>
+    <span class="row small meta" style="gap:14px;color:var(--ink2);flex-wrap:wrap"><span>${esc(t("iz_za_" + iz.za))}</span><span>${esc(t("iz_stajalista_n", { n: iz.tocke.length }))}</span><span class="mono">~${izUkupno(iz)} h</span>${sad ? `<span style="color:var(--accent)">${esc(t("iz_sad_kratko"))}</span>` : `<span>${esc(t("iz_sez_" + iz.sezona))}</span>`}</span></button>`;
+}
+function izletiSekcija() {
+  if (!IZLETI.length) return "";
+  const red = IZLETI.slice().sort((a, b) => (izSezona(b) - izSezona(a)) || (b.besplatno - a.besplatno));
+  const vidi = S.izSvi ? red : red.slice(0, 3);
+  return `<h2>${esc(t("iz_naslov"))}</h2><p class="small muted" style="margin:-4px 0 0">${esc(t("iz_opis"))}</p>
+    ${vidi.map(izletKartica).join("")}
+    ${red.length > 3 ? `<button class="btn" id="izSvi" style="align-self:flex-start">${esc(t(S.izSvi ? "iz_manje" : "iz_svi", { n: red.length }))}</button>` : ""}`;
+}
+function izJelo(st) {
+  const jelo = TOCKE.filter(p => p.kategorija === "jelo" && p.usluga);
+  return jelo.map(p => ({ p, d: Math.min(...st.map(s => hav(s, p))) })).filter(x => x.d < 4000)
+    .sort((a, b) => (!!b.p.usluga.partner - !!a.p.usluga.partner) || a.d - b.d).slice(0, 3);
+}
+function openIzlet(id) {
+  const iz = IBY[id]; if (!iz) return;
+  const x = izTekst(iz), ok = !!(iz.besplatno || jePro());
+  const st = iz.tocke.map(s => ({ s, p: BY[s.id] })).filter(o => o.p);
+  const red = st.map(({ s, p }, i) => {
+    const put = i ? izPut(st[i - 1].p, p, iz) : null;
+    return `${put && ok && iz.za !== "planinari" ? `<div class="small muted" style="padding:2px 0 2px 44px">↓ ${esc(t("iz_put_" + put.nacin, { min: Math.max(5, Math.round(put.min / 5) * 5), km: dec(put.km.toFixed(put.km < 10 ? 1 : 0)) }))}</div>` : ""}
+      <div class="row" style="gap:8px;align-items:flex-start">
+        <button class="list-row" data-open="${p.id}" style="flex:1;align-items:flex-start"><span class="num">${i + 1}</span><span class="t"><b>${esc(tx(p).naziv)}</b>${ok ? `<span>${esc(izStop(s))}</span><span class="mono">~${s.min} min</span>` : `<span>${esc(katNaziv(p))}</span>`}</span></button>
+        ${ok ? `<button class="btn" data-iznav="${i}" aria-label="${esc(t("vodi_me"))}: ${esc(tx(p).naziv)}" style="flex:0 0 48px;padding:0">${ic("nav")}</button>` : ""}</div>`;
+  }).join("");
+  const jelo = ok ? izJelo(st.map(o => o.p)) : [];
+  const ruta = iz.ruta && RBY[iz.ruta];
+  openSheet(t("iz_naslov"), `<div class="stack">
+    <div class="row"><span class="badge ${iz.besplatno ? "free" : "pro"}">${esc(iz.besplatno ? t("besplatno") : t("pro"))}</span><span class="small muted">${esc(t("iz_za_" + iz.za))} · ${esc(t("iz_sez_" + iz.sezona))}</span></div>
+    <h1>${esc(x.naziv)}</h1>
+    <div class="stats"><div><b>${st.length}</b><span>${esc(t("iz_stajalista"))}</span></div><div><b>~${izUkupno(iz)}</b><span>${esc(t("sati"))}</span></div></div>
+    ${izSezona(iz) ? `<div class="note" style="margin:0">${esc(t("iz_sad"))}</div>` : ""}
+    <p style="margin:0;font-size:1.04em">${esc(x.uvod)}</p>
+    ${ok ? `<div><div class="mini-map" id="izMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("iz_karta_napomena"))}</p></div>` : ""}
+    <section class="stack" style="gap:4px"><h3>${esc(t("iz_plan"))}</h3>${red}
+      ${ok ? `<p class="small muted" style="margin:4px 0 0">${esc(t("iz_procjena"))}</p>` : ""}</section>
+    ${ok ? `<button class="btn primary" data-iznav="0" style="align-self:stretch">${ic("nav")}${esc(t("iz_kreni"))}</button>` : `<div class="note warn">${esc(t("iz_pro"))}<br>${esc(t("pro_cijena"))}</div>`}
+    ${ok && x.ponijeti && x.ponijeti.length ? `<section class="card stack" style="gap:6px"><h3>${esc(t("iz_ponijeti"))}</h3><ul style="margin:0;padding-left:20px">${x.ponijeti.map(p => `<li>${esc(p)}</li>`).join("")}</ul></section>` : ""}
+    ${jelo.length ? `<section class="stack" style="gap:4px"><h3>${esc(t("iz_jelo"))}</h3>${jelo.map(({ p, d }) => `<button class="list-row" data-open="${esc(p.id)}"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span><span class="small muted mono">${fmtDist(d)}</span></button>`).join("")}</section>` : ""}
+    ${ruta ? `<section class="stack" style="gap:4px"><h3>${esc(t("iz_ruta"))}</h3>${rutaKartica(ruta)}</section>` : ""}
+  </div>`);
+  if (ok) {
+    const ll = st.map(o => [o.p.lat, o.p.lon]);
+    const mm = L.map("izMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, preferCanvas: true });
+    const skini = osnova(mm, true);
+    L.polyline(ll, { color: cv("--accent"), weight: 3, dashArray: "6 6", opacity: .9 }).addTo(mm);
+    st.forEach((o, i) => L.marker([o.p.lat, o.p.lon], { icon: L.divIcon({ className: "num-icon", html: String(i + 1), iconSize: [24, 24] }) }).addTo(mm));
+    mm.fitBounds(L.latLngBounds(ll).pad(0.25)); setTimeout(() => mm.invalidateSize(), 60);
+    sheetCleanup.push(() => { skini(); mm.remove(); });
+  }
+  $("#sheet").querySelectorAll("[data-iznav]").forEach(b => b.onclick = () => {
+    const o = st[+b.dataset.iznav]; if (!o) return;
+    openNav({ lat: o.p.lat, lon: o.p.lon }, tx(o.p).naziv); gcEv("izlet-kreni");
+  });
+  gcEv("izlet");
+}
+
 /* ---------- o aplikaciji: izvori, licence, privatnost, kontakt ---------- */
 function openOApp() {
   const mail = `mailto:${CONFIG.kontakt}?subject=${encodeURIComponent("Zelenko " + CONFIG.verzija)}`;
@@ -1427,9 +1513,10 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map && vrstaKarte() === "osm") { skiniPodlogu(); skiniPodlogu = osnova(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD, hike] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null), get("data/rute_planinarske.json").catch(() => ({ rute: [] }))]);
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD, hike, izl] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null), get("data/rute_planinarske.json").catch(() => ({ rute: [] })), get("data/izleti.json").catch(() => ({ izleti: [] }))]);
   T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec; if (lynxD) LYNX = lynxD;
   TOCKE = tocke.tocke; RUTE = rute.rute.concat((hike && hike.rute) || [], (bike && bike.rute) || []);
+  IZLETI = (izl && izl.izleti) || []; IZLETI.forEach(i => IBY[i.id] = i);
   if (CONFIG.jezik !== "hr") {
     (SPEC.specijaliteti || []).forEach(preko); Object.values(INFO).forEach(preko);
     (LYNX.cinjenice || []).forEach(c => { if (c[CONFIG.jezik]) c.tekst = c[CONFIG.jezik].tekst; });

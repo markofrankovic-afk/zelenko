@@ -1,0 +1,522 @@
+{
+ "opis": "Izleti po danima: gotovi planovi od mjesta koja već imamo u aplikaciji (id iz tocke.json). Tekstovi su naši; radno vrijeme i cijene ne pišemo ovdje nego ih aplikacija pokazuje iz kartice mjesta. min = okvirno vrijeme na stajalištu. Kopira se u docs/data/izleti.json.",
+ "izleti": [
+  {
+   "id": "I01",
+   "besplatno": true,
+   "sezona": "proljece_jesen",
+   "za": "obitelj",
+   "hr": {
+    "naziv": "Fužine s djecom",
+    "uvod": "Lagan dan oko fužinskih jezera: šetnica uz Bajer, špilja usred mjesta i malo divljeg zapada za djecu. Sve je na nekoliko minuta vožnje.",
+    "ponijeti": [
+     "jaknu za špilju (unutra je hladno)",
+     "udobnu obuću",
+     "vodu i užinu za šetnju uz jezero"
+    ]
+   },
+   "en": {
+    "naziv": "Fužine with kids",
+    "uvod": "An easy day around the Fužine lakes: a lakeside path by Bajer, a cave right in the village and a bit of the Wild West for the kids. Everything is a few minutes' drive apart.",
+    "ponijeti": [
+     "a jacket for the cave (it's cold inside)",
+     "comfortable shoes",
+     "water and a snack for the lakeside walk"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "S03",
+     "min": 60,
+     "hr": "Šetnja oko Bajera, ravno i lagano za sve.",
+     "en": "A walk around Lake Bajer, flat and easy for everyone."
+    },
+    {
+     "id": "C01",
+     "min": 45,
+     "hr": "Obilazak samo s vodičem, u točno vrijeme – raspored je u kartici špilje.",
+     "en": "Guided tours only, at set times – the schedule is on the cave's card."
+    },
+    {
+     "id": "E01",
+     "min": 90,
+     "hr": "Kaubojsko selo za djecu; radno vrijeme provjeri prije dolaska.",
+     "en": "A cowboy village for kids; check opening hours before you go."
+    },
+    {
+     "id": "V08",
+     "min": 45,
+     "hr": "Za kraj dana mirna obala Lepenice, dobra za piknik.",
+     "en": "End the day on the quiet shore of Lepenica, good for a picnic."
+    }
+   ]
+  },
+  {
+   "id": "I02",
+   "besplatno": true,
+   "sezona": "cijela_godina",
+   "za": "svi",
+   "hr": {
+    "naziv": "Kišni dan",
+    "uvod": "Kad pada kiša, Gorski kotar se najbolje vidi ispod zemlje i pod krovom: dvije špilje, stari mlin i centri Nacionalnog parka Risnjak.",
+    "ponijeti": [
+     "jaknu i čvrstu obuću za špilje",
+     "kišobran",
+     "gotovinu za ulaznice"
+    ]
+   },
+   "en": {
+    "naziv": "Rainy day",
+    "uvod": "When it rains, Gorski kotar is best seen underground and under a roof: two caves, an old mill and the Risnjak National Park visitor centres.",
+    "ponijeti": [
+     "a jacket and sturdy shoes for the caves",
+     "an umbrella",
+     "cash for tickets"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "C01",
+     "min": 45,
+     "hr": "Špilja Vrelo u Fužinama, obilazak s vodičem.",
+     "en": "Vrelo cave in Fužine, guided tour."
+    },
+    {
+     "id": "C02",
+     "min": 60,
+     "hr": "Špilja Lokvarka; nazovi prije dolaska.",
+     "en": "Lokvarka cave; call before you go."
+    },
+    {
+     "id": "H55",
+     "min": 45,
+     "hr": "Popovićev mlin u Delnicama, posjet uz najavu.",
+     "en": "Popović mill in Delnice, visits by appointment."
+    },
+    {
+     "id": "H45",
+     "min": 60,
+     "hr": "Goranska kuća znanja u Razlogama, u staroj školi.",
+     "en": "Gorski Kotar House of Knowledge in Razloge, in the old school."
+    },
+    {
+     "id": "H46",
+     "min": 45,
+     "hr": "Rodna kuća rijeke Kupe, nekoliko minuta dalje.",
+     "en": "Birth House of the Kupa River, a few minutes further on."
+    }
+   ]
+  },
+  {
+   "id": "I03",
+   "besplatno": false,
+   "sezona": "proljece_jesen",
+   "za": "svi",
+   "ruta": "R03",
+   "hr": {
+    "naziv": "Slapovi i kanjoni",
+    "uvod": "Zeleni vir, Vražji prolaz i kanjon Kamačnika – najljepši kad je vode puno, u proljeće i nakon kiše. Mostići i staze su vlažni, pa idi u dobroj obući.",
+    "ponijeti": [
+     "obuću koja ne kliže",
+     "vodu",
+     "jaknu – u kanjonima je svježe"
+    ]
+   },
+   "en": {
+    "naziv": "Waterfalls and canyons",
+    "uvod": "Zeleni vir, Vražji prolaz and the Kamačnik canyon – at their best when there's plenty of water, in spring and after rain. Footbridges and paths are wet, so wear good shoes.",
+    "ponijeti": [
+     "shoes with good grip",
+     "water",
+     "a jacket – the canyons are cool"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "V11",
+     "min": 30,
+     "hr": "Slap Zeleni vir; prije polaska provjeri prilaz u kartici.",
+     "en": "Zeleni vir waterfall; check the access route on its card before you go."
+    },
+    {
+     "id": "Z03",
+     "min": 90,
+     "hr": "Kanjon Vražji prolaz po mostićima, pa natrag do slapa.",
+     "en": "The Vražji prolaz gorge on footbridges, then back to the waterfall."
+    },
+    {
+     "id": "H08",
+     "min": 15,
+     "hr": "Stara hidroelektrana uz slap.",
+     "en": "The old hydropower plant by the waterfall."
+    },
+    {
+     "id": "Z04",
+     "min": 90,
+     "hr": "Kanjon Kamačnika kod Vrbovskog, šetnja uz potok.",
+     "en": "The Kamačnik canyon near Vrbovsko, a walk along the stream."
+    }
+   ]
+  },
+  {
+   "id": "I04",
+   "besplatno": false,
+   "sezona": "ljeto",
+   "za": "obitelj",
+   "ruta": "R04",
+   "hr": {
+    "naziv": "Izvor i dolina Kupe",
+    "uvod": "Od tajanstvenog izvora Kupe u Nacionalnom parku Risnjak niz dolinu do Broda na Kupi: šetnja, kupanje u hladnoj rijeci i kaštel na kraju dana.",
+    "ponijeti": [
+     "kupaći kostim i ručnik",
+     "obuću za vodu",
+     "gotovinu za ulaznice u park"
+    ]
+   },
+   "en": {
+    "naziv": "Source and valley of the Kupa",
+    "uvod": "From the mysterious source of the Kupa in Risnjak National Park down the valley to Brod na Kupi: a walk, a swim in the cold river and a castle at the end of the day.",
+    "ponijeti": [
+     "swimsuit and towel",
+     "water shoes",
+     "cash for park tickets"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "H45",
+     "min": 30,
+     "hr": "Polazište u Razlogama: centar Nacionalnog parka i parking.",
+     "en": "Start in Razloge: the national park centre and parking."
+    },
+    {
+     "id": "V01",
+     "min": 90,
+     "hr": "Šetnja do izvora Kupe i natrag.",
+     "en": "Walk to the source of the Kupa and back."
+    },
+    {
+     "id": "V03",
+     "min": 90,
+     "hr": "Kuželj: kupanje u Kupi i odmor u hladu.",
+     "en": "Kuželj: a swim in the Kupa and a rest in the shade."
+    },
+    {
+     "id": "H02",
+     "min": 60,
+     "hr": "Kaštel u Brodu na Kupi s izložbom o prirodi kraja; ponedjeljkom zatvoreno.",
+     "en": "The castle in Brod na Kupi with a nature exhibition; closed on Mondays."
+    }
+   ]
+  },
+  {
+   "id": "I05",
+   "besplatno": false,
+   "sezona": "bez_snijega",
+   "za": "planinari",
+   "ruta": "R05",
+   "hr": {
+    "naziv": "Cijeli dan na Risnjaku",
+    "uvod": "Klasičan uspon iz Crnog Luga do Schlosserova doma i na vrh Velikog Risnjaka, s pogledom do mora. Za dobru kondiciju; kreni rano.",
+    "ponijeti": [
+     "planinarske cipele",
+     "dovoljno vode",
+     "vjetrovku i topli sloj",
+     "ulaznicu za nacionalni park"
+    ]
+   },
+   "en": {
+    "naziv": "A full day on Risnjak",
+    "uvod": "The classic ascent from Crni Lug to Schlosser's hut and the summit of Veliki Risnjak, with a view to the sea. For good fitness; start early.",
+    "ponijeti": [
+     "hiking boots",
+     "plenty of water",
+     "a windproof and a warm layer",
+     "a national park ticket"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "Z01",
+     "min": 15,
+     "hr": "Ulaz u park u Crnom Lugu: ulaznica i parking.",
+     "en": "Park entrance in Crni Lug: tickets and parking."
+    },
+    {
+     "id": "P02",
+     "min": 45,
+     "hr": "Schlosserov dom ispod vrha – odmor.",
+     "en": "Schlosser's hut below the summit – a rest."
+    },
+    {
+     "id": "P01",
+     "min": 30,
+     "hr": "Vrh Velikog Risnjaka, 1528 m.",
+     "en": "The summit of Veliki Risnjak, 1528 m."
+    },
+    {
+     "id": "S01",
+     "min": 60,
+     "hr": "Na povratku, ako ima snage: poučna staza Leska kod ulaza.",
+     "en": "On the way back, if you still have the energy: the Leska nature trail by the entrance."
+    }
+   ],
+   "sati": "7–8"
+  },
+  {
+   "id": "I06",
+   "besplatno": false,
+   "sezona": "bez_snijega",
+   "za": "planinari",
+   "ruta": "R08",
+   "hr": {
+    "naziv": "Bijele i Samarske stijene",
+    "uvod": "Kameni labirinti u strogom rezervatu iznad Mrkoplja. Šumska cesta do polazišta zatvorena je kad ima snijega; u rezervatu se ide samo po markacijama.",
+    "ponijeti": [
+     "planinarske cipele",
+     "vodu i hranu – usput nema ničega",
+     "napunjen mobitel"
+    ]
+   },
+   "en": {
+    "naziv": "Bijele and Samarske stijene",
+    "uvod": "Stone labyrinths in a strict nature reserve above Mrkopalj. The forest road to the trailhead is closed when there's snow; in the reserve, stay on the waymarked trail.",
+    "ponijeti": [
+     "hiking boots",
+     "water and food – there's nothing on the way",
+     "a charged phone"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "S08",
+     "min": 10,
+     "hr": "Polazište na šumskoj cesti Mrkopalj – Jasenak.",
+     "en": "Trailhead on the Mrkopalj – Jasenak forest road."
+    },
+    {
+     "id": "P07",
+     "min": 120,
+     "hr": "Bijele stijene: labirinti i vidikovci.",
+     "en": "Bijele stijene: labyrinths and viewpoints."
+    },
+    {
+     "id": "P08",
+     "min": 90,
+     "hr": "Samarske stijene, za one s više vremena.",
+     "en": "Samarske stijene, for those with more time."
+    },
+    {
+     "id": "P27",
+     "min": 30,
+     "hr": "Na povratku Matić poljana i spomen-obilježje.",
+     "en": "On the way back: Matić poljana and the memorial."
+    }
+   ],
+   "sati": "6–8"
+  },
+  {
+   "id": "I07",
+   "besplatno": false,
+   "sezona": "proljece_jesen",
+   "za": "biciklisti",
+   "ruta": "R10",
+   "hr": {
+    "naziv": "Biciklom oko jezera",
+    "uvod": "Krug po cestama od Bajera preko Potkoša i Lepenice do Lokvarskog jezera i natrag. Ima uspona, ali i puno mjesta za odmor uz vodu.",
+    "ponijeti": [
+     "kacigu",
+     "svjetla",
+     "vodu i užinu",
+     "zakrpu za gumu"
+    ]
+   },
+   "en": {
+    "naziv": "Cycling round the lakes",
+    "uvod": "A road loop from Bajer past Potkoš and Lepenica to Lake Lokve and back. There's some climbing, but plenty of places to rest by the water.",
+    "ponijeti": [
+     "a helmet",
+     "lights",
+     "water and a snack",
+     "a puncture kit"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "B02",
+     "min": 10,
+     "hr": "Polazište kod Bajera u Fužinama.",
+     "en": "Start by Lake Bajer in Fužine."
+    },
+    {
+     "id": "V09",
+     "min": 15,
+     "hr": "Jezero Potkoš.",
+     "en": "Lake Potkoš."
+    },
+    {
+     "id": "V08",
+     "min": 20,
+     "hr": "Jezero Lepenica.",
+     "en": "Lake Lepenica."
+    },
+    {
+     "id": "V10",
+     "min": 45,
+     "hr": "Lokvarsko jezero – odmor prije povratka.",
+     "en": "Lake Lokve – a rest before heading back."
+    }
+   ]
+  },
+  {
+   "id": "I08",
+   "besplatno": false,
+   "sezona": "zima",
+   "za": "obitelj",
+   "hr": {
+    "naziv": "Zimski dan sa sanjkama",
+    "uvod": "Tri sanjkališta između Mrkoplja i Ravne Gore, a za kraj noćno sanjkanje na Kupjaku. Sve ovisi o snijegu – provjeri prije polaska.",
+    "ponijeti": [
+     "toplu odjeću i rezervne rukavice",
+     "termosicu s čajem",
+     "sanjke, ako imaš (mogu se i iznajmiti)"
+    ]
+   },
+   "en": {
+    "naziv": "A winter day of sledging",
+    "uvod": "Three sledging hills between Mrkopalj and Ravna Gora, and night sledging on Kupjak to finish. It all depends on snow – check before you go.",
+    "ponijeti": [
+     "warm clothes and spare gloves",
+     "a flask of tea",
+     "a sledge if you have one (you can also hire one)"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "P16",
+     "min": 120,
+     "hr": "Čelimbaša u Mrkoplju.",
+     "en": "Čelimbaša in Mrkopalj."
+    },
+    {
+     "id": "W03",
+     "min": 90,
+     "hr": "Sanjkalište Bajt kod Ravne Gore.",
+     "en": "Bajt sledging hill near Ravna Gora."
+    },
+    {
+     "id": "E05",
+     "min": 90,
+     "hr": "Gorski park Kupjak, i navečer pod svjetlima.",
+     "en": "Kupjak mountain park, also in the evening under lights."
+    }
+   ]
+  },
+  {
+   "id": "I09",
+   "besplatno": false,
+   "sezona": "proljece_jesen",
+   "za": "obitelj",
+   "hr": {
+    "naziv": "Lič i Ličko polje",
+    "uvod": "Mirni dan oko Liča: etnografska zbirka, svetište na polju, stari most na Ličanki i farma sa životinjama. Puno hodanja po ravnom.",
+    "ponijeti": [
+     "udobnu obuću",
+     "gotovinu za farmu i zbirku",
+     "užinu"
+    ]
+   },
+   "en": {
+    "naziv": "Lič and the Lič field",
+    "uvod": "A quiet day around Lič: an ethnographic collection, a shrine on the field, an old bridge on the Ličanka and a farm with animals. Lots of easy, flat walking.",
+    "ponijeti": [
+     "comfortable shoes",
+     "cash for the farm and the collection",
+     "a snack"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "H53",
+     "min": 45,
+     "hr": "Etnografska zbirka u Liču.",
+     "en": "The ethnographic collection in Lič."
+    },
+    {
+     "id": "H49",
+     "min": 30,
+     "hr": "Svetište Majke Božje Snježne na Ličkom polju.",
+     "en": "The shrine of Our Lady of the Snows on the Lič field."
+    },
+    {
+     "id": "H58",
+     "min": 30,
+     "hr": "Vicićev most i izletište.",
+     "en": "Vicić bridge and picnic spot."
+    },
+    {
+     "id": "E09",
+     "min": 90,
+     "hr": "OPG Zeleni san – vikendom poslijepodne.",
+     "en": "Zeleni san farm – weekend afternoons."
+    },
+    {
+     "id": "P14",
+     "min": 45,
+     "hr": "Šetnja Ličkim poljem za kraj dana.",
+     "en": "A walk across the Lič field to end the day."
+    }
+   ]
+  },
+  {
+   "id": "I10",
+   "besplatno": false,
+   "sezona": "proljece_jesen",
+   "za": "obitelj",
+   "hr": {
+    "naziv": "Čabar i Tršće",
+    "uvod": "Krajnji sjever Gorskog kotara uz slovensku granicu: dvorac Zrinskih, izvor Čabranke, staza s modelima zvijeri i adrenalinski park.",
+    "ponijeti": [
+     "udobnu obuću",
+     "vodu",
+     "osobnu iskaznicu ako skreneš preko granice"
+    ]
+   },
+   "en": {
+    "naziv": "Čabar and Tršće",
+    "uvod": "The far north of Gorski kotar on the Slovenian border: the Zrinski castle, the source of the Čabranka, a trail with life-size wild animals and an adventure park.",
+    "ponijeti": [
+     "comfortable shoes",
+     "water",
+     "ID if you cross the border"
+    ]
+   },
+   "tocke": [
+    {
+     "id": "H01",
+     "min": 60,
+     "hr": "Dvorac Zrinskih; vikendom samo uz najavu.",
+     "en": "The Zrinski castle; at weekends by appointment only."
+    },
+    {
+     "id": "V13",
+     "min": 30,
+     "hr": "Izvor Čabranke, kratka šetnja.",
+     "en": "The source of the Čabranka, a short walk."
+    },
+    {
+     "id": "S10",
+     "min": 60,
+     "hr": "Staza predatora u Tršću, oko 1,7 km.",
+     "en": "The predators' trail in Tršće, about 1.7 km."
+    },
+    {
+     "id": "E06",
+     "min": 90,
+     "hr": "Adrenalinski park Gorski Lazi; sezonu provjeri telefonom.",
+     "en": "Gorski Lazi adventure park; check the season by phone."
+    }
+   ]
+  }
+ ]
+}
