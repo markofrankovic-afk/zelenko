@@ -149,19 +149,22 @@ for rid, (t, wids) in sorted(REL.items()):
     if ref and naziv and ref.lower() not in naziv.lower(): ime = f"{naziv} ({ref})"
     # OSM imena tipa "1", "staza 7a", "F30": dodaj vrstu i mjesto početka da se snađeš na popisu
     gm = re.fullmatch(r"(?:staza\s*)?([a-z]?\d+[a-z]?)", (naziv or ref).lower())
-    ime_en = ime.replace("Biciklistička ruta", "Cycling route")
+    ime_en = ime.replace("Biciklistička ruta", "Cycling route"); ime_de = ime.replace("Biciklistička ruta", "Radroute")
     if gm:
         ime = f"{'MTB' if mtb else 'Biciklistička'} staza {gm.group(1).upper()}, {od}"
         ime_en = f"{'MTB' if mtb else 'Cycling'} trail {gm.group(1).upper()}, {od}"
-    else: ime = ime_en = (ime[0].upper() + ime[1:]).replace("vilage", "village")
+        ime_de = f"{'MTB-Strecke' if mtb else 'Radweg'} {gm.group(1).upper()}, {od}"
+    else: ime = ime_en = ime_de = (ime[0].upper() + ime[1:]).replace("vilage", "village")
     opis_en = (f"{'MTB' if mtb else 'Cycling'} route of {km:.1f} km" + (f", a loop from {od}" if kruzna else f", from {od} to {do}")
                + ". The route is mapped in OpenStreetMap; check trail conditions before you ride.")
+    opis_de = (f"{'MTB-Route' if mtb else 'Radroute'} von {km_txt(km)} km" + (f", Rundtour ab {od}" if kruzna else f", von {od} nach {do}")
+               + ". Die Strecke ist in OpenStreetMap eingetragen; prüfe den Wegzustand vor der Fahrt.")
     opis = (f"{'MTB' if mtb else 'Biciklistička'} ruta od {km_txt(km)} km" + (f", kružna iz mjesta {od}" if kruzna else f", od mjesta {od} do mjesta {do}")
             + ". Trasa je označena u OpenStreetMapu; prije vožnje provjeri stanje puta na terenu.")
     sid = f"B{rid}"
     open(os.path.join(GPX, sid + ".gpx"), "w", encoding="utf-8").write(gpx(rid, ime, dijelovi, rid))
     r = {"id": sid, "vrsta": "biciklisticka", "bicikl": "mtb" if mtb else "cesta",
-         "tekst": {"hr": {"naziv": ime, "opis": opis, "parking": f"početak: {od}"}, "en": {"naziv": ime_en, "opis": opis_en, "parking": f"start: {od}"}},
+         "tekst": {"hr": {"naziv": ime, "opis": opis, "parking": f"početak: {od}"}, "en": {"naziv": ime_en, "opis": opis_en, "parking": f"start: {od}"}, "de": {"naziv": ime_de, "opis": opis_de, "parking": f"Start: {od}"}},
          "tezina": tezina, "km": round(km, 1), "km_gpx": round(km, 1), "sati": sati, "uspon_m": None,
          "tocke": st, "besplatno": False, "polazista": [], "oblik": "kruzna" if kruzna else "linijska",
          "izvor_trase": f"OpenStreetMap (ODbL), relacija {rid}", "osm": f"r{rid}", "ref": ref or None,

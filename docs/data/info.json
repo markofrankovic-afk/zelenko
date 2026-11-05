@@ -11,6 +11,10 @@
   "en": {
    "savjet": "Near the source are the Risnjak National Park centres “Birth House of the Kupa River” (Kupari) and “Gorski Kotar House of Knowledge” (the old school in Razloge), open daily 9–17 h.",
    "napomena": "The national park charges admission. Tickets are sold at the entrance or online."
+  },
+  "de": {
+   "savjet": "Nahe der Quelle liegen die Zentren des Nationalparks Risnjak „Geburtshaus der Kupa“ (Kupari) und „Haus des Wissens des Gorski kotar“ (alte Schule in Razloge), täglich 9–17 Uhr geöffnet.",
+   "napomena": "Im Nationalpark wird Eintritt erhoben. Tickets gibt es am Eingang oder online."
   }
  },
  "V11": {
@@ -22,6 +26,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "According to JU Priroda, the road to Zeleni vir is being repaired: access from Donji Lošac near Brod na Kupi or on the loop trail from Skrad station. Check before you go."
+  },
+  "de": {
+   "napomena": "Laut JU Priroda wird die Straße zum Zeleni vir repariert: Zugang von Donji Lošac bei Brod na Kupi oder auf dem Rundweg vom Bahnhof Skrad. Prüfe vor dem Besuch."
   }
  },
  "P02": {
@@ -52,6 +59,16 @@
    ],
    "savjet": "Day passes are sold at the ticket office, online and at Petrol filling stations.",
    "napomena": "Slopes without snowmaking open only after enough natural snow has fallen."
+  },
+  "de": {
+   "rv_tekst": [
+    "Im Winter, wenn Schnee liegt: täglich 9–16 Uhr (Pisten, Sessellift, Schlepplifte).",
+    "Nachtskifahren dienstags und freitags 19–22 Uhr, wenn das Wetter es zulässt.",
+    "Die Kasse öffnet um 8 Uhr (an Nachtski-Tagen auch um 18 Uhr).",
+    "Der Schlepplift Tešnje ist dauerhaft geschlossen."
+   ],
+   "savjet": "Tageskarten gibt es an der Kasse, online und an Petrol-Tankstellen.",
+   "napomena": "Pisten ohne Beschneiung öffnen erst nach genug Naturschnee."
   }
  },
  "P16": {
@@ -63,6 +80,10 @@
   "en": {
    "savjet": "The sledding hill has a conveyor belt; there are half-day and full-day tickets, and sledges can be hired.",
    "napomena": "Opening depends on snow and weather – check their Facebook page or call before you go."
+  },
+  "de": {
+   "savjet": "Der Rodelhang hat ein Förderband; es gibt Halbtages- und Tageskarten, Schlitten kann man mieten.",
+   "napomena": "Der Betrieb hängt von Schnee und Wetter ab – schau auf ihre Facebook-Seite oder ruf vor dem Besuch an."
   }
  },
  "Z01": {
@@ -77,6 +98,10 @@
   "en": {
    "savjet": "Crni Lug also has the “Hidden Treasure of Risnjak” interpretation centre: visits by appointment on +385 91 620 8672 or info@visitdelnice.hr.",
    "napomena": "The national park charges admission. Tickets are sold at the entrance or online."
+  },
+  "de": {
+   "savjet": "In Crni Lug gibt es auch das Besucherzentrum „Verborgener Schatz des Risnjak“: Besuch nach Vereinbarung unter +385 91 620 8672 oder info@visitdelnice.hr.",
+   "napomena": "Im Nationalpark wird Eintritt erhoben. Tickets gibt es am Eingang oder online."
   }
  },
  "Z02": {
@@ -94,6 +119,9 @@
   "rv_izvor": "OpenStreetMap",
   "en": {
    "napomena": "According to JU Priroda, the road to Zeleni vir is being repaired: access from Donji Lošac near Brod na Kupi or on the loop trail from Skrad station. Check before you go."
+  },
+  "de": {
+   "napomena": "Laut JU Priroda wird die Straße zum Zeleni vir repariert: Zugang von Donji Lošac bei Brod na Kupi oder auf dem Rundweg vom Bahnhof Skrad. Prüfe vor dem Besuch."
   }
  },
  "Z04": {
@@ -105,6 +133,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "Check this season's opening hours, ticket and parking with the operator."
+  },
+  "de": {
+   "napomena": "Prüfe Öffnungszeiten, Eintritt und Parken für diese Saison beim Betreiber."
   }
  },
  "S01": {
@@ -117,6 +148,10 @@
   "en": {
    "napomena": "The trail is inside the national park, admission is charged.",
    "trajanje": "A 4.2 km loop, almost flat, with 23 information panels. Trainers are enough."
+  },
+  "de": {
+   "napomena": "Der Weg liegt im Nationalpark, es wird Eintritt erhoben.",
+   "trajanje": "Eine Runde von 4,2 km, fast eben, mit 23 Infotafeln. Turnschuhe reichen."
   }
  },
  "C01": {
@@ -196,6 +231,42 @@
      "€19.00 (€22.00)"
     ]
    ]
+  },
+  "de": {
+   "rv_tekst": [
+    "Nur mit Führung, Beginn zu festen Zeiten.",
+    "Januar–Mai: Sa und So um 11, 12, 14 und 15 Uhr",
+    "Juni: Fr um 14 und 15 Uhr; Sa und So um 11, 12, 14 und 15 Uhr (ab 15. Juni auch Mi und Do)",
+    "Juli–August: Mo–Mi um 10, 11 und 12 Uhr; Do und Fr 10–14 Uhr; am Wochenende 10–17 Uhr, stündlich",
+    "September: Fr um 10, 11, 14 und 15 Uhr; Sa und So um 11, 12, 14 und 15 Uhr",
+    "Oktober: Fr um 14 und 15 Uhr; Sa und So um 11, 12, 14 und 15 Uhr",
+    "November–Dezember: Sa und So um 11, 12, 14 und 15 Uhr",
+    "Geschlossen: Ostern, 1. Nov., 25. Dez. und 1. Jan. Gruppen ab 15 Personen können bei Anmeldung 3 Tage im Voraus auch zu anderen Zeiten kommen."
+   ],
+   "savjet": "Drinnen hat es etwa 8 °C, nimm eine Jacke mit. Die Höhle hat keine Stufen und ist rollstuhlgerecht.",
+   "trajanje": "Die Führung dauert 25–30 Minuten.",
+   "ulaznica": [
+    [
+     "Erwachsene",
+     "6,50 € (Juli–August 7,00 €)"
+    ],
+    [
+     "Kinder 4–18",
+     "5,00 € (5,50 €)"
+    ],
+    [
+     "Kinder unter 4",
+     "frei"
+    ],
+    [
+     "Rentner, Studenten, Wanderer",
+     "6,00 € (6,50 €)"
+    ],
+    [
+     "Familie (2 + bis zu 3 Kinder)",
+     "19,00 € (22,00 €)"
+    ]
+   ]
   }
  },
  "C02": {
@@ -211,6 +282,11 @@
    "savjet": "It's about 8 °C and damp inside, bring a jacket and sturdy shoes.",
    "napomena": "Prices and opening hours for 2026 have not been published on the official website. Call before you go.",
    "trajanje": "Guided tours only."
+  },
+  "de": {
+   "savjet": "Drinnen hat es etwa 8 °C und es ist feucht, nimm eine Jacke und feste Schuhe mit.",
+   "napomena": "Preise und Öffnungszeiten für 2026 sind auf der offiziellen Website nicht veröffentlicht. Ruf vor dem Besuch an.",
+   "trajanje": "Nur mit Führung."
   }
  },
  "H01": {
@@ -276,6 +352,35 @@
      "€2.00 per person"
     ]
    ]
+  },
+  "de": {
+   "rv_tekst": [
+    "Mo 7–17 Uhr, Di–Do 7–15 Uhr, Fr 7–13 Uhr",
+    "Wochenende und Feiertage nach Vereinbarung per Telefon oder E-Mail."
+   ],
+   "savjet": "Im Schloss befinden sich das Besucherzentrum „Frankopanen-Wege“ und eine Heimatsammlung.",
+   "ulaznica": [
+    [
+     "Erwachsene",
+     "3,30 €"
+    ],
+    [
+     "Schüler, Studenten, Rentner",
+     "2,70 €"
+    ],
+    [
+     "Kinder 6–14",
+     "1,30 €"
+    ],
+    [
+     "Kinder unter 6",
+     "frei"
+    ],
+    [
+     "Gruppen (ab 20)",
+     "2,00 € pro Person"
+    ]
+   ]
   }
  },
  "H02": {
@@ -335,6 +440,32 @@
      "€15.00"
     ]
    ]
+  },
+  "de": {
+   "rv_tekst": [
+    "Di–Fr 9–19 Uhr, Sa und So 10–18 Uhr",
+    "Montags und an Feiertagen geschlossen."
+   ],
+   "savjet": "Drinnen sind das Besucherzentrum „Frankopanen-Wege“ und die Dauerausstellung „Wildnis mit Meerblick“ des Naturhistorischen Museums Rijeka.",
+   "napomena": "Ein Ticket gilt für die Ausstellung und das Besucherzentrum.",
+   "ulaznica": [
+    [
+     "Erwachsene",
+     "3,00 €"
+    ],
+    [
+     "Kinder, Schüler, Studenten, Rentner",
+     "1,50 €"
+    ],
+    [
+     "Familie",
+     "5,00 €"
+    ],
+    [
+     "Jahreskarte",
+     "15,00 €"
+    ]
+   ]
   }
  },
  "H05": {
@@ -356,6 +487,13 @@
     "Closed on Mondays and public holidays."
    ],
    "napomena": "Check the ticket price when you visit (children under 7 free)."
+  },
+  "de": {
+   "rv_tekst": [
+    "Di–Sa 10–17 Uhr, So 10–15 Uhr",
+    "Montags und an Feiertagen geschlossen."
+   ],
+   "napomena": "Prüfe den Eintrittspreis beim Besuch (Kinder unter 7 frei)."
   }
  },
  "H45": {
@@ -376,6 +514,12 @@
     "daily 9–17 h"
    ],
    "napomena": "Tickets according to the Risnjak National Park price list."
+  },
+  "de": {
+   "rv_tekst": [
+    "täglich 9–17 Uhr"
+   ],
+   "napomena": "Eintritt laut Preisliste des Nationalparks Risnjak."
   }
  },
  "H46": {
@@ -396,6 +540,12 @@
     "daily 9–17 h"
    ],
    "napomena": "Tickets according to the Risnjak National Park price list."
+  },
+  "de": {
+   "rv_tekst": [
+    "täglich 9–17 Uhr"
+   ],
+   "napomena": "Eintritt laut Preisliste des Nationalparks Risnjak."
   }
  },
  "H50": {
@@ -405,6 +555,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "Guided visits; book a time in advance."
+  },
+  "de": {
+   "napomena": "Besichtigung mit Führung; vereinbare vorher einen Termin."
   }
  },
  "E01": {
@@ -425,6 +578,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "Visits by appointment."
+  },
+  "de": {
+   "napomena": "Besichtigung nach Vereinbarung."
   }
  },
  "H57": {
@@ -437,6 +593,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "Opening hours are not published; ask the Brod Moravice municipality about a visit."
+  },
+  "de": {
+   "napomena": "Öffnungszeiten sind nicht veröffentlicht; frag bei der Gemeinde Brod Moravice nach einem Besuch."
   }
  },
  "E05": {
@@ -449,6 +608,10 @@
   "en": {
    "savjet": "In winter: a sledding hill with a conveyor belt and night sledding; sledges for hire.",
    "napomena": "Check the season, opening hours and prices by phone – in winter everything depends on snow."
+  },
+  "de": {
+   "savjet": "Im Winter: Rodelhang mit Förderband und Nachtrodeln; Schlitten zu mieten.",
+   "napomena": "Prüfe Saison, Öffnungszeiten und Preise telefonisch – im Winter hängt alles vom Schnee ab."
   }
  },
  "E06": {
@@ -460,6 +623,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "Check the season and prices by phone."
+  },
+  "de": {
+   "napomena": "Prüfe Saison und Preise telefonisch."
   }
  },
  "E07": {
@@ -470,6 +636,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "Tours of 1 h (about 15 km) and 2 h (about 30 km). Check prices and times on their website."
+  },
+  "de": {
+   "napomena": "Touren von 1 h (etwa 15 km) und 2 h (etwa 30 km). Preise und Zeiten auf ihrer Website."
   }
  },
  "S11": {
@@ -479,6 +648,9 @@
   "provjereno": "2026-10-24",
   "en": {
    "napomena": "A section of about 1.45 km (88 m ascent) is open. The trail is mainly for pre-booked groups (schools, associations)."
+  },
+  "de": {
+   "napomena": "Ein Abschnitt von etwa 1,45 km (88 m Aufstieg) ist geöffnet. Der Weg ist vor allem für angemeldete Gruppen (Schulen, Vereine)."
   }
  },
  "S12": {
@@ -495,6 +667,10 @@
   "en": {
    "savjet": "Sledges can be hired on site.",
    "napomena": "Opening depends on snow and weather – check their Facebook page before you go."
+  },
+  "de": {
+   "savjet": "Schlitten kann man vor Ort mieten.",
+   "napomena": "Der Betrieb hängt von Schnee und Wetter ab – schau vor dem Besuch auf ihre Facebook-Seite."
   }
  },
  "W05": {
@@ -506,6 +682,10 @@
   "en": {
    "savjet": "Sledges can be hired at an affordable price.",
    "napomena": "Opening depends on snow and weather – check their Facebook page before you go."
+  },
+  "de": {
+   "savjet": "Schlitten kann man günstig mieten.",
+   "napomena": "Der Betrieb hängt von Schnee und Wetter ab – schau vor dem Besuch auf ihre Facebook-Seite."
   }
  },
  "W06": {
@@ -517,6 +697,9 @@
   "provjereno": "2026-10-31",
   "en": {
    "napomena": "Skiing runs only when there's enough snow – call the mountain lodge before you go."
+  },
+  "de": {
+   "napomena": "Skibetrieb nur bei genug Schnee – ruf vor dem Besuch im Berghaus an."
   }
  },
  "H58": {
@@ -533,6 +716,10 @@
   "en": {
    "napomena": "Visits by appointment, suitable for groups and workshops.",
    "savjet": "Accessible for people with disabilities."
+  },
+  "de": {
+   "napomena": "Besuch nach Vereinbarung, geeignet für Gruppen und Workshops.",
+   "savjet": "Barrierefrei zugänglich."
   }
  },
  "E09": {
@@ -550,6 +737,12 @@
     "Sat and Sun 11–18 h"
    ],
    "napomena": "Groups of 10–50 people only by appointment; a visit takes 1–2 hours."
+  },
+  "de": {
+   "rv_tekst": [
+    "Sa und So 11–18 Uhr"
+   ],
+   "napomena": "Gruppen von 10–50 Personen nur nach Vereinbarung; ein Besuch dauert 1–2 Stunden."
   }
  },
  "On2367579804": {
@@ -675,6 +868,9 @@
   "rv_izvor": "OpenStreetMap",
   "en": {
    "savjet": "An exhibition about the bear, the wolf and the lynx: habitats through the seasons, sounds, tracks, a film and a children's corner."
+  },
+  "de": {
+   "savjet": "Eine Ausstellung über Bär, Wolf und Luchs: Lebensräume im Lauf der Jahreszeiten, Geräusche, Spuren, ein Film und eine Kinderecke."
   }
  },
  "On11118473102": {
@@ -822,6 +1018,10 @@
   "en": {
    "savjet": "Crni Lug also has the “Hidden Treasure of Risnjak” interpretation centre: visits by appointment on +385 91 620 8672 or info@visitdelnice.hr.",
    "napomena": "The national park charges admission. Tickets are sold at the entrance or online."
+  },
+  "de": {
+   "savjet": "In Crni Lug gibt es auch das Besucherzentrum „Verborgener Schatz des Risnjak“: Besuch nach Vereinbarung unter +385 91 620 8672 oder info@visitdelnice.hr.",
+   "napomena": "Im Nationalpark wird Eintritt erhoben. Tickets gibt es am Eingang oder online."
   }
  },
  "Ow1165384924": {

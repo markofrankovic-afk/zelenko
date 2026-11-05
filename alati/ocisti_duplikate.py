@@ -80,6 +80,7 @@ data["tocke"] = [p for p in T if p["id"] not in ukloni]
 for p in data["tocke"]:
     if p["podvrsta"] == "kolodvor" and not norm(naziv(p)).startswith(("kolodvor", "stajaliste", "zeljeznick")):
         if "en" in p["tekst"]: p["tekst"]["en"]["naziv"] = naziv(p) + " station"
+        if "de" in p["tekst"]: p["tekst"]["de"]["naziv"] = "Bahnhof " + naziv(p)
         p["tekst"]["hr"]["naziv"] = "Kolodvor " + naziv(p)
 json.dump(data, open(tp, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 for f in ("slike.json", "info.json"):

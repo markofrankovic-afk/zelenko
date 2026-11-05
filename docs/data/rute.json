@@ -13,6 +13,11 @@
      "naziv": "Fužine in half a day",
      "opis": "The Lake Bajer promenade, a visit to Vrelo Cave and on to Lake Lepenica. Ideal with kids.",
      "parking": "Fužine, by Lake Bajer"
+    },
+    "de": {
+     "naziv": "Fužine an einem halben Tag",
+     "opis": "Die Promenade am Bajer-See, ein Besuch der Höhle Vrelo und weiter zum Lepenica-See. Ideal mit Kindern.",
+     "parking": "Fužine, am Bajer-See"
     }
    },
    "tezina": "lagano",
@@ -1338,6 +1343,11 @@
      "naziv": "Lokve: Lokvarka and Golubinjak",
      "opis": "Lokvarka Cave, the boulders of Golubinjak and the Queen of the Forest tree, returning to Lokve.",
      "parking": "Lokve, centre"
+    },
+    "de": {
+     "naziv": "Lokve: Lokvarka und Golubinjak",
+     "opis": "Die Höhle Lokvarka, die Felsblöcke von Golubinjak und der Baum „Königin des Waldes“, zurück nach Lokve.",
+     "parking": "Lokve, Zentrum"
     }
    },
    "tezina": "lagano",
@@ -3294,6 +3304,11 @@
      "naziv": "Zeleni vir and Vražji prolaz",
      "opis": "A loop from Skrad: the Zeleni vir waterfall and the Vražji prolaz canyon with its footbridges. Steep sections, slippery when wet.",
      "parking": "Zeleni vir, below Skrad"
+    },
+    "de": {
+     "naziv": "Zeleni vir und Vražji prolaz",
+     "opis": "Eine Runde ab Skrad: der Wasserfall Zeleni vir und die Schlucht Vražji prolaz mit ihren Stegen. Steile Abschnitte, bei Nässe rutschig.",
+     "parking": "Zeleni vir, unterhalb von Skrad"
     }
    },
    "tezina": "srednje",
@@ -5693,6 +5708,11 @@
      "naziv": "Source of the Kupa",
      "opis": "A short walk from Razloge to the source of the Kupa and back.",
      "parking": "Razloge"
+    },
+    "de": {
+     "naziv": "Quelle der Kupa",
+     "opis": "Ein kurzer Spaziergang von Razloge zur Quelle der Kupa und zurück.",
+     "parking": "Razloge"
     }
    },
    "tezina": "lagano",
@@ -6804,6 +6824,11 @@
      "naziv": "Risnjak from Crni Lug",
      "opis": "The classic climb from Crni Lug via the Schlosser hut to Veliki Risnjak and back the same way.",
      "parking": "Crni Lug, national park entrance"
+    },
+    "de": {
+     "naziv": "Risnjak von Crni Lug",
+     "opis": "Der klassische Aufstieg von Crni Lug über die Schlosser-Hütte auf den Veliki Risnjak und auf demselben Weg zurück.",
+     "parking": "Crni Lug, Eingang des Nationalparks"
     }
    },
    "tezina": "zahtjevno",
@@ -9964,6 +9989,11 @@
      "naziv": "Snježnik from Platak",
      "opis": "The shortest way up the rocky summit of Snježnik, with views of the Kvarner Gulf.",
      "parking": "Platak"
+    },
+    "de": {
+     "naziv": "Snježnik von Platak",
+     "opis": "Der kürzeste Weg auf den felsigen Gipfel des Snježnik, mit Blick auf die Kvarner-Bucht.",
+     "parking": "Platak"
     }
    },
    "tezina": "srednje",
@@ -11893,6 +11923,11 @@
     "en": {
      "naziv": "Bjelolasica from Begovo Razdolje",
      "opis": "From the highest village in Croatia up to Kula, the highest peak of Gorski kotar.",
+     "parking": "Begovo Razdolje"
+    },
+    "de": {
+     "naziv": "Bjelolasica von Begovo Razdolje",
+     "opis": "Vom höchstgelegenen Dorf Kroatiens hinauf zur Kula, dem höchsten Gipfel des Gorski kotar.",
      "parking": "Begovo Razdolje"
     }
    },
@@ -14553,6 +14588,11 @@
      "naziv": "Bijele stijene from the forest road",
      "opis": "The shortest approach to the stone labyrinths of Bijele stijene in a strict reserve; stay on the waymarks.",
      "parking": "by the Mrkopalj – Jasenak forest road (only without snow)"
+    },
+    "de": {
+     "naziv": "Bijele stijene von der Forststraße",
+     "opis": "Der kürzeste Zugang zu den Steinlabyrinthen der Bijele stijene in einem strengen Schutzgebiet; bleib auf den Markierungen.",
+     "parking": "an der Forststraße Mrkopalj – Jasenak (nur ohne Schnee)"
     }
    },
    "tezina": "zahtjevno",
@@ -14572,6 +14612,10 @@
      "en": {
       "naziv": "Mrkopalj – Jasenak forest road, shortest branch",
       "vrijeme": "about 45 min to Bijele stijene"
+     },
+     "de": {
+      "naziv": "Forststraße Mrkopalj – Jasenak, kürzester Abzweig",
+      "vrijeme": "etwa 45 min zu den Bijele stijene"
      }
     },
     {
@@ -14580,12 +14624,20 @@
      "en": {
       "naziv": "Forest road, branch to the Ratkovo shelter and Samarske stijene",
       "vrijeme": "about 30 min to the shelter"
+     },
+     "de": {
+      "naziv": "Forststraße, Abzweig zur Schutzhütte Ratkovo und zu den Samarske stijene",
+      "vrijeme": "etwa 30 min zur Schutzhütte"
      }
     },
     {
      "naziv": "Jasenak",
      "vrijeme": "2 h 30 – 3 h",
      "en": {
+      "naziv": "Jasenak",
+      "vrijeme": "2 h 30 – 3 h"
+     },
+     "de": {
       "naziv": "Jasenak",
       "vrijeme": "2 h 30 – 3 h"
      }
@@ -14596,6 +14648,10 @@
      "en": {
       "naziv": "Vrelo (Bjelolasica)",
       "vrijeme": "about 4 h"
+     },
+     "de": {
+      "naziv": "Vrelo (Bjelolasica)",
+      "vrijeme": "etwa 4 h"
      }
     }
    ],
@@ -15605,6 +15661,11 @@
      "naziv": "Kupa valley: Brod na Kupi – Gašparci",
      "opis": "On tarmac up the Kupa to the bridge at Gašparci and back, with breaks for a swim. For kids shorter to Kuželj (about 10 km), for stronger riders on to Čabar (about 60 km).",
      "parking": "Brod na Kupi"
+    },
+    "de": {
+     "naziv": "Kupa-Tal: Brod na Kupi – Gašparci",
+     "opis": "Auf Asphalt die Kupa hinauf bis zur Brücke bei Gašparci und zurück, mit Pausen zum Baden. Für Kinder kürzer bis Kuželj (etwa 10 km), für Geübte weiter bis Čabar (etwa 60 km).",
+     "parking": "Brod na Kupi"
     }
    },
    "tezina": "lagano",
@@ -15628,6 +15689,10 @@
      "en": {
       "naziv": "Brod na Kupi – Kuželj and back",
       "vrijeme": "about 10 km"
+     },
+     "de": {
+      "naziv": "Brod na Kupi – Kuželj und zurück",
+      "vrijeme": "etwa 10 km"
      }
     },
     {
@@ -15636,6 +15701,10 @@
      "en": {
       "naziv": "Brod na Kupi – Gašparci and back",
       "vrijeme": "about 22 km"
+     },
+     "de": {
+      "naziv": "Brod na Kupi – Gašparci und zurück",
+      "vrijeme": "etwa 22 km"
      }
     },
     {
@@ -15644,6 +15713,10 @@
      "en": {
       "naziv": "Brod na Kupi – Čabar and back",
       "vrijeme": "about 60 km"
+     },
+     "de": {
+      "naziv": "Brod na Kupi – Čabar und zurück",
+      "vrijeme": "etwa 60 km"
      }
     }
    ],
@@ -18805,6 +18878,11 @@
      "naziv": "Lakes: Fužine – Lokve",
      "opis": "A loop from Bajer past Potkoš and Lepenica to Lake Lokve and back.",
      "parking": "Fužine, by Lake Bajer"
+    },
+    "de": {
+     "naziv": "Seen: Fužine – Lokve",
+     "opis": "Eine Runde vom Bajer vorbei an Potkoš und Lepenica zum Lokve-See und zurück.",
+     "parking": "Fužine, am Bajer-See"
     }
    },
    "tezina": "srednje",

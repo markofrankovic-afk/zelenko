@@ -13,6 +13,10 @@
     "en": {
      "naslov": "Mrkopalj – Jasenak forest road",
      "opis": "Access to Bijele stijene. Closed when there's snow, usually from December to April or May."
+    },
+    "de": {
+     "naslov": "Forststraße Mrkopalj – Jasenak",
+     "opis": "Zugang zu den Bijele stijene. Bei Schnee gesperrt, meist von Dezember bis April oder Mai."
     }
    }
   },
@@ -29,6 +33,10 @@
     "en": {
      "naslov": "Kuželj: bypass under construction",
      "opis": "Traffic control is possible on the road along the Kupa."
+    },
+    "de": {
+     "naslov": "Kuželj: Umgehungsstraße im Bau",
+     "opis": "Auf der Straße entlang der Kupa ist mit Verkehrsregelung zu rechnen."
     }
    }
   },
@@ -45,6 +53,10 @@
     "en": {
      "naslov": "Hunting season",
      "opis": "In the forest, wear something brightly coloured and stay on waymarked trails."
+    },
+    "de": {
+     "naslov": "Jagdsaison",
+     "opis": "Trag im Wald etwas Auffälliges und bleib auf markierten Wegen."
     }
    }
   }
@@ -66,6 +78,11 @@
      "oznaka": "Autumn colours",
      "naslov": "Beeches on Tuhobić",
      "opis": "From Benkovac Fužinski, about 1 h 30"
+    },
+    "de": {
+     "oznaka": "Herbstfarben",
+     "naslov": "Buchen am Tuhobić",
+     "opis": "Ab Benkovac Fužinski, etwa 1 h 30"
     }
    }
   },
@@ -88,6 +105,11 @@
      "oznaka": "When it rains",
      "naslov": "A rainy day in a cave",
      "opis": "Lokvarka or Vrelo, check the tour times"
+    },
+    "de": {
+     "oznaka": "Wenn es regnet",
+     "naslov": "Ein Regentag in der Höhle",
+     "opis": "Lokvarka oder Vrelo, prüfe die Führungszeiten"
     }
    }
   },
@@ -108,6 +130,11 @@
      "oznaka": "More water",
      "naslov": "Zeleni vir after rain",
      "opis": "The waterfall and the Vražji prolaz canyon"
+    },
+    "de": {
+     "oznaka": "Mehr Wasser",
+     "naslov": "Zeleni vir nach Regen",
+     "opis": "Der Wasserfall und die Schlucht Vražji prolaz"
     }
    }
   },
@@ -127,6 +154,11 @@
      "oznaka": "Cool off",
      "naslov": "The Kupa by bike",
      "opis": "From Brod na Kupi to Gašparci, with stops for a swim"
+    },
+    "de": {
+     "oznaka": "Abkühlung",
+     "naslov": "Mit dem Rad an der Kupa",
+     "opis": "Von Brod na Kupi nach Gašparci, mit Badepausen"
     }
    }
   },
@@ -147,6 +179,11 @@
      "oznaka": "With kids",
      "naslov": "Fužine in half a day",
      "opis": "Bajer, Vrelo Cave and Lepenica"
+    },
+    "de": {
+     "oznaka": "Mit Kindern",
+     "naslov": "Fužine an einem halben Tag",
+     "opis": "Bajer, Höhle Vrelo und Lepenica"
     }
    }
   },
@@ -166,6 +203,11 @@
      "oznaka": "Snow",
      "naslov": "Platak",
      "opis": "Ski area and starting point for Snježnik"
+    },
+    "de": {
+     "oznaka": "Schnee",
+     "naslov": "Platak",
+     "opis": "Skigebiet und Ausgangspunkt für den Snježnik"
     }
    }
   }

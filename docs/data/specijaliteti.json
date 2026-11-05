@@ -29,6 +29,12 @@
     "opis": "The best-known Gorski kotar dish: roe deer, red deer, wild boar or bear meat, slowly cooked with onion and red wine. Served with polenta, potato gnocchi or homemade bread.",
     "kad": "all year",
     "probaj": "In Fužine, Hotel Bitoraj, Konoba Volta and Lovački dom Arnika are known for goulash; it's also served in other restaurants and mountain huts with home cooking."
+   },
+   "de": {
+    "naziv": "Wildgulasch",
+    "opis": "Das bekannteste Gericht des Gorski kotar: Reh-, Hirsch-, Wildschwein- oder Bärenfleisch, langsam mit Zwiebeln und Rotwein geschmort. Dazu Polenta, Kartoffelnocken oder hausgemachtes Brot.",
+    "kad": "ganzjährig",
+    "probaj": "In Fužine sind das Hotel Bitoraj, die Konoba Volta und das Lovački dom Arnika für ihr Gulasch bekannt; es gibt es auch in anderen Restaurants und Berghütten mit Hausmannskost."
    }
   },
   {
@@ -53,6 +59,12 @@
     "opis": "A cold starter: cured bear, wild boar or deer meat with škripavac (squeaky cheese) and homemade bread.",
     "kad": "all year",
     "probaj": "As a starter in restaurants; cured meats also from small local producers."
+   },
+   "de": {
+    "naziv": "Wildschinken und Käse škripavac",
+    "opis": "Eine kalte Vorspeise: getrocknetes Bären-, Wildschwein- oder Hirschfleisch mit škripavac (Quietschkäse) und hausgemachtem Brot.",
+    "kad": "ganzjährig",
+    "probaj": "Als Vorspeise in Restaurants; Trockenfleisch auch von kleinen örtlichen Erzeugern."
    }
   },
   {
@@ -77,6 +89,12 @@
     "opis": "The most prized fish of the local rivers and lakes. Baked, grilled or cooked in a thick fish soup.",
     "kad": "all year",
     "probaj": "Restaurants by the Kupa, the Kupica and the lakes."
+   },
+   "de": {
+    "naziv": "Bachforelle",
+    "opis": "Der geschätzteste Fisch der örtlichen Flüsse und Seen. Gebacken, gegrillt oder in einer dicken Fischsuppe.",
+    "kad": "ganzjährig",
+    "probaj": "Restaurants an der Kupa, der Kupica und an den Seen."
    }
   },
   {
@@ -101,6 +119,12 @@
     "opis": "An old Gorski kotar speciality: breaded, or stewed in a sauce with snails and mushrooms.",
     "kad": "all year",
     "probaj": "Restaurants with a traditional menu."
+   },
+   "de": {
+    "naziv": "Froschschenkel",
+    "opis": "Eine alte Spezialität des Gorski kotar: paniert oder in einer Soße mit Schnecken und Pilzen geschmort.",
+    "kad": "ganzjährig",
+    "probaj": "Restaurants mit traditioneller Speisekarte."
    }
   },
   {
@@ -125,6 +149,12 @@
     "opis": "A dish of the old Gorani: dormouse roasted or as a goulash. It was valued for its meat and fat, and dormouse hunting is still a local tradition.",
     "kad": "late summer and autumn",
     "probaj": "Rarely on the menu; mostly at local dormouse evenings."
+   },
+   "de": {
+    "naziv": "Siebenschläfer",
+    "opis": "Ein Gericht der alten Gorani: Siebenschläfer gebraten oder als Gulasch. Er wurde wegen Fleisch und Fett geschätzt, und die Siebenschläferjagd ist bis heute örtliche Tradition.",
+    "kad": "Spätsommer und Herbst",
+    "probaj": "Selten auf der Speisekarte; meist bei örtlichen Siebenschläfer-Abenden."
    }
   },
   {
@@ -140,6 +170,12 @@
     "opis": "An Easter dish: pork stomach stuffed with cubes of bread, ham, bacon, spring onion and eggs, then boiled or lightly smoked.",
     "kad": "around Easter",
     "probaj": "In homes and on Easter tables."
+   },
+   "de": {
+    "naziv": "Gefüllter Schweinemagen (budel, nadelo)",
+    "opis": "Ein Ostergericht: Schweinemagen, gefüllt mit Brotwürfeln, Schinken, Speck, Frühlingszwiebeln und Eiern, dann gekocht oder leicht geräuchert.",
+    "kad": "um Ostern",
+    "probaj": "In den Häusern und auf dem Ostertisch."
    }
   },
   {
@@ -164,6 +200,12 @@
     "opis": "Once the main winter dish, now a side: sauerkraut with garlic, sausage or blood sausage.",
     "kad": "winter",
     "probaj": "Restaurants with home cooking."
+   },
+   "de": {
+    "naziv": "Sauerkraut mit Wurst",
+    "opis": "Früher das wichtigste Wintergericht, heute Beilage: Sauerkraut mit Knoblauch, Wurst oder Blutwurst.",
+    "kad": "Winter",
+    "probaj": "Restaurants mit Hausmannskost."
    }
   },
   {
@@ -189,6 +231,12 @@
     "opis": "Porcini, chanterelles, morels and parasols: as a main dish, in a sauce or with meat. In winter eaten dried or pickled.",
     "kad": "spring to late autumn",
     "probaj": "Restaurants in season. Before picking, check the species in the Gljive Hrvatske app."
+   },
+   "de": {
+    "naziv": "Wildpilze",
+    "opis": "Steinpilze, Pfifferlinge, Morcheln und Parasole: als Hauptgericht, in Soße oder zu Fleisch. Im Winter getrocknet oder eingelegt.",
+    "kad": "Frühling bis Spätherbst",
+    "probaj": "Restaurants in der Saison. Prüfe vor dem Sammeln die Art in der App Gljive Hrvatske."
    }
   },
   {
@@ -216,6 +264,12 @@
     "opis": "A Gorski kotar dessert: thin pastry with wild blueberries, sugar and cinnamon, served warm and dusted with icing sugar. Apple and cheese strudels are made too.",
     "kad": "all year, best in summer when blueberries ripen",
     "probaj": "Hotel Bitoraj in Fužine is known for it; also in other restaurants."
+   },
+   "de": {
+    "naziv": "Heidelbeerstrudel",
+    "opis": "Ein Dessert des Gorski kotar: dünner Teig mit wilden Heidelbeeren, Zucker und Zimt, warm serviert und mit Puderzucker bestreut. Es gibt auch Apfel- und Topfenstrudel.",
+    "kad": "ganzjährig, am besten im Sommer, wenn die Heidelbeeren reif sind",
+    "probaj": "Das Hotel Bitoraj in Fužine ist dafür bekannt; auch in anderen Restaurants."
    }
   },
   {
@@ -240,6 +294,12 @@
     "opis": "Homemade plum, apple and pear brandy and juniper brandy (brinjevec). Liqueurs and juices from blueberries, strawberries, raspberries and blackberries, and lately Gorski kotar gin.",
     "kad": "all year",
     "probaj": "At family farms and in restaurants; see the Farms & local filter."
+   },
+   "de": {
+    "naziv": "Schnäpse, Liköre und Säfte",
+    "opis": "Hausgemachter Zwetschgen-, Apfel- und Birnenschnaps und Wacholderschnaps (brinjevec). Liköre und Säfte aus Heidelbeeren, Erdbeeren, Himbeeren und Brombeeren, neuerdings auch Gin aus dem Gorski kotar.",
+    "kad": "ganzjährig",
+    "probaj": "Auf Familienhöfen und in Restaurants; siehe Filter „Höfe & Regionales“."
    }
   }
  ],

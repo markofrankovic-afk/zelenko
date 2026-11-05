@@ -60,6 +60,24 @@ OPIS_EN = {
  "ljekarna": "Pharmacy.", "ambulanta": "Doctor's surgery or clinic.", "benzinska": "Petrol station.", "bankomat": "ATM.",
  "arheologija": "Archaeological site."}
 
+# i na njemačkom (tekst.de)
+GEN_DE = {"vidikovac": "Aussichtspunkt", "izvor": "Quelle", "piknik": "Rastplatz", "parking": "Parkplatz", "wc": "Öffentliche Toilette",
+          "pitka_voda": "Trinkwasser", "bankomat": "Geldautomat", "ljekarna": "Apotheke", "ambulanta": "Arzt", "spilja": "Höhle",
+          "rusevine": "Ruine", "dom": "Berghütte", "skloniste": "Schutzhütte", "benzinska": "Tankstelle",
+          "info": "Touristeninformation", "kamp": "Campingplatz", "muzej": "Museum", "park": "Park", "igraliste": "Spielplatz"}
+OPIS_DE = {
+ "vrh": "Gipfel{ele}.", "prijevoj": "Bergpass{ele}.", "vidikovac": "Aussichtspunkt{ele}.", "stijene": "Felsen.",
+ "dom": "Berghütte{ele}. Prüfe vor dem Aufbruch, ob sie geöffnet ist.", "skloniste": "Schutzhütte{ele}.",
+ "slap": "Wasserfall.", "izvor": "Quelle{pitka}.", "jezero": "See.", "kupaliste": "Badestelle.",
+ "spilja": "Eingang einer Höhle oder eines Schachts. Nicht ohne Ausrüstung und erfahrenen Führer betreten.", "zasticeno": "Schutzgebiet.",
+ "muzej": "Museum oder Sammlung. Prüfe vor dem Besuch die Öffnungszeiten.", "sakralno": "Kirche oder Kapelle.",
+ "dvorac": "Burg oder Festung.", "rusevine": "Ruine.", "spomen": "Denkmal oder Gedenkstätte.",
+ "tehnicka": "Industriedenkmal.", "povijesno": "Historischer Ort.", "kamp": "Campingplatz.", "piknik": "Rast- und Picknickplatz.",
+ "zanimljivost": "Sehenswürdigkeit.", "park": "Park zum Spazieren und Ausruhen.", "igraliste": "Spielplatz.", "info": "Touristeninformation.",
+ "kolodvor": "Bahnhof oder Haltestelle.", "pitka_voda": "Trinkwasser.", "parking": "Parkplatz.", "wc": "Öffentliche Toilette.",
+ "ljekarna": "Apotheke.", "ambulanta": "Arztpraxis oder Ambulanz.", "benzinska": "Tankstelle.", "bankomat": "Geldautomat.",
+ "arheologija": "Archäologische Fundstätte."}
+
 tocke = B["tocke"]
 for t in tocke: t["vaznost"] = 1
 spojeno, nove = 0, []
@@ -98,7 +116,8 @@ for o in O["tocke"]:
     mj, dmj = najblize(o)
     naziv = ime or (GEN.get(o["podvrsta"], "Točka") + " – " + mj)
     naziv_en = ime or (GEN_EN.get(o["podvrsta"], "Place") + " – " + mj)
-    if o["podvrsta"] == "bankomat" and not ime and tg.get("operator"): naziv, naziv_en = f"Bankomat {tg['operator']} – {mj}", f"ATM {tg['operator']} – {mj}"
+    naziv_de = ime or (GEN_DE.get(o["podvrsta"], "Ort") + " – " + mj)
+    if o["podvrsta"] == "bankomat" and not ime and tg.get("operator"): naziv, naziv_en, naziv_de = f"Bankomat {tg['operator']} – {mj}", f"ATM {tg['operator']} – {mj}", f"Geldautomat {tg['operator']} – {mj}"
     ele = tg.get("ele", "").replace(",", ".").split(";")[0]
     try: ele_s = f", {round(float(ele))} m" if ele else ""
     except ValueError: ele_s = ""
@@ -111,6 +130,10 @@ for o in O["tocke"]:
     opis_en = OPIS_EN.get(o["podvrsta"], "Place.").format(ele=ele_s, pitka=pitka_en)
     opis_en += f" Nearest village: {mj} ({km(dmj).replace(',', '.')})."
     if tg.get("opening_hours"): opis_en += f" Opening hours (OSM): {tg['opening_hours']}."
+    pitka_de = {"yes": ", Trinkwasser (laut OSM)", "no": ", kein Trinkwasser"}.get(tg.get("drinking_water"), "")
+    opis_de = OPIS_DE.get(o["podvrsta"], "Ort.").format(ele=ele_s, pitka=pitka_de)
+    opis_de += f" Nächster Ort: {mj} ({km(dmj)})."
+    if tg.get("opening_hours"): opis_de += f" Öffnungszeiten (OSM): {tg['opening_hours']}."
     try: elev = float(ele) if ele else 0
     except ValueError: elev = 0
     vazno = 2
@@ -119,7 +142,7 @@ for o in O["tocke"]:
     if o["podvrsta"] in ("vidikovac", "izvor", "spilja", "igraliste") and not ime: vazno = 3
     nove.append({
         "id": "O" + o["osm"], "kategorija": o["kategorija"], "podvrsta": o["podvrsta"],
-        "tekst": {"hr": {"naziv": naziv, "opis": opis}, "en": {"naziv": naziv_en, "opis": opis_en}},
+        "tekst": {"hr": {"naziv": naziv, "opis": opis}, "en": {"naziv": naziv_en, "opis": opis_en}, "de": {"naziv": naziv_de, "opis": opis_de}},
         "lat": o["lat"], "lon": o["lon"], "pouzdanost": "V", "vaznost": vazno,
         "izvor": {"koordinate": "OpenStreetMap", "osm": o["osm"], "wikidata": tg.get("wikidata"), "opis": "generiran iz OSM oznaka"},
         "licenca": "ODbL – © OpenStreetMap suradnici", "napomena": "", "status": "iz OSM-a, opis za doradu"})

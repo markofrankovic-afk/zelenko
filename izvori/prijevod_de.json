@@ -1,0 +1,926 @@
+{
+ "opis": "Deutsche Übersetzungen unserer Texte. Schlüssel sind IDs; fehlt ein Name, bleibt der kroatische (Eigennamen). Angewendet von alati/prevedi.py.",
+ "tocke": {
+  "V01": [
+   "Quelle der Kupa",
+   "Karstquelle der Kupa im Nationalpark Risnjak: ein tiefes, grünblaues Becken unter den Felsen, von wo die Kupa Richtung Slowenien fließt. Es gelten die Regeln des Nationalparks."
+  ],
+  "V02": [
+   "Kupa bei Hrvatsko",
+   "Der Oberlauf der Kupa an der Grenze zu Slowenien: klares, kaltes Wasser und ruhige Abschnitte für Spaziergänge am Ufer."
+  ],
+  "V03": [
+   "Kupa in Kuželj",
+   "Ein Dorf in der Kupa-Schlucht. Im Sommer Stellen zum Abkühlen; Angeln nur mit Erlaubnis."
+  ],
+  "V04": [
+   "Kupa in Brod na Kupi",
+   "Die Kupa direkt am Ort, mit steinigen Ufern und flachen Stellen."
+  ],
+  "V05": [
+   "Mündung der Kupica in die Kupa",
+   "In Brod na Kupi mündet die Kupica in die Kupa. Ein kurzer Spaziergang vom Ortszentrum."
+  ],
+  "V06": [
+   "Kupa bei Severin na Kupi",
+   "Zugang zur Kupa bei Severin, am unteren und wärmeren Abschnitt ihres Laufs durch den Gorski kotar."
+  ],
+  "V07": [
+   "Bajer-See",
+   "Ein Stausee direkt im Zentrum von Fužine. Uferpromenade, Boote und Angeln."
+  ],
+  "V08": [
+   "Lepenica-See",
+   "Ein Stausee oberhalb von Fužine, ruhiger als der Bajer; Ufer zum Spazieren und Angeln."
+  ],
+  "V09": [
+   "Potkoš-See",
+   "Ein kleiner Stausee östlich von Fužine."
+  ],
+  "V10": [
+   "Lokve-See",
+   "Ein großer Stausee bei Lokve, umgeben von Tannen- und Fichtenwald. Angeln und Spaziergänge am Ufer."
+  ],
+  "V11": [
+   "Wasserfall Zeleni vir",
+   "Ein Wasserfall bei Skrad, der über den Eingang einer Höhle stürzt; eines der bekanntesten Motive des Gorski kotar."
+  ],
+  "V12": [
+   "Čabranka in Čabar",
+   "Ein Fluss, der durch Čabar fließt und weiter unten bis zur Mündung in die Kupa die Grenze zu Slowenien bildet."
+  ],
+  "V13": [
+   "Quelle der Čabranka",
+   "Karstquelle der Čabranka beim Dorf Tropeti, nordwestlich von Čabar. Hier beginnt der Lehrpfad Tropetarska stijena."
+  ],
+  "P01": [
+   "Veliki Risnjak (1528 m)",
+   "Der Gipfel, nach dem der Park benannt ist. An klaren Tagen reicht der Blick von der Kvarner-Bucht bis zu den Alpen."
+  ],
+  "P02": [
+   "Schlosser-Hütte",
+   "Berghütte unterhalb des Risnjak-Gipfels, am Hauptweg von Crni Lug."
+  ],
+  "P03": [
+   null,
+   "Ein felsiger Gipfel oberhalb von Platak mit Blick auf die Kvarner-Bucht und den Risnjak."
+  ],
+  "P04": [
+   null,
+   "Skigebiet und Ausgangspunkt für den Snježnik, am Westrand des Gorski kotar."
+  ],
+  "P05": [
+   "Bjelolasica – Kula (1534 m)",
+   "Der höchste Gipfel des Gorski kotar: ein grasbewachsener Kamm mit Blick auf die Velika Kapela und das Meer."
+  ],
+  "P06": [
+   null,
+   "Das höchstgelegene Dorf Kroatiens, auf etwa 1060 m. Ausgangspunkt für die Bjelolasica."
+  ],
+  "P07": [
+   "Bijele stijene (Weiße Felsen)",
+   "Kalksteintürme und Steinlabyrinthe in einem strengen Naturschutzgebiet. Bleib auf den markierten Wegen."
+  ],
+  "P08": [
+   "Samarske stijene (Samar-Felsen)",
+   "Wilde Felsen und Karren neben den Bijele stijene; anspruchsvolles Gelände für erfahrene Wanderer."
+  ],
+  "P09": [
+   null,
+   "Der südliche Wall des Gorski kotar, mit Blick auf das Vinodol und die Kvarner-Bucht."
+  ],
+  "P10": [
+   null,
+   "Ein Gipfel zwischen Fužine und Mrkopalj, mit einer Berghütte am Weg."
+  ],
+  "P11": [
+   null,
+   "Ein leicht erreichbarer, bewaldeter Gipfel zwischen Gornje Jelenje und Fužine, mit Blick Richtung Rijeka und Kvarner-Bucht. Kontrollpunkt des Kroatischen Bergwanderwegs."
+  ],
+  "P12": [
+   null,
+   "Aussichtspunkt mit Turm und Berghaus oberhalb von Delnice; Blick auf den Risnjak und die Wälder des Gorski kotar."
+  ],
+  "P13": [
+   null,
+   "Ein Gipfel oberhalb von Skrad mit Blick ins Kupa-Tal."
+  ],
+  "P14": [
+   "Ličko polje",
+   "Ein Karstfeld bei Lič: im Sommer Wiesen, zeitweise unter Wasser."
+  ],
+  "P16": [
+   "Čelimbaša (Mrkopalj)",
+   "Skigebiet und Rodelhang oberhalb von Mrkopalj: ein Schlepplift für Skifahrer und ein Förderband am Rodelhang. Im Sommer Wiesen zum Spazieren."
+  ],
+  "P17": [
+   null,
+   "Der Nordgipfel des Risnjak-Massivs, im Nationalpark."
+  ],
+  "P18": [
+   null,
+   "Ein bewaldeter Gipfel nördlich von Delnice, Richtung Kupa-Tal."
+  ],
+  "P19": [
+   null,
+   "Ein Gipfel der Velika Kapela südlich der Bijele stijene."
+  ],
+  "P20": [
+   null,
+   "Ein Gipfel in den Wäldern südlich von Mrkopalj."
+  ],
+  "P21": [
+   null,
+   "Ein Gipfel in den Wäldern zwischen Lokve und Crni Lug."
+  ],
+  "P22": [
+   null,
+   "Ein Gipfel an der Matić poljana bei Mrkopalj."
+  ],
+  "P23": [
+   null,
+   "Ein Gipfel der Bitoraj- und Viševica-Gruppe."
+  ],
+  "P24": [
+   null,
+   "Der niedrigere Nachbar des Bitoraj."
+  ],
+  "P25": [
+   null,
+   "Ein Gipfel zwischen Ravna Gora und Vrbovsko."
+  ],
+  "P26": [
+   null,
+   "Ein Gipfel am Südrand des Gorski kotar, südlich von Lič."
+  ],
+  "P27": [
+   null,
+   "Eine Hochfläche mit Wiesen zwischen Mrkopalj und Begovo Razdolje."
+  ],
+  "P28": [
+   null,
+   "Ein Gipfel im Bjelolasica-Massiv."
+  ],
+  "P29": [
+   null,
+   "Ein Gipfel in den Wäldern südlich von Mrkopalj."
+  ],
+  "Z01": [
+   "Nationalpark Risnjak – Eingang Crni Lug",
+   "Haupteingang und Parkverwaltung: Informationen, Tickets und Beginn des Lehrpfads Leska."
+  ],
+  "Z02": [
+   "Waldpark Golubinjak",
+   "Ein Wald mit riesigen Felsblöcken, Rastplatz und kurzen Wegen bei Lokve."
+  ],
+  "Z03": [
+   "Vražji prolaz (Teufelsdurchgang)",
+   "Eine enge Bachschlucht mit Stegen und Weg; im Sommer angenehm kühl. Führt weiter zum Zeleni vir."
+  ],
+  "Z04": [
+   "Kamačnik-Schlucht",
+   "Eine kurze Schlucht eines klaren Baches bei Vrbovsko mit angelegtem Weg am Wasser, gut für Familien."
+  ],
+  "Z05": [
+   null,
+   "Ein Hügel bei Delnice mit Skipiste und Waldwegen."
+  ],
+  "Z06": [
+   "Königin des Waldes",
+   "Ein markanter alter Baum im Wald von Golubinjak bei Lokve."
+  ],
+  "S01": [
+   "Lehrpfad Leska",
+   "Ein Rundlehrpfad von etwa 4 km durch den Wald des Nationalparks Risnjak, für jedes Alter. Beginnt am Parkeingang."
+  ],
+  "S02": [
+   "Weg zur Quelle der Kupa",
+   "Ein Waldweg vom Weiler Razloge zur Quelle der Kupa."
+  ],
+  "S03": [
+   "Promenade am Bajer-See",
+   "Eine ebene Promenade rund um den Bajer-See durch Fužine, leicht für alle."
+  ],
+  "S04": [
+   null,
+   "Ein Waldweg von Delnice zum Aussichtspunkt Petehovac."
+  ],
+  "S05": [
+   null,
+   "Der kürzeste Aufstieg auf den Tuhobić, von Gornje Jelenje (Lepenice): etwa 3,7 km und 1 h 15 – 1 h 30 zu Fuß."
+  ],
+  "S06": [
+   null,
+   "Der Aufstieg auf den Tuhobić von der Seite von Fužine: etwa 5 km und 1 h 30 – 1 h 45 zu Fuß. Von Lič über Benkovac etwa 3 h 15."
+  ],
+  "S07": [
+   null,
+   "Ein längerer Aufstieg von Zlobin über Jelenčić: etwa 7 km und 2 h 15 – 2 h 30 zu Fuß."
+  ],
+  "S08": [
+   "Zugang zu den Bijele stijene von Mrkopalj",
+   "Von Mrkopalj auf der Forststraße Richtung Jasenak. Von der Straße zweigen markierte Wege ab: zur Schutzhütte Ratkovo etwa 30 min, zu den Bijele stijene auf dem kürzesten Abzweig etwa 45 min. Von Dezember bis April oder Mai ist die Straße wegen Schnee unpassierbar."
+  ],
+  "S09": [
+   null,
+   "Der klassische Aufstieg von Jasenak zu den Bijele stijene, etwa 2 h 30 – 3 h zu Fuß."
+  ],
+  "B01": [
+   "Kupa-Tal – Start in Brod na Kupi",
+   "Ausgangspunkt für Radtouren entlang der Kupa auf ruhigen Nebenstraßen."
+  ],
+  "B02": [
+   "Seen von Fužine – Start am Bajer",
+   "Ausgangspunkt für eine Rundtour zwischen den Seen von Fužine."
+  ],
+  "C01": [
+   "Höhle Vrelo",
+   "Eine Schauhöhle bei Fužine, an der Quelle der Ličanka nahe dem Lepenica-See; Besichtigung mit Führung."
+  ],
+  "C02": [
+   "Höhle Lokvarka",
+   "Eine Schauhöhle bei Lokve mit Tropfsteinen; eine der bekannteren Höhlen in diesem Teil Kroatiens."
+  ],
+  "H01": [
+   "Zrinski-Schloss, Čabar",
+   "Das Schloss von Petar Zrinski in Čabar, einst Mittelpunkt der Zrinski-Güter und Eisenwerke."
+  ],
+  "H02": [
+   "Zrinski-Schloss, Brod na Kupi",
+   "Ein restauriertes Schloss an der Kupa, heute mit Ausstellungsräumen."
+  ],
+  "H03": [
+   "Burg Severin na Kupi",
+   "Eine mittelalterliche Burg auf einem Felsen über der Kupa, mehrmals umgebaut."
+  ],
+  "H04": [
+   "Kloster Gomirje",
+   "Ein orthodoxes Kloster aus der Zeit um 1600, das westlichste Kloster der Serbisch-Orthodoxen Kirche."
+  ],
+  "H05": [
+   "Gedenkmuseum Ivan Goran Kovačić, Lukovdol",
+   "Das Geburtshaus des Dichters Ivan Goran Kovačić (1913–1943) in Lukovdol, heute Gedenkmuseum des Kroatischen Historischen Museums."
+  ],
+  "H06": [
+   "Louisiana-Straße – Gornje Jelenje",
+   "Ein Pass an der Louisiana-Straße (1803–1811), die Karlovac mit Rijeka verband; das Tor zum Gorski kotar von der Küste."
+  ],
+  "H07": [
+   "Karolinen-Straße – Vrata",
+   "An der Trasse der Karolinen-Straße aus dem 18. Jahrhundert, der ersten Straße durch den Gorski kotar zum Meer."
+  ],
+  "H08": [
+   "Wasserkraftwerk Zeleni vir",
+   "Ein altes Wasserkraftwerk am Zeleni vir, ein Beispiel für die frühe Elektrifizierung des Gorski kotar."
+  ],
+  "H09": [
+   null,
+   "Die größte Stadt des Gorski kotar und sein Verkehrsknotenpunkt; Ausgangspunkt für Petehovac und Risnjak."
+  ],
+  "H10": [
+   null,
+   "Ein Ort am Bajer-See, bekannt für seine Seen, die Höhle Vrelo und die Uferpromenade."
+  ],
+  "H11": [
+   null,
+   "Ein Ort am Lokve-See, Tor zum Golubinjak und zur Höhle Lokvarka."
+  ],
+  "H12": [
+   null,
+   "Ein Bergdorf unterhalb der Bjelolasica; im Winter Schnee, im Sommer Wiesen."
+  ],
+  "H13": [
+   null,
+   "Eine Stadt auf der Hochebene zwischen Delnice und Vrbovsko."
+  ],
+  "H14": [
+   null,
+   "Die östlichste größere Stadt des Gorski kotar, an der Louisiana-Straße; nahe der Kamačnik-Schlucht."
+  ],
+  "H15": [
+   null,
+   "Ein Ort oberhalb des Kupa-Tals, Ausgangspunkt für Zeleni vir und Vražji prolaz."
+  ],
+  "H16": [
+   null,
+   "Ein Ort im Nordosten des Gorski kotar, oberhalb des Kupa-Tals."
+  ],
+  "H17": [
+   null,
+   "Die nördlichste Stadt des Gorski kotar, an der Čabranka an der Grenze zu Slowenien."
+  ],
+  "H18": [
+   null,
+   "Ein Dorf im Feld von Gerovo, in der Gegend von Čabar."
+  ],
+  "H19": [
+   null,
+   "Ein Grenzdorf im Nordwesten, am Übergang nach Slowenien."
+  ],
+  "H20": [
+   null,
+   "Ein Dorf in der Gegend von Čabar."
+  ],
+  "H21": [
+   null,
+   "Ein Dorf am Haupteingang des Nationalparks Risnjak."
+  ],
+  "H22": [
+   null,
+   "Ein Dorf am Ličko polje, südöstlich von Fužine."
+  ],
+  "H23": [
+   null,
+   "Ein Dorf zwischen Mrkopalj und Begovo Razdolje."
+  ],
+  "H24": [
+   null,
+   "Ein Dorf in der Gemeinde Ravna Gora."
+  ],
+  "H25": [
+   null,
+   "Ein Dorf und Bahnhof bei Vrbovsko."
+  ],
+  "H26": [
+   null,
+   "Ein Dorf an der Bahnlinie zwischen Delnice und Ravna Gora."
+  ],
+  "H27": [
+   null,
+   "Ein Dorf und Bahnhof bei Delnice."
+  ],
+  "H28": [
+   null,
+   "Ein Weiler an der Kupa, Ausgangspunkt zur Quelle der Kupa."
+  ],
+  "H29": [
+   "Kirche der hl. Maria Magdalena, Brod na Kupi",
+   "Die Pfarrkirche im Zentrum von Brod na Kupi, neben dem Zrinski-Schloss."
+  ],
+  "H30": [
+   "Kirche des hl. Antonius von Padua, Čabar",
+   "Eine Kirche im Zentrum von Čabar, nahe dem Zrinski-Schloss."
+  ],
+  "H31": [
+   "Dreifaltigkeitskirche, Plešce",
+   "Eine Dorfkirche in der Gegend von Čabar, oberhalb der Kupa."
+  ],
+  "H32": [
+   "Marienkirche, Zamost",
+   "Eine Kirche in Zamost, an der oberen Kupa."
+  ],
+  "H33": [
+   "Kirche des hl. Florian, Hrvatsko",
+   "Eine Kirche im Dorf Hrvatsko, an der Grenze an der Kupa."
+  ],
+  "H34": [
+   "Heilig-Kreuz-Kirche, Turke",
+   "Eine Kirche in Turke, im oberen Kupa-Tal."
+  ],
+  "H35": [
+   "Kirche der Enthauptung Johannes des Täufers, Kuželj",
+   "Eine Kirche in Kuželj, an der Radroute durch das Kupa-Tal."
+  ],
+  "H36": [
+   "Kirche des hl. Florian, Severin na Kupi",
+   "Eine Kirche in Severin, unterhalb der Burg."
+  ],
+  "H37": [
+   "Kirche des hl. Elias, Damalj",
+   "Eine Kirche in Damalj bei Severin na Kupi."
+  ],
+  "H38": [
+   "Kirche Mariä Verkündigung, Zdihovo",
+   "Eine Kirche in Zdihovo, an der unteren Kupa im Gorski kotar."
+  ],
+  "H39": [
+   "Kapelle Unserer Lieben Frau von Lourdes, Gašparci",
+   "Eine Kapelle in Gašparci, im Kupa-Tal."
+  ],
+  "H40": [
+   "Dreifaltigkeitskapelle, Čedanj",
+   "Eine Kapelle in Čedanj, oberhalb des Kupa-Tals."
+  ],
+  "H41": [
+   "Kapelle der hl. Lucia, Goršeti",
+   "Eine Kapelle in Goršeti bei Brod Moravice."
+  ],
+  "H42": [
+   "Lourdes-Kapelle, Čabar",
+   "Eine kleine Kapelle am Rand von Čabar."
+  ],
+  "H43": [
+   "Denkmal für 26 erfrorene Partisanen",
+   "Ein Denkmal an der Matić poljana für die Partisanen, die dort im Zweiten Weltkrieg erfroren sind."
+  ],
+  "H44": [
+   "Skisprungschanzen Delnice",
+   "Skisprungschanzen am Rand von Delnice, Teil der Wintertradition des Gorski kotar."
+  ],
+  "H45": [
+   "Haus des Wissens des Gorski kotar, Razloge",
+   "Ein Besucherzentrum des Nationalparks Risnjak in der alten Dorfschule in Razloge, auf dem Weg zur Quelle der Kupa."
+  ],
+  "H46": [
+   "Geburtshaus der Kupa",
+   "Ein Besucherzentrum des Nationalparks Risnjak in Kupari, nahe der Quelle der Kupa: wie der Fluss entsteht und das Leben an ihm."
+  ],
+  "H47": [
+   "Turm Turanj, Brod Moravice",
+   "Ein alter Steinturm in Brod Moravice, eines der Wahrzeichen des Ortes."
+  ],
+  "H48": [
+   "Fajeri – Steinpfeiler",
+   "Eine Reihe von Steinpfeilern zwischen Brestova Draga und Slavica, Reste einer aufgegebenen Brücke."
+  ],
+  "H49": [
+   "Wallfahrtskapelle Maria Schnee, Lič",
+   "Eine Kapelle und Wallfahrtsstätte am Ličko polje bei Lič."
+  ],
+  "H50": [
+   "Heimatsammlung Mrkopalj",
+   "Eine Sammlung im ersten Stock des Gemeindehauses in Mrkopalj: alte Fotos, Werkzeuge, Trachten, handgemachte Skier und Schneeschuhe sowie Dokumente aus der Geschichte des Ortes. Besichtigung mit Führung."
+  ],
+  "H51": [
+   "Kolarnica (Stellmacherwerkstatt), Brod Moravice",
+   "Eine ehemalige Stellmacherwerkstatt, heute eine Ausstellung alter Handwerke: Stellmacherei, Tischlerei, Schusterei, Schneiderei und ein Friseursalon. Auf dem Dachboden befindet sich ein digitales Archiv des örtlichen Erbes."
+  ],
+  "H52": [
+   "Palčeva šiša, Plešce",
+   "Das Haus der Familie Čop von 1856, ein geschütztes Kulturdenkmal: alter Laden, Gasthaus, Büro, Salon und ethnografische Sammlung. Es zeigt das Leben eines wohlhabenden Haushalts im Tal der Čabranka."
+  ],
+  "H53": [
+   "Ethnografische Sammlung Lič",
+   "Eine Sammlung alter Gegenstände aus Lič und Umgebung, 1994 zum 150-jährigen Bestehen der Schule in Lič gegründet. Ein geschütztes Kulturgut."
+  ],
+  "E01": [
+   "Cowboydorf Roswell",
+   "Ein thematisches Cowboydorf bei Fužine, Spaß für Familien mit Kindern."
+  ],
+  "E02": [
+   "Freizeit- und Paintballpark Vrata",
+   "Ein Freizeitpark mit Paintball bei Vrata."
+  ],
+  "E03": [
+   "Šumska bajka (Waldmärchen), Lič",
+   "Ein Ausflugsort für Familien im Wald bei Lič, gut für Kinder."
+  ],
+  "E04": [
+   "Naturhaus Kotač an der Louisiana-Straße",
+   "Ein Naturbildungszentrum an der Louisiana-Straße, mit Café."
+  ],
+  "H54": [
+   "Rački-Haus, Delnice",
+   "Ein altes Haus des Gorski kotar in der Supilova-Straße, vermutlich etwa 300 Jahre alt. Hier wird die Delnicer Volkstracht aufbewahrt; jedes Jahr im Juni brennen hier die Johannisfeuer."
+  ],
+  "H55": [
+   "Popović-Mühle, Delnice",
+   "Eine Mühle von 1924 mit erhaltener Technik: Stein- und Walzenstühle, Siebe, Elevatoren und Lederriemen. Sie lief als erste in Delnice mit Strom aus dem Kraftwerk Zeleni vir. Besichtigung nach Vereinbarung."
+  ],
+  "H56": [
+   "Delač-Haus, Delači",
+   "Das älteste Haus des geschützten Weilers Delači bei Brod Moravice, von 1644. Restauriert und mit alten Gegenständen aus der Gegend eingerichtet."
+  ],
+  "H57": [
+   "Kroatische Lesestube Kuti",
+   "Eine Dorflesestube in Gornji Kuti bei Brod Moravice. Seit 1936 von ehrenamtlichen Dorfbewohnern geführt; sie hat mehr als 9000 Bücher."
+  ],
+  "E05": [
+   "Bergpark Kupjak",
+   "Ein Bergpark auf etwa 800 m: im Sommer Aussichtspunkt, Waldweg zum Wandern und Radfahren, Abenteuerangebote und Grillplätze; im Winter Rodelhang mit Förderband und Nachtrodeln."
+  ],
+  "E06": [
+   "Abenteuerpark Gorski Lazi, Tršće",
+   "Ein Abenteuerpark im Weiler Lazi bei Tršće."
+  ],
+  "E07": [
+   null,
+   "Quad-Touren auf Forststraßen und durch die Dörfer des Gorski kotar, 1 oder 2 Stunden."
+  ],
+  "S11": [
+   "Lehrpfad Tropetarska stijena",
+   "Ein Bergrundweg von der Quelle der Čabranka auf die Tropetarska stijena, etwa 4,5 km auf zwei Ebenen. Mehr als 70 Baumarten, Buchen-Tannen-Wald und eine seltene Kiefer. Vor allem für angemeldete Gruppen."
+  ],
+  "S12": [
+   "Lehrpfad Plodovi gorja (Früchte der Berge), Ravna Gora",
+   "Ein 1,5 km langer Weg am Suhi vrh bei Ravna Gora, mit Tafeln über Bäume, Sträucher, Pilze, Heilkräuter und Waldfrüchte."
+  ],
+  "W03": [
+   "Rodelhang Bajt, Ravna Gora",
+   "Ein Rodelhang an der Autobahnausfahrt Ravna Gora, mit Lift; Schlitten zu mieten."
+  ],
+  "W05": [
+   "Rudnik, Tršće",
+   "Ein kleines Skigebiet mit Kinderliften und ein Rodelhang mit Förderband bei Tršće; Schlitten zu mieten."
+  ],
+  "W06": [
+   "Skigebiet Petehovac, Delnice",
+   "Eine Skipiste mit Schlepplift am Petehovac oberhalb von Delnice, neben dem Berghaus; in Betrieb, wenn genug Schnee liegt. Daneben gibt es auch einen Rodelhang."
+  ],
+  "S10": [
+   "Raubtierpfad, Tršće",
+   "Ein Rundlehrpfad von etwa 1,7 km (etwa 1 h zu Fuß) mit lebensgroßen Figuren von Wolf, Luchs, Bär, Rothirsch, Reh, Fuchs, Wildschwein und Auerhahn, jeweils mit Infotafel."
+  ],
+  "H58": [
+   "Vicić-Brücke, Lič",
+   "Eine Brücke aus dem frühen 20. Jahrhundert am Vicić-Weg über den Bach Ličanka, der von Lič nach Bukova Kosa im Feld von Lič führte. Sie war aus Holz, auf Steinpfeilern, deren Reste noch zu sehen sind. An der Brücke gibt es einen Rastplatz."
+  ],
+  "E08": [
+   "Berggarten der Sinne, Belo Selo",
+   "Der erste Themengarten im Gorski kotar, angelegt wie ein traditioneller Bauerngarten an der Karolinen-Straße. Tafeln erzählen von Wald- und Gartenbeeren, Alpenblumen, Heilkräutern und alten Obst- und Gemüsesorten; zum Besuch gehört eine Verkostung hausgemachter Liköre, Marmeladen und Säfte."
+  ],
+  "E09": [
+   "Bauernhof und Ausflugsort Zeleni san, Lič",
+   "Ein Familienbauernhof bei Lič mit Haus- und exotischen Tieren: Zwergziegen und Minischweine, Esel, Ponys, Lamas, Alpakas, Nandus und Aras. Außerdem ein Garten mit Teich und seltenen Pflanzen sowie hausgemachte Säfte und Aroniamarmelade."
+  ]
+ },
+ "rute": {
+  "R01": [
+   "Fužine an einem halben Tag",
+   "Die Promenade am Bajer-See, ein Besuch der Höhle Vrelo und weiter zum Lepenica-See. Ideal mit Kindern.",
+   "Fužine, am Bajer-See"
+  ],
+  "R02": [
+   "Lokve: Lokvarka und Golubinjak",
+   "Die Höhle Lokvarka, die Felsblöcke von Golubinjak und der Baum „Königin des Waldes“, zurück nach Lokve.",
+   "Lokve, Zentrum"
+  ],
+  "R03": [
+   "Zeleni vir und Vražji prolaz",
+   "Eine Runde ab Skrad: der Wasserfall Zeleni vir und die Schlucht Vražji prolaz mit ihren Stegen. Steile Abschnitte, bei Nässe rutschig.",
+   "Zeleni vir, unterhalb von Skrad"
+  ],
+  "R04": [
+   "Quelle der Kupa",
+   "Ein kurzer Spaziergang von Razloge zur Quelle der Kupa und zurück.",
+   "Razloge"
+  ],
+  "R05": [
+   "Risnjak von Crni Lug",
+   "Der klassische Aufstieg von Crni Lug über die Schlosser-Hütte auf den Veliki Risnjak und auf demselben Weg zurück.",
+   "Crni Lug, Eingang des Nationalparks"
+  ],
+  "R06": [
+   "Snježnik von Platak",
+   "Der kürzeste Weg auf den felsigen Gipfel des Snježnik, mit Blick auf die Kvarner-Bucht.",
+   "Platak"
+  ],
+  "R07": [
+   "Bjelolasica von Begovo Razdolje",
+   "Vom höchstgelegenen Dorf Kroatiens hinauf zur Kula, dem höchsten Gipfel des Gorski kotar.",
+   "Begovo Razdolje"
+  ],
+  "R08": [
+   "Bijele stijene von der Forststraße",
+   "Der kürzeste Zugang zu den Steinlabyrinthen der Bijele stijene in einem strengen Schutzgebiet; bleib auf den Markierungen.",
+   "an der Forststraße Mrkopalj – Jasenak (nur ohne Schnee)"
+  ],
+  "R09": [
+   "Kupa-Tal: Brod na Kupi – Gašparci",
+   "Auf Asphalt die Kupa hinauf bis zur Brücke bei Gašparci und zurück, mit Pausen zum Baden. Für Kinder kürzer bis Kuželj (etwa 10 km), für Geübte weiter bis Čabar (etwa 60 km).",
+   "Brod na Kupi"
+  ],
+  "R10": [
+   "Seen: Fužine – Lokve",
+   "Eine Runde vom Bajer vorbei an Potkoš und Lepenica zum Lokve-See und zurück.",
+   "Fužine, am Bajer-See"
+  ]
+ },
+ "polazista": {
+  "Šumska cesta Mrkopalj – Jasenak, najkraći odvojak": "Forststraße Mrkopalj – Jasenak, kürzester Abzweig",
+  "oko 45 min do Bijelih stijena": "etwa 45 min zu den Bijele stijene",
+  "Šumska cesta, odvojak za Ratkovo sklonište i Samarske stijene": "Forststraße, Abzweig zur Schutzhütte Ratkovo und zu den Samarske stijene",
+  "oko 30 min do skloništa": "etwa 30 min zur Schutzhütte",
+  "Jasenak": "Jasenak",
+  "2 h 30 – 3 h": "2 h 30 – 3 h",
+  "Vrelo (Bjelolasica)": "Vrelo (Bjelolasica)",
+  "oko 4 h": "etwa 4 h",
+  "Brod na Kupi – Kuželj i natrag": "Brod na Kupi – Kuželj und zurück",
+  "oko 10 km": "etwa 10 km",
+  "Brod na Kupi – Gašparci i natrag": "Brod na Kupi – Gašparci und zurück",
+  "oko 22 km": "etwa 22 km",
+  "Brod na Kupi – Čabar i natrag": "Brod na Kupi – Čabar und zurück",
+  "oko 60 km": "etwa 60 km"
+ },
+ "specijaliteti": {
+  "gulas": {
+   "naziv": "Wildgulasch",
+   "opis": "Das bekannteste Gericht des Gorski kotar: Reh-, Hirsch-, Wildschwein- oder Bärenfleisch, langsam mit Zwiebeln und Rotwein geschmort. Dazu Polenta, Kartoffelnocken oder hausgemachtes Brot.",
+   "kad": "ganzjährig",
+   "probaj": "In Fužine sind das Hotel Bitoraj, die Konoba Volta und das Lovački dom Arnika für ihr Gulasch bekannt; es gibt es auch in anderen Restaurants und Berghütten mit Hausmannskost."
+  },
+  "suho": {
+   "naziv": "Wildschinken und Käse škripavac",
+   "opis": "Eine kalte Vorspeise: getrocknetes Bären-, Wildschwein- oder Hirschfleisch mit škripavac (Quietschkäse) und hausgemachtem Brot.",
+   "kad": "ganzjährig",
+   "probaj": "Als Vorspeise in Restaurants; Trockenfleisch auch von kleinen örtlichen Erzeugern."
+  },
+  "pastrva": {
+   "naziv": "Bachforelle",
+   "opis": "Der geschätzteste Fisch der örtlichen Flüsse und Seen. Gebacken, gegrillt oder in einer dicken Fischsuppe.",
+   "kad": "ganzjährig",
+   "probaj": "Restaurants an der Kupa, der Kupica und an den Seen."
+  },
+  "zabe": {
+   "naziv": "Froschschenkel",
+   "opis": "Eine alte Spezialität des Gorski kotar: paniert oder in einer Soße mit Schnecken und Pilzen geschmort.",
+   "kad": "ganzjährig",
+   "probaj": "Restaurants mit traditioneller Speisekarte."
+  },
+  "puh": {
+   "naziv": "Siebenschläfer",
+   "opis": "Ein Gericht der alten Gorani: Siebenschläfer gebraten oder als Gulasch. Er wurde wegen Fleisch und Fett geschätzt, und die Siebenschläferjagd ist bis heute örtliche Tradition.",
+   "kad": "Spätsommer und Herbst",
+   "probaj": "Selten auf der Speisekarte; meist bei örtlichen Siebenschläfer-Abenden."
+  },
+  "nadjev": {
+   "naziv": "Gefüllter Schweinemagen (budel, nadelo)",
+   "opis": "Ein Ostergericht: Schweinemagen, gefüllt mit Brotwürfeln, Schinken, Speck, Frühlingszwiebeln und Eiern, dann gekocht oder leicht geräuchert.",
+   "kad": "um Ostern",
+   "probaj": "In den Häusern und auf dem Ostertisch."
+  },
+  "zelje": {
+   "naziv": "Sauerkraut mit Wurst",
+   "opis": "Früher das wichtigste Wintergericht, heute Beilage: Sauerkraut mit Knoblauch, Wurst oder Blutwurst.",
+   "kad": "Winter",
+   "probaj": "Restaurants mit Hausmannskost."
+  },
+  "gljive": {
+   "naziv": "Wildpilze",
+   "opis": "Steinpilze, Pfifferlinge, Morcheln und Parasole: als Hauptgericht, in Soße oder zu Fleisch. Im Winter getrocknet oder eingelegt.",
+   "kad": "Frühling bis Spätherbst",
+   "probaj": "Restaurants in der Saison. Prüfe vor dem Sammeln die Art in der App Gljive Hrvatske."
+  },
+  "strudla": {
+   "naziv": "Heidelbeerstrudel",
+   "opis": "Ein Dessert des Gorski kotar: dünner Teig mit wilden Heidelbeeren, Zucker und Zimt, warm serviert und mit Puderzucker bestreut. Es gibt auch Apfel- und Topfenstrudel.",
+   "kad": "ganzjährig, am besten im Sommer, wenn die Heidelbeeren reif sind",
+   "probaj": "Das Hotel Bitoraj in Fužine ist dafür bekannt; auch in anderen Restaurants."
+  },
+  "rakije": {
+   "naziv": "Schnäpse, Liköre und Säfte",
+   "opis": "Hausgemachter Zwetschgen-, Apfel- und Birnenschnaps und Wacholderschnaps (brinjevec). Liköre und Säfte aus Heidelbeeren, Erdbeeren, Himbeeren und Brombeeren, neuerdings auch Gin aus dem Gorski kotar.",
+   "kad": "ganzjährig",
+   "probaj": "Auf Familienhöfen und in Restaurants; siehe Filter „Höfe & Regionales“."
+  }
+ },
+ "lynx": {
+  "ime": "Der Berg Risnjak hat seinen Namen wahrscheinlich von mir – dem Luchs (kroatisch ris). Den Nationalpark gibt es seit 1949.",
+  "povratak": "Anfang des 20. Jahrhunderts verschwand der Luchs aus diesen Wäldern. 1973 wurden sechs Luchse aus der Slowakei in den slowenischen Teil des Dinarischen Gebirges gebracht – die heutigen Luchse hier sind ihre Nachkommen.",
+  "geni": "Alle dinarischen Luchse stammen von nur sechs Tieren ab, deshalb sind wir zu eng verwandt. Darum bringt das Projekt LIFE Lynx Luchse aus den Karpaten in die Dinariden.",
+  "zastita": "In Kroatien bin ich streng geschützt. Die Luchsjagd ist seit 1998 verboten.",
+  "teritorij": "Ich bin ein Einzelgänger. Das Revier eines Männchens umfasst 120 bis 1800 km² – selbst das kleinste ist größer als der ganze Nationalpark Risnjak.",
+  "plijen": "Ich jage vor allem Rehe. Ein erwachsenes Männchen wiegt 18 bis 25 kg, ein Weibchen 12 bis 16 kg.",
+  "zvijeri": "Im Gorski kotar leben alle drei großen Beutegreifer: der Bär, der Wolf und ich. Zelenko der Bär und ich sind Nachbarn!"
+ },
+ "info": {
+  "C01": {
+   "rv_tekst": [
+    "Nur mit Führung, Beginn zu festen Zeiten.",
+    "Januar–Mai: Sa und So um 11, 12, 14 und 15 Uhr",
+    "Juni: Fr um 14 und 15 Uhr; Sa und So um 11, 12, 14 und 15 Uhr (ab 15. Juni auch Mi und Do)",
+    "Juli–August: Mo–Mi um 10, 11 und 12 Uhr; Do und Fr 10–14 Uhr; am Wochenende 10–17 Uhr, stündlich",
+    "September: Fr um 10, 11, 14 und 15 Uhr; Sa und So um 11, 12, 14 und 15 Uhr",
+    "Oktober: Fr um 14 und 15 Uhr; Sa und So um 11, 12, 14 und 15 Uhr",
+    "November–Dezember: Sa und So um 11, 12, 14 und 15 Uhr",
+    "Geschlossen: Ostern, 1. Nov., 25. Dez. und 1. Jan. Gruppen ab 15 Personen können bei Anmeldung 3 Tage im Voraus auch zu anderen Zeiten kommen."
+   ],
+   "savjet": "Drinnen hat es etwa 8 °C, nimm eine Jacke mit. Die Höhle hat keine Stufen und ist rollstuhlgerecht.",
+   "trajanje": "Die Führung dauert 25–30 Minuten.",
+   "ulaznica": [
+    [
+     "Erwachsene",
+     "6,50 € (Juli–August 7,00 €)"
+    ],
+    [
+     "Kinder 4–18",
+     "5,00 € (5,50 €)"
+    ],
+    [
+     "Kinder unter 4",
+     "frei"
+    ],
+    [
+     "Rentner, Studenten, Wanderer",
+     "6,00 € (6,50 €)"
+    ],
+    [
+     "Familie (2 + bis zu 3 Kinder)",
+     "19,00 € (22,00 €)"
+    ]
+   ]
+  },
+  "C02": {
+   "savjet": "Drinnen hat es etwa 8 °C und es ist feucht, nimm eine Jacke und feste Schuhe mit.",
+   "napomena": "Preise und Öffnungszeiten für 2026 sind auf der offiziellen Website nicht veröffentlicht. Ruf vor dem Besuch an.",
+   "trajanje": "Nur mit Führung."
+  },
+  "Z01": {
+   "savjet": "In Crni Lug gibt es auch das Besucherzentrum „Verborgener Schatz des Risnjak“: Besuch nach Vereinbarung unter +385 91 620 8672 oder info@visitdelnice.hr.",
+   "napomena": "Im Nationalpark wird Eintritt erhoben. Tickets gibt es am Eingang oder online."
+  },
+  "S01": {
+   "napomena": "Der Weg liegt im Nationalpark, es wird Eintritt erhoben.",
+   "trajanje": "Eine Runde von 4,2 km, fast eben, mit 23 Infotafeln. Turnschuhe reichen."
+  },
+  "V11": {
+   "napomena": "Laut JU Priroda wird die Straße zum Zeleni vir repariert: Zugang von Donji Lošac bei Brod na Kupi oder auf dem Rundweg vom Bahnhof Skrad. Prüfe vor dem Besuch."
+  },
+  "Z03": {
+   "napomena": "Laut JU Priroda wird die Straße zum Zeleni vir repariert: Zugang von Donji Lošac bei Brod na Kupi oder auf dem Rundweg vom Bahnhof Skrad. Prüfe vor dem Besuch."
+  },
+  "V01": {
+   "savjet": "Nahe der Quelle liegen die Zentren des Nationalparks Risnjak „Geburtshaus der Kupa“ (Kupari) und „Haus des Wissens des Gorski kotar“ (alte Schule in Razloge), täglich 9–17 Uhr geöffnet.",
+   "napomena": "Im Nationalpark wird Eintritt erhoben. Tickets gibt es am Eingang oder online."
+  },
+  "Or14680208": {
+   "savjet": "In Crni Lug gibt es auch das Besucherzentrum „Verborgener Schatz des Risnjak“: Besuch nach Vereinbarung unter +385 91 620 8672 oder info@visitdelnice.hr.",
+   "napomena": "Im Nationalpark wird Eintritt erhoben. Tickets gibt es am Eingang oder online."
+  },
+  "Z04": {
+   "napomena": "Prüfe Öffnungszeiten, Eintritt und Parken für diese Saison beim Betreiber."
+  },
+  "H02": {
+   "rv_tekst": [
+    "Di–Fr 9–19 Uhr, Sa und So 10–18 Uhr",
+    "Montags und an Feiertagen geschlossen."
+   ],
+   "savjet": "Drinnen sind das Besucherzentrum „Frankopanen-Wege“ und die Dauerausstellung „Wildnis mit Meerblick“ des Naturhistorischen Museums Rijeka.",
+   "napomena": "Ein Ticket gilt für die Ausstellung und das Besucherzentrum.",
+   "ulaznica": [
+    [
+     "Erwachsene",
+     "3,00 €"
+    ],
+    [
+     "Kinder, Schüler, Studenten, Rentner",
+     "1,50 €"
+    ],
+    [
+     "Familie",
+     "5,00 €"
+    ],
+    [
+     "Jahreskarte",
+     "15,00 €"
+    ]
+   ]
+  },
+  "H01": {
+   "rv_tekst": [
+    "Mo 7–17 Uhr, Di–Do 7–15 Uhr, Fr 7–13 Uhr",
+    "Wochenende und Feiertage nach Vereinbarung per Telefon oder E-Mail."
+   ],
+   "savjet": "Im Schloss befinden sich das Besucherzentrum „Frankopanen-Wege“ und eine Heimatsammlung.",
+   "ulaznica": [
+    [
+     "Erwachsene",
+     "3,30 €"
+    ],
+    [
+     "Schüler, Studenten, Rentner",
+     "2,70 €"
+    ],
+    [
+     "Kinder 6–14",
+     "1,30 €"
+    ],
+    [
+     "Kinder unter 6",
+     "frei"
+    ],
+    [
+     "Gruppen (ab 20)",
+     "2,00 € pro Person"
+    ]
+   ]
+  },
+  "On11117413766": {
+   "savjet": "Eine Ausstellung über Bär, Wolf und Luchs: Lebensräume im Lauf der Jahreszeiten, Geräusche, Spuren, ein Film und eine Kinderecke."
+  },
+  "H05": {
+   "rv_tekst": [
+    "Di–Sa 10–17 Uhr, So 10–15 Uhr",
+    "Montags und an Feiertagen geschlossen."
+   ],
+   "napomena": "Prüfe den Eintrittspreis beim Besuch (Kinder unter 7 frei)."
+  },
+  "H45": {
+   "rv_tekst": [
+    "täglich 9–17 Uhr"
+   ],
+   "napomena": "Eintritt laut Preisliste des Nationalparks Risnjak."
+  },
+  "H46": {
+   "rv_tekst": [
+    "täglich 9–17 Uhr"
+   ],
+   "napomena": "Eintritt laut Preisliste des Nationalparks Risnjak."
+  },
+  "H50": {
+   "napomena": "Besichtigung mit Führung; vereinbare vorher einen Termin."
+  },
+  "H55": {
+   "napomena": "Besichtigung nach Vereinbarung."
+  },
+  "H57": {
+   "napomena": "Öffnungszeiten sind nicht veröffentlicht; frag bei der Gemeinde Brod Moravice nach einem Besuch."
+  },
+  "E05": {
+   "savjet": "Im Winter: Rodelhang mit Förderband und Nachtrodeln; Schlitten zu mieten.",
+   "napomena": "Prüfe Saison, Öffnungszeiten und Preise telefonisch – im Winter hängt alles vom Schnee ab."
+  },
+  "E06": {
+   "napomena": "Prüfe Saison und Preise telefonisch."
+  },
+  "E07": {
+   "napomena": "Touren von 1 h (etwa 15 km) und 2 h (etwa 30 km). Preise und Zeiten auf ihrer Website."
+  },
+  "S11": {
+   "napomena": "Ein Abschnitt von etwa 1,45 km (88 m Aufstieg) ist geöffnet. Der Weg ist vor allem für angemeldete Gruppen (Schulen, Vereine)."
+  },
+  "P04": {
+   "rv_tekst": [
+    "Im Winter, wenn Schnee liegt: täglich 9–16 Uhr (Pisten, Sessellift, Schlepplifte).",
+    "Nachtskifahren dienstags und freitags 19–22 Uhr, wenn das Wetter es zulässt.",
+    "Die Kasse öffnet um 8 Uhr (an Nachtski-Tagen auch um 18 Uhr).",
+    "Der Schlepplift Tešnje ist dauerhaft geschlossen."
+   ],
+   "savjet": "Tageskarten gibt es an der Kasse, online und an Petrol-Tankstellen.",
+   "napomena": "Pisten ohne Beschneiung öffnen erst nach genug Naturschnee."
+  },
+  "P16": {
+   "savjet": "Der Rodelhang hat ein Förderband; es gibt Halbtages- und Tageskarten, Schlitten kann man mieten.",
+   "napomena": "Der Betrieb hängt von Schnee und Wetter ab – schau auf ihre Facebook-Seite oder ruf vor dem Besuch an."
+  },
+  "W03": {
+   "savjet": "Schlitten kann man vor Ort mieten.",
+   "napomena": "Der Betrieb hängt von Schnee und Wetter ab – schau vor dem Besuch auf ihre Facebook-Seite."
+  },
+  "W05": {
+   "savjet": "Schlitten kann man günstig mieten.",
+   "napomena": "Der Betrieb hängt von Schnee und Wetter ab – schau vor dem Besuch auf ihre Facebook-Seite."
+  },
+  "W06": {
+   "napomena": "Skibetrieb nur bei genug Schnee – ruf vor dem Besuch im Berghaus an."
+  },
+  "E08": {
+   "napomena": "Besuch nach Vereinbarung, geeignet für Gruppen und Workshops.",
+   "savjet": "Barrierefrei zugänglich."
+  },
+  "E09": {
+   "rv_tekst": [
+    "Sa und So 11–18 Uhr"
+   ],
+   "napomena": "Gruppen von 10–50 Personen nur nach Vereinbarung; ein Besuch dauert 1–2 Stunden."
+  }
+ },
+ "danas": {
+  "stanje": {
+   "cesta-jasenak": [
+    "Forststraße Mrkopalj – Jasenak",
+    "Zugang zu den Bijele stijene. Bei Schnee gesperrt, meist von Dezember bis April oder Mai."
+   ],
+   "kuzelj": [
+    "Kuželj: Umgehungsstraße im Bau",
+    "Auf der Straße entlang der Kupa ist mit Verkehrsregelung zu rechnen."
+   ],
+   "lov": [
+    "Jagdsaison",
+    "Trag im Wald etwas Auffälliges und bleib auf markierten Wegen."
+   ]
+  },
+  "ideje": {
+   "S06": [
+    "Herbstfarben",
+    "Buchen am Tuhobić",
+    "Ab Benkovac Fužinski, etwa 1 h 30"
+   ],
+   "C02": [
+    "Wenn es regnet",
+    "Ein Regentag in der Höhle",
+    "Lokvarka oder Vrelo, prüfe die Führungszeiten"
+   ],
+   "R03": [
+    "Mehr Wasser",
+    "Zeleni vir nach Regen",
+    "Der Wasserfall und die Schlucht Vražji prolaz"
+   ],
+   "R09": [
+    "Abkühlung",
+    "Mit dem Rad an der Kupa",
+    "Von Brod na Kupi nach Gašparci, mit Badepausen"
+   ],
+   "R01": [
+    "Mit Kindern",
+    "Fužine an einem halben Tag",
+    "Bajer, Höhle Vrelo und Lepenica"
+   ],
+   "P04": [
+    "Schnee",
+    "Platak",
+    "Skigebiet und Ausgangspunkt für den Snježnik"
+   ]
+  }
+ }
+}

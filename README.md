@@ -3,7 +3,7 @@
 PWA (radi i bez signala). Izbornik: Karta · Danas · Gastro (specijaliteti, jelo, smještaj, OPG) · Rute · Moje.
 Karta s 1083 točke, 30 ruta (10 naših, 3 besplatne; 20 biciklističkih i MTB iz OSM-a), gdje jesti, spavati i kupiti,
 Zelenkova putovnica (pečati po GPS-u), Danas (vrijeme i medin savjet), Sigurnost (SOS, povratak do auta,
-„javi nekome”), Moja mjesta, sigurnosna kopija. Svijetli i tamni način. Hrvatski i engleski (jezik se bira u „Moje”, inače po jeziku preglednika).
+„javi nekome”), Moja mjesta, sigurnosna kopija. Svijetli i tamni način. Hrvatski, engleski i njemački (jezik se bira u „Moje”, inače po jeziku preglednika). Sezonski vodiči za proljeće, ljeto, jesen i zimu.
 
 Adresa: https://markofrankovic-afk.github.io/zelenko/
 
@@ -11,8 +11,9 @@ Adresa: https://markofrankovic-afk.github.io/zelenko/
 Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave povećaj `VERSION` u `docs/sw.js`.
 
 ## Gdje je što
-- `docs/i18n/hr.json`, `en.json` – svi tekstovi sučelja (za DE/IT kopiraj `en.json`)
-- `izvori/prijevod_en.json` – engleski prijevod naših tekstova (točke, rute, specijaliteti, Lynx, informacije, Danas); u podatke ga upisuje `alati/prevedi.py`
+- `docs/i18n/hr.json`, `en.json`, `de.json` – svi tekstovi sučelja (za novi jezik kopiraj `en.json`)
+- `izvori/prijevod_en.json`, `prijevod_de.json` – engleski i njemački prijevod naših tekstova (točke, rute, specijaliteti, Lynx, informacije, Danas); u podatke ih upisuje `alati/prevedi.py` (`… prevedi.py docs en` pa `… docs de`). Tekstove za OSM točke i rute na sva tri jezika pišu `spoji_osm.py`, `osm_bike_rute.py` i `osm_pjesacke_rute.py`
+- `izvori/izleti.json`, `izvori/sezone.json` – izleti po danima i sezonski vodiči (hr, en, de); kopiraju se u `docs/data/`
 - `docs/data/tocke.json`, `rute.json` – točke i rute; `docs/gpx/` – GPX tragovi ruta
 - `docs/data/mreza.json` – mreža putova za navigaciju po karti bez interneta (gradi `alati/osm_mreza.py`); izračun puta je u `docs/put.js`
 - `docs/data/rute_bicikl.json` – biciklističke i MTB rute iz OSM relacija (gradi `alati/osm_bike_rute.py`)
@@ -34,7 +35,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 
 ## Alati (`alati/`, Python)
 - `osm_izvuci.py`, `spoji_osm.py`, `osm_podloga.py`, `osm_rute.py` – točke, karta i rute iz OSM izvatka (BBBike PBF)
-- `prevedi.py` – upisuje prijevode u podatke; pokreće se zadnji
+- `prevedi.py` – upisuje prijevode u podatke; pokreće se zadnji, jednom za `en` i jednom za `de`
 - `visine.py` – uspon, spust i visinski profil ruta iz Copernicus DEM GLO-30 (pokreće se nakon osm_rute.py, osm_bike_rute.py i osm_pjesacke_rute.py; DEM pločice N45E014 i N45E015 nisu u repozitoriju)
 - `osm_mreza.py` – mreža cesta, šumskih cesta i staza za navigaciju (pješice i biciklom)
 - `osm_bike_rute.py` – biciklističke i MTB rute iz OSM relacija: trasa, duljina, GPX, stajališta

@@ -25,22 +25,27 @@ SLO = re.compile(r"(PD Kočevje|PD Črnomelj|Zavod za gozdove)", re.I)
 # relacije koje ostaju iako je manje od pola trase u GK (početak je u susjednoj općini, cilj u GK)
 ZADRZI = {11807461: "Vrelo – Bjelolasica", 8776284: "Zlobin – Medviđak", 14014675: "Bitoraj – Viševica",
           3930022: "Mrkopaljski put, južna skupina"}
-# naša imena (hr, en) kad je OSM ime nespretno
-IME = {5571086: ("Kanjon Kamačnika", "Kamačnik canyon"),
-       7385900: ("Via Dinarica: kroz NP Risnjak", "Via Dinarica: through Risnjak National Park"),
-       7385993: ("Via Dinarica: Bijele i Samarske stijene", "Via Dinarica: Bijele and Samarske stijene"),
-       11548652: ("Staza prijateljstva Snežnik – Snježnik", "Friendship trail Snežnik – Snježnik"),
-       3930022: ("Mrkopaljski planinarski put – južna skupina", "Mrkopalj mountain trail – southern group")}
+# naša imena (hr, en, de) kad je OSM ime nespretno
+IME = {5571086: ("Kanjon Kamačnika", "Kamačnik canyon", "Kamačnik-Schlucht"),
+       7385900: ("Via Dinarica: kroz NP Risnjak", "Via Dinarica: through Risnjak National Park", "Via Dinarica: durch den Nationalpark Risnjak"),
+       7385993: ("Via Dinarica: Bijele i Samarske stijene", "Via Dinarica: Bijele and Samarske stijene", "Via Dinarica: Bijele und Samarske stijene"),
+       11548652: ("Staza prijateljstva Snežnik – Snježnik", "Friendship trail Snežnik – Snježnik", "Freundschaftsweg Snežnik – Snježnik"),
+       3930022: ("Mrkopaljski planinarski put – južna skupina", "Mrkopalj mountain trail – southern group", "Bergweg Mrkopalj – Südgruppe")}
 OPIS = {  # kratka rečenica o stazi, samo opće poznate činjenice
     5571086: ("Šetnja kanjonom potoka Kamačnika kod Vrbovskog, mostićima i stazom uz vodu.",
-              "A walk through the Kamačnik stream canyon near Vrbovsko, on footbridges and a path by the water."),
-    9786893: ("Klasičan uspon na Risnjak s fužinske strane.", "The classic ascent of Risnjak from the Fužine side."),
+              "A walk through the Kamačnik stream canyon near Vrbovsko, on footbridges and a path by the water.",
+              "Ein Spaziergang durch die Schlucht des Baches Kamačnik bei Vrbovsko, über Stege und einen Weg am Wasser."),
+    9786893: ("Klasičan uspon na Risnjak s fužinske strane.", "The classic ascent of Risnjak from the Fužine side.",
+              "Der klassische Aufstieg auf den Risnjak von der Seite von Fužine."),
     11548652: ("Prekogranična staza koja spaja Snežnik u Sloveniji i Snježnik iznad Platka.",
-               "A cross-border trail linking Snežnik in Slovenia and Snježnik above Platak."),
+               "A cross-border trail linking Snežnik in Slovenia and Snježnik above Platak.",
+               "Ein grenzüberschreitender Weg zwischen dem Snežnik in Slowenien und dem Snježnik oberhalb von Platak."),
     11807338: ("Greben od Samarskih stijena do Bjelolasice, najvišeg vrha Gorskog kotara.",
-               "A ridge walk from Samarske stijene to Bjelolasica, the highest peak of Gorski kotar."),
-    11807461: ("Uspon na Bjelolasicu (Kula, 1534 m) od Vrela.", "An ascent of Bjelolasica (Kula, 1534 m) from Vrelo."),
-    14014675: ("Uspon na Viševicu s Bitoraja.", "An ascent of Viševica from Bitoraj."),
+               "A ridge walk from Samarske stijene to Bjelolasica, the highest peak of Gorski kotar.",
+               "Eine Gratwanderung von den Samarske stijene zur Bjelolasica, dem höchsten Gipfel des Gorski kotar."),
+    11807461: ("Uspon na Bjelolasicu (Kula, 1534 m) od Vrela.", "An ascent of Bjelolasica (Kula, 1534 m) from Vrelo.",
+               "Aufstieg auf die Bjelolasica (Kula, 1534 m) von Vrelo aus."),
+    14014675: ("Uspon na Viševicu s Bitoraja.", "An ascent of Viševica from Bitoraj.", "Aufstieg auf die Viševica vom Bitoraj."),
 }
 NP_RISNJAK = re.compile(r"(Nacionalni ?Park Ri|Risnjak Nation)", re.I)
 MIN_KM, MAX_KM = 1.8, 35
@@ -162,7 +167,7 @@ MJESTA = [p for p in T if p["podvrsta"] == "naselje"]
 
 def mjesto(c):
     m = min(MJESTA, key=lambda p: hav(c, (p["lon"], p["lat"])))
-    return m["tekst"]["hr"]["naziv"], m["tekst"].get("en", m["tekst"]["hr"])["naziv"]
+    return m["tekst"]["hr"]["naziv"], m["tekst"].get("en", m["tekst"]["hr"])["naziv"], m["tekst"].get("de", m["tekst"]["hr"])["naziv"]
 
 
 def smjer_po_imenu(ime, dij):
@@ -230,27 +235,31 @@ for rid, (t, wids) in sorted(REL.items()):
         if not ls.envelope.buffer(0.005).contains(pt): continue
         if ls.distance(pt) * 111320 * math.cos(math.radians(p["lat"])) <= 300: st.append((ls.project(pt), p["id"]))
     st = [i for _, i in sorted(st)][:10]
-    (od, od_en), (do, do_en) = mjesto(line[0]), mjesto(line[-1])
+    (od, od_en, od_de), (do, do_en, do_de) = mjesto(line[0]), mjesto(line[-1])
     vd = (t.get("operator") or "") == "Via Dinarica" or "via dinarica" in naziv.lower()
-    ime, ime_en = IME.get(rid, (None, None))
+    ime, ime_en, ime_de = IME.get(rid, (None, None, None))
     if not ime:
         ime = re.sub(r"\s+-\s+", " – ", naziv); ime = ime[0].upper() + ime[1:]
         if vd and not ime.startswith("Via Dinarica"): ime = "Via Dinarica: " + ime
-        ime_en = ime
-    uvod, uvod_en = OPIS.get(rid, ("", ""))
+        ime_en = ime_de = ime
+    uvod, uvod_en, uvod_de = OPIS.get(rid, ("", "", ""))
     smjer = (f"kružna iz mjesta {od}" if kruzna else f"od mjesta {od} do mjesta {do}, u jednom smjeru")
     smjer_en = (f"a loop from {od_en}" if kruzna else f"from {od_en} to {do_en}, one way")
     opis = (uvod + " " if uvod else "") + f"Markirana staza od {km_txt(km)} km, {smjer}." + (" Dio je dugog puta Via Dinarica." if vd else "")
     opis_en = (uvod_en + " " if uvod_en else "") + f"A waymarked trail of {km:.1f} km, {smjer_en}." + (" Part of the long-distance Via Dinarica." if vd else "")
+    smjer_de = (f"Rundweg ab {od_de}" if kruzna else f"von {od_de} nach {do_de}, in eine Richtung")
+    opis_de = (uvod_de + " " if uvod_de else "") + f"Markierter Wanderweg von {km_txt(km)} km, {smjer_de}." + (" Teil des Weitwanderwegs Via Dinarica." if vd else "")
     if NP_RISNJAK.search(t.get("operator") or "") or "risnjak" in naziv.lower():
         opis += " U nacionalnom parku plaća se ulaznica i vrijede pravila parka."
         opis_en += " Risnjak National Park charges admission and its rules apply."
+        opis_de += " Im Nationalpark Risnjak wird Eintritt erhoben, und es gelten die Regeln des Parks."
     opis += " Trasa je iz OpenStreetMapa; prije polaska provjeri stanje staze i markacije."
     opis_en += " The route comes from OpenStreetMap; check the trail and waymarks before you set off."
+    opis_de += " Die Route stammt aus OpenStreetMap; prüfe Weg und Markierung vor dem Aufbruch."
     sid = f"PL{rid}"
     open(os.path.join(GPX, sid + ".gpx"), "w", encoding="utf-8").write(gpx(ime, dij, rid))
     r = {"id": sid, "vrsta": "planinarska",
-         "tekst": {"hr": {"naziv": ime, "opis": opis, "parking": f"početak: {od}"}, "en": {"naziv": ime_en, "opis": opis_en, "parking": f"start: {od_en}"}},
+         "tekst": {"hr": {"naziv": ime, "opis": opis, "parking": f"početak: {od}"}, "en": {"naziv": ime_en, "opis": opis_en, "parking": f"start: {od_en}"}, "de": {"naziv": ime_de, "opis": opis_de, "parking": f"Start: {od_de}"}},
          "tezina": "srednje", "km": round(km, 1), "km_gpx": round(km, 1), "sati": "", "uspon_m": None,
          "tocke": st, "besplatno": False, "polazista": [], "oblik": "kruzna" if kruzna else "linijska",
          "izvor_trase": f"OpenStreetMap (ODbL), relacija {rid}", "osm": f"r{rid}", "ref": t.get("ref"),
