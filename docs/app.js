@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.15.0",
+  verzija: "0.16.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -1037,6 +1037,7 @@ async function renderDanas() {
       <button class="sos" data-go="sigurnost" aria-label="${esc(t("sos_aria"))}">${esc(t("sos"))}</button></div>
     <div id="medoBox">${medoSavjet(store.get("gk-wx", null), st, now, sez)}</div>
     <div id="wxBox">${draw(store.get("gk-wx", null))}</div>
+    ${sezonaKartica(sez)}
     ${putovnicaKartica()}
     ${zimaDanas(r)}
     <section class="stack" style="gap:8px"><h2>${esc(t("stanje_na_terenu"))}</h2>
@@ -1322,6 +1323,43 @@ function openIzlet(id) {
   gcEv("izlet");
 }
 
+/* ---------- sezonski vodiči (data/sezone.json): što raditi u ovo doba godine ---------- */
+let SEZONE = {};
+const SEZ_RED = ["proljece", "ljeto", "jesen", "zima"];
+const SEZ_BESPL = 3;   /* koliko mjesta vidi besplatna verzija */
+function sezonaKartica(sez) {
+  const s = SEZONE[sez]; if (!s) return "";
+  const x = s[CONFIG.jezik] || s.hr;
+  return `<button class="card stack" data-sezona="${sez}" style="gap:6px;text-align:left;border-left:6px solid ${s.boja};padding:14px">
+    <span class="eyebrow">${esc(t("sez_vodic"))}</span><b style="font-size:1.12em">${esc(x.naslov)}</b>
+    <span class="small" style="color:var(--ink2)">${esc(x.uvod)}</span>
+    <span class="row small" style="gap:6px;color:var(--accent);font-weight:600">${esc(t("sez_otvori"))}${ic("chevron")}</span></button>`;
+}
+function openSezona(sez) {
+  const s = SEZONE[sez]; if (!s) return;
+  const x = s[CONFIG.jezik] || s.hr, pro = jePro(), r = ref();
+  const mj = s.mjesta.map(m => ({ m, p: BY[m.id] })).filter(o => o.p);
+  const vidljiva = pro ? mj : mj.slice(0, SEZ_BESPL), skrivena = pro ? [] : mj.slice(SEZ_BESPL);
+  const izl = (s.izleti || []).map(i => IBY[i]).filter(Boolean), rute = (s.rute || []).map(i => RBY[i]).filter(Boolean);
+  const red = ({ m, p }) => `<button class="list-row" data-open="${p.id}" style="align-items:flex-start"><span class="dot" style="margin-top:6px;background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(m[CONFIG.jezik] || m.hr)}</span></span><span class="mono small">${fmtDist(hav(r, p))}</span></button>`;
+  const ostale = SEZ_RED.filter(k => k !== sez && SEZONE[k]);
+  openSheet(t("sez_vodic"), `<div class="stack">
+    <div style="height:6px;border-radius:3px;background:${s.boja}"></div>
+    <h1>${esc(x.naslov)}</h1>
+    <p style="margin:0;font-size:1.04em">${esc(x.uvod)}</p>
+    <section class="card stack" style="gap:6px"><h3>${esc(t("sez_savjeti"))}</h3><ul style="margin:0;padding-left:20px">${x.savjeti.map(v => `<li>${esc(v)}</li>`).join("")}</ul>
+      ${s.hak ? `<a class="btn" href="https://www.hak.hr/info/stanje-na-cestama/" target="_blank" rel="noopener" style="align-self:flex-start">${esc(t("zima_hak"))}</a>` : ""}
+      ${s.gljive && DANAS.gljive_url ? `<a class="btn" href="${esc(DANAS.gljive_url)}" target="_blank" rel="noopener" style="align-self:flex-start">${esc(t("gljive_naslov"))}</a>` : ""}</section>
+    <section class="stack" style="gap:4px"><h3>${esc(t("sez_mjesta"))}</h3>${vidljiva.map(red).join("")}
+      ${skrivena.length ? skrivena.map(({ p }) => `<div class="list-row" style="opacity:.55"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span>${ic("lock")}</div>`).join("") : ""}</section>
+    ${izl.length || rute.length ? `<section class="stack" style="gap:4px"><h3>${esc(t("sez_izleti"))}</h3>${izl.map(izletKartica).join("")}${rute.map(q => rutaKartica(q)).join("")}</section>` : ""}
+    ${pro ? "" : `<div class="note warn">${esc(t("sez_pro"))}<br>${esc(t("pro_cijena"))}</div>`}
+    <section class="stack" style="gap:6px"><h3>${esc(t("sez_ostale"))}</h3><div class="row" style="gap:8px;flex-wrap:wrap">${ostale.map(k => `<button class="btn" data-sezona="${k}">${esc((SEZONE[k][CONFIG.jezik] || SEZONE[k].hr).naslov.split(" ")[0])}</button>`).join("")}</div></section>
+  </div>`);
+  gcEv("sezona-" + sez);
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-sezona]"); if (b) openSezona(b.dataset.sezona); });
+
 /* ---------- o aplikaciji: izvori, licence, privatnost, kontakt ---------- */
 function openOApp() {
   const mail = `mailto:${CONFIG.kontakt}?subject=${encodeURIComponent("Zelenko " + CONFIG.verzija)}`;
@@ -1513,10 +1551,11 @@ async function boot() {
   if (store.get("gk-big", false)) document.documentElement.classList.add("big");
   const get = u => PREGLED ? Promise.resolve(window.GK_DATA[u]) : fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   get("data/podloga.json").then(d => { PODLOGA = d; if (map && vrstaKarte() === "osm") { skiniPodlogu(); skiniPodlogu = osnova(map); } }).catch(() => {});
-  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD, hike, izl] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null), get("data/rute_planinarske.json").catch(() => ({ rute: [] })), get("data/izleti.json").catch(() => ({ izleti: [] }))]);
+  const [i18n, tocke, rute, kat, danas, slike, usluge, put, info, spec, bike, lynxD, hike, izl, sezD] = await Promise.all([get(`i18n/${CONFIG.jezik}.json`), get("data/tocke.json"), get("data/rute.json"), get("data/kategorije.json"), get("data/danas.json"), get("data/slike.json").catch(() => ({})), get("data/usluge.json").catch(() => ({ usluge: [] })), get("data/putovnica.json").catch(() => null), get("data/info.json").catch(() => ({})), get("data/specijaliteti.json").catch(() => null), get("data/rute_bicikl.json").catch(() => ({ rute: [] })), get("data/lynx.json").catch(() => null), get("data/rute_planinarske.json").catch(() => ({ rute: [] })), get("data/izleti.json").catch(() => ({ izleti: [] })), get("data/sezone.json").catch(() => ({ sezone: {} }))]);
   T = i18n; KAT = kat; DANAS = danas; SLIKE = slike || {}; if (put) PUT = put; INFO = info || {}; if (spec) SPEC = spec; if (lynxD) LYNX = lynxD;
   TOCKE = tocke.tocke; RUTE = rute.rute.concat((hike && hike.rute) || [], (bike && bike.rute) || []);
   IZLETI = (izl && izl.izleti) || []; IZLETI.forEach(i => IBY[i.id] = i);
+  SEZONE = (sezD && sezD.sezone) || {};
   if (CONFIG.jezik !== "hr") {
     (SPEC.specijaliteti || []).forEach(preko); Object.values(INFO).forEach(preko);
     (LYNX.cinjenice || []).forEach(c => { if (c[CONFIG.jezik]) c.tekst = c[CONFIG.jezik].tekst; });

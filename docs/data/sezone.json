@@ -1,0 +1,141 @@
+{
+  "napomena": "Sezonski vodiči: naši tekstovi, mjesta i izleti iz vlastitih podataka. Sezona se bira po mjesecu kao u app.js sezona().",
+  "sezone": {
+    "proljece": {
+      "boja": "#6FA65A",
+      "hr": {
+        "naslov": "Proljeće u Gorskom kotaru",
+        "uvod": "Snijeg se topi, a rijeke, izvori i slapovi tada imaju najviše vode. U dolinama sve zeleni, dok se na višim vrhovima snijeg zna zadržati do svibnja.",
+        "savjeti": [
+          "Staze su često blatne i sklizave: obuj cipele s dobrim đonom.",
+          "Na višim vrhovima još može biti snijega i leda. Provjeri stanje prije uspona.",
+          "Neke šumske ceste otvaraju se tek kad se snijeg otopi.",
+          "Slapovi i kanjoni najljepši su nakon kiše, ali tada su i staze najsklizavije."
+        ]
+      },
+      "en": {
+        "naslov": "Spring in Gorski kotar",
+        "uvod": "The snow melts, and rivers, springs and waterfalls carry the most water. The valleys turn green, while snow can stay on the higher peaks until May.",
+        "savjeti": [
+          "Trails are often muddy and slippery: wear shoes with a good grip.",
+          "There can still be snow and ice on the higher peaks. Check conditions before you climb.",
+          "Some forest roads only open once the snow has melted.",
+          "Waterfalls and gorges look best after rain, but that is also when the paths are most slippery."
+        ]
+      },
+      "mjesta": [
+        { "id": "V11", "hr": "Slap je u proljeće najjači.", "en": "The waterfall is at its strongest in spring." },
+        { "id": "Z03", "hr": "Kanjon s puno vode nakon otapanja snijega.", "en": "The gorge runs full after the snowmelt." },
+        { "id": "V01", "hr": "Izvor Kupe kad ima najviše vode.", "en": "The Kupa spring at its fullest." },
+        { "id": "V13", "hr": "Vrelo Čabranke i poučna staza uz njega.", "en": "The Čabranka spring and the nature trail beside it." },
+        { "id": "Z04", "hr": "Kratka staza uz bistri potok, dobra za obitelji.", "en": "A short path along a clear stream, good for families." },
+        { "id": "P14", "hr": "Polje je u proljeće ponekad pod vodom.", "en": "In spring the field is sometimes flooded." },
+        { "id": "C01", "hr": "Špilja kad vani pada kiša.", "en": "A cave for a rainy day." }
+      ],
+      "izleti": ["I03", "I09", "I02"],
+      "rute": ["R03"]
+    },
+    "ljeto": {
+      "boja": "#E0A63A",
+      "hr": {
+        "naslov": "Ljeto u Gorskom kotaru",
+        "uvod": "Ovdje je ljeti svježije nego na obali. Najbolje je u hladovini šuma, uz Kupu i jezera, a na vrhove se ide rano ujutro.",
+        "savjeti": [
+          "Kreni rano: poslijepodne su česte grmljavinske oluje.",
+          "Kupa je hladna i ljeti. Kupaj se samo gdje je plitko i mirno.",
+          "Nakon šetnje šumom i livadama pregledaj se zbog krpelja.",
+          "Ponesi dovoljno vode: na grebenima nema izvora."
+        ]
+      },
+      "en": {
+        "naslov": "Summer in Gorski kotar",
+        "uvod": "Summers here are cooler than on the coast. The best spots are the shady forests, the Kupa and the lakes, and the peaks are best climbed early in the morning.",
+        "savjeti": [
+          "Start early: afternoon thunderstorms are common.",
+          "The Kupa stays cold even in summer. Only swim where the water is shallow and calm.",
+          "Check yourself for ticks after walking through forest and meadows.",
+          "Take enough water: there are no springs on the ridges."
+        ]
+      },
+      "mjesta": [
+        { "id": "V03", "hr": "Kanjon Kupe i mjesta za osvježenje.", "en": "The Kupa canyon and places to cool off." },
+        { "id": "V04", "hr": "Kamenite obale i plićaci uz mjesto.", "en": "Rocky banks and shallows by the village." },
+        { "id": "V02", "hr": "Mirni dijelovi Kupe za šetnju uz obalu.", "en": "Calm stretches of the Kupa for a riverside walk." },
+        { "id": "V07", "hr": "Šetnica oko jezera i čamci.", "en": "A lakeside walk and boats." },
+        { "id": "C02", "hr": "U špilji je svježe i usred ljeta.", "en": "It stays cool inside the cave even in midsummer." },
+        { "id": "P01", "hr": "Na vrh rano ujutro, prije vrućine i oluja.", "en": "Climb early, before the heat and the storms." },
+        { "id": "P03", "hr": "Pogled na Kvarner s vrha iznad Platka.", "en": "A view of the Kvarner from the peak above Platak." }
+      ],
+      "izleti": ["I04", "I07", "I01", "I05"],
+      "rute": ["R09"]
+    },
+    "jesen": {
+      "boja": "#C2643A",
+      "hr": {
+        "naslov": "Jesen u Gorskom kotaru",
+        "uvod": "Bukove šume mijenjaju boju, a jutra su često maglovita. To je doba za šetnje, vidikovce i gljive.",
+        "savjeti": [
+          "Dani su kraći: provjeri kad je zalazak i vrati se prije mraka.",
+          "U jeseni traje lovna sezona. Drži se markiranih staza.",
+          "Beri samo gljive koje sigurno poznaješ.",
+          "Jutra su hladna, a magla u dolinama zna se zadržati do podneva."
+        ]
+      },
+      "en": {
+        "naslov": "Autumn in Gorski kotar",
+        "uvod": "The beech forests change colour and the mornings are often misty. It is the time for walks, viewpoints and mushrooms.",
+        "savjeti": [
+          "Days are shorter: check the sunset time and be back before dark.",
+          "Autumn is hunting season. Keep to marked trails.",
+          "Only pick mushrooms you know for certain.",
+          "Mornings are cold, and fog in the valleys can linger until noon."
+        ]
+      },
+      "mjesta": [
+        { "id": "S06", "hr": "Uspon kroz bukovu šumu na Tuhobić.", "en": "A climb through beech forest to Tuhobić." },
+        { "id": "P11", "hr": "Šumoviti vrh s pogledom prema Kvarneru.", "en": "A wooded peak with a view towards the Kvarner." },
+        { "id": "P12", "hr": "Vidikovac s tornjem iznad šuma oko Delnica.", "en": "A viewing tower above the forests around Delnice." },
+        { "id": "Z02", "hr": "Velike stijene i kratke staze kroz šumu.", "en": "Big boulders and short forest paths." },
+        { "id": "Z06", "hr": "Staro stablo u šumi Golubinjaka.", "en": "An old tree in the Golubinjak forest." },
+        { "id": "P06", "hr": "Najviše naselje u Hrvatskoj, ispod Bjelolasice.", "en": "The highest village in Croatia, below Bjelolasica." }
+      ],
+      "izleti": ["I09", "I05", "I02"],
+      "rute": ["R02"],
+      "gljive": true
+    },
+    "zima": {
+      "boja": "#5E8FC2",
+      "hr": {
+        "naslov": "Zima u Gorskom kotaru",
+        "uvod": "Kad padne snijeg, Gorski kotar je za skijanje, sanjkanje i zimske šetnje. Sve ovisi o snijegu, pa prije puta provjeri što radi.",
+        "savjeti": [
+          "Auto mora imati zimsku opremu. Prije puta provjeri stanje na cestama na HAK-u.",
+          "Skijališta i sanjkališta rade samo kad ima dovoljno snijega.",
+          "Mrak pada rano, u prosincu već oko pola pet. Planiraj povratak na vrijeme.",
+          "Na staze idi samo ako znaš kretati se po snijegu i imaš opremu."
+        ]
+      },
+      "en": {
+        "naslov": "Winter in Gorski kotar",
+        "uvod": "When the snow falls, Gorski kotar is for skiing, sledging and winter walks. Everything depends on the snow, so check what is open before you go.",
+        "savjeti": [
+          "Your car needs winter equipment. Check road conditions with HAK before you travel.",
+          "Ski slopes and sledging hills only open when there is enough snow.",
+          "It gets dark early, around 4:30 pm in December. Plan to be back in time.",
+          "Only go on trails if you can move safely on snow and have the right gear."
+        ]
+      },
+      "mjesta": [
+        { "id": "P04", "hr": "Skijalište na zapadnom rubu Gorskog kotara.", "en": "A ski area on the western edge of Gorski kotar." },
+        { "id": "P16", "hr": "Vučnica za skijaše i pokretna traka na sanjkalištu.", "en": "A ski tow and a moving walkway on the sledging hill." },
+        { "id": "W06", "hr": "Skijalište i sanjkalište iznad Delnica.", "en": "Ski slope and sledging hill above Delnice." },
+        { "id": "W05", "hr": "Malo skijalište za djecu i sanjkalište.", "en": "A small ski slope for children and a sledging hill." },
+        { "id": "W03", "hr": "Sanjkalište uz izlaz s autoceste.", "en": "A sledging hill by the motorway exit." },
+        { "id": "E05", "hr": "Zimi sanjkalište s pokretnom trakom.", "en": "In winter, a sledging hill with a moving walkway." }
+      ],
+      "izleti": ["I08"],
+      "rute": [],
+      "hak": true
+    }
+  }
+}

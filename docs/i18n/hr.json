@@ -699,5 +699,12 @@
  "iz_sez_zima": "zimi",
  "iz_sez_bez_snijega": "kad nema snijega",
  "iz_svi": "Svi izleti ({n})",
- "iz_manje": "Prikaži manje"
+ "iz_manje": "Prikaži manje",
+ "sez_vodic": "Sezonski vodič",
+ "sez_otvori": "Otvori vodič",
+ "sez_savjeti": "Savjeti za ovo doba godine",
+ "sez_mjesta": "Mjesta za ovo doba godine",
+ "sez_izleti": "Izleti i rute",
+ "sez_pro": "Sva mjesta u sezonskim vodičima dio su Pro verzije.",
+ "sez_ostale": "Ostala godišnja doba"
 }
