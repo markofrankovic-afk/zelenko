@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.17.0",
+  verzija: "0.18.0",
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -496,7 +496,7 @@ function openUsluga(p) {
   const u = p.usluga, x = tx(p), d = S.pos ? hav(S.pos, p) : null, fav = S.favs.includes(p.id);
   const mail = `mailto:${CONFIG.kontakt}?subject=${encodeURIComponent(t("vlasnik_predmet", { naziv: x.naziv, id: p.id }))}`;
   openSheet(katNaziv(p), `<div class="stack">
-    ${u.partner && u.slika ? `<figure class="hero foto ok" style="background:${boja(p)}"><img src="${esc(u.slika)}" alt=""></figure>` : ""}
+    ${u.partner && u.slika ? `<figure class="hero foto ok" style="background:${boja(p)}"><img src="${esc(u.slika)}" alt=""></figure>` : SLIKE[p.id] ? slikaHtml(p.id, boja(p)) : ""}
     <div><span class="row small muted"><span class="dot" style="background:${boja(p)}"></span>${esc(katNaziv(p))}${u.kuhinja ? " · " + esc(u.kuhinja.replace(/_/g, " ").replace(/;/g, ", ")) : ""}${d != null ? " · " + fmtDist(d) + " " + esc(t("od_tebe")) : ""}</span>
       <h1>${esc(x.naziv)}</h1>${u.partner ? `<span class="badge free">${esc(t("partner"))}</span>` : ""}</div>
     ${rvOznaka(u)}
@@ -661,11 +661,14 @@ function openPozdrav() {
 
 /* fotografija s Commonsa: autor i licenca uvijek uz sliku (uvjet CC BY / CC BY-SA) */
 const fotoSrc = s => s.datoteka || s.url;
+/* potpis fotke: Commons (autor i licenca s poveznicom) ili autorova vlastita (sva prava pridržana) */
+const fotoAutor = s => s.izvor ? `<a href="${esc(s.izvor)}" target="_blank" rel="noopener">${esc(t("foto_autor", { autor: s.autor }))}</a>` : esc(t("foto_autor", { autor: s.autor }));
+const fotoLic = s => s.vlastita ? esc(t("foto_vlastita")) : `<a href="${esc(s.licenca_url || s.izvor)}" target="_blank" rel="noopener">${esc(s.licenca)}</a>`;
 function slikaHtml(id, c) {
   const s = SLIKE[id];
   if (!s) return `<div class="hero">${heroSvg(c)}<span>${esc(t("fotografija_uskoro"))}</span></div>`;
   return `<figure class="hero foto" style="background:${c}">${heroSvg(c)}<img src="${esc(fotoSrc(s))}" alt="" decoding="async" onload="this.parentNode.classList.add('ok')" onerror="this.remove()">
-    <figcaption><a href="${esc(s.izvor)}" target="_blank" rel="noopener">${esc(t("foto_autor", { autor: s.autor }))}</a> · <a href="${esc(s.licenca_url || s.izvor)}" target="_blank" rel="noopener">${esc(s.licenca)}</a></figcaption></figure>`;
+    <figcaption>${fotoAutor(s)} · ${fotoLic(s)}</figcaption></figure>`;
 }
 function openTocka(id) {
   const p = BY[id]; if (!p) return; if (p.usluga) return openUsluga(p); const x = tx(p);
@@ -1465,7 +1468,7 @@ function openFotoZasluge() {
   for (const x of SPEC.specijaliteti) if (x.slika) (po[x.slika.naslov] = po[x.slika.naslov] || { s: x.slika, ids: [], nazivi: [] }).nazivi = [x.naziv];
   openSheet(t("foto_zasluge"), `<p class="small muted" style="margin:0 0 8px">${esc(t("foto_zasluge_uvod"))}</p>` +
     Object.values(po).map(({ s, ids, nazivi }) => `<div class="list-row" style="align-items:flex-start"><span class="t"><b>${esc(ids.map(i => BY[i] ? tx(BY[i]).naziv : i).concat(nazivi || []).join(", "))}</b>
-      <span>${esc(t("foto_autor", { autor: s.autor }))} · <a href="${esc(s.licenca_url || s.izvor)}" target="_blank" rel="noopener">${esc(s.licenca)}</a> · <a href="${esc(s.izvor)}" target="_blank" rel="noopener">Wikimedia Commons</a></span></span></div>`).join(""));
+      <span>${esc(t("foto_autor", { autor: s.autor }))} · ${fotoLic(s)}${s.izvor ? ` · <a href="${esc(s.izvor)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</span></span></div>`).join(""));
 }
 function gdjeHtml() {
   if (!gdje) return `<button class="btn dark block" id="gdjeBtn">${esc(t("odredi_lokaciju"))}</button>`;

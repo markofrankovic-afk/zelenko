@@ -195,7 +195,7 @@
  "fotografija_uskoro": "Photo coming soon",
  "foto_autor": "Photo: {autor}",
  "foto_zasluge": "Photos and authors",
- "foto_zasluge_uvod": "Photos are from Wikimedia Commons, under free licences that allow this use. Thanks to the authors.",
+ "foto_zasluge_uvod": "Photos are from Wikimedia Commons, under free licences that allow this use, and by the app's author, Marko Franković. Thanks to the authors.",
  "prototip_napomena": "To check: {tekst}",
  "odredi_lokaciju": "Find my location",
  "drugo": "Other",
@@ -695,5 +695,6 @@
  "sez_izleti": "Day trips and routes",
  "sez_pro": "All places in the seasonal guides are part of Zelenko Pro.",
  "sez_ostale": "Other seasons",
- "jezik_de": "Deutsch"
+ "jezik_de": "Deutsch",
+ "foto_vlastita": "all rights reserved"
 }

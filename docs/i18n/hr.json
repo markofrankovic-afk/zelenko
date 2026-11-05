@@ -195,7 +195,7 @@
  "fotografija_uskoro": "Fotografija uskoro",
  "foto_autor": "Foto: {autor}",
  "foto_zasluge": "Fotografije i autori",
- "foto_zasluge_uvod": "Fotografije su s Wikimedia Commonsa, pod slobodnim licencama koje dopuštaju ovakvu upotrebu. Hvala autorima.",
+ "foto_zasluge_uvod": "Fotke su s Wikimedia Commonsa, pod slobodnim licencama koje dopuštaju ovu upotrebu, i fotke autora aplikacije Marka Frankovića. Hvala autorima.",
  "prototip_napomena": "Za provjeru: {tekst}",
  "odredi_lokaciju": "Odredi lokaciju",
  "drugo": "Drugo",
@@ -707,5 +707,6 @@
  "sez_izleti": "Izleti i rute",
  "sez_pro": "Sva mjesta u sezonskim vodičima dio su Pro verzije.",
  "sez_ostale": "Ostala godišnja doba",
- "jezik_de": "Deutsch"
+ "jezik_de": "Deutsch",
+ "foto_vlastita": "sva prava pridržana"
 }

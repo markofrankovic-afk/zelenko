@@ -72,13 +72,10 @@
   "naslov": "Delnice.jpg"
  },
  "H10": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Fu%C5%BEine_i_Crkva_sv._Antona_Padovanskog._26._kolovoza_1929..jpg/500px-Fu%C5%BEine_i_Crkva_sv._Antona_Padovanskog._26._kolovoza_1929..jpg",
-  "datoteka": "slike/fuzine-i-crkva-sv-antona-padovanskog-26-kolovoza-1929.webp",
-  "autor": "Unknown author Unknown author",
-  "licenca": "Public domain",
-  "licenca_url": null,
-  "izvor": "https://commons.wikimedia.org/wiki/File:Fu%C5%BEine_i_Crkva_sv._Antona_Padovanskog._26._kolovoza_1929..jpg",
-  "naslov": "Fužine i Crkva sv. Antona Padovanskog. 26. kolovoza 1929..jpg"
+  "datoteka": "slike/vlastita-20260421-171753.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260421_171753.jpg"
  },
  "H11": {
   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/LokvarskoJezero1.jpg/500px-LokvarskoJezero1.jpg",
@@ -522,13 +519,10 @@
   "naslov": "Matić poljana.jpg"
  },
  "S03": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Jezero_BajerFu%C5%BEine.jpg",
-  "datoteka": null,
-  "autor": "The original uploader was Zeljko at Croatian Wikipedia .",
-  "licenca": "CC BY-SA 3.0",
-  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
-  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_BajerFu%C5%BEine.jpg",
-  "naslov": "Jezero BajerFužine.jpg"
+  "datoteka": "slike/vlastita-img-20191013-181521.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "IMG_20191013_181521.jpg"
  },
  "V01": {
   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Izvor_Kupe_%285%29.jpg/500px-Izvor_Kupe_%285%29.jpg",
@@ -576,22 +570,16 @@
   "naslov": "Kupa i Kupčica.jpg"
  },
  "V07": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Jezero_BajerFu%C5%BEine.jpg",
-  "datoteka": null,
-  "autor": "The original uploader was Zeljko at Croatian Wikipedia .",
-  "licenca": "CC BY-SA 3.0",
-  "licenca_url": "http://creativecommons.org/licenses/by-sa/3.0/",
-  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_BajerFu%C5%BEine.jpg",
-  "naslov": "Jezero BajerFužine.jpg"
+  "datoteka": "slike/vlastita-20260421-172517.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260421_172517.jpg"
  },
  "V08": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Jezero_Lepenica_-_panoramio.jpg/500px-Jezero_Lepenica_-_panoramio.jpg",
-  "datoteka": null,
-  "autor": "Reklam-net",
-  "licenca": "CC BY-SA 3.0",
-  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
-  "izvor": "https://commons.wikimedia.org/wiki/File:Jezero_Lepenica_-_panoramio.jpg",
-  "naslov": "Jezero Lepenica - panoramio.jpg"
+  "datoteka": "slike/vlastita-20240421-172125.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20240421_172125.jpg"
  },
  "V09": {
   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Jezero_Potko%C5%A1.jpg/500px-Jezero_Potko%C5%A1.jpg",
@@ -603,22 +591,16 @@
   "naslov": "Jezero Potkoš.jpg"
  },
  "V10": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/LokvarskoJezero1.jpg/500px-LokvarskoJezero1.jpg",
-  "datoteka": "slike/lokvarskojezero.webp",
-  "autor": "Sl-Ziga",
-  "licenca": "Public domain",
-  "licenca_url": null,
-  "izvor": "https://commons.wikimedia.org/wiki/File:LokvarskoJezero1.jpg",
-  "naslov": "LokvarskoJezero1.jpg"
+  "datoteka": "slike/vlastita-img-20201122-135534.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "IMG_20201122_135534.jpg"
  },
  "V11": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/SL03_Zeleni_Vir.jpg/500px-SL03_Zeleni_Vir.jpg",
-  "datoteka": null,
-  "autor": "Deapmakeup",
-  "licenca": "CC BY-SA 4.0",
-  "licenca_url": "https://creativecommons.org/licenses/by-sa/4.0",
-  "izvor": "https://commons.wikimedia.org/wiki/File:SL03_Zeleni_Vir.jpg",
-  "naslov": "SL03 Zeleni Vir.jpg"
+  "datoteka": "slike/vlastita-imag6000.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "IMAG6000.jpg"
  },
  "V12": {
   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Cabar-1.JPG/500px-Cabar-1.JPG",
@@ -648,13 +630,10 @@
   "naslov": "Park suma golubinjak1.JPG"
  },
  "Z03": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/SKRAD_Vra%C5%BEji_prolaz_%28The_Devil%27s_pass%29_-_panoramio.jpg/500px-SKRAD_Vra%C5%BEji_prolaz_%28The_Devil%27s_pass%29_-_panoramio.jpg",
-  "datoteka": null,
-  "autor": "Zoran Kurelić Rabko",
-  "licenca": "CC BY-SA 3.0",
-  "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
-  "izvor": "https://commons.wikimedia.org/wiki/File:SKRAD_Vra%C5%BEji_prolaz_(The_Devil%27s_pass)_-_panoramio.jpg",
-  "naslov": "SKRAD Vražji prolaz (The Devil's pass) - panoramio.jpg"
+  "datoteka": "slike/vlastita-imag5977.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "IMAG5977.jpg"
  },
  "Z04": {
   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Kamacnik08%2C_Croatia.JPG/500px-Kamacnik08%2C_Croatia.JPG",
@@ -673,5 +652,71 @@
   "licenca_url": "https://creativecommons.org/licenses/by-sa/3.0",
   "izvor": "https://commons.wikimedia.org/wiki/File:Park_suma_golubinjak2.JPG",
   "naslov": "Park suma golubinjak2.JPG"
+ },
+ "H49": {
+  "datoteka": "slike/vlastita-20240216-171327.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20240216_171327.jpg"
+ },
+ "H58": {
+  "datoteka": "slike/vlastita-20250503-181021.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20250503_181021.jpg"
+ },
+ "E10": {
+  "datoteka": "slike/vlastita-20250807-120721.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20250807_120721.jpg"
+ },
+ "P14": {
+  "datoteka": "slike/vlastita-20250920-111151.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20250920_111151.jpg"
+ },
+ "Ow334000388": {
+  "datoteka": "slike/vlastita-20260404-114204.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260404_114204.jpg"
+ },
+ "W07": {
+  "datoteka": "slike/vlastita-20260503-182236.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260503_182236.jpg"
+ },
+ "P30": {
+  "datoteka": "slike/vlastita-20260503-182343.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260503_182343.jpg"
+ },
+ "E11": {
+  "datoteka": "slike/vlastita-20260815-184828.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260815_184828.jpg"
+ },
+ "E12": {
+  "datoteka": "slike/vlastita-20260831-111602.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "20260831_111602.jpg"
+ },
+ "Un3410783523": {
+  "datoteka": "slike/vlastita-img-20190805-173902.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "IMG_20190805_173902.jpg"
+ },
+ "E13": {
+  "datoteka": "slike/vlastita-zoe-0198.webp",
+  "autor": "Marko Franković",
+  "vlastita": true,
+  "naslov": "ZOE_0198.jpg"
  }
 }

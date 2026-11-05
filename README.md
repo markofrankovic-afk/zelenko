@@ -13,6 +13,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 ## Gdje je što
 - `docs/i18n/hr.json`, `en.json`, `de.json` – svi tekstovi sučelja (za novi jezik kopiraj `en.json`)
 - `izvori/prijevod_en.json`, `prijevod_de.json` – engleski i njemački prijevod naših tekstova (točke, rute, specijaliteti, Lynx, informacije, Danas); u podatke ih upisuje `alati/prevedi.py` (`… prevedi.py docs en` pa `… docs de`). Tekstove za OSM točke i rute na sva tri jezika pišu `spoji_osm.py`, `osm_bike_rute.py` i `osm_pjesacke_rute.py`
+- `izvori/vlastite_fotke.json` – autorove fotke (točka → datoteka, rezerve); `alati/vlastite_fotke.py <docs> <mapa_originala>` ih smanjuje u `docs/slike/` bez EXIF-a i upisuje u `slike.json` (originali nisu u repozitoriju; pokreće se nakon `prevedi.py`)
 - `izvori/izleti.json`, `izvori/sezone.json` – izleti po danima i sezonski vodiči (hr, en, de); kopiraju se u `docs/data/`
 - `docs/data/tocke.json`, `rute.json` – točke i rute; `docs/gpx/` – GPX tragovi ruta
 - `docs/data/mreza.json` – mreža putova za navigaciju po karti bez interneta (gradi `alati/osm_mreza.py`); izračun puta je u `docs/put.js`

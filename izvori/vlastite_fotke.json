@@ -1,0 +1,56 @@
+{
+ "opis": "Fotografije autora (Marko Franković), sva prava pridržana; u aplikaciji se koriste uz njegovo dopuštenje. Originali nisu u repozitoriju. Odabir je potvrdio autor 5. 11. 2026. Primjenjuje alati/vlastite_fotke.py (nakon commons_slike.py).",
+ "autor": "Marko Franković",
+ "odabrane": {
+  "H49": "20240216_171327.jpg",
+  "V08": "20240421_172125.jpg",
+  "H58": "20250503_181021.jpg",
+  "E10": "20250807_120721.jpg",
+  "P14": "20250920_111151.jpg",
+  "Ow334000388": "20260404_114204.jpg",
+  "H10": "20260421_171753.jpg",
+  "V07": "20260421_172517.jpg",
+  "W07": "20260503_182236.jpg",
+  "P30": "20260503_182343.jpg",
+  "E11": "20260815_184828.jpg",
+  "E12": "20260831_111602.jpg",
+  "Z03": "IMAG5977.jpg",
+  "V11": "IMAG6000.jpg",
+  "Un3410783523": "IMG_20190805_173902.jpg",
+  "S03": "IMG_20191013_181521.jpg",
+  "V10": "IMG_20201122_135534.jpg",
+  "E13": "ZOE_0198.jpg"
+ },
+ "rezerve": {
+  "P14": [
+   "20170920_140635.jpg"
+  ],
+  "V08": [
+   "20240421_174540.jpg",
+   "20240511_175056.jpg",
+   "20240731_180607.jpg"
+  ],
+  "V07": [
+   "20240730_173505.jpg",
+   "20260613_174141.jpg",
+   "20260920_105207.jpg"
+  ],
+  "H58": [
+   "20250603_192913.jpg"
+  ],
+  "Ow334000388": [
+   "20260423_183502.jpg"
+  ],
+  "E11": [
+   "20260815_185005.jpg"
+  ],
+  "Z03": [
+   "IMAG5970.jpg",
+   "IMAG5996.jpg"
+  ],
+  "V11": [
+   "IMAG6001.jpg",
+   "IMAG6015.jpg"
+  ]
+ }
+}

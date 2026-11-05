@@ -1,5 +1,5 @@
 {
- "opis": "Položaji koje je autor (Marko Franković) postavio ili potvrdio na OSM podlozi prema poznavanju terena (alat docs/pribadace.html). Imaju prednost pred svim ostalim izvorima koordinata. Primjenjuje alati/spoji_osm.py.",
+ "opis": "Položaji koje je autor (Marko Franković) postavio ili potvrdio na OSM podlozi prema poznavanju terena (alat docs/pribadace.html). Imaju prednost pred svim ostalim izvorima koordinata. Primjenjuje alati/spoji_osm.py. Oznaka \"gps_fotke\": položaj iz GPS-a autorove fotografije snimljene na mjestu.",
  "datum": "2026-10-31",
  "tocke": {
   "H58": [
@@ -211,6 +211,26 @@
    45.365451,
    14.618629,
    "pomaknuto"
+  ],
+  "E10": [
+   45.312157,
+   14.717052,
+   "gps_fotke"
+  ],
+  "E11": [
+   45.322337,
+   14.72586,
+   "gps_fotke"
+  ],
+  "P30": [
+   45.311962,
+   14.726138,
+   "gps_fotke"
+  ],
+  "W07": [
+   45.312082,
+   14.726372,
+   "gps_fotke"
   ]
  }
 }
