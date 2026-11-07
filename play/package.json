@@ -1,0 +1,23 @@
+{
+  "name": "zelenko-play",
+  "version": "0.19.0",
+  "private": true,
+  "description": "Zelenko – Gorski kotar Guide: Android aplikacija za Google Play (Capacitor omotač oko docs/)",
+  "scripts": {
+    "web": "node pripremi_web.mjs",
+    "sync": "node pripremi_web.mjs && npx cap sync android",
+    "apk": "node pripremi_web.mjs && npx cap sync android && cd android && ./gradlew assembleDebug",
+    "aab": "node pripremi_web.mjs && npx cap sync android && cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/app": "^7.1.2",
+    "@capacitor/core": "^7.6.10",
+    "@capacitor/filesystem": "^7.1.9",
+    "@capacitor/share": "^7.0.4",
+    "cordova-plugin-purchase": "^13.20.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.6.10"
+  }
+}

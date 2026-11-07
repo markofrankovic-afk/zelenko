@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Zelenko</string>
+    <string name="title_activity_main">Zelenko</string>
+    <string name="package_name">hr.frankovic.zelenko</string>
+    <string name="custom_url_scheme">hr.frankovic.zelenko</string>
+</resources>

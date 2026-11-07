@@ -3,7 +3,9 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.18.0",
+  verzija: "0.19.0",
+  paket: "hr.frankovic.zelenko",   // Android paket na Google Playu (nakon prvog objavljivanja se ne može mijenjati)
+  karta: "https://markofrankovic-afk.github.io/zelenko/karta/",   // pločice karte za aplikaciju s Playa (nisu u paketu)
   jezik: "hr",
   goatcounter: "",                 // npr. "https://gkvodic.goatcounter.com/count" kad otvoriš račun
   kontakt: "marko.frankovic@gmail.com",
@@ -34,7 +36,8 @@ const ICON = {
   pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
   wifi_off: '<path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M2 8.8a15 15 0 0 1 4.2-2.7M10.7 5.1A15 15 0 0 1 22 8.8M5 12.9a10 10 0 0 1 5.2-2.8M19 12.9a10 10 0 0 0-1.6-1.2M12 20h.01"/>',
   rec: '<circle cx="12" cy="12" r="7"/>', pause: '<path d="M9 5v14M15 5v14"/>', trash: '<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/>',
-  chevron: '<path d="m9 18 6-6-6-6"/>', car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>'
+  chevron: '<path d="m9 18 6-6-6-6"/>', calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  leaf: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/>', car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>'
 };
 const ic = (n, cls = "ic") => `<svg class="${cls}" aria-hidden="true" viewBox="0 0 24 24">${ICON[n] || ""}</svg>`;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -51,9 +54,16 @@ CONFIG.jezik = (() => { const j = store.get("gk-jezik", null); if (JEZICI.includ
   if (pj.some(l => /^(hr|bs|sr|sh)\b/i.test(l))) return "hr";
   const prvi = pj.find(l => /^(de|en)\b/i.test(l));
   return prvi && /^de\b/i.test(prvi) ? "de" : "en"; })();
-/* Pro: dok kupnja preko Google Playa ne postoji, za probu se otključava s ?pro=1 (gasi se s ?pro=0) */
-(() => { const q = new URLSearchParams(location.search).get("pro"); if (q === "1") store.set("gk-pro", true); if (q === "0") store.set("gk-pro", false); })();
-const jePro = () => !!store.get("gk-pro", false);
+/* Pro: jednokratna kupnja u aplikaciji na Google Playu (cordova-plugin-purchase, vidi blok „Zelenko Pro”).
+   Na webu se Pro ne prodaje. Za probu se otključava tajnim testnim kodom: ?pro=KOD ili 5 dodira na broj verzije
+   u „O aplikaciji”; ?pro=0 ga gasi. U kodu je samo SHA-256 testnog koda, ne i sam kod. */
+const NATIVNO = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+const PRO_TEST = "3b76f0e978204676f4fe97caba844bc41e66e31e3721a30356c40d25503af756";
+const jePro = () => !!(store.get("gk-pro-kupljeno", false) || store.get("gk-pro-test", false));
+async function provjeriKod(kod) {
+  try { const h = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("zelenko:" + String(kod).trim().toLowerCase()));
+    return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("") === PRO_TEST; } catch (e) { return false; }
+}
 const slobodna = r => !!(r.besplatno || jePro());
 const LOC = () => ({ hr: "hr-HR", de: "de-DE" })[CONFIG.jezik] || "en-GB";
 /* tekst na odabranom jeziku; za njemački (i druge) bez prijevoda prvo engleski, pa hrvatski */
@@ -176,6 +186,8 @@ let skiniPodlogu = () => {}, rutaLayer = null;
    „osm“ = kartice OpenStreetMapa + offline podloga. Izvan okvira Gorskog kotara uvijek se vide OSM kartice. */
 const KARTA_OKVIR = L.latLngBounds([45.15, 14.42], [45.70, 15.33]);
 const KARTA_VERZIJA = 2;  /* povećaj kad se pločice ponovo izrade (alati/osm_karta.py) */
+/* u aplikaciji s Playa pločice karte nisu u paketu: dolaze s weba i spremaju se u predmemoriju „gk-karta” */
+const KARTA_BAZA = NATIVNO ? CONFIG.karta : "karta/";
 const vrstaKarte = () => PREGLED || !window.ZelenkoKarta ? "osm" : store.get("gk-karta", "zelenko");
 const OsmVani = L.TileLayer.extend({ _isValidTile(c) { return L.TileLayer.prototype._isValidTile.call(this, c) && !KARTA_OKVIR.contains(this._tileCoordsToBounds(c)); } });
 function osnova(m, mala) {
@@ -183,7 +195,7 @@ function osnova(m, mala) {
   if (vrstaKarte() === "zelenko") {
     sl.push(new OsmVani("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
     const tamna = document.documentElement.getAttribute("data-theme") === "dark" || (!document.documentElement.hasAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
-    const z = ZelenkoKarta.slojevi("karta/", { v: KARTA_VERZIJA, tamna });
+    const z = ZelenkoKarta.slojevi(KARTA_BAZA, { v: KARTA_VERZIJA, tamna, fontovi: "karta/", kes: NATIVNO });
     sl.push(z.vektor);
     if (!mala) m.attributionControl.addAttribution(t("karta_dem_atr"));
   } else if (!PREGLED) sl.push(L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, className: "osm-tiles" }));
@@ -193,7 +205,7 @@ function osnova(m, mala) {
 }
 function initMap() {
   map = L.map("map", { zoomControl: false, attributionControl: true, preferCanvas: true }).setView(CONFIG.centar, CONFIG.zoom);
-  map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> suradnici');
+  map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ' + esc(t("osm_suradnici")));
   map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
   skiniPodlogu = osnova(map);
   layer = L.layerGroup().addTo(map);
@@ -727,7 +739,9 @@ function istakniNaKarti(p) {
 function sharePlace(naziv, p) {
   const url = `https://www.openstreetmap.org/?mlat=${p.lat.toFixed(5)}&mlon=${p.lon.toFixed(5)}#map=15/${p.lat.toFixed(5)}/${p.lon.toFixed(5)}`;
   const text = t("podijeli_tekst", { naziv });
-  if (navigator.share) navigator.share({ title: naziv, text, url }).catch(() => {}); else copy(text + " " + url);
+  const nSh = NATIVNO && window.Capacitor.Plugins && window.Capacitor.Plugins.Share;
+  if (nSh) nSh.share({ title: naziv, text, url }).catch(() => {});
+  else if (navigator.share) navigator.share({ title: naziv, text, url }).catch(() => {}); else copy(text + " " + url);
 }
 
 /* popis svih vidljivih točaka */
@@ -795,7 +809,7 @@ function openRuta(id) {
     <div><div class="mini-map" id="rutaMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("linija_skica"))}</p></div>
     ${r.osm ? `<p class="small muted" style="margin:0">${esc(t("ruta_osm_izvor"))} <a href="https://www.openstreetmap.org/relation/${esc(r.osm.slice(1))}" target="_blank" rel="noopener">OSM</a></p>` : ""}
     ${stops.length ? `<section><h3>${esc(t("stajalista"))}</h3>${stops.map((p, i) => `<button class="list-row" data-open="${p.id}"><span class="num">${i + 1}</span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")}</section>` : ""}
-    ${slobodna(r) ? "" : `<div class="note warn">${esc(t("pro_zakljucano"))}<br>${esc(t("pro_cijena"))}</div>`}
+    ${slobodna(r) ? "" : `<div class="note warn">${esc(t("pro_zakljucano"))}<br>${esc(t("pro_cijena"))}<br><button class="btn" data-pro style="margin-top:8px">${esc(t("pro_sto"))}</button></div>`}
     <div class="grid2"><button class="btn primary" id="rKreni" ${slobodna(r) ? "" : "disabled"}>${ic(slobodna(r) ? "nav" : "lock")}${esc(t("kreni_rutom"))}</button><button class="btn" id="rKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
     ${slobodna(r) && r.gpx ? `<button class="btn" id="rGpx" style="align-self:flex-start">${ic("download")}${esc(t("gpx_preuzmi"))}</button>` : ""}
   </div>`);
@@ -1066,6 +1080,7 @@ async function renderDanas() {
 function renderMoje() {
   const favs = S.favs.map(i => BY[i]).filter(Boolean), n = favs.length + S.moja.length;
   $("#moje").innerHTML = `<div class="between"><h1>${esc(t("moje_naslov"))}</h1><button class="sos" data-go="sigurnost" aria-label="${esc(t("sos_aria"))}">${esc(t("sos"))}</button></div>
+    ${proKartica()}
     ${putovnicaKartica()}
     <section class="stack" style="gap:6px"><div class="between"><h2>${esc(t("moja_mjesta"))}</h2><span class="small muted">${n}</span></div>
       ${n ? favs.slice(0, 5).map(p => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span></button>`).join("")
@@ -1115,7 +1130,7 @@ function snimSekcija() {
     <button class="btn ${SN.stanje ? "" : "primary"}" id="snKreni" style="align-self:flex-start">${ic(jePro() ? "rec" : "lock")}${esc(t(SN.stanje ? "snim_otvori" : "snim_kreni"))}</button></section>`;
 }
 function snimKreni() {
-  if (!jePro()) { openSheet(t("snim_naslov"), `<div class="stack"><p style="margin:0">${esc(t("snim_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p></div>`); return; }
+  if (!jePro()) { openSheet(t("snim_naslov"), `<div class="stack"><p style="margin:0">${esc(t("snim_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p><button class="btn" data-pro style="align-self:flex-start">${esc(t("pro_sto"))}</button></div>`); return; }
   if (!SN.stanje) { SN.stanje = { start: Date.now(), od: Date.now(), trajanje: 0, m: 0, uspon: 0, ref: null, p: [] }; snimSpremi(); gcEv("snim-kreni"); }
   SN.prviPut = true; go("karta"); snimGPS(); snimCrtaj(); snimPanel(); toast(t("snim_ekran"));
 }
@@ -1224,18 +1239,18 @@ function kartaPostavke() {
     <button class="btn" id="kPreuzmi" style="align-self:flex-start">${ic(jePro() ? "download" : "lock")}${esc(t(pr ? "karta_ponovo" : "karta_preuzmi"))}</button>` : ""}</div>`;
 }
 async function preuzmiKartu() {
-  if (!jePro()) { openSheet(t("karta_offline_naslov"), `<div class="stack"><p style="margin:0">${esc(t("karta_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p></div>`); return; }
+  if (!jePro()) { openSheet(t("karta_offline_naslov"), `<div class="stack"><p style="margin:0">${esc(t("karta_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p><button class="btn" data-pro style="align-self:flex-start">${esc(t("pro_sto"))}</button></div>`); return; }
   if (KP.radi || !("caches" in window)) return;
   KP.radi = true;
   const poruka = x => { const el = $("#kOffTxt"); if (el) el.textContent = x; };
   try {
     poruka(t("karta_preuzimam", { p: 0 }));
-    const popis = await (await fetch("karta/popis.json", { cache: "no-store" })).json();
-    const c = await caches.open("gk-karta"), sve = popis.plocice;
+    const popis = await (await fetch(KARTA_BAZA + "popis.json", { cache: "no-store" })).json();
+    const c = await caches.open("gk-karta"), sve = NATIVNO ? popis.plocice.filter(x => !x.startsWith("fonts/")) : popis.plocice;
     let i = 0, gotovo = 0;
     const radnik = async () => {
       while (i < sve.length) {
-        const f = sve[i++], u = new URL("karta/" + f + (f.startsWith("fonts/") ? "" : "?v=" + KARTA_VERZIJA), location.href).href;
+        const f = sve[i++], u = new URL(KARTA_BAZA + f + (f.startsWith("fonts/") ? "" : "?v=" + KARTA_VERZIJA), location.href).href;
         if (!(await c.match(u))) { const r = await fetch(u); if (!r.ok) throw new Error(u); await c.put(u, r); }
         if (++gotovo % 25 === 0) poruka(t("karta_preuzimam", { p: Math.round(gotovo / sve.length * 100) }));
       }
@@ -1312,7 +1327,7 @@ function openIzlet(id) {
     ${ok ? `<div><div class="mini-map" id="izMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("iz_karta_napomena"))}</p></div>` : ""}
     <section class="stack" style="gap:4px"><h3>${esc(t("iz_plan"))}</h3>${red}
       ${ok ? `<p class="small muted" style="margin:4px 0 0">${esc(t("iz_procjena"))}</p>` : ""}</section>
-    ${ok ? `<button class="btn primary" data-iznav="0" style="align-self:stretch">${ic("nav")}${esc(t("iz_kreni"))}</button>` : `<div class="note warn">${esc(t("iz_pro"))}<br>${esc(t("pro_cijena"))}</div>`}
+    ${ok ? `<button class="btn primary" data-iznav="0" style="align-self:stretch">${ic("nav")}${esc(t("iz_kreni"))}</button>` : `<div class="note warn">${esc(t("iz_pro"))}<br>${esc(t("pro_cijena"))}<br><button class="btn" data-pro style="margin-top:8px">${esc(t("pro_sto"))}</button></div>`}
     ${ok && x.ponijeti && x.ponijeti.length ? `<section class="card stack" style="gap:6px"><h3>${esc(t("iz_ponijeti"))}</h3><ul style="margin:0;padding-left:20px">${x.ponijeti.map(p => `<li>${esc(p)}</li>`).join("")}</ul></section>` : ""}
     ${jelo.length ? `<section class="stack" style="gap:4px"><h3>${esc(t("iz_jelo"))}</h3>${jelo.map(({ p, d }) => `<button class="list-row" data-open="${esc(p.id)}"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span><span class="small muted mono">${fmtDist(d)}</span></button>`).join("")}</section>` : ""}
     ${ruta ? `<section class="stack" style="gap:4px"><h3>${esc(t("iz_ruta"))}</h3>${rutaKartica(ruta)}</section>` : ""}
@@ -1363,19 +1378,103 @@ function openSezona(sez) {
     <section class="stack" style="gap:4px"><h3>${esc(t("sez_mjesta"))}</h3>${vidljiva.map(red).join("")}
       ${skrivena.length ? skrivena.map(({ p }) => `<div class="list-row" style="opacity:.55"><span class="dot" style="background:${boja(p)}"></span><span class="t"><b>${esc(tx(p).naziv)}</b><span>${esc(katNaziv(p))}</span></span>${ic("lock")}</div>`).join("") : ""}</section>
     ${izl.length || rute.length ? `<section class="stack" style="gap:4px"><h3>${esc(t("sez_izleti"))}</h3>${izl.map(izletKartica).join("")}${rute.map(q => rutaKartica(q)).join("")}</section>` : ""}
-    ${pro ? "" : `<div class="note warn">${esc(t("sez_pro"))}<br>${esc(t("pro_cijena"))}</div>`}
+    ${pro ? "" : `<div class="note warn">${esc(t("sez_pro"))}<br>${esc(t("pro_cijena"))}<br><button class="btn" data-pro style="margin-top:8px">${esc(t("pro_sto"))}</button></div>`}
     <section class="stack" style="gap:6px"><h3>${esc(t("sez_ostale"))}</h3><div class="row" style="gap:8px;flex-wrap:wrap">${ostale.map(k => `<button class="btn" data-sezona="${k}">${esc(jz(SEZONE[k]).naslov.split(" ")[0])}</button>`).join("")}</div></section>
   </div>`);
   gcEv("sezona-" + sez);
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-sezona]"); if (b) openSezona(b.dataset.sezona); });
 
+/* ---------- Zelenko Pro: što donosi, kupnja na Google Playu, testni kod ---------- */
+const PRO_ID = "zelenko_pro";            // proizvod u Google Play Consoleu (jednokratni, „managed product”)
+const KUP = { cijena: null, spreman: false, radi: false };
+const proCijena = () => KUP.cijena || t("pro_iznos");
+function proPromjena() { if ($("#proEkran")) openPro(); if (S.view) go(S.view); }
+function proKupljen() {
+  if (store.get("gk-pro-kupljeno", false)) return;
+  store.set("gk-pro-kupljeno", true); toast(t("pro_hvala")); gcEv("pro-kupljen"); proPromjena();
+}
+function kupnjaInit() {
+  if (!NATIVNO || !window.CdvPurchase || KUP.init) return;
+  KUP.init = true;
+  const { store: ps, ProductType, Platform, LogLevel, ErrorCode } = CdvPurchase;
+  ps.verbosity = LogLevel.WARNING;
+  ps.register([{ id: PRO_ID, type: ProductType.NON_CONSUMABLE, platform: Platform.GOOGLE_PLAY }]);
+  const vlasnik = () => { const pr = ps.get(PRO_ID, Platform.GOOGLE_PLAY); if (pr && pr.owned) proKupljen(); };
+  ps.when()
+    .productUpdated(pr => { if (pr.id !== PRO_ID) return; KUP.cijena = (pr.pricing && pr.pricing.price) || KUP.cijena; vlasnik(); if ($("#proEkran")) openPro(); })
+    .approved(tx => tx.verify())
+    .verified(rc => rc.finish())
+    .finished(tx => { KUP.radi = false; if (tx.products.some(x => x.id === PRO_ID)) proKupljen(); })
+    .receiptUpdated(vlasnik);
+  ps.error(e => { KUP.radi = false; if (e && e.code !== ErrorCode.PAYMENT_CANCELLED) toast(t("pro_greska")); if ($("#proEkran")) openPro(); });
+  ps.initialize([Platform.GOOGLE_PLAY]).then(() => { KUP.spreman = true; vlasnik(); if ($("#proEkran")) openPro(); }).catch(() => {});
+}
+async function proKupi() {
+  const pr = window.CdvPurchase && CdvPurchase.store.get(PRO_ID, CdvPurchase.Platform.GOOGLE_PLAY), o = pr && pr.getOffer();
+  if (!o) { toast(t("pro_nedostupno")); return; }
+  KUP.radi = true; openPro(); gcEv("pro-kupi");
+  const err = await o.order().catch(e => e);
+  if (err) { KUP.radi = false; if (err.code !== CdvPurchase.ErrorCode.PAYMENT_CANCELLED) toast(t("pro_greska")); openPro(); }
+}
+async function proVrati() {
+  if (!window.CdvPurchase) { toast(t("pro_nedostupno")); return; }
+  try { await CdvPurchase.store.restorePurchases(); } catch (e) {}
+  setTimeout(() => { if (!jePro()) toast(t("pro_nema_kupnje")); }, 1500);
+}
+function proKartica() {
+  if (jePro()) return `<button class="card list-row" data-pro style="width:100%;text-align:left">${medo(40, true)}<span class="t"><b>${esc(t("pro_naslov"))}</b><span>${esc(t("pro_imas"))}</span></span></button>`;
+  return `<button class="card stack" data-pro style="gap:6px;text-align:left;border-left:6px solid var(--accent);padding:14px">
+    <span class="between"><b style="font-size:1.12em">${esc(t("pro_naslov"))}</b><span class="badge pro">${esc(proCijena())}</span></span>
+    <span class="small" style="color:var(--ink2)">${esc(t("pro_kartica"))}</span>
+    <span class="row small" style="gap:6px;color:var(--accent);font-weight:600">${esc(t("pro_sto"))}${ic("chevron")}</span></button>`;
+}
+function openPro() {
+  const pro = jePro(), test = store.get("gk-pro-test", false) && !store.get("gk-pro-kupljeno", false);
+  const nR = RUTE.filter(r => !r.besplatno).length, nI = IZLETI.filter(i => !i.besplatno).length;
+  const st = [["nav", t("pro_f_rute", { n: nR })], ["map", t("pro_f_karta")], ["rec", t("pro_f_snim")], ["calendar", t("pro_f_izleti", { n: nI })], ["leaf", t("pro_f_sez")]];
+  const akcija = pro
+    ? `<div class="note" style="margin:0">${esc(t(test ? "pro_test_aktivan" : "pro_imas"))}</div>${test ? `<button class="btn" id="proTestOff" style="align-self:flex-start">${esc(t("pro_test_iskljuci"))}</button>` : ""}`
+    : NATIVNO
+      ? `<button class="btn primary" id="proKupi" ${KUP.radi ? "disabled" : ""} style="align-self:stretch">${esc(KUP.radi ? t("pro_ucitavam") : t("pro_kupi", { cijena: proCijena() }))}</button>
+         <p class="small muted" style="margin:0">${esc(t("pro_vrati_opis"))}</p><button class="btn" id="proVrati" style="align-self:flex-start">${esc(t("pro_vrati"))}</button>`
+      : `<p style="margin:0">${esc(t("pro_web"))}</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=${esc(CONFIG.paket)}" target="_blank" rel="noopener" style="align-self:stretch">${esc(t("pro_play"))}</a>`;
+  const html = `<div class="stack" id="proEkran">
+    <div class="row" style="gap:14px;align-items:center">${medo(64, true)}<div><h1 style="margin:0">${esc(t("pro_naslov"))}</h1><span class="small muted">${esc(t("pro_jednom", { cijena: proCijena() }))}</span></div></div>
+    <ul class="stack" style="list-style:none;margin:0;padding:0;gap:10px">${st.map(([i, x]) => `<li class="row" style="gap:12px;align-items:flex-start"><span style="color:var(--accent);flex:0 0 24px">${ic(i)}</span><span>${esc(x)}</span></li>`).join("")}</ul>
+    ${akcija}
+    <section class="card stack" style="gap:6px"><b>${esc(t("pro_besplatno_n"))}</b><span class="small" style="color:var(--ink2)">${esc(t("pro_besplatno"))}</span></section>
+  </div>`;
+  if ($("#proEkran")) $("#proEkran").outerHTML = html; else openSheet(t("pro_naslov"), html);
+  const k = $("#proKupi"); if (k) k.onclick = proKupi;
+  const v = $("#proVrati"); if (v) v.onclick = proVrati;
+  const o = $("#proTestOff"); if (o) o.onclick = () => { store.set("gk-pro-test", false); proPromjena(); };
+  if (!$("#proEkran").dataset.ev) { $("#proEkran").dataset.ev = 1; gcEv("pro-ekran"); }
+}
+function openProKod() {
+  openSheet(t("pro_kod_naslov"), `<form class="stack" id="proKodForm"><label for="proKod">${esc(t("pro_kod_polje"))}</label>
+    <input id="proKod" autocomplete="off" autocapitalize="none" spellcheck="false" style="font-size:1.1em;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)">
+    <button class="btn primary" type="submit">${esc(t("pro_kod_potvrdi"))}</button></form>`);
+  $("#proKodForm").onsubmit = async e => { e.preventDefault();
+    if (await provjeriKod($("#proKod").value)) { store.set("gk-pro-test", true); closeSheet(); toast(t("pro_kod_ok")); proPromjena(); }
+    else toast(t("pro_kod_krivo")); };
+}
+document.addEventListener("click", e => { if (e.target.closest("[data-pro]")) openPro(); });
+(async () => { const q = new URLSearchParams(location.search).get("pro"); if (!q) return;
+  if (q === "0") store.set("gk-pro-test", false); else if (await provjeriKod(q)) store.set("gk-pro-test", true);
+  history.replaceState(null, "", location.pathname + location.hash); })();
+if (NATIVNO) { if (window.CdvPurchase) kupnjaInit(); else document.addEventListener("deviceready", kupnjaInit, { once: true }); }
+/* Android tipka Natrag: zatvori prozor, pa se vrati na kartu, pa izađi */
+if (NATIVNO && window.Capacitor.Plugins && window.Capacitor.Plugins.App) window.Capacitor.Plugins.App.addListener("backButton", () => {
+  if (!$("#sheet").hidden) closeSheet(); else if (S.view !== "karta") go("karta"); else window.Capacitor.Plugins.App.exitApp();
+});
+
 /* ---------- o aplikaciji: izvori, licence, privatnost, kontakt ---------- */
 function openOApp() {
   const mail = `mailto:${CONFIG.kontakt}?subject=${encodeURIComponent("Zelenko " + CONFIG.verzija)}`;
   openSheet(t("oapp_naslov"), `<div class="stack">
     <div class="row" style="gap:14px;align-items:center">${medo(72, true)}${lynx(64, true)}</div>
-    <p style="margin:0;font-size:1.04em">${esc(t("oapp_uvod"))}</p><span class="small muted">${esc(t("verzija", { v: CONFIG.verzija }))}</span>
+    <p style="margin:0;font-size:1.04em">${esc(t("oapp_uvod"))}</p><span class="small muted" id="oVerzija">${esc(t("verzija", { v: CONFIG.verzija }))}</span>
     <section class="stack" style="gap:6px"><h2>${esc(t("oapp_izvori"))}</h2>
       ${(T.oapp_izvori_popis || []).map(([n, o, u]) => `<div style="padding:8px 0;border-top:1px solid var(--line)"><b>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>` : esc(n)}</b><div class="small" style="color:var(--ink2)">${esc(o)}</div></div>`).join("")}
       ${Object.keys(SLIKE).length ? `<button class="btn" id="oFoto" style="align-self:flex-start">${esc(t("foto_zasluge"))}</button>` : ""}</section>
@@ -1386,6 +1485,7 @@ function openOApp() {
     <section class="stack" style="gap:6px"><h2>${esc(t("oapp_kontakt"))}</h2><p style="margin:0">${esc(t("oapp_kontakt_tekst"))}</p>
       <a class="btn primary" href="${mail}" style="align-self:flex-start">${ic("msg")}${esc(t("oapp_pisi"))}</a></section></div>`);
   const f = $("#oFoto"); if (f) f.onclick = openFotoZasluge;
+  let dodiri = 0; $("#oVerzija").onclick = () => { if (++dodiri === 5) openProKod(); };
   gcEv("o-aplikaciji");
 }
 
@@ -1530,6 +1630,12 @@ async function spremiDatoteku(ime, sadrzaj, tip) {
     try { await dl.save({ filename: ime, data: sadrzaj }); } catch (e) {}
     return;
   }
+  const P = NATIVNO && window.Capacitor.Plugins;
+  if (P && P.Filesystem && P.Share) {   /* Android: datoteka u privremenu mapu pa izbornik „Dijeli” (Drive, Komoot, Datoteke…) */
+    try { const r = await P.Filesystem.writeFile({ path: ime, data: sadrzaj, directory: "CACHE", encoding: "utf8" });
+      await P.Share.share({ title: ime, files: [r.uri] }); } catch (e) { if (!/cancel/i.test((e && e.message) || "")) toast(t("gpx_nema")); }
+    return;
+  }
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([sadrzaj], { type: tip }));
   a.download = ime; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
@@ -1584,7 +1690,7 @@ async function boot() {
   const h = location.hash.slice(1); go(["karta", "danas", "gastro", "rute", "moje", "sigurnost"].includes(h) ? h : "karta");
   gcInit();
   if (!store.get("gk-pozdrav", false)) setTimeout(openPozdrav, 500);
-  if (!PREGLED && "serviceWorker" in navigator && location.protocol !== "file:") {
+  if (!PREGLED && !NATIVNO && "serviceWorker" in navigator && location.protocol !== "file:") {
     const imaoSW = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
       reg.update().catch(() => {});

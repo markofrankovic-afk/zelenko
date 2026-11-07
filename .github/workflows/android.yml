@@ -1,0 +1,40 @@
+# Android aplikacija za Google Play: izrađuje se kod svakog pusha na granu „play”.
+# Uvijek: probni APK (debug) za instalaciju na mobitel. Ako su postavljene tajne s upload ključem: i AAB za Play.
+name: Android
+on:
+  push:
+    branches: [play]
+    paths: ["docs/**", "play/**", ".github/workflows/android.yml"]
+  workflow_dispatch:
+jobs:
+  izradi:
+    runs-on: ubuntu-latest
+    env:
+      IMA_KLJUC: ${{ secrets.ZELENKO_KEYSTORE_B64 != '' }}
+    defaults: { run: { working-directory: play } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: play/package-lock.json }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - run: npm ci
+      - run: node pripremi_web.mjs && npx cap sync android
+      - name: Probni APK
+        run: cd android && ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with: { name: zelenko-probni-apk, path: play/android/app/build/outputs/apk/debug/app-debug.apk }
+      - name: AAB za Google Play
+        if: env.IMA_KLJUC == 'true'
+        env:
+          KS: ${{ secrets.ZELENKO_KEYSTORE_B64 }}
+          ZELENKO_KEYSTORE_PASS: ${{ secrets.ZELENKO_KEYSTORE_PASS }}
+          ZELENKO_KEY_ALIAS: ${{ secrets.ZELENKO_KEY_ALIAS }}
+          ZELENKO_KEY_PASS: ${{ secrets.ZELENKO_KEY_PASS }}
+        run: |
+          echo "$KS" | base64 -d > "$RUNNER_TEMP/zelenko.jks"
+          export ZELENKO_KEYSTORE="$RUNNER_TEMP/zelenko.jks"
+          cd android && ./gradlew bundleRelease --no-daemon
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('play/android/app/build/outputs/bundle/release/*.aab') != '' }}
+        with: { name: zelenko-play-aab, path: play/android/app/build/outputs/bundle/release/app-release.aab }

@@ -26,9 +26,11 @@ window.ZelenkoKarta = (() => {
   const k = v => ["==", ["get", "k"], v];
   const FONT = ["Noto Sans Medium"], FONT_R = ["Noto Sans Regular"], FONT_I = ["Noto Sans Italic"];
 
-  function stil(osnova, v, C) {
+  function stil(osnova, v, C, fontovi, kes) {
     const q = v ? "?v=" + v : "";
     const url = new URL(osnova, location.href).href;
+    /* u aplikaciji s Playa pločice idu kroz protokol „zk”: prvo predmemorija gk-karta, pa mreža */
+    const pl = kes ? url.replace(/^https:\/\//, "zk://") : url;
     const [W, S, E, N] = OKVIR;
     const fill = (id, f, boja, minzoom) => ({ id, type: "fill", source: "z", "source-layer": "pokrov", filter: f, minzoom: minzoom != null ? z(minzoom) : 0, paint: { "fill-color": boja } });
     const crta = (id, sloj, f, boja, sirina, extra = {}) => ({ id, type: "line", source: "z", "source-layer": sloj, ...(f ? { filter: f } : {}), layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": boja, "line-width": sirina, ...extra } });
@@ -36,12 +38,12 @@ window.ZelenkoKarta = (() => {
     const lokalne = ["in", ["get", "k"], ["literal", ["lokalna", "servis"]]];
     return {
       version: 8,
-      glyphs: url + "fonts/{fontstack}/{range}.pbf",
+      glyphs: new URL(fontovi || osnova, location.href).href + "fonts/{fontstack}/{range}.pbf",
       sources: {
         okvir: { type: "geojson", data: { type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [[[W, S], [E, S], [E, N], [W, N], [W, S]]] } } },
-        z: { type: "vector", tiles: [url + "v/{z}/{x}/{y}.mvt" + q], minzoom: 8, maxzoom: 14, bounds: OKVIR,
+        z: { type: "vector", tiles: [pl + "v/{z}/{x}/{y}.mvt" + q], minzoom: 8, maxzoom: 14, bounds: OKVIR,
              attribution: "" },
-        s: { type: "raster", tiles: [url + "s/{z}/{x}/{y}.webp" + q], tileSize: 256, minzoom: 8, maxzoom: 13, bounds: OKVIR }
+        s: { type: "raster", tiles: [pl + "s/{z}/{x}/{y}.webp" + q], tileSize: 256, minzoom: 8, maxzoom: 13, bounds: OKVIR }
       },
       layers: [
         { id: "pozadina", type: "fill", source: "okvir", minzoom: z(9), paint: { "fill-color": C.pozadina } },
@@ -92,9 +94,23 @@ window.ZelenkoKarta = (() => {
     };
   }
   /* osnova: url do mape karta/ (npr. "karta/"); vraća { vektor } – jedan sloj s cijelom kartom */
+  let zk = false;
+  function protokol() {
+    if (zk || !window.maplibregl || !maplibregl.addProtocol) return;
+    zk = true;
+    maplibregl.addProtocol("zk", async (params, abort) => {
+      const url = "https://" + params.url.slice(5);
+      let c = null; try { c = await caches.open("gk-karta"); const h = await c.match(url); if (h) return { data: await h.arrayBuffer() }; } catch (e) {}
+      const r = await fetch(url, { signal: abort.signal });
+      if (!r.ok) throw new Error("karta " + r.status);
+      if (c) c.put(url, r.clone()).catch(() => {});
+      return { data: await r.arrayBuffer() };
+    });
+  }
   function slojevi(osnova, opcije = {}) {
+    if (opcije.kes) protokol();
     const vektor = L.maplibreGL({
-      style: stil(osnova, opcije.v, opcije.tamna ? TAMNA : SVIJETLA),
+      style: stil(osnova, opcije.v, opcije.tamna ? TAMNA : SVIJETLA, opcije.fontovi, opcije.kes),
       interactive: false, attributionControl: false, padding: 0.1,
       fadeDuration: 0, maxTileCacheSize: 120, localIdeographFontFamily: false
     });
