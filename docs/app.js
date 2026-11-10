@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.19.0",
+  verzija: "0.20.0",
   paket: "hr.frankovic.zelenko",   // Android paket na Google Playu (nakon prvog objavljivanja se ne može mijenjati)
   karta: "https://markofrankovic-afk.github.io/zelenko/karta/",   // pločice karte za aplikaciju s Playa (nisu u paketu)
   jezik: "hr",
@@ -606,6 +606,7 @@ function openPutovnica() {
     ${medoOblak(t("razina_" + r.k), poruka, null, 64)}
     <div class="stack" style="gap:6px"><span class="small muted">${esc(t("putovnica_stanje", { n, ukupno: N }))}</span><span class="prog"><i style="width:${Math.round(100 * n / N)}%"></i></span></div>
     <p class="small muted" style="margin:0">${esc(t("putovnica_uvod"))}</p>
+    <button class="btn" id="pSlika" style="align-self:flex-start">${ic(jePro() ? "share" : "lock")}${esc(t("slika_podijeli"))}</button>
     <div class="pecati">${PUT.pecati.filter(x => BY[x.id] && !x.skriven).map(x => { const p = BY[x.id], ok = S.pecati[x.id];
       return `<button class="pecat${ok ? " ok" : ""}" data-open="${x.id}"><span class="krug">${medo(46, true)}</span>${esc(tx(p).naziv.replace(/\s*\(.*?\)/, ""))}${ok ? `<small>${new Date(ok).toLocaleDateString(LOC())}</small>` : ""}</button>`; }).join("")}</div>
     ${lynxTragovi().length ? `<section class="stack" style="gap:8px"><h3>${esc(t("lynx_tragovi"))}</h3>
@@ -768,6 +769,7 @@ function renderRute() {
   const fit = RUTE.filter(r => rutaGrupa(r) === P.vrijeme && (r.vrsta === "biciklisticka" ? "bicikl" : "pjesice") === P.kako && (P.s !== "djeca" || r.tezina === "lagano"));
   $("#rute").innerHTML = `<div class="between"><h1>${esc(t("rute"))}</h1><button class="sos" data-go="sigurnost" aria-label="${esc(t("sos_aria"))}">${esc(t("sos"))}</button></div>
     ${izletiSekcija()}
+    ${mojiIzletiSekcija()}
     <section class="card stack" style="gap:12px"><h2>${esc(t("sto_danas"))}</h2>
       ${grp("vrijeme", "koliko_vremena", [["kratko", "vrijeme_kratko"], ["pola", "vrijeme_pola"], ["dan", "vrijeme_dan"]])}
       ${grp("s", "s_kim", [["drustvo", "s_drustvo"], ["djeca", "s_djeca"]])}
@@ -1103,6 +1105,7 @@ $("#moje").addEventListener("click", e => {
   const kb = e.target.closest("[data-karta]"); if (kb && kb.dataset.karta !== vrstaKarte()) { store.set("gk-karta", kb.dataset.karta); if (map) { skiniPodlogu(); skiniPodlogu = osnova(map); } renderMoje(); gcEv("karta-" + kb.dataset.karta); }
   if (e.target.closest("#kPreuzmi")) preuzmiKartu();
   if (e.target.closest("#snKreni")) snimKreni();
+  if (e.target.closest("#gpxUvozBtn")) { if (jePro()) $("#gpxUvoz").click(); else proNapomena(t("snim_naslov"), "gpx_uvoz_pro"); }
   const tr = e.target.closest("[data-trag]"); if (tr) openTrag(tr.dataset.trag);
   if (e.target.closest("#sMoja")) openMojaMjesta();
   if (e.target.closest("#sFoto")) openFotoZasluge();
@@ -1114,6 +1117,7 @@ $("#moje").addEventListener("click", e => {
 $("#moje").addEventListener("change", e => {
   if (e.target.id === "bigTxt") { document.documentElement.classList.toggle("big", e.target.checked); store.set("gk-big", e.target.checked); }
   if (e.target.id === "kUvoz" && e.target.files[0]) uvozKopije(e.target.files[0]);
+  if (e.target.id === "gpxUvoz" && e.target.files[0]) { uvozGpx(e.target.files[0]); e.target.value = ""; }
 });
 
 
@@ -1126,8 +1130,9 @@ function snimSekcija() {
   const tr = store.get("gk-tragovi", []);
   return `<section class="card stack" style="gap:10px"><div class="between"><h2>${esc(t("snim_naslov"))}</h2>${jePro() ? "" : `<span class="badge pro">${esc(t("pro"))}</span>`}</div>
     <span class="small muted">${esc(t("snim_opis"))}</span>
-    ${tr.map(x => `<button class="list-row" data-trag="${esc(x.id)}"><span class="num r">${ic("route")}</span><span class="t"><b>${esc(x.ime)}</b><span class="mono">${dec((x.m / 1000).toFixed(1))} km · ↑ ${x.uspon} m · ${fmtTraj(x.s)} h</span></span></button>`).join("") || `<span class="small muted">${esc(t("snim_prazno"))}</span>`}
-    <button class="btn ${SN.stanje ? "" : "primary"}" id="snKreni" style="align-self:flex-start">${ic(jePro() ? "rec" : "lock")}${esc(t(SN.stanje ? "snim_otvori" : "snim_kreni"))}</button></section>`;
+    ${tr.map(x => `<button class="list-row" data-trag="${esc(x.id)}"><span class="num r">${ic("route")}</span><span class="t"><b>${esc(x.ime)}</b><span class="mono">${dec((x.m / 1000).toFixed(1))} km · ↑ ${x.uspon} m${x.s ? ` · ${fmtTraj(x.s)} h` : ""}${x.uvezen ? ` · ${esc(t("gpx_uvezena"))}` : ""}</span></span></button>`).join("") || `<span class="small muted">${esc(t("snim_prazno"))}</span>`}
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn ${SN.stanje ? "" : "primary"}" id="snKreni">${ic(jePro() ? "rec" : "lock")}${esc(t(SN.stanje ? "snim_otvori" : "snim_kreni"))}</button>
+      <button class="btn" id="gpxUvozBtn">${ic(jePro() ? "download" : "lock")}${esc(t("gpx_uvoz"))}</button><input type="file" id="gpxUvoz" ${NATIVNO ? "" : 'accept=".gpx,application/gpx+xml"'} hidden></div></section>`;
 }
 function snimKreni() {
   if (!jePro()) { openSheet(t("snim_naslov"), `<div class="stack"><p style="margin:0">${esc(t("snim_pro"))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p><button class="btn" data-pro style="align-self:flex-start">${esc(t("pro_sto"))}</button></div>`); return; }
@@ -1191,17 +1196,18 @@ function snimZavrsi() {
 }
 function tragGpx(x) {
   const e = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-  const pts = x.p.map(p => `   <trkpt lat="${p[0]}" lon="${p[1]}">${p[2] != null ? `<ele>${p[2]}</ele>` : ""}<time>${new Date(x.start + p[3] * 1000).toISOString()}</time></trkpt>`).join("\n");
+  const pts = x.p.map(p => `   <trkpt lat="${p[0]}" lon="${p[1]}">${p[2] != null ? `<ele>${p[2]}</ele>` : ""}${p[3] != null ? `<time>${new Date(x.start + p[3] * 1000).toISOString()}</time>` : ""}</trkpt>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Zelenko" xmlns="http://www.topografix.com/GPX/1/1">\n <metadata><name>${e(x.ime)}</name><time>${new Date(x.start).toISOString()}</time></metadata>\n <trk><name>${e(x.ime)}</name><trkseg>\n${pts}\n </trkseg></trk>\n</gpx>\n`;
 }
 function openTrag(id) {
   const sve = store.get("gk-tragovi", []), x = sve.find(y => y.id === id); if (!x) return;
   openSheet(t("snim_naslov"), `<div class="stack">
     <label class="stack" style="gap:4px"><span class="small muted">${esc(t("snim_ime"))}</span><input id="trIme" value="${esc(x.ime)}" maxlength="80" style="min-height:44px;padding:0 12px;border:1px solid var(--line2);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit"></label>
-    <div class="stats"><div><b>${dec((x.m / 1000).toFixed(1))}</b><span>${esc(t("km"))}</span></div><div><b>${fmtTraj(x.s)}</b><span>${esc(t("sati"))}</span></div><div><b>~${x.uspon}</b><span>${esc(t("m_uspona"))}</span></div></div>
-    <p class="small muted" style="margin:0">${esc(t("snim_uspon_gps"))}</p>
+    <div class="stats"><div><b>${dec((x.m / 1000).toFixed(1))}</b><span>${esc(t("km"))}</span></div><div><b>${x.s ? fmtTraj(x.s) : "–"}</b><span>${esc(t("sati"))}</span></div><div><b>~${x.uspon}</b><span>${esc(t("m_uspona"))}</span></div></div>
+    <p class="small muted" style="margin:0">${esc(t(x.uvezen ? "gpx_uvoz_napomena" : "snim_uspon_gps"))}</p>
     <div class="mini-map" id="trMap"></div>
-    <div class="grid2"><button class="btn primary" id="trGpx">${ic("download")}${esc(t("snim_gpx"))}</button><button class="btn" id="trKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
+    <button class="btn primary" id="trPrati" style="align-self:stretch">${ic("route")}${esc(t("prati_kreni"))}</button>
+    <div class="grid2"><button class="btn" id="trGpx">${ic("download")}${esc(t("snim_gpx"))}</button><button class="btn" id="trKarta">${ic("map")}${esc(t("prikazi_na_karti"))}</button></div>
     <button class="btn" id="trBrisi" style="align-self:flex-start">${ic("trash")}<span>${esc(t("snim_obrisi"))}</span></button></div>`);
   const ll = x.p.map(p => [p[0], p[1]]);
   const mm = L.map("trMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, preferCanvas: true });
@@ -1209,6 +1215,7 @@ function openTrag(id) {
   L.polyline(ll, { color: cv("--sos"), weight: 4 }).addTo(mm);
   mm.fitBounds(L.latLngBounds(ll).pad(0.2)); setTimeout(() => mm.invalidateSize(), 60);
   sheetCleanup.push(() => { skini(); mm.remove(); });
+  $("#trPrati").onclick = () => { if (jePro()) pratiKreni(x); else proNapomena(t("snim_naslov"), "gpx_uvoz_pro"); };
   $("#trIme").onchange = e => { const v = e.target.value.trim(); if (!v) return; x.ime = v; store.set("gk-tragovi", sve); if (S.view === "moje") renderMoje(); };
   $("#trGpx").onclick = () => { spremiDatoteku((x.ime.replace(/[^\p{L}\p{N} _-]+/gu, "").trim().replace(/\s+/g, "-") || "ruta") + ".gpx", tragGpx(x), "application/gpx+xml"); gcEv("snim-gpx"); };
   $("#trKarta").onclick = () => { closeSheet(); go("karta"); setTimeout(() => { if (SN.prikaz) SN.prikaz.remove(); SN.prikaz = L.polyline(ll, { color: cv("--sos"), weight: 4, dashArray: "6 6" }).addTo(map); map.fitBounds(SN.prikaz.getBounds().pad(0.2)); }, 80); };
@@ -1385,6 +1392,234 @@ function openSezona(sez) {
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-sezona]"); if (b) openSezona(b.dataset.sezona); });
 
+/* ---------- moji izleti (Pro): vlastiti plan dana od spremljenih mjesta ---------- */
+const MI_NACIN = { auto: "svi", pjesice: "planinari", bicikl: "biciklisti" };
+const miSvi = () => store.get("gk-moji-izleti", []);
+const miSpremi = v => store.set("gk-moji-izleti", v);
+function miMjesto(ref) {
+  if (String(ref).startsWith("m:")) { const m = S.moja.find(x => x.id === ref.slice(2)); return m && { ref, naziv: m.ime, lat: m.lat, lon: m.lon, kat: t("kat_moje"), boja: cv("--accent") }; }
+  const p = BY[ref]; return p && { ref, naziv: tx(p).naziv, lat: p.lat, lon: p.lon, kat: katNaziv(p), boja: boja(p) };
+}
+function miPut(iz) {
+  const st = iz.tocke.map(miMjesto).filter(Boolean); let min = 0, km = 0;
+  const dijelovi = st.map((s, i) => { if (!i) return null; const p = izPut(st[i - 1], s, { za: MI_NACIN[iz.nacin] }); min += p.min; km += p.km; return p; });
+  return { st, min, km, dijelovi };
+}
+const miPutTxt = p => t("iz_put_" + p.nacin, { min: Math.max(5, Math.round(p.min / 5) * 5), km: dec(p.km.toFixed(p.km < 10 ? 1 : 0)) });
+function mojiIzletiSekcija() {
+  const sv = miSvi();
+  return `<section class="card stack" style="gap:10px"><div class="between"><h2>${esc(t("mi_naslov"))}</h2>${jePro() ? "" : `<span class="badge pro">${esc(t("pro"))}</span>`}</div>
+    <span class="small muted">${esc(t("mi_opis"))}</span>
+    ${sv.map(iz => { const { st, min } = miPut(iz); return `<button class="list-row" data-mi="${esc(iz.id)}"><span class="num r">${ic("calendar")}</span><span class="t"><b>${esc(iz.ime)}</b><span>${esc(t("iz_stajalista_n", { n: st.length }))} · ${esc(t("mi_na_putu", { vrijeme: fmtMin(min) }))}</span></span></button>`; }).join("")}
+    <button class="btn ${sv.length ? "" : "primary"}" id="miNovi" style="align-self:flex-start">${ic(jePro() ? "calendar" : "lock")}${esc(t("mi_novi"))}</button></section>`;
+}
+function proNapomena(naslov, kljuc) {
+  openSheet(naslov, `<div class="stack"><p style="margin:0">${esc(t(kljuc))}</p><p class="small muted" style="margin:0">${esc(t("pro_cijena"))}</p><button class="btn" data-pro style="align-self:flex-start">${esc(t("pro_sto"))}</button></div>`);
+}
+function miUredi(id) {
+  if (!jePro()) { proNapomena(t("mi_naslov"), "mi_pro"); return; }
+  const sv = miSvi(), staro = sv.find(x => x.id === id);
+  const iz = staro ? JSON.parse(JSON.stringify(staro)) : { id: "mi" + Date.now(), ime: t("mi_zadano", { n: sv.length + 1 }), nacin: "auto", tocke: [] };
+  const kandidati = () => [...S.favs.filter(i => BY[i]), ...S.moja.map(m => "m:" + m.id)].filter(r => !iz.tocke.includes(r));
+  openSheet(t("mi_naslov"), `<div class="stack" id="miUr"></div>`);
+  const crtaj = () => {
+    const { st, dijelovi } = miPut(iz), ost = kandidati().map(miMjesto).filter(Boolean);
+    $("#miUr").innerHTML = `
+      <div class="field"><label for="miIme">${esc(t("snim_ime"))}</label><input id="miIme" maxlength="60" value="${esc(iz.ime)}"></div>
+      <div class="seg" role="group" aria-label="${esc(t("mi_nacin"))}">${["auto", "pjesice", "bicikl"].map(n => `<button data-minacin="${n}" aria-pressed="${iz.nacin === n}">${esc(t("mi_" + n))}</button>`).join("")}</div>
+      <section class="stack" style="gap:4px"><h3>${esc(t("iz_plan"))}</h3>
+        ${st.length ? st.map((s, i) => `${dijelovi[i] ? `<div class="small muted" style="padding:2px 0 2px 44px">↓ ${esc(miPutTxt(dijelovi[i]))}</div>` : ""}
+          <div class="row" style="gap:6px"><span class="num">${i + 1}</span><span class="t" style="flex:1;min-width:0;display:flex;flex-direction:column"><b>${esc(s.naziv)}</b><span class="small muted">${esc(s.kat)}</span></span>
+            <button class="btn" data-migore="${i}" ${i ? "" : "disabled"} aria-label="${esc(t("mi_gore"))}" style="flex:0 0 44px;padding:0">↑</button><button class="btn" data-midolje="${i}" ${i < st.length - 1 ? "" : "disabled"} aria-label="${esc(t("mi_dolje"))}" style="flex:0 0 44px;padding:0">↓</button><button class="btn" data-mimakni="${i}" aria-label="${esc(t("mi_makni"))}" style="flex:0 0 44px;padding:0">${ic("x")}</button></div>`).join("")
+          : `<span class="small muted">${esc(t("mi_plan_prazan"))}</span>`}
+        ${st.length > 2 ? `<button class="btn" id="miRedoslijed" style="align-self:flex-start">${ic("route")}${esc(t("mi_poredaj"))}</button>` : ""}</section>
+      <section class="stack" style="gap:4px"><h3>${esc(t("mi_dodaj"))}</h3>
+        ${ost.length ? ost.map(s => `<button class="list-row" data-midodaj="${esc(s.ref)}"><span class="dot" style="background:${s.boja}"></span><span class="t"><b>${esc(s.naziv)}</b><span>${esc(s.kat)}</span></span><span aria-hidden="true" style="font-size:1.4em;color:var(--accent)">+</span></button>`).join("")
+          : `<span class="small muted">${esc(t(st.length ? "mi_sve_dodano" : "mi_nema_mjesta"))}</span>`}</section>
+      <div class="grid2"><button class="btn primary" id="miSpremi">${ic("check")}${esc(t("spremi"))}</button>${staro ? `<button class="btn" id="miBrisi">${ic("trash")}<span>${esc(t("obrisi"))}</span></button>` : ""}</div>`;
+  };
+  crtaj();
+  $("#miUr").addEventListener("input", e => { if (e.target.id === "miIme") iz.ime = e.target.value; });
+  $("#miUr").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; const d = b.dataset;
+    if (d.minacin) iz.nacin = d.minacin;
+    else if (d.midodaj) iz.tocke.push(d.midodaj);
+    else if (d.mimakni != null) iz.tocke.splice(+d.mimakni, 1);
+    else if (d.migore != null) { const i = +d.migore; [iz.tocke[i - 1], iz.tocke[i]] = [iz.tocke[i], iz.tocke[i - 1]]; }
+    else if (d.midolje != null) { const i = +d.midolje; [iz.tocke[i + 1], iz.tocke[i]] = [iz.tocke[i], iz.tocke[i + 1]]; }
+    else if (b.id === "miRedoslijed") {   /* najbliže sljedeće, od prvog stajališta */
+      const ost = iz.tocke.slice(1), red = [iz.tocke[0]];
+      while (ost.length) { const z = miMjesto(red[red.length - 1]); let k = 0, dk = Infinity; ost.forEach((r, i) => { const m = miMjesto(r), dd = m && z ? hav(z, m) : Infinity; if (dd < dk) { dk = dd; k = i; } }); red.push(ost.splice(k, 1)[0]); }
+      iz.tocke = red;
+    }
+    else if (b.id === "miSpremi") {
+      if (iz.tocke.length < 2) { toast(t("mi_premalo")); return; }
+      iz.ime = (iz.ime || "").trim() || t("mi_zadano", { n: sv.length + 1 });
+      miSpremi(staro ? sv.map(x => x.id === iz.id ? iz : x) : sv.concat(iz));
+      gcEv(staro ? "moj-izlet-uredi" : "moj-izlet-novi"); if (S.view === "rute") renderRute(); miOtvori(iz.id); return;
+    }
+    else if (b.id === "miBrisi") { if (!d.sigurno) { d.sigurno = "1"; b.querySelector("span").textContent = t("snim_obrisi_potvrdi"); return; }
+      miSpremi(sv.filter(x => x.id !== iz.id)); closeSheet(); if (S.view === "rute") renderRute(); toast(t("mi_obrisan")); return; }
+    else return;
+    crtaj();
+  });
+}
+function miOtvori(id) {
+  const iz = miSvi().find(x => x.id === id); if (!iz) return;
+  if (!jePro()) { proNapomena(t("mi_naslov"), "mi_pro"); return; }
+  const { st, min, km, dijelovi } = miPut(iz);
+  openSheet(t("mi_naslov"), `<div class="stack">
+    <h1>${esc(iz.ime)}</h1>
+    <div class="stats"><div><b>${st.length}</b><span>${esc(t("iz_stajalista"))}</span></div><div><b>~${dec(km.toFixed(km < 10 ? 1 : 0))}</b><span>${esc(t("km"))}</span></div><div><b>${esc(fmtMin(min))}</b><span>${esc(t("mi_" + iz.nacin))}</span></div></div>
+    <div><div class="mini-map" id="miMap"></div><p class="small muted" style="margin:6px 0 0">${esc(t("iz_karta_napomena"))}</p></div>
+    <section class="stack" style="gap:4px"><h3>${esc(t("iz_plan"))}</h3>
+      ${st.map((s, i) => `${dijelovi[i] ? `<div class="small muted" style="padding:2px 0 2px 44px">↓ ${esc(miPutTxt(dijelovi[i]))}</div>` : ""}
+        <div class="row" style="gap:8px;align-items:flex-start"><button class="list-row" data-open="${esc(s.ref)}" style="flex:1"><span class="num">${i + 1}</span><span class="t"><b>${esc(s.naziv)}</b><span>${esc(s.kat)}</span></span></button>
+        <button class="btn" data-minav="${i}" aria-label="${esc(t("vodi_me"))}: ${esc(s.naziv)}" style="flex:0 0 48px;padding:0">${ic("nav")}</button></div>`).join("")}
+      <p class="small muted" style="margin:4px 0 0">${esc(t("mi_procjena"))}</p></section>
+    <button class="btn primary" data-minav="0" style="align-self:stretch">${ic("nav")}${esc(t("iz_kreni"))}</button>
+    <button class="btn" id="miUredi" style="align-self:flex-start">${esc(t("mi_uredi"))}</button>
+  </div>`);
+  const ll = st.map(s => [s.lat, s.lon]);
+  const mm = L.map("miMap", { zoomControl: false, attributionControl: false, scrollWheelZoom: false, preferCanvas: true });
+  const skini = osnova(mm, true);
+  L.polyline(ll, { color: cv("--accent"), weight: 3, dashArray: "6 6", opacity: .9 }).addTo(mm);
+  st.forEach((s, i) => L.marker([s.lat, s.lon], { icon: L.divIcon({ className: "num-icon", html: String(i + 1), iconSize: [24, 24] }) }).addTo(mm));
+  mm.fitBounds(L.latLngBounds(ll).pad(0.25)); setTimeout(() => mm.invalidateSize(), 60);
+  sheetCleanup.push(() => { skini(); mm.remove(); });
+  $("#sheet").querySelectorAll("[data-minav]").forEach(b => b.onclick = () => { const s = st[+b.dataset.minav]; if (s) { openNav({ lat: s.lat, lon: s.lon }, s.naziv); gcEv("moj-izlet-kreni"); } });
+  $("#miUredi").onclick = () => miUredi(id);
+  gcEv("moj-izlet");
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("#miNovi")) miUredi(null);
+  const b = e.target.closest("[data-mi]"); if (b) miOtvori(b.dataset.mi);
+});
+
+/* ---------- uvoz GPX-a i praćenje rute bez signala (Pro) ---------- */
+function uvozGpx(file) {
+  if (!jePro()) { proNapomena(t("snim_naslov"), "gpx_uvoz_pro"); return; }
+  file.text().then(s => {
+    const d = new DOMParser().parseFromString(s, "application/xml");
+    if (d.getElementsByTagName("parsererror").length) throw 0;
+    let el = [...d.getElementsByTagName("trkpt")]; if (el.length < 2) el = [...d.getElementsByTagName("rtept")]; if (el.length < 2) el = [...d.getElementsByTagName("wpt")];
+    if (el.length < 2) throw 0;
+    const korak = Math.ceil(el.length / 5000);   /* dugi tragovi: najviše 5000 točaka */
+    if (korak > 1) el = el.filter((_, i) => i % korak === 0 || i === el.length - 1);
+    const vrijeme = x => { const v = x.getElementsByTagName("time")[0]; const ms = v ? Date.parse(v.textContent) : NaN; return isNaN(ms) ? null : ms; };
+    const t0 = vrijeme(el[0]), t1 = vrijeme(el[el.length - 1]);
+    let m = 0, uspon = 0, ref = null, z = null;
+    const p = el.map(x => {
+      const lat = +x.getAttribute("lat"), lon = +x.getAttribute("lon"), ev = x.getElementsByTagName("ele")[0], ele = ev && !isNaN(+ev.textContent) ? Math.round(+ev.textContent) : null, tt = vrijeme(x);
+      if (z) m += hav({ lat: z[0], lon: z[1] }, { lat, lon });
+      if (ele != null) { if (ref == null) ref = ele; else if (ele - ref >= 5) { uspon += ele - ref; ref = ele; } else if (ref - ele >= 5) ref = ele; }
+      z = [+lat.toFixed(6), +lon.toFixed(6), ele, t0 != null && tt != null ? Math.round((tt - t0) / 1000) : null]; return z;
+    }).filter(q => isFinite(q[0]) && isFinite(q[1]));
+    if (p.length < 2) throw 0;
+    const imeEl = d.querySelector("trk > name, rte > name, metadata > name");
+    const ime = ((imeEl && imeEl.textContent) || file.name.replace(/\.gpx$/i, "")).trim().slice(0, 80) || t("gpx_uvezena");
+    const trag = { id: "g" + Date.now(), ime, uvezen: true, start: t0 || Date.now(), m: Math.round(m), uspon, s: t0 != null && t1 != null ? Math.round((t1 - t0) / 1000) : 0, p };
+    const sve = store.get("gk-tragovi", []); sve.unshift(trag); store.set("gk-tragovi", sve);
+    if (S.view === "moje") renderMoje();
+    gcEv("gpx-uvoz"); toast(t("gpx_uvoz_ok")); openTrag(trag.id);
+  }).catch(() => toast(t("gpx_uvoz_greska")));
+}
+/* praćenje: trasa na karti, prijeđeno i preostalo po trasi, upozorenje kad skreneš s nje */
+const PR = { aktivna: false };
+function pratiKreni(x) {
+  pratiKraj(); closeSheet(); go("karta");
+  const ll = x.p.map(p => [p[0], p[1]]), kum = [0];
+  for (let i = 1; i < ll.length; i++) kum.push(kum[i - 1] + hav({ lat: ll[i - 1][0], lon: ll[i - 1][1] }, { lat: ll[i][0], lon: ll[i][1] }));
+  Object.assign(PR, { aktivna: true, ime: x.ime, ll, kum, izvan: false, sloj: L.layerGroup([L.polyline(ll, { color: cv("--ink"), weight: 8, opacity: .5, interactive: false }), L.polyline(ll, { color: cv("--amber"), weight: 5, interactive: false })]).addTo(map) });
+  map.fitBounds(L.latLngBounds(ll).pad(0.15));
+  locate(false);
+  try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { PR.lock = l; }).catch(() => {}); } catch (e) {}
+  PR.tik = setInterval(pratiPanel, 3000); pratiPanel(); gcEv("prati-rutu");
+}
+function pratiKraj() {
+  if (!PR.aktivna) return;
+  clearInterval(PR.tik); if (PR.sloj) map.removeLayer(PR.sloj);
+  try { if (PR.lock) PR.lock.release(); } catch (e) {}
+  Object.assign(PR, { aktivna: false, sloj: null, lock: null }); $("#pratiPanel").hidden = true;
+}
+/* najbliža točka na trasi (ravna projekcija, dovoljno točna na ovim udaljenostima) */
+function pratiNaTrasi(pos) {
+  const kx = 111320 * Math.cos(pos.lat * Math.PI / 180), ky = 110540; let best = { d: Infinity, s: 0 };
+  for (let i = 1; i < PR.ll.length; i++) {
+    const ax = (PR.ll[i - 1][1] - pos.lon) * kx, ay = (PR.ll[i - 1][0] - pos.lat) * ky, bx = (PR.ll[i][1] - pos.lon) * kx, by = (PR.ll[i][0] - pos.lat) * ky;
+    const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy, u = l2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2)) : 0;
+    const px = ax + u * dx, py = ay + u * dy, d = Math.hypot(px, py);
+    if (d < best.d) best = { d, s: PR.kum[i - 1] + u * (PR.kum[i] - PR.kum[i - 1]) };
+  }
+  return best;
+}
+function pratiPanel() {
+  const el = $("#pratiPanel"); if (!PR.aktivna) { el.hidden = true; return; }
+  el.hidden = false;
+  const ukupno = PR.kum[PR.kum.length - 1];
+  let tijelo;
+  if (!S.pos) tijelo = `<p class="kn-poruka">${esc(t("lokacija_trazim"))}</p>`;
+  else {
+    const n = pratiNaTrasi(S.pos);
+    if (n.d > 150) { tijelo = `<p class="kn-poruka">${esc(t("prati_daleko", { d: fmtDist(n.d) }))}</p>`; PR.izvan = false; }
+    else {
+      const izvan = n.d > 50;
+      if (izvan && !PR.izvan) { try { navigator.vibrate && navigator.vibrate([200, 100, 200]); } catch (e) {} }
+      PR.izvan = izvan;
+      tijelo = `${izvan ? `<p class="kn-poruka" style="color:var(--sos)">${esc(t("prati_skrenuo", { d: fmtDist(n.d) }))}</p>` : ""}
+        <div class="kn-stat"><b>${fmtDist(n.s)}</b><span>${esc(t("prati_prijedeno"))}</span><b>${fmtDist(Math.max(0, ukupno - n.s))}</b><span>${esc(t("kn_ostalo"))}</span></div>`;
+      if (ukupno - n.s < 30 && !PR.stigao) { PR.stigao = true; toast(t("kn_stigao")); }
+    }
+  }
+  el.innerHTML = `<div class="kn-glava"><span class="small muted">${esc(t("prati_naslov"))} · ${esc(PR.ime)}</span></div>${tijelo}
+    <div class="row kn-gumbi">${S.pos && pratiNaTrasi(S.pos).d > 150 ? `<button class="btn" data-pr="pocetak">${ic("nav")}${esc(t("prati_do_pocetka"))}</button>` : ""}<button class="btn" data-pr="centar">${ic("loc")}${esc(t("kn_centriraj"))}</button><button class="btn" data-pr="kraj">${esc(t("kn_zavrsi"))}</button></div>`;
+}
+$("#pratiPanel").addEventListener("click", e => {
+  const b = e.target.closest("[data-pr]"); if (!b) return;
+  if (b.dataset.pr === "kraj") pratiKraj();
+  if (b.dataset.pr === "centar") { if (S.pos) map.setView([S.pos.lat, S.pos.lon], Math.max(map.getZoom(), 15)); else locate(true); }
+  if (b.dataset.pr === "pocetak") { const z = PR.ll[0]; openNav({ lat: z[0], lon: z[1] }, PR.ime); }
+});
+
+/* ---------- slika putovnice za dijeljenje (Pro) ---------- */
+async function putovnicaSlika() {
+  if (!jePro()) { proNapomena(t("putovnica"), "slika_pro"); return; }
+  const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
+  const g = c.getContext("2d"), font = cv("--f-disp") || "system-ui, sans-serif", fontT = cv("--f-body") || font;
+  const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#15803D"); gr.addColorStop(1, "#0B4F26"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.fillStyle = "rgba(255,255,255,.06)"; for (let i = 0; i < 7; i++) { g.beginPath(); g.moveTo(-100, 980 + i * 60); g.quadraticCurveTo(W / 2, 820 + i * 60 - (i % 2) * 80, W + 100, 960 + i * 60); g.lineTo(W + 100, H); g.lineTo(-100, H); g.closePath(); g.fill(); }
+  const img = new Image(); img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 20 168 220" width="336" height="440">${MEDO_TIJELO}${MEDO_GLAVA}</svg>`);
+  try { await img.decode(); } catch (e) {}
+  const n = brojPecata(), N = PUT.pecati.length, raz = t("razina_" + razinaZa(n).r.k);
+  g.textAlign = "center"; g.fillStyle = "#fff";
+  g.font = `700 40px ${fontT}`; g.globalAlpha = .85; g.fillText(t("putovnica").toUpperCase(), W / 2, 110); g.globalAlpha = 1;
+  if (img.complete && img.naturalWidth) g.drawImage(img, W / 2 - 168, 150, 336, 440);
+  g.font = `800 150px ${font}`; g.fillText(`${n} / ${N}`, W / 2, 740);
+  g.font = `600 46px ${fontT}`; g.fillText(t("slika_podnaslov"), W / 2, 810);
+  g.font = `700 40px ${fontT}`; const rw = g.measureText(raz).width + 70;
+  g.fillStyle = "#F4CB72"; g.beginPath(); g.roundRect(W / 2 - rw / 2, 850, rw, 72, 36); g.fill(); g.fillStyle = "#1C2A21"; g.fillText(raz, W / 2, 898);
+  const zadnji = PUT.pecati.filter(x => S.pecati[x.id] && BY[x.id] && !x.skriven).sort((a, b) => S.pecati[b.id].localeCompare(S.pecati[a.id])).slice(0, 4);
+  g.fillStyle = "#fff"; g.font = `500 36px ${fontT}`;
+  zadnji.forEach((x, i) => { let s = "✓ " + tx(BY[x.id]).naziv.replace(/\s*\(.*?\)/, ""); while (g.measureText(s).width > W - 160 && s.length > 4) s = s.slice(0, -2); if (s !== "✓ " + tx(BY[x.id]).naziv.replace(/\s*\(.*?\)/, "")) s = s.trim() + "…"; g.fillText(s, W / 2, 1000 + i * 56); });
+  g.globalAlpha = .9; g.font = `700 38px ${font}`; g.fillText("Zelenko – Gorski kotar Guide", W / 2, H - 70); g.globalAlpha = 1;
+  const blob = await new Promise(r => c.toBlob(r, "image/png")); if (!blob) { toast(t("slika_greska")); return; }
+  const ime = "zelenko-putovnica.png", tekst = t("slika_tekst", { n, ukupno: N });
+  const P = NATIVNO && window.Capacitor.Plugins;
+  try {
+    if (P && P.Filesystem && P.Share) {
+      const b64 = await new Promise((ok, ne) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.onerror = ne; r.readAsDataURL(blob); });
+      const w = await P.Filesystem.writeFile({ path: ime, data: b64, directory: "CACHE" });
+      await P.Share.share({ title: t("putovnica"), text: tekst, files: [w.uri] });
+    } else {
+      const f = new File([blob], ime, { type: "image/png" });
+      if (!PREGLED && navigator.canShare && navigator.canShare({ files: [f] })) await navigator.share({ files: [f], text: tekst });
+      else await spremiDatoteku(ime, blob, "image/png");
+    }
+    gcEv("putovnica-slika");
+  } catch (e) { if (!/cancel|abort/i.test((e && (e.name + e.message)) || "")) toast(t("slika_greska")); }
+}
+document.addEventListener("click", e => { if (e.target.closest("#pSlika")) putovnicaSlika(); });
+
 /* ---------- Zelenko Pro: što donosi, kupnja na Google Playu, testni kod ---------- */
 const PRO_ID = "zelenko_pro";            // proizvod u Google Play Consoleu (jednokratni, „managed product”)
 const KUP = { cijena: null, spreman: false, radi: false };
@@ -1432,7 +1667,7 @@ function proKartica() {
 function openPro() {
   const pro = jePro(), test = store.get("gk-pro-test", false) && !store.get("gk-pro-kupljeno", false);
   const nR = RUTE.filter(r => !r.besplatno).length, nI = IZLETI.filter(i => !i.besplatno).length;
-  const st = [["nav", t("pro_f_rute", { n: nR })], ["map", t("pro_f_karta")], ["rec", t("pro_f_snim")], ["calendar", t("pro_f_izleti", { n: nI })], ["leaf", t("pro_f_sez")]];
+  const st = [["nav", t("pro_f_rute", { n: nR })], ["map", t("pro_f_karta")], ["rec", t("pro_f_snim")], ["download", t("pro_f_gpx")], ["calendar", t("pro_f_izleti", { n: nI })], ["star", t("pro_f_mi")], ["leaf", t("pro_f_sez")], ["share", t("pro_f_slika")]];
   const akcija = pro
     ? `<div class="note" style="margin:0">${esc(t(test ? "pro_test_aktivan" : "pro_imas"))}</div>${test ? `<button class="btn" id="proTestOff" style="align-self:flex-start">${esc(t("pro_test_iskljuci"))}</button>` : ""}`
     : NATIVNO
