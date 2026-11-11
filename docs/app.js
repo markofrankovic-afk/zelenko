@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.20.0",
+  verzija: "0.21.0",
   paket: "hr.frankovic.zelenko",   // Android paket na Google Playu (nakon prvog objavljivanja se ne može mijenjati)
   karta: "https://markofrankovic-afk.github.io/zelenko/karta/",   // pločice karte za aplikaciju s Playa (nisu u paketu)
   jezik: "hr",
@@ -801,7 +801,7 @@ function openRuta(id) {
   openSheet(vrstaR(r), `<div class="stack">
     <div class="row"><span class="badge ${r.besplatno ? "free" : "pro"}">${esc(r.besplatno ? t("besplatno") : t("pro"))}</span><span class="small muted">${esc(vrstaR(r))}</span></div>
     <h1>${esc(x.naziv)}</h1>
-    <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(dec(r.sati))}</b><span>${esc(t("sati"))}</span></div><div><b>${r.uspon_m == null ? "–" : "~" + r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b>${esc(tez(r))}</b><span>${esc(t("tezina"))}</span></div></div>
+    <div class="stats"><div><b>${kmR(r)}</b><span>${esc(t("km"))}</span></div><div><b>${esc(dec(r.sati))}</b><span>${esc(t("sati"))}</span></div><div><b>${r.uspon_m == null ? "–" : "~" + r.uspon_m}</b><span>${esc(t("m_uspona"))}</span></div><div><b class="rijec">${esc(tez(r))}</b><span>${esc(t("tezina"))}</span></div></div>
     <p style="margin:0;font-size:1.04em">${esc(x.opis)}</p>
     ${profilHtml(r)}
     <p class="small muted" style="margin:0">${esc(t(r.visina ? "procjena_rute_dem" : r.osm ? "procjena_rute_osm" : "procjena_rute"))}</p>
@@ -899,7 +899,7 @@ function kartaNav(cilj, naziv) {
   KN.drag = () => { if (KN.pratim) { KN.pratim = false; knPanel(); } };
   map.on("dragstart", KN.drag);
   mreza().catch(() => knPoruka(t("kn_nema_mreze")));
-  gcEv("navigacija-karta");
+  mrakStart(); gcEv("navigacija-karta");
 }
 function zavrsiKartaNav() {
   if (!KN.aktivna) return;
@@ -1146,6 +1146,7 @@ function snimGPS() {
   SN.watch = GEO.watchPosition(snimTocka, () => toast(t("snim_greska_gps")), { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 });
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { SN.lock = l; }).catch(() => {}); } catch (e) {}
   clearInterval(SN.tik); SN.tik = setInterval(snimPanel, 15000);
+  mrakStart();
 }
 function snimStani() {
   if (SN.watch != null) GEO.clearWatch(SN.watch);
@@ -1534,7 +1535,7 @@ function pratiKreni(x) {
   map.fitBounds(L.latLngBounds(ll).pad(0.15));
   locate(false);
   try { if (navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { PR.lock = l; }).catch(() => {}); } catch (e) {}
-  PR.tik = setInterval(pratiPanel, 3000); pratiPanel(); gcEv("prati-rutu");
+  PR.tik = setInterval(pratiPanel, 3000); pratiPanel(); mrakStart(); gcEv("prati-rutu");
 }
 function pratiKraj() {
   if (!PR.aktivna) return;
@@ -1619,6 +1620,38 @@ async function putovnicaSlika() {
   } catch (e) { if (!/cancel|abort/i.test((e && (e.name + e.message)) || "")) toast(t("slika_greska")); }
 }
 document.addEventListener("click", e => { if (e.target.closest("#pSlika")) putovnicaSlika(); });
+
+/* ---------- upozorenje prije mraka (besplatno): dok snimaš, pratiš rutu ili te vodi navigacija ---------- */
+const MRAK = { id: 4501, tik: null, javljeno: null, zakazano: false, PRIJE: 45 * 60000 };
+const mrakAktivno = () => !!(SN.stanje && !SN.stanje.pauza) || PR.aktivna || KN.aktivna;
+function mrakZalazak() { const r = ref(), z = sunTimes(new Date(), r.lat, r.lon); return z ? z.set.getTime() : null; }
+const mrakLN = () => NATIVNO && window.Capacitor.Plugins && window.Capacitor.Plugins.LocalNotifications;
+function mrakProvjeri() {
+  if (!mrakAktivno()) { mrakStop(); return; }
+  const zal = mrakZalazak(); if (!zal) return;
+  const ostalo = zal - Date.now(), dan = new Date().toDateString();
+  if (ostalo <= MRAK.PRIJE && ostalo > -2 * 3600000 && MRAK.javljeno !== dan) {
+    MRAK.javljeno = dan;
+    try { navigator.vibrate && navigator.vibrate([300, 150, 300]); } catch (e) {}
+    const tekst = ostalo > 0 ? t("mrak_upozorenje", { min: Math.max(1, Math.round(ostalo / 60000)), vrijeme: fmtTime(new Date(zal)) }) : t("mrak_vec");
+    openSheet(t("mrak_naslov"), `<div class="stack">${medoOblak(t("mrak_naslov"), tekst, null, 72)}<button class="btn primary" id="mrakOk">${esc(t("mrak_ok"))}</button></div>`);
+    $("#mrakOk").onclick = () => closeSheet();
+    gcEv("mrak-upozorenje");
+  }
+}
+function mrakStart() {
+  mrakProvjeri(); if (!MRAK.tik) MRAK.tik = setInterval(mrakProvjeri, 60000);
+  const LN = mrakLN(), zal = mrakZalazak();
+  if (!LN || !zal || MRAK.zakazano || zal - MRAK.PRIJE < Date.now() + 60000) return;
+  MRAK.zakazano = true;   /* i kad je ekran ugašen ili je aplikacija u pozadini */
+  LN.requestPermissions().then(p => p.display === "granted" ? LN.schedule({ notifications: [{ id: MRAK.id, title: t("mrak_naslov"), body: t("mrak_obavijest", { vrijeme: fmtTime(new Date(zal)) }), schedule: { at: new Date(zal - MRAK.PRIJE), allowWhileIdle: true } }] }) : null)
+    .catch(() => { MRAK.zakazano = false; });
+}
+function mrakStop() {
+  clearInterval(MRAK.tik); MRAK.tik = null;
+  const LN = mrakLN(); if (LN && MRAK.zakazano) LN.cancel({ notifications: [{ id: MRAK.id }] }).catch(() => {});
+  MRAK.zakazano = false;
+}
 
 /* ---------- Zelenko Pro: što donosi, kupnja na Google Playu, testni kod ---------- */
 const PRO_ID = "zelenko_pro";            // proizvod u Google Play Consoleu (jednokratni, „managed product”)

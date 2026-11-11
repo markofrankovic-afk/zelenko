@@ -619,7 +619,7 @@
  },
  "tez_lagano": "leicht",
  "tez_srednje": "mittel",
- "tez_zahtjevno": "anspruchsvoll",
+ "tez_zahtjevno": "schwer",
  "koord_teren": "vor Ort geprüft",
  "gpx_preuzmi": "GPX herunterladen",
  "gpx_nema": "GPX ist gerade nicht verfügbar.",
@@ -769,5 +769,10 @@
  "slika_greska": "Das Bild konnte nicht erstellt werden. Versuch es noch einmal.",
  "pro_f_gpx": "GPX-Routen importieren (Komoot, Strava) und ohne Netz folgen",
  "pro_f_mi": "Eigene Ausflüge aus gespeicherten Orten",
- "pro_f_slika": "Ein Pass-Bild für Instagram und WhatsApp"
+ "pro_f_slika": "Ein Pass-Bild für Instagram und WhatsApp",
+ "mrak_naslov": "Bald wird es dunkel",
+ "mrak_upozorenje": "In etwa {min} min geht die Sonne unter (um {vrijeme}). Zeit für den Rückweg.",
+ "mrak_vec": "Die Sonne ist schon untergegangen. Geh vorsichtig zurück, mit Lampe, wenn du eine hast.",
+ "mrak_obavijest": "Die Sonne geht um {vrijeme} unter. Mach dich rechtzeitig auf den Rückweg.",
+ "mrak_ok": "OK"
 }

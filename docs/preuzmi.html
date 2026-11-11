@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zelenko – Gorski kotar Guide</title>
+<meta name="description" content="Offline vodič kroz Gorski kotar: karta, staze, slapovi, špilje i gdje jesti, i bez signala.">
+<link rel="icon" href="icons/icon-192.png">
+<script>
+/* QR s plakata i naljepnice: na Androidu odmah u Google Play, ostali vide ovu stranicu */
+if (/Android/i.test(navigator.userAgent) && !/[?&]ostani/.test(location.search)) location.replace("https://play.google.com/store/apps/details?id=hr.frankovic.zelenko");
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@400;600&display=swap">
+<style>
+:root{--zelena:#15803D;--tamna:#0B4F26;--krem:#F1F2E6;--ink:#1C2A21;--zuta:#F4CB72}
+*{box-sizing:border-box}
+body{margin:0;background:var(--krem);color:var(--ink);font:17px/1.55 Barlow,system-ui,sans-serif}
+header{background:linear-gradient(var(--zelena),var(--tamna));color:#fff;text-align:center;padding:40px max(16px,env(safe-area-inset-left)) 32px}
+h1{font:700 clamp(2.6rem,9vw,4rem)/1 "Barlow Condensed","Arial Narrow",sans-serif;margin:12px 0 6px;letter-spacing:.02em}
+header p{margin:0;font-size:1.15rem;opacity:.92}
+main{max-width:620px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-left)) 48px;display:grid;gap:22px}
+.gumbi{display:grid;gap:12px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:54px;border-radius:14px;font:600 1.1rem Barlow,sans-serif;text-decoration:none}
+.btn.play{background:var(--ink);color:#fff} .btn.web{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.jez{display:flex;gap:8px;justify-content:center} .jez button{font:600 14px Barlow,sans-serif;border:1px solid #fff8;background:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+.jez button[aria-pressed=true]{background:#fff;color:var(--tamna)}
+small{color:#4a5a50}
+</style>
+</head>
+<body>
+<header>
+  <div class="jez"><button data-j="hr">HR</button><button data-j="en">EN</button><button data-j="de">DE</button></div>
+  <svg width="150" height="165" viewBox="36 20 168 220" aria-hidden="true"><path d="M44 240 C44 182 78 158 120 158 C162 158 196 182 196 240 Z" fill="#7A4A26"/><path d="M86 240 C86 204 100 188 120 188 C140 188 154 204 154 240 Z" fill="#C99A6B"/><path d="M74 178 L88 240" stroke="#C2700A" stroke-width="10" stroke-linecap="round"/><path d="M166 178 L152 240" stroke="#C2700A" stroke-width="10" stroke-linecap="round"/><circle cx="66" cy="70" r="22" fill="#7A4A26"/><circle cx="66" cy="70" r="11" fill="#C99A6B"/><circle cx="174" cy="70" r="22" fill="#7A4A26"/><circle cx="174" cy="70" r="11" fill="#C99A6B"/><ellipse cx="120" cy="112" rx="64" ry="58" fill="#8B5A33"/><ellipse cx="120" cy="134" rx="30" ry="22" fill="#E8C9A0"/><ellipse cx="120" cy="123" rx="11" ry="7.5" fill="#24160D"/><path d="M120 130 Q120 140 110 142 M120 130 Q120 140 130 142" stroke="#24160D" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="96" cy="104" r="6.5" fill="#24160D"/><circle cx="98.5" cy="101.5" r="2.2" fill="#fff"/><circle cx="144" cy="104" r="6.5" fill="#24160D"/><circle cx="146.5" cy="101.5" r="2.2" fill="#fff"/><circle cx="82" cy="126" r="7" fill="#E07A5F" opacity=".45"/><circle cx="158" cy="126" r="7" fill="#E07A5F" opacity=".45"/><path d="M80 66 Q82 30 120 28 Q158 30 160 66 Z" fill="#15803D"/><rect x="81" y="55" width="78" height="10" fill="#1A4129"/><ellipse cx="120" cy="67" rx="62" ry="10" fill="#1A4129"/><circle cx="144" cy="44" r="7.5" fill="#fff" stroke="#C62828" stroke-width="4"/></svg>
+  <h1>ZELENKO</h1><p data-t="pod"></p>
+</header>
+<main>
+  <p data-t="uvod" style="margin:0;font-size:1.15rem"></p>
+  <ul><li data-t="l1"></li><li data-t="l2"></li><li data-t="l3"></li><li data-t="l4"></li></ul>
+  <div class="gumbi"><a class="btn play" href="https://play.google.com/store/apps/details?id=hr.frankovic.zelenko" data-t="play"></a><a class="btn web" href="./" data-t="web"></a></div>
+  <small data-t="mala"></small>
+</main>
+<script>
+const T = {
+ hr: { pod: "Vodič kroz Gorski kotar", uvod: "Karta, staze, slapovi, špilje, kulturna baština i gdje jesti – na jednom mjestu i bez signala.", l1: "Karta Gorskog kotara koja radi i bez interneta", l2: "Rute za šetnju, planinarenje i bicikl, s vođenjem", l3: "SOS, „Gdje sam?” i povratak do auta", l4: "Zelenkova putovnica s pečatima za cijelu obitelj", play: "Preuzmi na Google Playu", web: "Otvori web verziju", mala: "Bez prijave i bez reklama. Hrvatski, engleski i njemački." },
+ en: { pod: "Your guide to Gorski kotar", uvod: "Map, trails, waterfalls, caves, heritage and where to eat – all in one place, even without signal.", l1: "A map of Gorski kotar that works offline", l2: "Walking, hiking and cycling routes with guidance", l3: "SOS, “Where am I?” and back to the car", l4: "Zelenko’s stamp passport for the whole family", play: "Get it on Google Play", web: "Open the web version", mala: "No sign-up and no ads. Croatian, English and German." },
+ de: { pod: "Dein Führer durch den Gorski kotar", uvod: "Karte, Wege, Wasserfälle, Höhlen, Kulturerbe und wo man isst – alles an einem Ort, auch ohne Netz.", l1: "Eine Karte des Gorski kotar, die offline funktioniert", l2: "Spazier-, Wander- und Radrouten mit Navigation", l3: "SOS, „Wo bin ich?“ und zurück zum Auto", l4: "Zelenkos Stempelpass für die ganze Familie", play: "Bei Google Play laden", web: "Web-Version öffnen", mala: "Ohne Anmeldung und ohne Werbung. Kroatisch, Englisch und Deutsch." }
+};
+function jezik(j) { document.documentElement.lang = j; document.querySelectorAll("[data-t]").forEach(e => e.textContent = T[j][e.dataset.t]); document.querySelectorAll("[data-j]").forEach(b => b.setAttribute("aria-pressed", b.dataset.j === j)); }
+const pj = (navigator.languages || [navigator.language || "hr"]).map(x => x.slice(0, 2).toLowerCase());
+jezik(pj.find(x => ["hr", "bs", "sr"].includes(x)) ? "hr" : pj.find(x => x === "de" || x === "en") || "en");
+document.querySelector(".jez").onclick = e => { const b = e.target.closest("[data-j]"); if (b) jezik(b.dataset.j); };
+</script>
+</body>
+</html>

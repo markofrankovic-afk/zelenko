@@ -781,5 +781,10 @@
  "slika_greska": "Slika nije napravljena. Pokušaj ponovno.",
  "pro_f_gpx": "Uvoz GPX ruta (Komoot, Strava) i praćenje rute bez signala",
  "pro_f_mi": "Vlastiti izleti složeni od spremljenih mjesta",
- "pro_f_slika": "Slika putovnice za Instagram i WhatsApp"
+ "pro_f_slika": "Slika putovnice za Instagram i WhatsApp",
+ "mrak_naslov": "Uskoro pada mrak",
+ "mrak_upozorenje": "Za oko {min} min sunce zalazi (u {vrijeme}). Vrijeme je da kreneš natrag.",
+ "mrak_vec": "Sunce je već zašlo. Vrati se oprezno, s lampom ako je imaš.",
+ "mrak_obavijest": "Sunce zalazi u {vrijeme}. Kreni natrag na vrijeme.",
+ "mrak_ok": "U redu"
 }

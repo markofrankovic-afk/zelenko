@@ -7,8 +7,8 @@ android {
         applicationId "hr.frankovic.zelenko"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2000  // 0.20.0 → 2000; povećaj kod svakog izdanja na Playu
-        versionName "0.20.0"
+        versionCode 2100  // 0.21.0 → 2100; povećaj kod svakog izdanja na Playu
+        versionName "0.21.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

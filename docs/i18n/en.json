@@ -769,5 +769,10 @@
  "slika_greska": "The picture couldn't be made. Please try again.",
  "pro_f_gpx": "Import GPX routes (Komoot, Strava) and follow them without signal",
  "pro_f_mi": "Your own day trips built from saved places",
- "pro_f_slika": "A passport picture for Instagram and WhatsApp"
+ "pro_f_slika": "A passport picture for Instagram and WhatsApp",
+ "mrak_naslov": "It'll be dark soon",
+ "mrak_upozorenje": "The sun sets in about {min} min (at {vrijeme}). Time to head back.",
+ "mrak_vec": "The sun has already set. Head back carefully, with a torch if you have one.",
+ "mrak_obavijest": "The sun sets at {vrijeme}. Head back in time.",
+ "mrak_ok": "OK"
 }
