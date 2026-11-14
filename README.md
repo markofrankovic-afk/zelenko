@@ -66,12 +66,6 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 - Na webu se Pro ne prodaje; ekran Pro vodi na Google Play.
 - Za probu: tajni testni kod (`?pro=KOD` u adresi ili 5 dodira na broj verzije u „O aplikaciji”); `?pro=0` gasi. U `app.js` je samo SHA-256 koda (`PRO_TEST`), sam kod zna samo autor.
 
-## Android aplikacija (`play/`)
+## Android aplikacija
 
-Capacitor 7 omotač oko `docs/`. `play/pripremi_web.mjs` kopira `docs/` u `play/www/` bez pločica karte (`karta/v`, `karta/s`), service workera i internih stranica: pločice dolaze s GitHub Pagesa i spremaju se na mobitel (protokol `zk` u `karta.js`), a Pro ih može preuzeti sve odjednom.
-
-- Paket: `hr.frankovic.zelenko` (nakon prvog objavljivanja na Playu ne može se mijenjati).
-- Dodaci: `@capacitor/app` (tipka Natrag), `@capacitor/filesystem` i `@capacitor/share` (GPX i sigurnosna kopija), `cordova-plugin-purchase` (kupnja).
-- Izrada: GitHub Actions (`.github/workflows/android.yml`) na svaki push na granu `play`. Uvijek nastaje probni APK; AAB za Play kad su postavljene tajne `ZELENKO_KEYSTORE_B64`, `ZELENKO_KEYSTORE_PASS`, `ZELENKO_KEY_ALIAS`, `ZELENKO_KEY_PASS` (upload ključ, nije u repozitoriju).
-- Lokalno: `cd play && npm ci && npm run apk` (treba Android SDK i Javu 21).
-- Kod svakog izdanja povećaj `versionCode` u `play/android/app/build.gradle` i `verzija` u `docs/app.js`.
+Android aplikacija za Google Play je u zasebnom privatnom repozitoriju (`zelenko-android`). Ona kod izrade preuzima `docs/` iz ovog repozitorija, pa se aplikacija održava samo ovdje.

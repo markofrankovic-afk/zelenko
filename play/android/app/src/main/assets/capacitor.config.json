@@ -1,0 +1,8 @@
+{
+	"appId": "hr.frankovic.zelenko",
+	"appName": "Zelenko",
+	"webDir": "www",
+	"android": {
+		"backgroundColor": "#F1F2E6"
+	}
+}
