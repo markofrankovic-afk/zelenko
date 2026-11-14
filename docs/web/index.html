@@ -79,10 +79,10 @@ nav.glavni a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px
 
 /* brojke */
 .brojke{background:var(--bg2);border-bottom:1px solid var(--line)}
-.brojke ul{list-style:none;margin:0;padding:22px 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;text-align:center}
-.brojke b{display:block;font:500 clamp(1.6rem,4vw,2.2rem)/1.1 var(--f-mono);color:var(--accent);font-variant-numeric:tabular-nums}
-.brojke span{font-size:.9rem;color:var(--muted)}
-@media (max-width:620px){.brojke ul{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}}
+.brojke ul{list-style:none;margin:0;padding:48px 0 44px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;text-align:center}
+.brojke b{display:block;font:700 clamp(3rem,7vw,5rem)/1 var(--f-disp);color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.brojke span{display:block;margin-top:8px;font:600 clamp(.95rem,1.6vw,1.1rem)/1.3 var(--f-body);color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:620px){.brojke ul{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px;padding:36px 0}.brojke li:first-child{grid-column:1/-1}}
 
 section.dio{padding-block:84px}
 section.dio .glava{display:grid;gap:14px;margin-bottom:40px}
@@ -191,7 +191,7 @@ footer nav a{opacity:.9}
   <div class="glava"><span class="eyebrow" data-t="g_eyebrow"></span><h2 data-t="g_naslov"></h2></div>
   <div class="galerija">
     <figure><img src="../slike/vlastita-20260421-172517.webp" alt="Bajer, Fužine" loading="lazy"><figcaption>Bajer, Fužine</figcaption></figure>
-    <figure><img src="../slike/vlastita-imag6000.webp" alt="Zeleni vir" loading="lazy"><figcaption>Zeleni vir</figcaption></figure>
+    <figure><img src="img/zeleni-vir.webp" alt="Zeleni vir" loading="lazy"><figcaption>Zeleni vir</figcaption></figure>
     <figure><img src="../slike/vlastita-imag5977.webp" alt="Vražji prolaz" loading="lazy"><figcaption>Vražji prolaz</figcaption></figure>
     <figure><img src="../slike/vlastita-20240421-172125.webp" alt="Lepenica" loading="lazy"><figcaption>Lepenica</figcaption></figure>
     <figure><img src="../slike/vlastita-20250920-111151.webp" alt="Ličko polje" loading="lazy"><figcaption>Ličko polje</figcaption></figure>
