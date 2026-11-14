@@ -62,7 +62,7 @@ Settings → Pages → Branch `main`, mapa `/docs` → Save. Kod svake objave po
 
 ## Zelenko Pro
 
-- Prodaje se samo u aplikaciji na Google Playu: jednokratni proizvod `zelenko_pro` (4,99 €), preko `cordova-plugin-purchase`. Kupnja se pamti na mobitelu, „Vrati kupnju” je vraća na novom mobitelu s istim Google računom.
+- Prodaje se samo u aplikaciji na Google Playu: jednokratni proizvod `zelenko_pro` (6,99 €), preko `cordova-plugin-purchase`. Kupnja se pamti na mobitelu, „Vrati kupnju” je vraća na novom mobitelu s istim Google računom.
 - Na webu se Pro ne prodaje; ekran Pro vodi na Google Play.
 - Za probu: tajni testni kod (`?pro=KOD` u adresi ili 5 dodira na broj verzije u „O aplikaciji”); `?pro=0` gasi. U `app.js` je samo SHA-256 koda (`PRO_TEST`), sam kod zna samo autor.
 
