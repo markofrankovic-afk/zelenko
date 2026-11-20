@@ -1,0 +1,22 @@
+{
+ "opis": "Objekti koje OSM nema, upisani prema javnim podacima turističke zajednice (našim riječima). Spajaju se s OSM uslugama u osm_usluge.py.",
+ "usluge": [
+  {
+   "id": "R-buffet-iskra",
+   "vrsta": "jelo",
+   "podvrsta": "kafic",
+   "naziv": "Buffet Iskra",
+   "opis": "Buffet uz šetalište prema Golubinjaku: 80 mjesta unutra i 30 na terasi. Primaju kartice, ljubimci su dobrodošli.",
+   "lat": 45.35775,
+   "lon": 14.75005,
+   "lokacija_priblizna": true,
+   "adresa": "Šetalište Golubinjak 6",
+   "mjesto": "Lokve",
+   "telefon": "+385 91 909 8716",
+   "partner": false,
+   "napomena_izvor": "TZ Gorski kotar, gorskikotar.hr/en/buffet-iskra (20. 11. 2026.); lokacija prema kućnim brojevima 1 i 2 u OSM-u",
+   "okusi_tradicije": true,
+   "izvor": "tz"
+  }
+ ]
+}

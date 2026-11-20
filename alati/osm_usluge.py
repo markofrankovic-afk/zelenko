@@ -119,6 +119,12 @@ if os.path.exists(pp):
     for x in json.load(open(pp, encoding="utf-8"))["partneri"]:
         out = [u for u in out if not (u["naziv"].lower() == x["naziv"].lower() and abs(u["lat"] - x["lat"]) < 0.005)]
         out.append(x)
+# objekti koje OSM nema, prema podacima TZ-a (izvori/usluge_rucno.json)
+pr = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "izvori", "usluge_rucno.json")
+if os.path.exists(pr):
+    for x in json.load(open(pr, encoding="utf-8"))["usluge"]:
+        out = [u for u in out if not (u["naziv"].lower() == x["naziv"].lower() and abs(u["lat"] - x["lat"]) < 0.005)]
+        out.append({k: v for k, v in x.items() if k != "napomena_izvor"})
 # ručni ispravci (izvori/usluge_ispravci.json): npr. hotel s restoranom koji OSM ne zna
 pi = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "izvori", "usluge_ispravci.json")
 if os.path.exists(pi):

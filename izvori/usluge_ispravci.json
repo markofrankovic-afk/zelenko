@@ -3,13 +3,16 @@
  "ispravci": {
   "Un11918508747": {
    "i_jelo": true,
-   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"
+   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu",
+   "okusi_tradicije": true
   },
   "Un1305138346": {
-   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"
+   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu",
+   "okusi_tradicije": true
   },
   "Un1305138335": {
-   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu"
+   "napomena_izvor": "Marko, 24. 10. 2026.: poznat po gulašu",
+   "okusi_tradicije": true
   },
   "Un12085008012": {
    "ukloni": true,
@@ -18,6 +21,38 @@
   "Un12100311068": {
    "naziv": "Bar Lepenice Lake",
    "napomena_izvor": "Marko, 5. 11. 2026.: u OSM-u krivo „Bar Lenice Lake”"
+  },
+  "Un12552319041": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Un12040682073": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Un1376858376": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Uw431847824": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Un11077598577": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Un7692590085": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Un2885424499": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
+  },
+  "Un3374483954": {
+   "okusi_tradicije": true,
+   "napomena_izvor": "Okusi tradicije Gorskog kotara, Novi list 19. 11. 2026."
   }
  }
 }

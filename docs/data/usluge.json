@@ -87,7 +87,8 @@
 "adresa": "Lučička cesta 1a",
 "mjesto": "Delnice",
 "osm": "n12040682073",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Un11077598577",
@@ -97,7 +98,8 @@
 "lat": 45.395275,
 "lon": 14.800178,
 "osm": "n11077598577",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Un332074206",
@@ -119,6 +121,22 @@
 "lon": 14.618611,
 "osm": "w228706869",
 "partner": false
+},
+{
+"id": "R-buffet-iskra",
+"vrsta": "jelo",
+"podvrsta": "kafic",
+"naziv": "Buffet Iskra",
+"opis": "Buffet uz šetalište prema Golubinjaku: 80 mjesta unutra i 30 na terasi. Primaju kartice, ljubimci su dobrodošli.",
+"lat": 45.35775,
+"lon": 14.75005,
+"lokacija_priblizna": true,
+"adresa": "Šetalište Golubinjak 6",
+"mjesto": "Lokve",
+"telefon": "+385 91 909 8716",
+"partner": false,
+"okusi_tradicije": true,
+"izvor": "tz"
 },
 {
 "id": "Un14107014388",
@@ -316,7 +334,8 @@
 "lon": 14.713684,
 "radno_vrijeme": "We-Sa 12:00-22:00; Su 12:00-21:00; Mo,Tu off",
 "osm": "n7692590085",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Un11918660078",
@@ -402,7 +421,8 @@
 "adresa": "Grabanj ul 2",
 "mjesto": "Delnice",
 "osm": "n12552319041",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Un3572261096",
@@ -424,7 +444,8 @@
 "kuhinja": "regional",
 "osm": "n1305138346",
 "partner": false,
-"i_spavanje": true
+"i_spavanje": true,
+"okusi_tradicije": true
 },
 {
 "id": "Un12196463564",
@@ -469,7 +490,8 @@
 "adresa": "Zdihovo 10",
 "mjesto": "Zdihovo",
 "osm": "n3374483954",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Un3666738766",
@@ -582,7 +604,8 @@
 "mjesto": "Delnice",
 "osm": "n1376858376",
 "partner": false,
-"i_spavanje": true
+"i_spavanje": true,
+"okusi_tradicije": true
 },
 {
 "id": "Un10901109959",
@@ -615,7 +638,8 @@
 "adresa": "Željeznička 8",
 "mjesto": "Vrbovsko",
 "osm": "n2885424499",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Un12059271493",
@@ -1375,7 +1399,8 @@
 "kuhinja": "regional",
 "osm": "n1305138335",
 "partner": false,
-"i_jelo": true
+"i_jelo": true,
+"okusi_tradicije": true
 },
 {
 "id": "Uw416543740",
@@ -1426,7 +1451,8 @@
 "lon": 14.796935,
 "web": "http://www.hotel-risnjak.hr",
 "osm": "w431847824",
-"partner": false
+"partner": false,
+"okusi_tradicije": true
 },
 {
 "id": "Uw455482341",
@@ -1518,7 +1544,8 @@
 "mjesto": "Fužine",
 "osm": "n11918508747",
 "partner": false,
-"i_jelo": true
+"i_jelo": true,
+"okusi_tradicije": true
 },
 {
 "id": "Un5906354786",

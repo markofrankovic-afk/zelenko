@@ -3,7 +3,7 @@
 "use strict";
 
 const CONFIG = {
-  verzija: "0.21.0",
+  verzija:"0.21.1",
   paket: "hr.frankovic.zelenko",   // Android paket na Google Playu (nakon prvog objavljivanja se ne može mijenjati)
   karta: "https://markofrankovic-afk.github.io/zelenko/karta/",   // pločice karte za aplikaciju s Playa (nisu u paketu)
   jezik: "hr",
@@ -510,7 +510,8 @@ function openUsluga(p) {
   openSheet(katNaziv(p), `<div class="stack">
     ${u.partner && u.slika ? `<figure class="hero foto ok" style="background:${boja(p)}"><img src="${esc(u.slika)}" alt=""></figure>` : SLIKE[p.id] ? slikaHtml(p.id, boja(p)) : ""}
     <div><span class="row small muted"><span class="dot" style="background:${boja(p)}"></span>${esc(katNaziv(p))}${u.kuhinja ? " · " + esc(u.kuhinja.replace(/_/g, " ").replace(/;/g, ", ")) : ""}${d != null ? " · " + fmtDist(d) + " " + esc(t("od_tebe")) : ""}</span>
-      <h1>${esc(x.naziv)}</h1>${u.partner ? `<span class="badge free">${esc(t("partner"))}</span>` : ""}</div>
+      <h1>${esc(x.naziv)}</h1>${u.partner ? `<span class="badge free">${esc(t("partner"))}</span>` : ""}${u.okusi_tradicije ? `<span class="badge okusi">${esc(t("okusi"))}</span>` : ""}</div>
+    ${u.okusi_tradicije ? `<p class="small muted" style="margin:0">${esc(t("okusi_tekst"))}</p>` : ""}
     ${rvOznaka(u)}
     <div class="row akc" style="flex-wrap:wrap"><button class="btn primary" id="tNav" style="flex:2 1 110px">${ic("nav")}${esc(t("vodi_me"))}</button>
       ${u.telefon ? `<a class="btn" style="flex:1 1 100px" href="tel:${esc(u.telefon.replace(/\s/g, ""))}">${ic("phone")}${esc(t("nazovi"))}</a>` : ""}
@@ -521,7 +522,7 @@ function openUsluga(p) {
     ${u.radno_vrijeme ? `<details class="tip"><summary>${esc(t("radno_vrijeme"))}</summary><p style="white-space:pre-line">${esc(rvLjudski(u.radno_vrijeme))}</p></details>` : ""}
     ${u.adresa || u.mjesto ? `<div class="row small"><b>${esc(t("adresa"))}:</b><span>${esc([u.adresa, u.mjesto].filter(Boolean).join(", "))}${u.lokacija_priblizna ? " · " + esc(t("lokacija_priblizna")) : ""}</span></div>` : ""}
     ${u.partner ? "" : `<div class="card stack" style="gap:8px"><b>${esc(t("vlasnik_naslov"))}</b><span class="small muted">${esc(t("vlasnik_tekst"))}</span><a class="btn" style="align-self:flex-start" href="${mail}">${ic("msg")}${esc(t("vlasnik_gumb"))}</a></div>`}
-    <p class="small muted" style="margin:0">${esc(t(u.osm ? "usluga_izvor" : "usluga_izvor_vlasnik"))}</p></div>`);
+    <p class="small muted" style="margin:0">${esc(t(u.osm ? "usluga_izvor" : u.izvor === "tz" ? "usluga_izvor_tz" : "usluga_izvor_vlasnik"))}</p></div>`);
   $("#tNav").onclick = () => openNav({ lat: p.lat, lon: p.lon }, x.naziv);
   $("#tKarta").onclick = () => istakniNaKarti(p);
   $("#tFav").onclick = () => { S.favs = S.favs.includes(p.id) ? S.favs.filter(f => f !== p.id) : S.favs.concat(p.id); store.set("gk-fav", S.favs); renderChips(); openUsluga(p); };
@@ -1760,7 +1761,7 @@ function openOApp() {
 /* ---------- gastro kutak: specijaliteti, jelo, smještaj, OPG ---------- */
 const G_FILTRI = [["jelo", p => p.kategorija === "jelo" || !!(p.usluga && p.usluga.i_jelo)], ["spavanje", p => p.kategorija === "spavanje" || !!(p.usluga && p.usluga.i_spavanje)],
   ["opg", p => p.kategorija === "kupnja" && (p.podvrsta === "opg" || p.podvrsta === "mljekomat")], ["trgovine", p => p.kategorija === "kupnja" && p.podvrsta !== "opg" && p.podvrsta !== "mljekomat"]];
-S.gastro = { f: "jelo", otvoreno: false };
+S.gastro = { f: "jelo", otvoreno: false, okusi: false };
 function specKartica(x) {
   return `<button class="idea spec" data-spec="${x.id}"><span class="top" style="background:${x.boja}${x.slika ? `;background-image:url('${esc(fotoSrc(x.slika))}')` : ""}"><span>${esc(t("spec_vrsta_" + x.vrsta))}</span></span>
     <span class="b"><b>${esc(x.naziv)}</b><span>${esc(x.kad)}</span></span></button>`;
@@ -1781,10 +1782,11 @@ function gastroLista() {
   const r = ref(), [, f] = G_FILTRI.find(([k]) => k === S.gastro.f);
   let list = TOCKE.filter(f).map(p => ({ p, d: hav(r, p), st: p.usluga ? rvStanje(p.usluga.radno_vrijeme) : null }));
   if (S.gastro.otvoreno) list = list.filter(x => x.st && x.st.otvoreno);
+  if (S.gastro.okusi) list = list.filter(x => x.p.usluga && x.p.usluga.okusi_tradicije);
   list.sort((a, b) => (b.p.usluga && b.p.usluga.partner ? 1 : 0) - (a.p.usluga && a.p.usluga.partner ? 1 : 0) || a.d - b.d);
   if (!list.length) return `<p class="muted" style="margin:0">${esc(t("gastro_nema"))}</p>`;
   return list.slice(0, 25).map(({ p, d }) => `<button class="list-row" data-open="${p.id}"><span class="dot" style="background:${boja(p)}"></span>
-    <span class="t"><b>${esc(tx(p).naziv)}${p.usluga && p.usluga.partner ? ` <span class="badge free">${esc(t("partner"))}</span>` : ""}</b><span>${esc(katNaziv(p))} · ${rvOznaka(p.usluga || {}, true)}</span></span>
+    <span class="t"><b>${esc(tx(p).naziv)}${p.usluga && p.usluga.partner ? ` <span class="badge free">${esc(t("partner"))}</span>` : ""}${p.usluga && p.usluga.okusi_tradicije ? ` <span class="badge okusi">${esc(t("okusi"))}</span>` : ""}</b><span>${esc(katNaziv(p))} · ${rvOznaka(p.usluga || {}, true)}</span></span>
     <span class="mono small">${fmtDist(d)}</span></button>`).join("");
 }
 function renderGastro() {
@@ -1794,7 +1796,7 @@ function renderGastro() {
     <section class="stack" style="gap:8px"><h2>${esc(t("spec_naslov"))}</h2><div class="ideas">${SPEC.specijaliteti.map(specKartica).join("")}</div></section>
     <section class="stack" style="gap:8px"><h2>${esc(t("gastro_gdje"))}</h2>
       <div class="g-filter" role="group">${G_FILTRI.map(([k]) => `<button class="chip soft" data-gf="${k}" aria-pressed="${G.f === k}">${esc(t("g_" + k))}</button>`).join("")}</div>
-      <div class="row" style="justify-content:space-between"><button class="chip" id="gOtv" aria-pressed="${G.otvoreno}">${esc(t("samo_otvoreno"))}</button>
+      <div class="row" style="justify-content:space-between;flex-wrap:wrap"><span class="row" style="flex-wrap:wrap"><button class="chip" id="gOtv" aria-pressed="${G.otvoreno}">${esc(t("samo_otvoreno"))}</button>${G.f === "jelo" ? `<button class="chip" id="gOkusi" aria-pressed="${!!G.okusi}">${esc(t("okusi_filtar"))}</button>` : ""}</span>
         <button class="btn" id="gKarta" style="min-height:44px">${ic("map")}${esc(t("na_karti"))}</button></div>
       <div>${gastroLista()}</div>
       <p class="small muted" style="margin:0">${esc(t(S.pos ? "zracno" : "blizu_sredista"))}</p></section>
@@ -1805,6 +1807,7 @@ $("#gastro").addEventListener("click", e => {
   const sp = e.target.closest("[data-spec]"); if (sp) { openSpec(sp.dataset.spec); return; }
   const gf = e.target.closest("[data-gf]"); if (gf) { S.gastro.f = gf.dataset.gf; renderGastro(); gcEv("gastro-" + S.gastro.f); return; }
   if (e.target.closest("#gOtv")) { S.gastro.otvoreno = !S.gastro.otvoreno; renderGastro(); return; }
+  if (e.target.closest("#gOkusi")) { S.gastro.okusi = !S.gastro.okusi; renderGastro(); gcEv("gastro-okusi"); return; }
   if (e.target.closest("#gKarta")) { S.grupa = { jelo: "jelo", spavanje: "spavanje", opg: "opg", trgovine: "kupnja" }[S.gastro.f]; renderChips(); renderMarkers(); renderNear(); go("karta"); }
 });
 document.addEventListener("click", e => { const b = e.target.closest("[data-gfiltar]"); if (b) { S.gastro.f = b.dataset.gfiltar; closeSheet(); go("gastro"); } });
